@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block login %}
+<p class="fa-regular fa-x fa-lg" id="closeForm"></p>
+<form action="index.php?route=check-login" method="POST" class="formLogin">
+    <fieldset>
+      <label for="emailLogin">Email</label>
+      <input type="email" id="emailLogin" name="emailLogin">
+    </fieldset>
+
+    <fieldset>
+      <label for="passwordLogin">Password</label>
+      <input type="password" id="passwordLogin" name="passwordLogin">
+    </fieldset>
+
+    <fieldset>
+      <button type="submit" name="submit">Se connecter</button>
+    </fieldset>
+
+    <p class="goSignup">Créer nouveau compte <p>
+  </form>
+  {% endblock %}
+
+
+  {% block signup %}
+<form action="index.php?route=check-signup" method="POST" class="formSignup">
+    <fieldset>
+      <label for="emailLogin">Prenom</label>
+      <input type="email" id="emailLogin" name="emailLogin">
+    </fieldset>
+
+    <fieldset>
+      <label for="emailLogin">Email</label>
+      <input type="email" id="emailLogin" name="emailLogin">
+    </fieldset>
+
+    <fieldset>
+      <label for="passwordLogin">Password</label>
+      <input type="password" id="passwordLogin" name="passwordLogin">
+    </fieldset>
+
+    <fieldset>
+      <button type="submit" name="submit"> Créer nouveau compte</button>
+    </fieldset>
+    <a href="index.php?route=formLogin"> Se connecter <a>
+  </form>
+  {% endblock %}
+
