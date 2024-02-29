@@ -1,25 +1,41 @@
 {% extends "base.html.twig" %}
 
-
 {% block main %}
-    <main class="container">
-            <nav class="nav-desktop"> <!--En mobile display: none-->
-                <ul>
-                    <li>Accueil</li>
-                    <li>Club</li>
-                </ul>
-                <figure>
-                    <img src="" alt=""/>
-                </figure>
-                <p></p>
-                <ul>
-                    <li>Boutique</li>
-                    <li>Billeterie</li>
-                </ul>
-            </nav>
-            <figure>
-                <img src="" alt=""/>
-            </figure>
-                <p></p>
-    </main>
+    
 {% endblock %}
+
+
+{% block menuDeroulant %}
+            <nav class="navMobile invisible"> 
+                <p class="fa-solid fa-x fa-lg closeMenu" style="color: #000000;"></p>
+                <div class="nav-links">
+                    <ul>
+                        <li>
+                        Actualité
+                        </li>
+                        <li>
+                        Club
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                        <a href="index.php?route=boutique">Boutique</a>
+                        </li>
+                        <li>
+                        Billeterie
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                        Paramètres
+                        </li>            
+                    {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
+                        <li>
+                            <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p></a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </nav>
+{% endblock %}
+

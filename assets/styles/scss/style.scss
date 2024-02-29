@@ -3,7 +3,8 @@
 @import "vars/font";
 
 @import "partials/header";
+@import "partials/nav";
 
-.formSignup, #closeFormSignup{
-    display: none;
+body{
+    z-index: 1;
 }

@@ -1,48 +1,61 @@
 {% extends "base.html.twig" %}
 
-{% block login %}
-<p class="fa-regular fa-x fa-lg" id="closeForm"></p>
-<form action="index.php?route=check-login" method="POST" class="formLogin">
+{% block main %}
+    {% if errorMessage is not empty %}
+        <p>{{ errorMessage }}</p>
+    {% endif %}
+
+    {% if valideMessage is not empty %}
+        <p>{{ valideMessage }}</p>
+    {% endif %}
+
+<a href="index.php?route=home"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
+<form action="index.php?route=check-login" method="POST" class=" formLogin">
     <fieldset>
       <label for="emailLogin">Email</label>
-      <input type="email" id="emailLogin" name="emailLogin">
+      <input type="email" id="emailLogin" name="emailLogin" required>
     </fieldset>
 
     <fieldset>
       <label for="passwordLogin">Password</label>
-      <input type="password" id="passwordLogin" name="passwordLogin">
+      <input type="password" id="passwordLogin" name="passwordLogin" required>
     </fieldset>
 
     <fieldset>
       <button type="submit" name="submit">Se connecter</button>
     </fieldset>
-
     <p class="goSignup">Créer nouveau compte <p>
   </form>
-  {% endblock %}
 
-
-  {% block signup %}
-<form action="index.php?route=check-signup" method="POST" class="formSignup">
+<form action="index.php?route=check-signup" method="POST" class="formSignup invisible">
     <fieldset>
-      <label for="emailLogin">Prenom</label>
-      <input type="email" id="emailLogin" name="emailLogin">
+      <label for="first_name">Prénom</label>
+      <input type="text" id="first_name" name="first_name" required>
+    </fieldset>
+
+    <fieldset>
+      <label for="last_name">Nom</label>
+      <input type="text" id="last_name" name="last_name" required>
     </fieldset>
 
     <fieldset>
       <label for="emailLogin">Email</label>
-      <input type="email" id="emailLogin" name="emailLogin">
+      <input type="email" id="emailSignup" name="emailSignup" required>
     </fieldset>
 
     <fieldset>
-      <label for="passwordLogin">Password</label>
-      <input type="password" id="passwordLogin" name="passwordLogin">
+      <label for="passwordLogin">Mot de passe</label>
+      <input type="password" id="passwordSignup" name="passwordSignup" required>
+    </fieldset>
+
+    <fieldset>
+      <label for="confirmPasswordLogin">Confirmer le mot de passe</label>
+      <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" required>
     </fieldset>
 
     <fieldset>
       <button type="submit" name="submit"> Créer nouveau compte</button>
     </fieldset>
-    <a href="index.php?route=formLogin"> Se connecter <a>
+    <p class="goLogin"> Se connecter <p>
   </form>
-  {% endblock %}
-
+{% endblock %}

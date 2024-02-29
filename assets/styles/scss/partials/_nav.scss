@@ -1,0 +1,28 @@
+
+.navMobile{
+    padding-top: 2em;
+    position: absolute;
+    z-index: 2;
+    background-color: $beige ;
+    width: 65%;
+    height: 100vh;
+    margin-top: -5em;
+
+    .closeMenu{
+        margin-left: 10em;
+        margin-top: 1em;
+    }
+    .nav-links{
+        ul{
+            li{
+                padding-top: 2em;
+            }
+        }
+    } 
+}
+
+.bodyBack{
+    background-color: $black;
+    opacity: 0.1;
+    z-index: 2;
+}

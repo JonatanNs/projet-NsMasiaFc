@@ -14,6 +14,10 @@ class Router
         {
             $authc->home();
         }
+        else if(isset($get["route"]) && $get["route"] === "home")
+        {
+            $authc->home();
+        }
         else if(isset($get["route"]) && $get["route"] === "news")
         {
             $ac->news();
@@ -34,16 +38,10 @@ class Router
         {
             $oc->payement();
         }
-        else if(isset($get["route"]) && $get["route"] === "formLogin")
+        else if(isset($get["route"]) && $get["route"] === "form")
         {
-            $authc->formLogin();
+            $authc->form();
         }
-
-        else if(isset($get["route"]) && $get["route"] === "formSignup")
-        {
-            $authc->formSignup();
-        }
-
         else if(isset($get["route"]) && $get["route"] === "check-login")
         {
             $authc->checkLogin();
@@ -51,6 +49,10 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "check-signup")
         {
             $authc->checkSignup();
+        }
+        else if(isset($get["route"]) && $get["route"] === "logout")
+        {
+            $authc->logout();
         }
     }
 }
