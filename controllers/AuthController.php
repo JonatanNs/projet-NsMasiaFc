@@ -93,4 +93,5 @@ class AuthController extends AbstractController
 
         header("Location: index.php?route=home");
     }
+
 }

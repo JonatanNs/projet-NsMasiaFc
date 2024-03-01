@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main class="container">
+        <div class="searchAndBag">
+            <i class="gg-search search"></i>
+            <i class="gg-shopping-bag theBag"> <p class="numberBag textEmpty"></p></i> 
+        </div>
+
+        <article class="titleBoutique">
+            <figure>
+                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+            </figure>
+            <h1>NsMasia FC</h1>
+            <p>Boutique Officiel</p>
+        </article>
+
+        <section class="shirtSale">
+            <figure class="shirtOne">
+                <img src="assets/img/maillot_domicile.png" alt="Maillot domicile"/>
+            </figure>
+            <figure class="shirtTwo">
+                <img src="assets/img/MaillotDom2-removebg-preview.png" alt="Maillot domicile"/>
+            </figure>    
+            <ul>
+                <h2>NsMasia FC Domicile</h2> 
+                <p>Maillot domicile 2024/2025</p>
+                <li class="taille">
+                    <label for="taille">Taille : </label>
+                    <select name="taille" id="taille">
+                        <option value=""> <i class="fa-solid fa-chevron-down fa-sm"></i> </option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </li>
+                <li class="prix">
+                    <p>Prix : 90€</p>
+                </li>
+                <li class="ajouterAuPannier"> 
+                    <i class="gg-remove moins"></i><p class="number">0</p><i class="gg-add plus"></i>     
+                    <button class="btn-ajouterAuPannier">Ajouter au pannier</button>
+                </li>
+            </ul>
+        </section>
+
+        <article class="description">
+            <h3>Description<i class="fa-solid fa-chevron-down fa-sm"></i><h3>
+            <p></p>
+        </article>
+
+        <section class="autreProduits">
+            <h4>Ces produits pourraient vous intéresser aussi: </h4>
+            <figure>
+                <img src="assets/img/maillot_exterieur.png" alt="" />
+                <img src="assets/img/maillot_third.png" alt="" />
+            </figure>
+        </section>
+
+        <section class="pannier invisible">
+            <h5>Pannier</h5>
+            <article>
+                <figure>
+                    <img src="" alt="" />
+                </figure>
+                <h6>Produits : </h6>
+                <p>Prix : 90 X <span class="numberBagPanier"></span></p>
+            </article>
+            <p>Total : 450€</p>
+
+            <form action="index.php?route=payement" method="POST">
+                <input type="hidden" id="panier_Imgproduct" name="panier_Imgproduct" value="0"/>
+                <input type="hidden" id="panier_quantity" name="panier_quantity" value="0"/>
+                <input type="hidden" id="panier_total" name="panier_total" value="0"/>
+                <button type="submit">Commander</button>
+            </form>
+        </section>
+
+        <form class="boutiqueSearch invisible">
+            <fieldset>
+                <label for="search">Recherche <i type="submit" class="fa-solid fa-magnifying-glass fa-xs"></i></label>
+                <input type="text" id="searchForm" name="searchForm"/>
+            </fieldset>
+            <button>Valider</button>
+        </form>
+    </main>
+
+{% endblock %}

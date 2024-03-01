@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--SEO-->
+    <meta name="robots" content="index,follow">
     <meta name="description" content="Site officiel du FC NsMasia. Toute l'actualité autour de la Ns, vente de maillots et de places." >
     <link rel="icon" href="assets/img/logo-ns_masia.png" alt="Logo NsMasiaFC">
-    <meta name="robots" content="index,follow">
     <!--Font -->
     <!-- Css.gg-->
     <link href="https://css.gg/css" rel="stylesheet" />
@@ -19,14 +19,11 @@
 </head>
 <body>
     <header class="header">       
-        <div class="menu">
-            <p class="gg-menu openMenu" style="color: #000000;"></p> 
-        </div>
 
         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter-->
-        <div>
-            <p> Bienvenu {{ userIsConect }}</p> 
-        </div> 
+            <div>
+                <p> Bienvenu {{ userIsConect }}</p> 
+            </div> 
         {% endif %}
 
         {% if userIsConect is empty %} <!-- Quand l'utilisateur n'est pas connecter-->
@@ -35,18 +32,54 @@
             </div>
         {% endif %}
 
+        <div class="menu">
+            <p class="gg-menu openMenu" style="color: #000000;"></p> 
+            {% block menuDeroulant %} 
+                <nav class="navMobile invisible"> 
+                    <p class="fa-solid fa-x fa-lg closeMenu" style="color: #000000;"></p>
+                    <div class="nav-links">
+                        <ul>
+                            <li>
+                            Actualité
+                            </li>
+                            <li>
+                            Club
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                            <a href="index.php?route=boutique">Boutique</a>
+                            </li>
+                            <li>
+                            Billeterie
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                            Paramètres
+                            </li>            
+                        {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
+                            <li>
+                                <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p></a>
+                            </li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </nav>
+            {% endblock %}
+        </div>
     </header>
-      {% block menuDeroulant %} {% endblock %}
 
-    {% block main %} {% endblock %}
+        {% block main %}  {% endblock %}
     
+
     <footer class="footer">
 
     </footer>
     
     <!-- Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- FontAwesone-->
+   <!-- FontAwesone-->
     <script src="https://kit.fontawesome.com/3b11095cd8.js" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
 </body>

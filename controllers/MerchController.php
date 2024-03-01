@@ -4,19 +4,19 @@ class MerchController extends AbstractController
 {
     public function billeterie()
     {
-        //appel Manager
+        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render("billeterie.html.twig", [
-            
+            'userIsConect' => $userIsConect
         ]);
     }
 
     public function boutique()
     {
-        //appel Manager
+        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render("boutique.html.twig", [
-            
+            'userIsConect' => $userIsConect
         ]);
     }
 }

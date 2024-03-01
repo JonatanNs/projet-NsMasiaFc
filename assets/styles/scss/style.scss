@@ -4,7 +4,10 @@
 
 @import "partials/header";
 @import "partials/nav";
+@import "partials/boutique";
 
-body{
-    z-index: 1;
+.container{
+    background-color: $black;
+    color: $beige;
 }
+

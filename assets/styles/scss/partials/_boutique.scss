@@ -1,0 +1,174 @@
+
+.container{
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.searchAndBag{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+
+    .numberBag{
+        color: $beige;
+        margin-left: 1.5em;
+        margin-top: -1em;  
+    }
+}
+
+.titleBoutique{
+    //NsMasia FC + Boutique Officiel
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    figure a{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+         img{
+            width: 20%;
+        }
+    }
+    h1{
+        //NsMasia FC
+    }
+    p{
+        //Boutique Officiel
+    }
+}
+
+.shirtSale{
+    display: flex;
+    flex-direction: column;
+
+    .shirtOne{
+        width: 100%;
+
+        img{
+            width: 80%;
+        }
+    }
+    figure{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 20%;
+        }
+    }
+
+    h2{
+        //NsMasia FC Domicile
+        
+    }
+
+    p{
+        //Maillot domicile 2024/2025
+        
+    }
+        
+    ul{
+        margin-left: 1em;
+        .taille{
+            //taille
+            margin-top: 2em;
+            select{
+                margin-left: 1em;
+                width: 20%;
+            }
+        }
+        .prix{
+            //prix
+            margin-top: 2em;
+            margin-bottom: 2em;
+              p{
+                
+              }  
+                
+        }
+
+        .ajouterAuPannier{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 3em;
+            .plus{
+                
+               
+            }
+            .number{
+
+            }
+            .moins{
+
+            }
+
+            .btn-ajouterAuPannier{
+                //Ajouter au pannier
+
+            }
+        }
+    }
+}
+
+.description{
+    margin-left: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    h3{
+
+    }
+    p{
+
+    }
+}
+
+.autreProduits{
+    margin-bottom: 2em;
+    h4{
+
+    }
+    figure{
+        display: flex;
+        flex-direction: row;
+        img{
+
+        }
+    }
+}
+
+.pannier{
+    background-color: $black;
+    color: $beige;
+    border: 5px solid $beige;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 2rem;
+    padding: 1em;
+    position: absolute;
+    top: 7em;
+    left: 4em;
+}
+
+.boutiqueSearch{
+    background-color: $black;
+    color: $beige;
+    border: 5px solid $beige;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 2rem;
+    padding: 1em;
+    position: absolute;
+    top: 7em;
+    left: 4em;
+}
+
+
