@@ -39,43 +39,33 @@
                     <p class="fa-solid fa-x fa-lg closeMenu" style="color: #000000;"></p>
                     <div class="nav-links">
                         <ul>
-                            <li>
-                            Actualité
-                            </li>
-                            <li>
-                            Club
-                            </li>
+                            <li>Actualité</li>
+                            <li>Club</li>
                         </ul>
                         <ul>
                             <li>
-                            <a href="index.php?route=boutique">Boutique</a>
+                                <a href="index.php?route=boutique">Boutique</a>
                             </li>
-                            <li>
-                            Billeterie
-                            </li>
+                            <li>Billeterie</li>
                         </ul>
                         <ul>
-                            <li>
-                            Paramètres
-                            </li>            
+                            <li>Paramètres</li>            
                         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
                             <li>
-                                <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p></a>
+                                <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p> </a>
                             </li>
-                        </ul>
                         {% endif %}
+                        </ul>
+                        
                     </div>
                 </nav>
             {% endblock %}
         </div>
     </header>
 
-        {% block main %}  {% endblock %}
+    {% block main %}{% endblock %}
     
-
-    <footer class="footer">
-
-    </footer>
+    <footer class="footer"></footer>
     
     <!-- Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

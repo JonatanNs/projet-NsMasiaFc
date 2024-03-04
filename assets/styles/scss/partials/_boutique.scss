@@ -75,7 +75,7 @@
     }
         
     ul{
-        margin-left: 1em;
+        
         .taille{
             //taille
             margin-top: 2em;
@@ -99,23 +99,15 @@
             flex-direction: row;
             justify-content: center;
             gap: 3em;
-            .plus{
-                
-               
-            }
-            .number{
-
-            }
-            .moins{
-
-            }
-
-            .btn-ajouterAuPannier{
-                //Ajouter au pannier
-
-            }
         }
     }
+}
+
+div.maillot.maillot1 > section > ul > li:nth-child(3){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1em;
 }
 
 .description{
@@ -144,6 +136,7 @@
     }
 }
 
+
 .pannier{
     background-color: $black;
     color: $beige;
@@ -156,20 +149,30 @@
     position: absolute;
     top: 7em;
     left: 4em;
-    text-wrap: nowrap;
+
+    article > ul > ul > li:nth-child(2){
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+    }
     .pannier-divRow{
         display: flex;
         flex-direction: row;
         justify-content: center;
+        
+
         .panier-img img{
-            width: 40%;
+            width: 15%;
+            border-radius: 1rem;
         }
     }
     .pannier-divCol{
         display: flex;
         flex-direction: column;
+        margin-left: -20em;
+        margin-right: 2em;
     }
-
 }
 
 .boutiqueSearch{

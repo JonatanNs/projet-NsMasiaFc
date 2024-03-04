@@ -8,7 +8,7 @@
     {% if valideMessage is not empty %}
         <p>{{ valideMessage }}</p>
     {% endif %}
-{{ dump(tokenCSRF) }}
+
 <a href="index.php?route=home"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
 <form action="index.php?route=check-login" method="POST" class=" formLogin">
   <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />

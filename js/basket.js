@@ -32,7 +32,7 @@ function removeFromBasket(product){
     saveBasket(basket);
 }
 
-function changeQuantity(product, newQuantity) {
+function changeQuantity(product, newQuantity){
     let basket = getBasket();
     let foundProductIndex = basket.findIndex(p => p.id === product.id);
 
@@ -60,7 +60,7 @@ function getTotalPrice(){
     let basket = getBasket();
     let total = 0;
     for(let product of basket){
-        total += product.quantity * product.price;
+        total += product.quantity * product.prices;
     }
     return total;
 }
@@ -78,19 +78,25 @@ document.addEventListener('DOMContentLoaded', function(){
     const productPrice = priceElement.textContent; // prix
     const btnAjouterAuPannier = document.querySelector(".btn-ajouterAuPannier");
     const tailleSelect = shirtSaleSection.querySelector('#taille'); //ID taille
-
+    const theBag = document.querySelector(".basket");
     const numberElement = shirtSaleSection.querySelector('.number'); 
-    const numberValue = numberElement.textContent; // valeur de l'élément .number
-
     const plus = document.querySelector(".plus");
     const moins = document.querySelector(".moins");
+    //switchMaillot
+    const maillotDos = document.querySelectorAll(".maillotDos");
+    const maillotFace = document.querySelectorAll(".maillotFace");
+    const allShirtTwo = document.querySelectorAll("div.maillot > section > div.maillotFace > figure.shirtTwo > img");
+    const AllOne = document.querySelectorAll("div.maillot > section > div.maillotDos > figure.shirtTwo img");
+
     let num = 0;
 
-    function basket(){
+
+    function basketContent(){
+        
         tailleSelect.addEventListener('change', function() {
             const selectedSize = tailleSelect.value; // Obtenez la taille sélectionnée à partir de la valeur de l'option sélectionnée
             console.log(selectedSize); // Affichez la taille sélectionnée dans la console
-
+            
             if(plus){
                 plus.addEventListener("click", function(){
                     num++;  
@@ -107,9 +113,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             p.style.color="red";
                             }
                     
-                    numberElement.textContent = num;
-                    //console.log(num);
-                    
+                    numberElement.textContent = num;           
                 });
             }
 
@@ -124,10 +128,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     numberElement.textContent = num;
                 });
             }
-            
-
-            
-        
                     
                 btnAjouterAuPannier.addEventListener("click", function() {
                     if (num > 0) {
@@ -146,80 +146,129 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    const theBag = document.querySelector(".basket");
-
-if (theBag) {
-    theBag.addEventListener("click", function() {
-        const textEmpty = document.querySelector(".textEmpty");
-        const panier = document.querySelector(".pannier");
-        const panierImg = document.querySelector(".panier-img");
-        const panierName = document.querySelector(".panier-nameProduct");
-        const panierPrice = document.querySelector(".panier-price");
-        const panierQuantity = document.querySelector(".panier-quantity");
-        const panierTotal = document.querySelector(".panier-total");
-
-        // Récupérer les données du panier depuis le LocalStorage
-        const basketData = localStorage.getItem("basket");
-
-        if (!basketData) {
-            // Le panier est vide, afficher un message approprié
-            textEmpty.textContent = "Votre panier est vide";
-            textEmpty.style.cssText = "white-space: nowrap; position: absolute; top: 1em; right: -4.5em;";
-            setTimeout(function() { textEmpty.textContent = ""; }, 3000);
-        } else {
-            // Le panier n'est pas vide, afficher son contenu
-            panier.classList.toggle("invisible");
-
-            // Convertir les données récupérées en objet JavaScript
-            const basket = JSON.parse(basketData);
-
-            // Vider le contenu actuel du panier avant d'ajouter de nouveaux éléments
-            panierImg.innerHTML = "";
-            panierName.innerHTML = "";
-            panierPrice.innerHTML = "";
-            panierQuantity.innerHTML = "";
-            panierTotal.innerHTML = "";
-
-            // Afficher chaque produit dans le panier
-            basket.forEach(product => {
-                // Créer un élément img pour l'image du produit
-                let img = document.createElement("img");
-                img.src = product.url;
-                img.alt = product.alt;
-                panierImg.appendChild(img);
-
-                // Créer un élément span pour le nom du produit
-                let name = document.createElement("p");
-                name.textContent = product.name;
-                panierName.appendChild(name);
-
-                // Créer un élément span pour le prix du produit
-                let price = document.createElement("p");
-                price.textContent = product.prices;
-                panierPrice.appendChild(price);
-
-                // Créer un élément span pour la quantité du produit
-                let quantity = document.createElement("p");
-                quantity.textContent = product.quantity;
-                panierQuantity.appendChild(quantity);
-
-                // Créer un élément span pour le prix total du produit
-                let total = document.createElement("p");
-                total.textContent = product.quantity * product.prices;
-                panierTotal.appendChild(total);
+    
+    function panier(){
+        if (theBag) {
+            theBag.addEventListener("click", function() {
+                const textEmpty = document.querySelector(".textEmpty");
+                const panier = document.querySelector(".pannier");
+                const panierImg = document.querySelector(".panier-img");
+                const pannierDivCol = document.querySelector(".pannier-divCol");
+                const panierTotal = document.querySelector(".panier-total");
+        
+                // Récupérer les données du panier depuis le LocalStorage
+                const basketData = localStorage.getItem("basket");
+        
+                if (!basketData) {
+                    // Le panier est vide, afficher un message approprié
+                    textEmpty.textContent = "Votre panier est vide";
+                    textEmpty.style.cssText = "white-space: nowrap; position: absolute; top: 1em; right: -4.5em;";
+                    setTimeout(function() { textEmpty.textContent = ""; }, 3000);
+                } else {
+                    // Le panier n'est pas vide, afficher son contenu
+                    panier.classList.toggle("invisible");
+        
+                    // Convertir les données récupérées en objet JavaScript
+                    const basket = JSON.parse(basketData);
+        
+                    // Vider le contenu actuel du panier avant d'ajouter de nouveaux éléments
+                    panierImg.innerHTML = "";
+                    panierTotal.innerHTML = "";
+                    pannierDivCol.innerHTML ="";
+                    
+                    // Afficher chaque produit dans le panier
+                    basket.forEach(product => {
+                        const img = document.createElement("img");
+                        img.src = product.url;
+                        img.alt = product.alt;
+                        panierImg.appendChild(img);
+                        // Créer un élément h6 pour le nom du produit
+                        
+                        const nameProduct = document.createElement("h6");
+                        nameProduct.classList.add("panier-nameProduct");
+                        nameProduct.textContent = product.name;
+                        pannierDivCol.appendChild(nameProduct);
+        
+                        // Créer un élément p pour le prix du produit
+                        const prixQuantite = document.createElement("p");
+                        prixQuantite.classList.add("panier-price-quantity");
+                        prixQuantite.textContent = product.prices + " € x " + product.quantity;
+                        pannierDivCol.appendChild(prixQuantite);
+                        
+                    });
+                    const totalp = document.createElement("p");
+                        totalp.classList.add("totalp");
+                        totalp.textContent = "Total = " +  getTotalPrice() + "€";
+                        panierTotal.appendChild(totalp);
+                }
             });
+        }   
+    }
+
+    function switchMaillot(){
+
+        allShirtTwo.forEach(shirtTwo => {
+            shirtTwo.addEventListener("click", function() {
+                maillotDos.forEach(dos => {
+                    dos.classList.remove("invisible");
+                });
+                maillotFace.forEach(face => {
+                    face.classList.add("invisible");
+                });
+            });
+        });
+
+        AllOne.forEach(face => {
+            face.addEventListener("click", function() {
+                maillotFace.forEach(face => {
+                    face.classList.remove("invisible");
+                });
+                maillotDos.forEach(dos => {
+                    dos.classList.add("invisible");
+                });
+            });
+        });
+
+        const productLength = document.querySelector(".productLength");
+        const maillotLength = parseInt(productLength.textContent); 
+
+        for(let i = 1; i <= maillotLength; i++){
+            if (i !== 1) { 
+            let maillot = document.querySelector(".maillot" + i).classList.add("invisible");
+            }
+            let otherMaillot = document.querySelector(".other" + i);
+            otherMaillot.addEventListener("click", function(){
+                let maillot = document.querySelector(".maillot:not(.invisible)");
+                let maillot2 = document.querySelector(".maillot.invisible");
+                maillot.classList.add("invisible");
+                maillot2.classList.remove("invisible"); 
+            })
         }
-    });
-}
+    }
 
+    function recherche(){
+        const recherche = document.querySelector(".boutiqueSearch");
+        const search = document.querySelector(".search");
 
+        search.addEventListener("click", function() {
+            recherche.classList.toggle("invisible");
+        });
+    };
 
     
-    basket();
 
-  
+
+
+    basketContent();
+    panier();
+    switchMaillot();
+    recherche();
     
-    
+
+
+
+
+
 });
 
 

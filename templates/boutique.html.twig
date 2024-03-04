@@ -13,17 +13,30 @@
             <h1>NsMasia FC</h1>
             <p>Boutique Officiel</p>
         </article>
-        <section class="shirtSale">
-        {% set product = random(products) %}
-            <figure class="shirtOne" id="{{product.id}}">
-                <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
-            </figure> 
-             <figure class="shirtTwo">
-                <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
-            </figure> 
-            <ul>
+        {% for product in products %}
+        <div class="maillot maillot{{ product.id}}">
+            <section class="shirtSale">
+        
+            <div class="maillotFace">
+                <figure class="shirtOne" id="{{product.id}}">
+                    <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                </figure> 
+                <figure class="shirtTwo">
+                    <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
+                </figure> 
+            </div>
+
+            <div class="maillotDos invisible">
+                <figure class="shirtOne" id="{{product.id}}">
+                    <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
+                </figure>
+                <figure class="shirtTwo">
+                    <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                </figure> 
+            </div>
                 <h2>{{ product.name }}</h2> 
                 <p>{{ product.img_alt }}</p>
+            <ul>
                 <li class="taille">
                     <label for="taille">Taille : </label>
                     <select name="taille" id="taille">
@@ -44,51 +57,47 @@
                     <button class="btn-ajouterAuPannier">Ajouter au pannier</button>
                 </li>
             </ul>
-        </section>
-        <article class="description">
-            <h3>Description<i class="fa-solid fa-chevron-down fa-sm"></i><h3>
-            <p>{{product.descriptions}}</p>
-        </article>
+            </section>
+            <article class="description">
+                <h3>Description<i class="fa-solid fa-chevron-down fa-sm"></i><h3>
+                <p>{{product.descriptions}}</p>
+            </article>
+        </div>
+        {% endfor %}
         <section class="autreProduits">
             <h4>Ces produits pourraient vous intéresser aussi: </h4>
-            <figure>
-                {% for other_product in products %}
-                        <span class="invisible other{{other_product.id}}">{{ other_product.id}}</span><img src="{{ other_product.img_url }}" alt="{{ other_product.img_alt }}" />
-                {% endfor %}
-            </figure>
+            
+            {% for other_product in products %}
+                <span class="productLength invisible">{{products|length}}</span>
+                <figure>
+                    <img src="{{ other_product.img_url }}" alt="{{ other_product.img_alt }}" class="other{{other_product.id}}" />
+                </figure>
+            {% endfor %}
+            
         </section>
 
 <!--Visible au click-->
 
         <section class="pannier invisible">
             <h5>Panier</h5>
-            <article>
-                <ul class="pannier-divRow">
-                    <li>
-                        <figure class="panier-img"></figure>
-                    </li>
-                    <ul class="pannier-divCol">
-                        <li>
-                            <h6 class="panier-nameProduct"></h6>
-                        </li>
-                        <li>
-                            <p class="panier-price"></p> <span>X<span> <p class="panier-quantity"></p>
-                        <li>
-                    </ul> 
-                </ul>
-                    <p class="panier-total">€</p>
-            </article>
-            
-            <form action="index.php?route=payement" method="GET">
+            <div>
+                <div class="pannier-divRow">      
+                    <figure class="panier-img"></figure>
+                    <div class="pannier-divCol"></div> 
+                </div>
+                <div class="panier-total"></div>
+            </div> 
+            <form action="index.php?route=payement" method="POST">
                 <button type="submit">Valider</button>
             </form>
         </section>
+
         <form class="boutiqueSearch invisible">
             <fieldset>
                 <label for="search">Recherche <i type="submit" class="fa-solid fa-magnifying-glass fa-xs"></i></label>
                 <input type="text" id="searchForm" name="searchForm"/>
             </fieldset>
-            <button>Valider</button>
+            <button type="submit">Valider</button>
         </form>
     </main>
 {% endblock %}

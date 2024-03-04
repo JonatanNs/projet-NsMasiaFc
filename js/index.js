@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function(){
     const menu = document.querySelector(".openMenu");
     const closeMenu = document.querySelector(".closeMenu");
     
-
     function form() {
         // Vérifiez si les éléments existent
         if(goSignup){
@@ -37,11 +36,8 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-
-
     
-    
-
     form();
     menuMobile();
+    
 });
