@@ -7,5 +7,14 @@ require "vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+if(!isset($_SESSION["csrf-token"]))
+{
+    $tokenManager = new CSRFTokenManager();
+    $token = $tokenManager->generateCSRFToken();
+
+    $_SESSION["csrf-token"] = $token;
+    var_dump($_SESSION["csrf-token"]);
+}
+
 $router = new Router();
 $router->handleRequest($_GET);

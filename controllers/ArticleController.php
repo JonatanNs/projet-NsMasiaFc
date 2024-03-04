@@ -4,7 +4,7 @@ class ArticleController extends AbstractController
 {
     public function news()
     {
-        //appel Manager
+        
 
         $this->render("news.html.twig", [
             
@@ -13,7 +13,7 @@ class ArticleController extends AbstractController
 
     public function club()
     {
-        //appel Manager
+        
 
         $this->render("club.html.twig", [
             

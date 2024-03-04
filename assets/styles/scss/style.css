@@ -121,6 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .shirtSale .shirtOne img {
   width: 80%;
+  border-radius: 3rem;
 }
 .shirtSale figure {
   width: 100%;
@@ -175,6 +176,19 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 7em;
   left: 4em;
+  text-wrap: nowrap;
+}
+.pannier .pannier-divRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.pannier .pannier-divRow .panier-img img {
+  width: 40%;
+}
+.pannier .pannier-divCol {
+  display: flex;
+  flex-direction: column;
 }
 
 .boutiqueSearch {

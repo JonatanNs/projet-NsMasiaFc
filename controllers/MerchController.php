@@ -14,9 +14,12 @@ class MerchController extends AbstractController
     public function boutique()
     {
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-
+        $merchManager = new MerchManager();
+        $products = $merchManager->getAllProducts();
         $this->render("boutique.html.twig", [
-            'userIsConect' => $userIsConect
+            'userIsConect' => $userIsConect,
+            'products' => $products
         ]);
     }
+
 }

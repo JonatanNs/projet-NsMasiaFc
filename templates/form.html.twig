@@ -8,9 +8,10 @@
     {% if valideMessage is not empty %}
         <p>{{ valideMessage }}</p>
     {% endif %}
-
+{{ dump(tokenCSRF) }}
 <a href="index.php?route=home"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
 <form action="index.php?route=check-login" method="POST" class=" formLogin">
+  <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
     <fieldset>
       <label for="emailLogin">Email</label>
       <input type="email" id="emailLogin" name="emailLogin" required>
@@ -28,6 +29,7 @@
   </form>
 
 <form action="index.php?route=check-signup" method="POST" class="formSignup invisible">
+  <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
     <fieldset>
       <label for="first_name">Prénom</label>
       <input type="text" id="first_name" name="first_name" required>
