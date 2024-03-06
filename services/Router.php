@@ -38,6 +38,14 @@ class Router
         {
             $oc->payement();
         }
+        else if(isset($get["route"]) && $get["route"] === "checkPayement")
+        {
+            $oc->checkPayement();
+        }
+        else if(isset($get["route"]) && $get["route"] === "stripePay")
+        {
+            $oc->stripePayement();
+        }
         else if(isset($get["route"]) && $get["route"] === "form")
         {
             $authc->form();

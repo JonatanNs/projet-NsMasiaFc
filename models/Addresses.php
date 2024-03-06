@@ -3,7 +3,7 @@
 class Addresses {
 
     private ? int $id = null;
-    public function __construct(private Users $user_id, private string $street, private int $number, private string $complements, private string $postal_code, private int $city) {
+    public function __construct(private int $user_id, private string $street, private int $streetNumber, private string $complements, private int $postal_code, private string $city) {
     }
 
     public function getId(): ? int {
@@ -13,11 +13,11 @@ class Addresses {
         $this->id = $id;
     }
 
-    public function getUser_id(): Users {
+    public function getUser_id(): int {
         return $this->user_id;
     }
 
-    public function setUser_id(Users $user_id): void {
+    public function setUser_id(int $user_id): void {
         $this->user_id = $user_id;
     }
 
@@ -28,11 +28,11 @@ class Addresses {
         $this->street = $street;
     }
 
-    public function getNumber(): int {
-        return $this->number;
+    public function getStreetNumber(): int {
+        return $this->streetNumber;
     }
-    public function setNumber(int $number): void {
-        $this->number = $number;
+    public function setStreetNumber(int $streetNumber): void {
+        $this->streetNumber = $streetNumber;
     }
 
     public function getComplements(): string {
@@ -42,17 +42,17 @@ class Addresses {
         $this->complements = $complements;
     }
 
-    public function getPostalCode(): string {
+    public function getPostalCode(): int {
         return $this->postal_code;
     }
-    public function setPostalCode(string $postal_code): void {
+    public function setPostalCode(int $postal_code): void {
         $this->postal_code = $postal_code;
     }
 
-    public function getCity(): int {
+    public function getCity(): string {
         return $this->city;
     }
-    public function setCity(int $city): void {
+    public function setCity(string $city): void {
         $this->city = $city;
     }
 }

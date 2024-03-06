@@ -1,3 +1,152 @@
+{% extends "base.html.twig" %}
+
 {% block main %}
-    <h1>Payement<h1>
+    <main class="container">
+        <article class="titleBoutique">
+            <figure>
+                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+            </figure>
+            <h1>NsMasia FC</h1>
+            <p>Boutique Officiel</p>
+        </article>
+        <div class="payement">
+            <div class="orderUser">
+                <article class="orderUser-connexion">
+                {% if userIsConect is empty %}
+                <h2>Information personels</h2>
+                    <form action="index.php?route=check-login" method="POST" class=" formLogin">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <fieldset>
+                        <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <button type="submit" name="submit">Se connecter</button>
+                        </fieldset>
+                        <p class="goSignup">Créer nouveau compte ?<p>
+                    </form>
+
+                    <form action="index.php?route=check-signup" method="POST" class="formSignup invisible" id="payment-form">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <fieldset>
+                        <input type="text" id="first_name" name="first_name" placeholder="Prénom" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="text" id="last_name" name="last_name" placeholder="Nom" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="email" id="emailSignup" name="emailSignup" placeholder="Email" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="passwordSignup" name="passwordSignup" placeholder="Mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="Confirmer le mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <button type="submit" name="submit"> Créer nouveau compte</button>
+                        </fieldset>
+                        <p class="goLogin"> Se connecter ? <p>
+                    </form>
+                    {% endif %}
+
+                    {% if userIsConect is not empty %} <!-- Quand l'utilisateur n'est pas connecter-->
+                        <article>
+                            <h2>Information personels</h2>
+                            <p> {{ userIsConect }}</p>
+                            <p>Poursuivre le processus d'achat</p>
+                        </article>
+                    {% endif %}
+                </article>
+                <article class="orderUser-address">
+                <h2>Livraison</h2>
+                {% if addresses is null %}
+                    <form  class="formLivraison" id="#payment-form">
+                        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <input type="hidden" name="user_id" id="user_id" value="{{ userId }}" />
+                        
+                        <fieldset>
+                            <input type="text" id="orderFirstName" name="orderFirstName" placeholder="Prénom" required/>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="orderLastName" name="orderLastName" placeholder="Nom" required/>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="orderStreet" name="orderStreet" placeholder="Rue" required/>
+                        </fieldset>
+                        <fieldset>
+                            <input type="number" id="orderStreetNumber" name="orderStreetNumber" placeholder="Numéro" required/>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
+                        </fieldset>
+                        <fieldset>
+                            <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
+                        </fieldset>
+                        <select name="pays">
+                            <option value="FR">France</option>
+                            <option value="EN">Angleterre</option>
+                            <option value="BE">Belgique</option>
+                            <option value="ES">Espagne</option>
+                            <option value="IT">Italie</option>
+                            <option value="LU">Luxembourg</option>
+                            <option value="MC">Monaco</option>
+                        </select>
+
+                    
+                    {% endif %}
+                    {% if addresses is not null %}
+                        <article>
+                            {% for address in addresses %}
+                                <p>{{ address.street  ~  address.streetNumber }} </p>
+                                <p>{{ address.complements }}</p>
+                                <p>{{ address.postal_code  ~  address.city }}</p>
+                            {% endfor %}
+                        </article>
+                    {% endif %}
+                </article>
+                <article class="orderUser-livraison"></article>
+                    <h3>Payement</h3>
+                    
+                <article class="orderUser-payement">
+                </article>
+            </div>
+            <section class="">
+                <h3>Panier</h3><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
+                <div class="recapPanierUser invisible">
+                    <div class="recapPanierUserDivRow">      
+                        <figure class="recapPanierUserImg"></figure>
+                        <div class="recapPanierUserDivCol"></div> 
+                        <div class="recapPanierUser-total"></div>
+                    </div>
+                </div> 
+                <p id="totalPrice"></p>
+                
+            </section>
+            {% if userIsConect is not empty %}
+                <div id="payment-element" >
+                    <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit">
+                    <div class="spinner hidden" id="spinner"></div>
+                    <span id="button-text">Payer</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+            {% endif %}
+                    </form>
+            
+        </div>
+    </main>
 {% endblock %}

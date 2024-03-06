@@ -66,19 +66,20 @@ function getTotalPrice(){
 }
 
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(){  
     const shirtOne = document.querySelector('.shirtOne'); //  le maillot
+    const shirtSaleSection = document.querySelector('.shirtSale'); 
     const maillotId = shirtOne.getAttribute('id'); // ID du maillot
     const imgUrl = shirtOne.querySelector('img').getAttribute('src'); // URL de l'image 
     const imgAlt = shirtOne.querySelector('img').getAttribute('alt');
     const h2Element = document.querySelector('.shirtSale').querySelector('h2'); 
     const productName = h2Element.textContent; 
-    const shirtSaleSection = document.querySelector('.shirtSale'); 
+    const theBag = document.querySelector(".basket");
     const priceElement = shirtSaleSection.querySelector('.prices'); 
     const productPrice = priceElement.textContent; // prix
+
     const btnAjouterAuPannier = document.querySelector(".btn-ajouterAuPannier");
     const tailleSelect = shirtSaleSection.querySelector('#taille'); //ID taille
-    const theBag = document.querySelector(".basket");
     const numberElement = shirtSaleSection.querySelector('.number'); 
     const plus = document.querySelector(".plus");
     const moins = document.querySelector(".moins");
@@ -87,64 +88,65 @@ document.addEventListener('DOMContentLoaded', function(){
     const maillotFace = document.querySelectorAll(".maillotFace");
     const allShirtTwo = document.querySelectorAll("div.maillot > section > div.maillotFace > figure.shirtTwo > img");
     const AllOne = document.querySelectorAll("div.maillot > section > div.maillotDos > figure.shirtTwo img");
+    
 
     let num = 0;
 
-
     function basketContent(){
-        
         tailleSelect.addEventListener('change', function() {
-            const selectedSize = tailleSelect.value; // Obtenez la taille sélectionnée à partir de la valeur de l'option sélectionnée
-            console.log(selectedSize); // Affichez la taille sélectionnée dans la console
-            
+        const selectedSize = tailleSelect.value; // Obtenez la taille sélectionnée à partir de la valeur de l'option sélectionnée
+                
             if(plus){
                 plus.addEventListener("click", function(){
                     num++;  
-                        if(num === 10){
-                            const p = document.createElement("p");
-                            p.classList.add("maxProducts");
-                            const textp = document.createTextNode("Vous ne pouvez commander que jusqu'à 10 produits au maximum.");
-                            setTimeout(function() {
-                                p.remove();
-                            }, 3000);
-                            p.appendChild(textp);
-                            document.querySelector("section.shirtSale > ul > li:nth-child(5)").append(p);
-                            plus.style.display="none";
-                            p.style.color="red";
-                            }
-                    
+                    if(num === 10){
+                        const p = document.createElement("p");
+                        p.classList.add("maxProducts");
+                        const textp = document.createTextNode("Vous ne pouvez commander que jusqu'à 10 produits au maximum.");
+                        setTimeout(function() {
+                            p.remove();
+                        }, 3000);
+                        p.appendChild(textp);
+                        document.querySelector("section.shirtSale > ul > li:nth-child(5)").append(p);
+                        plus.style.display="none";
+                        p.style.color="red";
+                    }       
                     numberElement.textContent = num;           
                 });
-            }
+            };
 
-            if (moins) {
-                moins.addEventListener("click", function() {
-                    if (num > 0) {
-                        num--;  
-                        if(num < 10){
-                            plus.style.display="block";
-                        }
-                    }
-                    numberElement.textContent = num;
-                });
-            }
-                    
-                btnAjouterAuPannier.addEventListener("click", function() {
-                    if (num > 0) {
-                        addBasket({
-                            id: maillotId,
-                            "name": productName,
-                            "url": imgUrl,
-                            "alt": imgAlt,
-                            "size": selectedSize,
-                            "prices": productPrice,
-                            "quantity": num // Utiliser la quantité actuelle spécifiée par l'utilisateur
+                if (moins) {
+                        moins.addEventListener("click", function() {
+                            if (num > 0) {
+                                num--;  
+                                if(num < 10){
+                                    plus.style.display="block";
+                                }
+                            }
+                            numberElement.forEach(number =>{
+                                numberElement.textContent = num;
+                            });
                         });
-                        changeQuantity({ id: maillotId }, num); // Mettre à jour la quantité du produit dans le panier
                     }
-                });                  
-        });
-    }
+                   
+                    btnAjouterAuPannier.addEventListener("click", function() {
+                        if (num > 0) {
+                            addBasket({
+                                id: maillotId,
+                                "name": productName,
+                                "url": imgUrl,
+                                "alt": imgAlt,
+                                "size": selectedSize,
+                                "prices": productPrice,
+                                "quantity": num // Utiliser la quantité actuelle spécifiée par l'utilisateur
+                            });
+                            changeQuantity({ id: maillotId }, num); // Mettre à jour la quantité du produit dans le panier
+                        }
+                    });                  
+            });
+        }       
+    
+    
 
     
     function panier(){
@@ -176,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     panierTotal.innerHTML = "";
                     pannierDivCol.innerHTML ="";
                     
+                    
                     // Afficher chaque produit dans le panier
                     basket.forEach(product => {
                         const img = document.createElement("img");
@@ -202,8 +205,10 @@ document.addEventListener('DOMContentLoaded', function(){
                         panierTotal.appendChild(totalp);
                 }
             });
-        }   
-    }
+        }  
+    } 
+    
+    
 
     function switchMaillot(){
 
@@ -255,18 +260,12 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     };
 
-    
-
-
 
     basketContent();
     panier();
     switchMaillot();
     recherche();
     
-
-
-
 
 
 });

@@ -1,0 +1,50 @@
+/********************** PAYEMENT *************************/
+
+.payement{
+    width: 80%;
+    margin: 0 auto;
+    .orderUser{
+        .orderUser-connexion{
+            text-align: center;
+            h2{
+                border-right: 1px solid $beige;
+                border-left: 1px solid $beige;
+            }
+            form{
+                margin: 2em 0;
+                input{
+                    width: 100%;
+                    border-radius: 0.5rem;
+                    background-color: $beige;
+                    padding: 0.5em;
+                    margin-bottom: 1em;
+                }
+                p{
+                    cursor: pointer;
+                }
+            }
+        }
+        .orderUser-address{
+            h2{
+                text-align: center;
+                border-right: 1px solid $beige;
+                border-left: 1px solid $beige;
+            }
+            form{
+                margin: 2em 0;
+                input, select{
+                    width: 100%;
+                    border-radius: 0.5rem;
+                    background-color: $beige;
+                    padding: 0.5em;
+                    margin-bottom: 1em;
+                }
+                p{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+

@@ -48,6 +48,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+/********************** HEADER *****************/
 .header {
   display: flex;
   flex-direction: row;
@@ -57,6 +58,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1em;
 }
 
+/***********************  NAVIGATION  ***********************/
 .navMobile {
   padding-top: 2em;
   position: fixed;
@@ -79,6 +81,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgb(0, 0, 0);
 }
 
+/************************** BOUTIQUE ***********************/
 .container {
   max-width: 480px;
   margin: 0 auto;
@@ -150,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 3em;
 }
 
-div.maillot.maillot1 > section > ul > li:nth-child(3) {
+div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > section > ul > li:nth-child(3) {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -215,6 +218,50 @@ div.maillot.maillot1 > section > ul > li:nth-child(3) {
   position: absolute;
   top: 7em;
   left: 4em;
+}
+
+/********************** PAYEMENT *************************/
+.payement {
+  width: 80%;
+  margin: 0 auto;
+}
+.payement .orderUser .orderUser-connexion {
+  text-align: center;
+}
+.payement .orderUser .orderUser-connexion h2 {
+  border-right: 1px solid rgb(255, 249, 237);
+  border-left: 1px solid rgb(255, 249, 237);
+}
+.payement .orderUser .orderUser-connexion form {
+  margin: 2em 0;
+}
+.payement .orderUser .orderUser-connexion form input {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 249, 237);
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+.payement .orderUser .orderUser-connexion form p {
+  cursor: pointer;
+}
+.payement .orderUser .orderUser-address h2 {
+  text-align: center;
+  border-right: 1px solid rgb(255, 249, 237);
+  border-left: 1px solid rgb(255, 249, 237);
+}
+.payement .orderUser .orderUser-address form {
+  margin: 2em 0;
+}
+.payement .orderUser .orderUser-address form input, .payement .orderUser .orderUser-address form select {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 249, 237);
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+.payement .orderUser .orderUser-address form p {
+  cursor: pointer;
 }
 
 .container {

@@ -44,4 +44,21 @@ class UserManager extends AbstractManager{
 
         return null ;
     }
+
+    public function getAllUserById(int $id) : ? Users {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $parameters = [
+            'id' => $id
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result) {
+            $user = new Users($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
+            $user->setId($result["id"]);
+            return $user;
+        }
+
+        return null ;
+    }
 }

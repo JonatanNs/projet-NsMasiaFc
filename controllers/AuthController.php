@@ -4,11 +4,13 @@ class AuthController extends AbstractController
 {
     public function home()
     {
+        $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $this->render("home.html.twig", [
             'userIsConect' => $userIsConect,
-            'tokenCSRF' => $tokenCSRF
+            'tokenCSRF' => $tokenCSRF,
+            'userId' => $userId
         ]);
     }
 
@@ -47,6 +49,7 @@ class AuthController extends AbstractController
                             $email = htmlspecialchars($_POST["emailSignup"]);
                             $password = password_hash($_POST["passwordSignup"], PASSWORD_BCRYPT); //RequiPuigdu35# //LeoMessi10# //KyllianMbaape10# //JoaoFelix7#
                             $user = new Users($first_name, $last_name, $email, $password);
+
                             //insert a la base de donner
                             $userManager->SignUpUser($user);
 
@@ -94,6 +97,8 @@ class AuthController extends AbstractController
                     if(password_verify($_POST["passwordLogin"], $users->getPassword())){
                         unset($_SESSION["error-message"]);
                         $_SESSION["user"] = $users->getFirstName() . ' ' . $users->getLastName();
+                        $_SESSION["userId"] = $users->getId();
+                        $_SESSION["valide"] = "Connexion reussie.";
                         header("Location: index.php?route=home");
                         exit;
                     } else {
