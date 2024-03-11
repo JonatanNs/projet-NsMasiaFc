@@ -78,13 +78,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bodyBack {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(42, 42, 42);
 }
 
 /************************** BOUTIQUE ***********************/
 .container {
   max-width: 480px;
-  margin: 0 auto;
 }
 
 .searchAndBag {
@@ -115,99 +114,58 @@ h1, h2, h3, h4, h5, h6 {
 .titleBoutique figure a img {
   width: 20%;
 }
-.shirtSale {
-  display: flex;
-  flex-direction: column;
-}
-.shirtSale .shirtOne {
-  width: 100%;
-}
-.shirtSale .shirtOne img {
-  width: 80%;
-  border-radius: 3rem;
-}
-.shirtSale figure {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.allShirt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
+  justify-content: space-evenly;
 }
-.shirtSale figure img {
-  width: 20%;
+.allShirt .shirtSale {
+  display: flex;
+  flex-direction: column;
 }
-.shirtSale ul .taille {
-  margin-top: 2em;
-}
-.shirtSale ul .taille select {
+.allShirt .shirtSale .shirtOne {
+  width: 100%;
   margin-left: 1em;
-  width: 20%;
-}
-.shirtSale ul .prix {
+  margin-bottom: 2em;
   margin-top: 2em;
-  margin-bottom: 2em;
 }
-.shirtSale ul .ajouterAuPannier {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 3em;
+.allShirt .shirtSale .shirtOne img {
+  width: 80%;
+  gap: 1em;
+  border-radius: 1rem;
+  cursor: pointer;
 }
-
-div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > section > ul > li:nth-child(3) {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1em;
+.allShirt .shirtSale ul li h2 {
+  cursor: pointer;
 }
-
-.description {
-  margin-left: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-.autreProduits {
-  margin-bottom: 2em;
-}
-.autreProduits figure {
-  display: flex;
-  flex-direction: row;
-}
-.pannier {
-  background-color: rgb(0, 0, 0);
+.allShirt .shirtSale ul li h2 a {
   color: rgb(255, 249, 237);
-  border: 5px solid rgb(255, 249, 237);
-  width: 70%;
-  margin: 0 auto;
-  text-align: center;
+}
+.allShirt .shirtSale ul li h2 a:hover {
+  text-decoration: underline;
+}
+.allShirt .shirtSale ul li p {
+  cursor: pointer;
+}
+.maillot .shirtOne {
+  width: 100%;
+}
+.maillot .shirtOne img {
   border-radius: 2rem;
-  padding: 1em;
-  position: absolute;
-  top: 7em;
-  left: 4em;
+  width: 100%;
 }
-.pannier article > ul > ul > li:nth-child(2) {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.maillot .shirtTwo {
+  width: 100%;
 }
-.pannier .pannier-divRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.pannier .pannier-divRow .panier-img img {
-  width: 15%;
+.maillot .shirtTwo img {
+  width: 25%;
+  margin: 0 auto;
   border-radius: 1rem;
 }
-.pannier .pannier-divCol {
-  display: flex;
-  flex-direction: column;
-  margin-left: -20em;
-  margin-right: 2em;
-}
 
-.boutiqueSearch {
-  background-color: rgb(0, 0, 0);
+.pannier {
+  background-color: rgb(42, 42, 42);
   color: rgb(255, 249, 237);
   border: 5px solid rgb(255, 249, 237);
   width: 70%;
@@ -218,6 +176,14 @@ div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > se
   position: absolute;
   top: 7em;
   left: 4em;
+}
+.pannier .divRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.pannier .divRow figure img {
+  width: 50%;
 }
 
 /********************** PAYEMENT *************************/
@@ -265,6 +231,7 @@ div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > se
 }
 
 .container {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(42, 42, 42);
   color: rgb(255, 249, 237);
+  font-family: "Nunito", sans-serif;
 }/*# sourceMappingURL=style.css.map */

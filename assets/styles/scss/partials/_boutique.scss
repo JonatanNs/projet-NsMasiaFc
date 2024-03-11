@@ -1,7 +1,6 @@
 /************************** BOUTIQUE ***********************/
 .container{
     max-width: 480px;
-    margin: 0 auto;
 }
 
 .searchAndBag{
@@ -42,100 +41,81 @@
     }
 }
 
-.shirtSale{
-    display: flex;
-    flex-direction: column;
 
-    .shirtOne{
-        width: 100%;
 
-        img{
-            width: 80%;
-            border-radius: 3rem;
-        }
-    }
-    figure{
-        width: 100%;
+.allShirt{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-evenly;
+    .shirtSale{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        img{
-            width: 20%;
-        }
-    }
-
-    h2{
-        //NsMasia FC Domicile
-        
-    }
-
-    p{
-        //Maillot domicile 2024/2025
-        
-    }
-        
-    ul{
-        
-        .taille{
-            //taille
+        .shirtOne{
+            width: 100%;
+            margin-left: 1em;
+            margin-bottom: 2em;
             margin-top: 2em;
-            select{
-                margin-left: 1em;
-                width: 20%;
+            img{
+                width: 80%;
+                gap: 1em;
+                border-radius: 1rem;
+                cursor: pointer;
             }
         }
-        .prix{
-            //prix
-            margin-top: 2em;
-            margin-bottom: 2em;
-              p{
-                
-              }  
-                
+        ul{
+            li{
+                h2{
+                    //NsMasia FC Domicile
+                    cursor: pointer;
+                    a{
+                        color: $beige;
+                        &:hover{
+                            text-decoration: underline ;
+                        }
+                    }
+                    
+                    
+                }
+            }
+            li{
+                p{
+                    //Maillot domicile 2024/2025
+                    cursor: pointer;
+                }
+            }
+            li{
+                .prix{
+    
+                }
+            }
+            li{
+                .addCart{
+    
+                }
+            }
         }
-
-        .ajouterAuPannier{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 3em;
-        }
+    
     }
 }
 
-div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > section > ul > li:nth-child(3){
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 1em;
-}
-
-.description{
-    margin-left: 1em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    h3{
-
-    }
-    p{
-
-    }
-}
-
-.autreProduits{
-    margin-bottom: 2em;
-    h4{
-
-    }
-    figure{
-        display: flex;
-        flex-direction: row;
+.maillot{
+    .shirtOne{
+        width: 100%;
         img{
-
+            border-radius: 2rem;
+            width: 100%;
+        }
+    }
+    .shirtTwo{
+        width: 100%;
+        img{
+            width: 25%;
+            margin: 0 auto;
+            border-radius: 1rem;
         }
     }
 }
-
 
 .pannier{
     background-color: $black;
@@ -150,43 +130,14 @@ div.maillot.maillot1 > section > ul > li:nth-child(3), div.maillot.maillot2 > se
     top: 7em;
     left: 4em;
 
-    article > ul > ul > li:nth-child(2){
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        
-    }
-    .pannier-divRow{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        
-
-        .panier-img img{
-            width: 15%;
-            border-radius: 1rem;
+    .divRow{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        figure{
+            img{
+                width: 50%;
+            }
         }
     }
-    .pannier-divCol{
-        display: flex;
-        flex-direction: column;
-        margin-left: -20em;
-        margin-right: 2em;
-    }
 }
-
-.boutiqueSearch{
-    background-color: $black;
-    color: $beige;
-    border: 5px solid $beige;
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 2rem;
-    padding: 1em;
-    position: absolute;
-    top: 7em;
-    left: 4em;
-}
-
-

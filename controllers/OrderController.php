@@ -1,6 +1,4 @@
 <?php
-
-
 class OrderController extends AbstractController
 {
     public function payement() {
@@ -10,7 +8,6 @@ class OrderController extends AbstractController
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $addresses = isset($_SESSION["adresse"]) ? $_SESSION["adresse"] : null;
-        $price = isset($_SESSION['prices']) ? $_SESSION['prices'] : null;
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
         
@@ -22,11 +19,10 @@ class OrderController extends AbstractController
             'valideMessage' => $valideMessage,
             'products' => $products,
             'addresses' => $addresses,
-            'prices' => $price
         ]);
     }
 
-    public function checkPayement(){
+    /*public function checkPayement(){
         // Vérifiez la soumission du formulaire
         if(isset($_POST["orderFirstName"]) && isset($_POST["orderLastName"]) && 
            isset($_POST["orderStreet"]) && isset($_POST["orderStreetNumber"]) && 
@@ -74,9 +70,9 @@ class OrderController extends AbstractController
                         
                         if($products) {
                             // Créez une nouvelle commande pour ce produit
-                            $order_products = new Order_products($users, $products, (int)$quantity, $newAddresses, $prices, $formatted_date,(int)$_POST["totalPrices1"]);
+                            $order_products = new Order_products($users, $products, (int)$quantity, $sizes, $newAddresses, $prices, $formatted_date,(int)$_POST["totalPrices1"]);
                             // Ajoutez la commande à la base de données
-                            $orderManager->createOrder($users, $products, (int)$quantity, $newAddresses, $prices);
+                            $orderManager->createOrder($users, $products, (int)$quantity,  $sizes, $newAddresses, $prices);
                             $_SESSION['prices'] = $prices;
                         } else {
                             // Gérez le cas où le produit n'existe pas ou ne peut pas être récupéré
@@ -87,10 +83,7 @@ class OrderController extends AbstractController
                     $_SESSION["valide"] = "Adresse enregistrée";
                     header("Location: index.php?route=payement");
                     exit;
-                }
-                
-                
-                    
+                }  
                 } else {
                 $_SESSION["error"] = "Remplissez votre adresse de livraison";
                 header("Location: index.php?route=payement");
@@ -101,48 +94,55 @@ class OrderController extends AbstractController
             header("Location: index.php?route=payement");
             exit;
             }
-        }
+        }*/
 
         public function stripePayement() {
+            var_dump($_POST['products']);
+            $products = $_POST['products'];
+
+            //var_dump($dataProducts);
+
             $api = $_ENV['API_KEY'];
-        
-            $stripe = new \Stripe\StripeClient($api);
-        
-            function calculateOrderAmount(int $amount): int {
-                // Remplacer cette constante par un calcul du montant de la commande
-                // Calculer le total de la commande sur le serveur pour éviter
-                // personnes de manipuler directement le montant sur le client
-                return $amount * 100;
-            }
+            \Stripe\Stripe::setApiKey($api);
         
             header('Content-Type: application/json');
         
-            try {
-                // retrieve JSON from POST body
-                $jsonStr = file_get_contents('php://input');
-                $jsonObj = json_decode($jsonStr);
-                
-                // TODO : Create a PaymentIntent with amount and currency in '$paymentIntent'
-                $paymentIntent = $stripe->paymentIntents->create([ 
-                    'amount' => calculateOrderAmount($jsonObj->amount),
-                    'currency' => 'eur'
-                ]);
+            $YOUR_DOMAIN = 'http://localhost:3000';
         
-                $output = [
-                    'clientSecret' => $paymentIntent->client_secret,
+            $line_items = [];
+        
+            foreach ($products as $product) {
+                $data = json_decode($product, true);
+                $line_item = [
+                    'quantity' => $data['quantity'], 
+                    'price_data' => [
+                        'currency' => 'EUR',
+                        'product_data' => [
+                            'name' => $data['name'], 
+                            //'size' => $data['size']
+                        ],
+                        'unit_amount' => $data['prices'] 
+                    ],
                 ];
-        
-                // Rediriger avant d'envoyer la réponse JSON
-                echo json_encode($output);
-                
-            } catch (Error $e) {
-                http_response_code(500);
-                echo json_encode(['error' => $e->getMessage()]);
+                $line_items[] = $line_item;
             }
-        }
         
+            $checkout_session = \Stripe\Checkout\Session::create([
+                'submit_type' => 'pay',
+                'billing_address_collection' => 'required',
+                'shipping_address_collection' => [
+                    'allowed_countries' => ['FR'],
+                ],
+                'line_items' => $line_items,
+                'mode' => 'payment',
+                'success_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=succes',
+                'cancel_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=payement',
+            ]);
+        
+            header("HTTP/1.1 303 See Other");
+            header("Location: " . $checkout_session->url);     
+        }    
 }
         
     
-
 

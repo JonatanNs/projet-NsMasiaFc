@@ -3,16 +3,15 @@
 class Products {
 
 private ?int $id = null;
+private ?string $descriptions = null;
+private ?string $other_img_url = null;
+private ?string $other_img_alt = null;
 
 public function __construct(
     private string $name, 
     private string $img_url, 
     private string $img_alt, 
-    private string $descriptions,
-    private string $prices, 
-    private ?string $other_img_url = null,
-    private ?string $other_img_alt = null
-
+    private string $prices 
 ) {
     
 }

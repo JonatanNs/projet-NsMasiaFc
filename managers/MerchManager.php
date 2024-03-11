@@ -14,12 +14,12 @@ class MerchManager extends AbstractManager{
                 $item["name"], 
                 $item["img_url"], 
                 $item["img_alt"], 
-                $item["descriptions"], 
-                $item["prices"],
-                $item["other_img_url"],
-                $item["other_img_alt"],
+                $item["prices"]
             );
             $newProduct->setId($item["id"]);
+            $newProduct->setDescriptions($item["descriptions"] ?? '');
+            $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
+            $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
             $products[] = $item;
         }
         return $products;
@@ -40,12 +40,12 @@ class MerchManager extends AbstractManager{
                 $item["name"], 
                 $item["img_url"], 
                 $item["img_alt"], 
-                $item["descriptions"], 
-                $item["prices"],
-                $item["other_img_url"],
-                $item["other_img_alt"],
+                $item["prices"]
             );
             $newProduct->setId($item["id"]);
+            $newProduct->setDescriptions($item["descriptions"] ?? '');
+            $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
+            $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
             $products[] = $item;
         }
         return $products;

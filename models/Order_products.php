@@ -7,6 +7,7 @@ public function __construct(
     private Users $user_id,
     private array $products,
     private int $quantity,
+    private array $sizes,
     private Addresses $addresses_id,
     private array $prices,
     private string $date,
@@ -44,6 +45,14 @@ public function getQuantity(): int {
 
 public function setQuantity(int $quantity): void {
     $this->quantity = $quantity;
+}
+
+public function getTailles(): array {
+    return $this->sizes;
+}
+
+public function setTailles(array $sizes): void {
+    $this->sizes = $sizes;
 }
 
 public function getAddressesId(): Addresses {

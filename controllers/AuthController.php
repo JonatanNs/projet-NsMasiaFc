@@ -34,7 +34,6 @@ class AuthController extends AbstractController
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){ 
                 
-
                 $password_condition = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%#%§*?&]{8,}$/';
                 //si le mot de passe et le confirm mot de passe est le meme 
                 if ($_POST["passwordSignup"] === $_POST["confirmPasswordSignup"]) {
@@ -98,6 +97,7 @@ class AuthController extends AbstractController
                         unset($_SESSION["error-message"]);
                         $_SESSION["user"] = $users->getFirstName() . ' ' . $users->getLastName();
                         $_SESSION["userId"] = $users->getId();
+                        $_SESSION["userEmail"] = $users->getEmail();
                         $_SESSION["valide"] = "Connexion reussie.";
                         header("Location: index.php?route=home");
                         exit;

@@ -30,6 +30,11 @@ class Router
         {
             $mc->boutique();
         }
+        else if(isset($get["route"]) && $get["route"] === "lookProduct" && isset($get["id"]))
+        {
+            $productId = isset($get["id"]) ? (int)$get["id"] : 0;
+            $mc->boutiqueProduct($productId);
+        }
         else if(isset($get["route"]) && $get["route"] === "billeterie")
         {
             $mc->billeterie();

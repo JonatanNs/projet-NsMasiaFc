@@ -67,136 +67,66 @@ function getTotalPrice(){
 
 
 document.addEventListener('DOMContentLoaded', function(){  
-    const shirtOne = document.querySelector('.shirtOne'); //  le maillot
-    const shirtSaleSection = document.querySelector('.shirtSale'); 
-    const maillotId = shirtOne.getAttribute('id'); // ID du maillot
-    const imgUrl = shirtOne.querySelector('img').getAttribute('src'); // URL de l'image 
-    const imgAlt = shirtOne.querySelector('img').getAttribute('alt');
-    const h2Element = document.querySelector('.shirtSale').querySelector('h2'); 
-    const productName = h2Element.textContent; 
-    const theBag = document.querySelector(".basket");
-    const priceElement = shirtSaleSection.querySelector('.prices'); 
-    const productPrice = priceElement.textContent; // prix
-
-    const btnAjouterAuPannier = document.querySelector(".btn-ajouterAuPannier");
-    const tailleSelect = shirtSaleSection.querySelector('#taille'); //ID taille
-    const numberElement = shirtSaleSection.querySelector('.number'); 
-    const plus = document.querySelector(".plus");
-    const moins = document.querySelector(".moins");
-    //switchMaillot
-    const maillotDos = document.querySelectorAll(".maillotDos");
-    const maillotFace = document.querySelectorAll(".maillotFace");
-    const allShirtTwo = document.querySelectorAll("div.maillot > section > div.maillotFace > figure.shirtTwo > img");
-    const AllOne = document.querySelectorAll("div.maillot > section > div.maillotDos > figure.shirtTwo img");
-    
-
-    let num = 0;
-
-    function basketContent(){
-        tailleSelect.addEventListener('change', function() {
-        const selectedSize = tailleSelect.value; // Obtenez la taille sélectionnée à partir de la valeur de l'option sélectionnée
-                
-            if(plus){
-                plus.addEventListener("click", function(){
-                    num++;  
-                    if(num === 10){
-                        const p = document.createElement("p");
-                        p.classList.add("maxProducts");
-                        const textp = document.createTextNode("Vous ne pouvez commander que jusqu'à 10 produits au maximum.");
-                        setTimeout(function() {
-                            p.remove();
-                        }, 3000);
-                        p.appendChild(textp);
-                        document.querySelector("section.shirtSale > ul > li:nth-child(5)").append(p);
-                        plus.style.display="none";
-                        p.style.color="red";
-                    }       
-                    numberElement.textContent = num;           
-                });
-            };
-
-                if (moins) {
-                        moins.addEventListener("click", function() {
-                            if (num > 0) {
-                                num--;  
-                                if(num < 10){
-                                    plus.style.display="block";
-                                }
-                            }
-                            numberElement.forEach(number =>{
-                                numberElement.textContent = num;
-                            });
-                        });
-                    }
-                   
-                    btnAjouterAuPannier.addEventListener("click", function() {
-                        if (num > 0) {
-                            addBasket({
-                                id: maillotId,
-                                "name": productName,
-                                "url": imgUrl,
-                                "alt": imgAlt,
-                                "size": selectedSize,
-                                "prices": productPrice,
-                                "quantity": num // Utiliser la quantité actuelle spécifiée par l'utilisateur
-                            });
-                            changeQuantity({ id: maillotId }, num); // Mettre à jour la quantité du produit dans le panier
-                        }
-                    });                  
-            });
-        }       
-    
-    
-
-    
+ 
     function panier(){
-        if (theBag) {
+        const theBag = document.querySelector(".bagProduct");
+        if (theBag){
             theBag.addEventListener("click", function() {
-                const textEmpty = document.querySelector(".textEmpty");
-                const panier = document.querySelector(".pannier");
-                const panierImg = document.querySelector(".panier-img");
-                const pannierDivCol = document.querySelector(".pannier-divCol");
-                const panierTotal = document.querySelector(".panier-total");
-        
                 // Récupérer les données du panier depuis le LocalStorage
                 const basketData = localStorage.getItem("basket");
-        
-                if (!basketData) {
+                if(!basketData){
                     // Le panier est vide, afficher un message approprié
-                    textEmpty.textContent = "Votre panier est vide";
-                    textEmpty.style.cssText = "white-space: nowrap; position: absolute; top: 1em; right: -4.5em;";
-                    setTimeout(function() { textEmpty.textContent = ""; }, 3000);
-                } else {
+                    const p = document.createElement("p");
+                    p.textContent = "Votre panier est vide";
+                    p.style.cssText = "white-space: nowrap; color:red; margin: 1em 0 0 -4em ";
+                    theBag.appendChild(p);   
+                }else{
+                    const panier = document.querySelector(".pannier");
+                    const panierUser = document.querySelector(".panierUser");
+                    const panierTotal = document.querySelector(".panier-total");
                     // Le panier n'est pas vide, afficher son contenu
+
+                    panierUser.innerHTML = '';
+                    panierTotal.innerHTML = '';
+                    
                     panier.classList.toggle("invisible");
         
                     // Convertir les données récupérées en objet JavaScript
                     const basket = JSON.parse(basketData);
-        
-                    // Vider le contenu actuel du panier avant d'ajouter de nouveaux éléments
-                    panierImg.innerHTML = "";
-                    panierTotal.innerHTML = "";
-                    pannierDivCol.innerHTML ="";
-                    
-                    
+            
                     // Afficher chaque produit dans le panier
                     basket.forEach(product => {
-                        const img = document.createElement("img");
+                        const divRow = document.createElement("div");
+                        divRow.classList.add("divRow");
+                        panierUser.appendChild(divRow);
+                        
+                        const img = document.createElement("img")
                         img.src = product.url;
                         img.alt = product.alt;
-                        panierImg.appendChild(img);
-                        // Créer un élément h6 pour le nom du produit
-                        
+                        divRow.appendChild(img);
+                        //img.appendChild(panierImg);
+
                         const nameProduct = document.createElement("h6");
                         nameProduct.classList.add("panier-nameProduct");
                         nameProduct.textContent = product.name;
-                        pannierDivCol.appendChild(nameProduct);
-        
-                        // Créer un élément p pour le prix du produit
+                        //pannierDivCol.appendChild(nameProduct);
+                        divRow.appendChild(nameProduct);
+
                         const prixQuantite = document.createElement("p");
                         prixQuantite.classList.add("panier-price-quantity");
                         prixQuantite.textContent = product.prices + " € x " + product.quantity;
-                        pannierDivCol.appendChild(prixQuantite);
+                        //pannierDivCol.appendChild(prixQuantite);
+                        divRow.appendChild(prixQuantite);
+
+                        const figure = document.createElement("figure");
+                        divRow.appendChild(figure);
+                        figure.appendChild(img);
+
+                        const div = document.createElement("div"); 
+                        div.classList.add("divCol");
+                        divRow.appendChild(div);
+                        div.appendChild(nameProduct);
+                        div.appendChild(prixQuantite);
                         
                     });
                     const totalp = document.createElement("p");
@@ -211,6 +141,10 @@ document.addEventListener('DOMContentLoaded', function(){
     
 
     function switchMaillot(){
+        const maillotDos = document.querySelectorAll(".maillotDos");
+        const maillotFace = document.querySelectorAll(".maillotFace");
+        const allShirtTwo = document.querySelectorAll("div.maillot > section > div.maillotFace > figure.shirtTwo > img");
+        const AllOne = document.querySelectorAll("div.maillot > section > div.maillotDos > figure.shirtTwo img");
 
         allShirtTwo.forEach(shirtTwo => {
             shirtTwo.addEventListener("click", function() {
@@ -235,44 +169,99 @@ document.addEventListener('DOMContentLoaded', function(){
         });
 
         const productLength = document.querySelector(".productLength");
-        const maillotLength = parseInt(productLength.textContent); 
-
-        for(let i = 1; i <= maillotLength; i++){
-            if (i !== 1) { 
-            let maillot = document.querySelector(".maillot" + i).classList.add("invisible");
+        if(productLength){
+            const maillotLength = parseInt(productLength.textContent); 
+            for(let i = 1; i <= maillotLength; i++){
+                let otherMaillot = document.querySelector(".other" + i);
+                if(otherMaillot){
+                    otherMaillot.addEventListener("click", function(){
+                    
+                        let maillot = document.querySelector(".maillot:not(.invisible)");
+                        let maillot2 = document.querySelector(".maillot.invisible");
+                        maillot.classList.add("invisible");
+                        maillot2.classList.remove("invisible"); 
+                    })
+                } 
             }
-            let otherMaillot = document.querySelector(".other" + i);
-            otherMaillot.addEventListener("click", function(){
-                let maillot = document.querySelector(".maillot:not(.invisible)");
-                let maillot2 = document.querySelector(".maillot.invisible");
-                maillot.classList.add("invisible");
-                maillot2.classList.remove("invisible"); 
-            })
         }
     }
 
-    function recherche(){
-        const recherche = document.querySelector(".boutiqueSearch");
-        const search = document.querySelector(".search");
 
-        search.addEventListener("click", function() {
-            recherche.classList.toggle("invisible");
-        });
-    };
-
-
-    basketContent();
-    panier();
-    switchMaillot();
-    recherche();
+    function AddLocalStorage() {
+        const productIdElements = document.querySelectorAll(".shirtOne");
+        const h2Elements = document.querySelectorAll('.shirtSale');
+        const taille = document.getElementById("taille");
     
+        if (taille) {
+            taille.addEventListener("change", function() {
+                size = taille.value; 
+            });
+        }
+    
+        h2Elements.forEach((element, index) => {
+            const productName = element.querySelector('h2').textContent;
+            const productId = productIdElements[index].getAttribute("id");
+            const productImgUrl = element.querySelector('img').getAttribute('src');
+            const productImgAlt = element.querySelector('img').getAttribute('alt');
+            const productPrice = element.querySelector('.prices').textContent;
+    
+            const addCartButtons = element.querySelectorAll(".addCart");
+    
+            addCartButtons.forEach((button, i) => {
+                const productLength = document.querySelector('.productLength');
+                button.addEventListener("click", function() {
+                    const maillotId = "maillot" + (i + 1);
+                    const productUrl = productImgUrl;
+                    const productAlt = productImgAlt;
+                    const productQuantity = ""; 
+    
+                    for (let j = 0; j < parseInt(productLength.textContent); j++) {
+                        if (maillotId === "maillot" + (j + 1)) {
+                            addBasket({
+                                id: productId,
+                                name: productName.trim(),
+                                url: productUrl,
+                                alt: productAlt,
+                                size: size, 
+                                prices: productPrice,
+                                quantity: productQuantity
+                            });
+                            break; 
+                        }
+                    }
+                });
+            });
+        });
+    }
+    
+    
+    
+    function lookProduct(){
+        const lookProductButtons = document.querySelectorAll(".lookProduct");
+        lookProductButtons.forEach(function(button) {
+            document.querySelectorAll(".maillot").forEach(function(maillot) {
+                maillot.classList.add("invisible");
+            });
+            button.addEventListener("click", function() {
+                // Récupérer l'ID du produit associé à ce bouton
+                const productId = button.closest(".shirtSale").querySelector(".shirtOne").getAttribute("id");
+                // Masquer tous les maillots
+                document.querySelectorAll(".maillot").forEach(function(maillot) {
+                    maillot.classList.add("invisible");
+                });
+                // Afficher le maillot correspondant à l'ID du produit
+                document.querySelector(".maillot" + productId).classList.remove("invisible");
+            });
+        });
+    }
+
+
+    panier();
+    AddLocalStorage();
+    switchMaillot();
+    lookProduct();
 
 
 });
-
-
-
-
-
 
 

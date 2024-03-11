@@ -2,7 +2,7 @@
 
 class OrderManager extends AbstractManager{
 
-    public function createOrder(Users $user, array $product, int $quantity, Addresses $addresses, array $prices) {
+    public function createOrder(Users $user, array $product, int $quantity, array $sizes, Addresses $addresses, array $prices) {
         $date = new DateTime();
         $formatted_date = $date->format('Y-m-d H:i:s');
     
@@ -12,12 +12,13 @@ class OrderManager extends AbstractManager{
             $price = $prices[$i];
             $product_id = $product[$i];
     
-            $query = $this->db->prepare("INSERT INTO order_products (id, user_id, product_id, quantity, addresses_id, prices, date, total_prices) 
+            $query = $this->db->prepare("INSERT INTO order_products (id, user_id, product_id, quantity, sizes, addresses_id, prices, date, total_prices) 
                                         VALUES (NULL, :user_id, :product_id, :quantity, :addresses_id, :prices, :date, :total_prices)");
             $parameters = [
                 'user_id' => $user->getId(), 
                 'product_id' => $product_id, 
                 'quantity' => (int)$quantity, 
+                'size' => $sizes,
                 'addresses_id'=> $addresses->getId(), 
                 'prices' => $price,
                 'date' => $formatted_date,
