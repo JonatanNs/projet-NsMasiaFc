@@ -1,0 +1,49 @@
+/*********************Biletterie***********************/
+//@media screen and (min-width: 375px) and (max-width: 480px) {
+    .img-background{
+        background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
+        background-size: cover;
+        margin-left: -0.4em;
+        margin-right: -0.4em;
+        padding: 3em;
+    }
+    .nextMatch{
+            h2{
+                text-align: center;
+            }
+        
+        .matchs{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+            padding: 0;
+            
+            .reservation{
+                background-color: $black;
+                color:  $beige;
+                border-radius: 1rem;
+                border: 5px solid $beige;
+                text-align: center;
+                padding: 1em;
+                margin-top: -2em;
+                margin-bottom: 5em;
+            } 
+        }
+    }
+
+
+
+/**************************RESERVATION*************************/
+
+
+.stadiumTicket {
+    position: relative;
+    img{
+        margin: 0 auto;
+    }
+}
+
+
+
+
+//}

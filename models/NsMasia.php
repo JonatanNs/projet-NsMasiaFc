@@ -3,7 +3,7 @@
 class NsMasia {
 
     private ? int $id = null;
-    public function __construct(private string $name, private string $logo_url, private string $logo_alt, private string $stadium, private int $ranking_points, private int $match_play, private int $match_win, private int $match_lose, private int $match_nul) {
+    public function __construct(private string $name, private string $logo_url, private string $logo_alt, private int $ranking_points, private int $match_play, private int $match_win, private int $match_lose, private int $match_nul) {
     }
 
     public function getId(): ? int {
@@ -32,14 +32,6 @@ class NsMasia {
     }
     public function setLogoAlt(string $logo_alt): void {
         $this->logo_alt = $logo_alt;
-    }
-
-    public function getStadium(): string {
-        return $this->stadium;
-    }
-
-    public function setStadium(string $stadium): void {
-        $this->stadium = $stadium;
     }
 
     public function getMatchWin(): int {

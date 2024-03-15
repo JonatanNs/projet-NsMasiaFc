@@ -30,8 +30,13 @@
             <div>
                 <p> Bienvenu {{ userIsConect }}</p> 
             </div> 
+            {% if rolesUser == "ADMIN" %} 
+                <form action="index.php?route=checkAdmin" method="POST">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <button type="submit">ADMIN</button>
+                </form> 
+            {% endif %}
         {% endif %}
-
         {% if userIsConect is empty %} <!-- Quand l'utilisateur n'est pas connecter-->
             <div>
                 <a href="index.php?route=form"> <p class="fa-solid fa-user fa-xl" id="toggleForm"> </p></a> <!-- Go form -->
@@ -52,17 +57,18 @@
                             <li>
                                 <a href="index.php?route=boutique">Boutique</a>
                             </li>
-                            <li>Billeterie</li>
+                            <li>
+                                <a href="index.php?route=billeterie">Billeterie</a>
+                            </li>
                         </ul>
                         <ul>
-                            <li>Paramètres</li>            
+                            <!--<li>Paramètres</li>-->       
                         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
                             <li>
                                 <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p> </a>
                             </li>
                         {% endif %}
                         </ul>
-                        
                     </div>
                 </nav>
             {% endblock %}
@@ -80,5 +86,6 @@
     <script src="js/index.js"></script>
     <script src="js/basket.js"></script>
     <script src="js/payement.js"></script>
+    <script src="js/billeterie.js"></script>
 </body>
 </html>

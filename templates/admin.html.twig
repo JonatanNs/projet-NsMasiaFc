@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main class="container">
+    <h1>Admin</h1>
+
+    <section>
+        <h2>Boutique</h2>
+        <p>Ajouter Un produit</p>
+        <form action="index.php?route=checkAddproduct" method="POST">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+            <fieldset>
+                <label for="nameProduct">Name</label>
+                <input type="text" id="nameProduct" name="nameProduct" placeholder="Maillot" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="imgUrl">Url 1</label>
+                <input type="url" id="imgUrl" name="imgUrl" placeholder="https://example.com" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="imgUrl">Image Alt 1</label>
+                <input type="url" id="imgAlt" name="imgAlt" placeholder="Description de l'image" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="ortherImgUrl">Url 2 </label>
+                <input type="url" id="ortherImgUrl" name="ortherImgUrl" placeholder="https://example.com">
+            </fieldset>
+
+            <fieldset>
+                <label for="ortherImgUrl">Image Alt 2</label>
+                <input type="url" id="ortherImgAlt" name="ortherImgAlt" placeholder="Description de l'image">
+            </fieldset>
+
+            <fieldset>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" placeholder="Description du produit">
+            </fieldset>
+
+            <fieldset>
+                <label for="prices">Prix</label>
+                <input type="number" id="prices" name="prices" placeholder="Prix du produit" required>
+            </fieldset>
+
+            <fieldset>
+            <button type="submit" name="submit">Ajouter</button>
+            </fieldset>
+        </form>
+    </section>
+    </main>
+{% endblock %}

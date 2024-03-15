@@ -1,0 +1,10 @@
+
+{% block main %}
+
+<h1>Payement Reussi</h1>  
+    <form action="index.php?route=checkSucces" method="POST" class="formSucces">
+    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />      
+        <button type="submit" class="succesBtn">Retour sur le site</button>
+    </form>
+    <script src="js/succes.js"></script>
+{% endblock %}

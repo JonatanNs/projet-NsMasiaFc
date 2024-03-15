@@ -1,143 +1,144 @@
 /************************** BOUTIQUE ***********************/
-.container{
-    max-width: 480px;
-}
 
-.searchAndBag{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1em;
-
-    .numberBag{
-        color: $beige;
-        margin-left: 1.5em;
-        margin-top: -1em;  
-    }
-}
-
-.titleBoutique{
-    //NsMasia FC + Boutique Officiel
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    figure a{
-        width: 100%;
+@media screen and (max-width: 480px) {
+    /* Votre code CSS pour les écrans dont la largeur est entre 0px et 480px */
+    .searchAndBag{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-around;
         align-items: center;
+        padding: 1em;
 
-         img{
-            width: 20%;
+        .numberBag{
+            color: $beige;
+            margin-left: 1.5em;
+            margin-top: -1em;  
         }
     }
-    h1{
-        //NsMasia FC
-    }
-    p{
-        //Boutique Officiel
-    }
-}
 
-
-
-.allShirt{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: space-evenly;
-    .shirtSale{
+    .titleBoutique{
+        //NsMasia FC + Boutique Officiel
         display: flex;
         flex-direction: column;
-        .shirtOne{
+        justify-content: center;
+        align-items: center;
+        figure a{
             width: 100%;
-            margin-left: 1em;
-            margin-bottom: 2em;
-            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
             img{
-                width: 80%;
-                gap: 1em;
-                border-radius: 1rem;
-                cursor: pointer;
+                width: 20%;
             }
         }
-        ul{
-            li{
-                h2{
-                    //NsMasia FC Domicile
-                    cursor: pointer;
-                    a{
-                        color: $beige;
-                        &:hover{
-                            text-decoration: underline ;
-                        }
-                    }
-                    
-                    
-                }
-            }
-            li{
-                p{
-                    //Maillot domicile 2024/2025
-                    cursor: pointer;
-                }
-            }
-            li{
-                .prix{
-    
-                }
-            }
-            li{
-                .addCart{
-    
-                }
-            }
+        h1{
+            //NsMasia FC
         }
-    
-    }
-}
-
-.maillot{
-    .shirtOne{
-        width: 100%;
-        img{
-            border-radius: 2rem;
-            width: 100%;
+        p{
+            //Boutique Officiel
         }
     }
-    .shirtTwo{
-        width: 100%;
-        img{
-            width: 25%;
-            margin: 0 auto;
-            border-radius: 1rem;
-        }
-    }
-}
 
-.pannier{
-    background-color: $black;
-    color: $beige;
-    border: 5px solid $beige;
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 2rem;
-    padding: 1em;
-    position: absolute;
-    top: 7em;
-    left: 4em;
 
-    .divRow{
+
+    .allShirt{
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
-        figure{
+        justify-content: space-evenly;
+        .shirtSale{
+            display: flex;
+            flex-direction: column;
+            .shirtOne{
+                width: 100%;
+                margin-left: 1em;
+                margin-bottom: 2em;
+                margin-top: 2em;
+                img{
+                    width: 80%;
+                    gap: 1em;
+                    border-radius: 1rem;
+                    cursor: pointer;
+                }
+            }
+            ul{
+                li{
+                    h2{
+                        //NsMasia FC Domicile
+                        cursor: pointer;
+                        a{
+                            color: $beige;
+                            &:hover{
+                                text-decoration: underline ;
+                            }
+                        }
+                        
+                        
+                    }
+                }
+                li{
+                    p{
+                        //Maillot domicile 2024/2025
+                        cursor: pointer;
+                    }
+                }
+                li{
+                    .prix{
+        
+                    }
+                }
+                li{
+                    .addCart{
+        
+                    }
+                }
+            }
+        
+        }
+    }
+
+    .maillot{
+        .shirtOne{
+            width: 100%;
             img{
-                width: 50%;
+                border-radius: 2rem;
+                width: 100%;
+            }
+        }
+        .shirtTwo{
+            width: 100%;
+            img{
+                width: 25%;
+                margin: 0 auto;
+                border-radius: 1rem;
             }
         }
     }
+
+    .pannier{
+        background-color: $black;
+        color: $beige;
+        border: 5px solid $beige;
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 2rem;
+        padding: 1em;
+        position: absolute;
+        top: 7em;
+        left: 4em;
+
+        .divRow{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            figure{
+                img{
+                    width: 50%;
+                }
+            }
+        }
+    }
+
 }

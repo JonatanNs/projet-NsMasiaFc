@@ -4,7 +4,6 @@ class Router
 {
     public function handleRequest(array $get) : void
     {
-
         $authc = new AuthController();
         $ac = new ArticleController();
         $mc = new MerchController();
@@ -17,6 +16,14 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "home")
         {
             $authc->home();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkAdmin")
+        {
+            $authc->checkAdmin();
+        }
+        else if(isset($get["route"]) && $get["route"] === "succes")
+        {
+            $oc->succesPay();
         }
         else if(isset($get["route"]) && $get["route"] === "news")
         {
@@ -39,17 +46,29 @@ class Router
         {
             $mc->billeterie();
         }
+        else if(isset($get["route"]) && $get["route"] === "reservation")
+        {
+            $mc->reservation();
+        }
+        else if(isset($get["route"]) && $get["route"] === "panier")
+        {
+            $oc->panier();
+        }
         else if(isset($get["route"]) && $get["route"] === "payement")
         {
             $oc->payement();
         }
-        else if(isset($get["route"]) && $get["route"] === "checkPayement")
-        {
-            $oc->checkPayement();
-        }
         else if(isset($get["route"]) && $get["route"] === "stripePay")
         {
             $oc->stripePayement();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkAddress")
+        {
+            $oc->checkAddress();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkSucces")
+        {
+            $oc->checkSucces();
         }
         else if(isset($get["route"]) && $get["route"] === "form")
         {

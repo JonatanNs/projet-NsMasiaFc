@@ -2,60 +2,66 @@
 
 class OrderManager extends AbstractManager{
 
-    public function createOrder(Users $user, array $product, int $quantity, array $sizes, Addresses $addresses, array $prices) {
+    public function createOrderFromProduct(string $numberOrder, int $products, int $quantities, string $sizes, int $totalPrices) {  
         $date = new DateTime();
         $formatted_date = $date->format('Y-m-d H:i:s');
-    
-        // Extraire l'identifiant unique du tableau $product
-        
-        for($i=0 ; $i<(int)$_POST["productLength"]; $i++){
-            $price = $prices[$i];
-            $product_id = $product[$i];
-    
-            $query = $this->db->prepare("INSERT INTO order_products (id, user_id, product_id, quantity, sizes, addresses_id, prices, date, total_prices) 
-                                        VALUES (NULL, :user_id, :product_id, :quantity, :addresses_id, :prices, :date, :total_prices)");
-            $parameters = [
-                'user_id' => $user->getId(), 
-                'product_id' => $product_id, 
-                'quantity' => (int)$quantity, 
-                'size' => $sizes,
-                'addresses_id'=> $addresses->getId(), 
-                'prices' => $price,
+            $query = $this->db->prepare("INSERT INTO order_products (id, order_number, product_id, quantity, sizes, date, total_prices) 
+                                        VALUES (null, :order_number, :product_id, :quantity, :sizes, :date, :total_prices)");
+            $parameters = [ 
+                'order_number' => $numberOrder,
+                'product_id' => $products, 
+                'quantity' => $quantities, 
+                'sizes' => $sizes, 
                 'date' => $formatted_date,
-                'total_prices' => (int)$_POST["totalPrices1"]
+                'total_prices' => $totalPrices
             ];
             $query->execute($parameters);
-        }
-    }
-    
-    
 
-    public function createAddresses(Users $users){
-        $query = $this->db->prepare("INSERT INTO addresses (id, user_id, street, streetNumber, complements, postal_code, city) 
-                                    VALUES (NULL, :user_id, :street, :streetNumber, :complements, :postal_code, :city)");
+            return $this->db->lastInsertId();
+    }
+
+    public function createOrder( string $numberOrder, Addresses $addresses, int $totalTtc) {  
+        $date = new DateTime();
+        $formatted_date = $date->format('Y-m-d H:i:s');
+        
+            $query = $this->db->prepare("INSERT INTO orders (id, order_number, addresse_id, date, totalTtc) 
+                                        VALUES (null, :order_number, :addresse_id, :date, :totalTtc)");
+            $parameters = [ 
+                'order_number' => $numberOrder, 
+                'addresse_id'=> $addresses->getId(), 
+                'date' => $formatted_date,
+                'totalTtc' => $totalTtc
+            ];
+            $query->execute($parameters);
+    }
+
+    public function createAddresses(Users $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
+        $query = $this->db->prepare("INSERT INTO addresses (id, user_id, addresse, complements, postal_code, city, pays) 
+                                    VALUES (NULL, :user_id, :addresse, :complements, :postal_code, :city, :pays)");
         $parameters = [
             'user_id' => $users->getId(),
-            'street' => $_POST["orderStreet"],	
-            'streetNumber' => (int)$_POST["orderStreetNumber"],	
-            'complements' => $_POST["orderComplements"], 
-            'postal_code' => (int)$_POST["orderZipCode"], 
-            'city' => $_POST["orderCity"]
+            'addresse' => $address,		
+            'complements' => isset($completement) ? $completement : "", 
+            'postal_code' => $postal_code, 
+            'city' => $city,
+            'pays' => $pays
         ];
         $query->execute($parameters);
 
         return $this->db->lastInsertId();
     }
 
-    public function getAllAddressesById( int $users){
+    public function getAllAddressesByUserId( Users $users){
         $query = $this->db->prepare("SELECT * FROM addresses WHERE user_id = :user_id");
         $parameters = [
-            'user_id' => $users
+            'user_id' => $users->getId()
          ];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($result) {
-            $addresses = new Addresses( $users , $result["street"], $result["streetNumber"], $result["complements"], $result["postal_code"], $result["city"]);
+            $addresses = new Addresses( $users , $result["addresse"], $result["postal_code"], $result["city"], $result["pays"]);
+            $addresses->setComplements($result["complements"]);
             $addresses->setId($result["id"]);
             return $addresses;
         }

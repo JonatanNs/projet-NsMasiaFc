@@ -4,12 +4,10 @@ class Order_products {
 private ?int $id = null;
 
 public function __construct(
-    private Users $user_id,
-    private array $products,
+    private string $numberOrder,
+    private Products $products,
     private int $quantity,
     private array $sizes,
-    private Addresses $addresses_id,
-    private array $prices,
     private string $date,
     private int $total_prices
 ) {
@@ -23,19 +21,19 @@ public function setId(?int $id): void {
     $this->id = $id;
 }
 
-public function getUsersId(): Users {
-    return $this->user_id;
+public function getNumberOrder(): string {
+    return $this->numberOrder;
 }
 
-public function setUsersId(Users $user_id): void {
-    $this->user_id = $user_id;
+public function setNumberOrder(string $numberOrder): void {
+    $this->numberOrder = $numberOrder;
 }
 
-public function getProducts(): array {
+public function getProducts(): Products {
     return $this->products;
 }
 
-public function setProducts(array $products): void {
+public function setProducts(Products $products): void {
     $this->products = $products;
 }
 
@@ -53,22 +51,6 @@ public function getTailles(): array {
 
 public function setTailles(array $sizes): void {
     $this->sizes = $sizes;
-}
-
-public function getAddressesId(): Addresses {
-    return $this->addresses_id;
-}
-
-public function setAddressesId(Addresses $addresses_id): void {
-    $this->addresses_id = $addresses_id;
-}
-
-public function getPrices(): array {
-    return $this->prices;
-}
-
-public function setPrices(array $prices): void {
-    $this->prices = $prices;
 }
 
 public function getDate(): string {

@@ -6,10 +6,15 @@
 @import "partials/nav";
 @import "partials/boutique";
 @import "partials/payement";
+@import "partials/biletterie";
 
+//@media screen and (max-width: 480px) {
 .container{
     background-color: $black;
     color: $beige;
     font-family: $font2;
+    max-width: 480px;
+    margin: 0 auto;
 }
 
+//}

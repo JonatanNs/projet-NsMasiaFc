@@ -23,6 +23,7 @@ class UserManager extends AbstractManager{
         foreach($result as $item){
             $user = new Users($item["first_name"], $item["last_name"], $item["email"], $item["password"]);
             $user->setId($item["id"]);
+            $user->setRoles($item["roles"]);
             $users[] = $item;
         }
         return $users ;
@@ -39,6 +40,7 @@ class UserManager extends AbstractManager{
         if($result) {
             $user = new Users($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
             $user->setId($result["id"]);
+            $user->setRoles($result["roles"]);
             return $user;
         }
 
@@ -56,6 +58,7 @@ class UserManager extends AbstractManager{
         if($result) {
             $user = new Users($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
             $user->setId($result["id"]);
+            $user->setRoles($result["roles"]);
             return $user;
         }
 

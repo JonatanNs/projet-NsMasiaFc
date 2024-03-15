@@ -3,7 +3,12 @@
 class RivalsTeam {
 
     private ? int $id = null;
-    public function __construct(private string $name, private string $logo_url, private string $logo_alt, private string $stadium, private int $ranking_points, private int $match_play, private int $match_win, private int $match_lose, private int $match_nul) {
+    private ? int $ranking_points = null;
+    private ? int $match_play = null; 
+    private ? int $match_win = null; 
+    private ? int $match_lose = null; 
+    private ? int $match_nul = null;
+    public function __construct(private string $name, private string $logo_url, private string $logo_alt) {
     }
 
     public function getId(): ? int {
@@ -34,33 +39,25 @@ class RivalsTeam {
         $this->logo_alt = $logo_alt;
     }
 
-    public function getStadium(): string {
-        return $this->stadium;
-    }
-
-    public function setStadium(string $stadium): void {
-        $this->stadium = $stadium;
-    }
-
-    public function getMatchWin(): int {
+    public function getMatchWin(): ? int {
         return $this->match_win;
     }
-    public function setMatchWin(int $match_win): void {
+    public function setMatchWin(? int $match_win): void {
         $this->match_win = $match_win;
     }
 
-    public function getMatchesLose(): int {
+    public function getMatchesLose():? int {
         return $this->match_lose;
     }
 
-    public function setMatchesLose(int $match_lose): void {
+    public function setMatchesLose(? int $match_lose): void {
         $this->match_lose = $match_lose;
     }
 
-    public function getMatchesNul(): int {
+    public function getMatchesNul():? int {
         return $this->match_nul;
     }
-    public function setMatchesNul(int $match_nul): void {
+    public function setMatchesNul(? int $match_nul): void {
         $this->match_nul = $match_nul;
     }
 }

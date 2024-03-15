@@ -3,6 +3,7 @@
 class Users {
 
     private ? int $id = null;
+    private string $roles = "USER";
     public function __construct(private string $first_name, private string $last_name, private string $email, private string $password) {
     }
 
@@ -40,5 +41,12 @@ class Users {
     }
     public function setPassword(string $password): void {
         $this->password = $password;
-    }  
+    } 
+    
+    public function getRoles(): string {
+        return $this->roles;
+    }
+    public function setRoles(string $roles): void {
+        $this->roles = $roles;
+    }
 }

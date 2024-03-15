@@ -7,10 +7,14 @@ class AuthController extends AbstractController
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+        $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
         $this->render("home.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
-            'userId' => $userId
+            'userId' => $userId,
+            'rolesUser' => $rolesUser,
+            'adminRnd7sX23' => $adminRnd7sX23
         ]);
     }
 
@@ -18,13 +22,35 @@ class AuthController extends AbstractController
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
         $this->render("form.html.twig", [
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
-            'tokenCSRF' => $tokenCSRF     
+            'tokenCSRF' => $tokenCSRF,
+            'rolesUser' => $rolesUser
         ]);
+    }
+
+    public function checkAdmin(){
+        $tokenManager = new CSRFTokenManager(); 
+        if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+            $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
+            $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+            $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
+            $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
+            $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+            unset($_SESSION["error"]);
+            unset($_SESSION["valide"]);
+            $this->render("admin.html.twig", [
+                'userIsConect' => $userIsConect,
+                'errorMessage' => $errorMessage, 
+                'valideMessage' => $valideMessage,
+                'tokenCSRF' => $tokenCSRF,
+                'rolesUser' => $rolesUser
+            ]);
+        }
     }
 
     public function checkSignup() {
@@ -46,7 +72,7 @@ class AuthController extends AbstractController
                             $first_name = htmlspecialchars($_POST["first_name"]);
                             $last_name = htmlspecialchars($_POST["last_name"]);
                             $email = htmlspecialchars($_POST["emailSignup"]);
-                            $password = password_hash($_POST["passwordSignup"], PASSWORD_BCRYPT); //RequiPuigdu35# //LeoMessi10# //KyllianMbaape10# //JoaoFelix7#
+                            $password = password_hash($_POST["passwordSignup"], PASSWORD_BCRYPT); 
                             $user = new Users($first_name, $last_name, $email, $password);
 
                             //insert a la base de donner
@@ -84,7 +110,7 @@ class AuthController extends AbstractController
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){ 
                 
-                
+
                 $userManager = new UserManager();
                 $users = $userManager->getAllUserByEmail($_POST["emailLogin"]);
 
@@ -98,6 +124,7 @@ class AuthController extends AbstractController
                         $_SESSION["user"] = $users->getFirstName() . ' ' . $users->getLastName();
                         $_SESSION["userId"] = $users->getId();
                         $_SESSION["userEmail"] = $users->getEmail();
+                        $_SESSION['userRoles'] = $users->getRoles();
                         $_SESSION["valide"] = "Connexion reussie.";
                         header("Location: index.php?route=home");
                         exit;
@@ -114,6 +141,7 @@ class AuthController extends AbstractController
             } 
         }
     }
+
     public function logout() : void
     {
         session_destroy();

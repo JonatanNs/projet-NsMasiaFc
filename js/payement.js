@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 let productUser = {
                     "name": product.name,
-                    "size" : product.size,
+                    "size" : 'Taille ' + product.size,
                     "prices": parseInt(product.prices)*100,
                     "quantity": product.quantity
                 };
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         
     }
+    
 
     
     panierPayement();

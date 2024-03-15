@@ -68,7 +68,7 @@ function getTotalPrice(){
 
 document.addEventListener('DOMContentLoaded', function(){  
  
-    function panier(){
+    function bagBoutique(){
         const theBag = document.querySelector(".bagProduct");
         if (theBag){
             theBag.addEventListener("click", function() {
@@ -96,35 +96,35 @@ document.addEventListener('DOMContentLoaded', function(){
             
                     // Afficher chaque produit dans le panier
                     basket.forEach(product => {
-                        const divRow = document.createElement("div");
-                        divRow.classList.add("divRow");
-                        panierUser.appendChild(divRow);
+                        const firstLi = document.createElement("div");
+                        firstLi.classList.add("firstLi");
+                        panierUser.appendChild(firstLi);
                         
                         const img = document.createElement("img")
                         img.src = product.url;
                         img.alt = product.alt;
-                        divRow.appendChild(img);
+                        firstLi.appendChild(img);
                         //img.appendChild(panierImg);
 
                         const nameProduct = document.createElement("h6");
                         nameProduct.classList.add("panier-nameProduct");
                         nameProduct.textContent = product.name;
                         //pannierDivCol.appendChild(nameProduct);
-                        divRow.appendChild(nameProduct);
+                        firstLi.appendChild(nameProduct);
 
                         const prixQuantite = document.createElement("p");
                         prixQuantite.classList.add("panier-price-quantity");
                         prixQuantite.textContent = product.prices + " € x " + product.quantity;
                         //pannierDivCol.appendChild(prixQuantite);
-                        divRow.appendChild(prixQuantite);
+                        firstLi.appendChild(prixQuantite);
 
                         const figure = document.createElement("figure");
-                        divRow.appendChild(figure);
+                        firstLi.appendChild(figure);
                         figure.appendChild(img);
 
                         const div = document.createElement("div"); 
                         div.classList.add("divCol");
-                        divRow.appendChild(div);
+                        firstLi.appendChild(div);
                         div.appendChild(nameProduct);
                         div.appendChild(prixQuantite);
                         
@@ -137,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }  
     } 
+
+
     
     
 
@@ -187,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
 
-    function AddLocalStorage() {
+    function AddLocalStorageBoutique() {
         const productIdElements = document.querySelectorAll(".shirtOne");
         const h2Elements = document.querySelectorAll('.shirtSale');
         const taille = document.getElementById("taille");
@@ -233,7 +235,8 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         });
     }
-    
+
+        
     
     
     function lookProduct(){
@@ -255,12 +258,88 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
+    const basketData = localStorage.getItem("basket");
+    if(basketData){
+        const basket = JSON.parse(basketData);
+        if(basket){
+            console.log(basket);
+            const panierUser = document.querySelector(".panierUser");
+            const panierValue = document.querySelector(".panierValue");
+            panierValue.textContent = getTotalPrice() + "€";
 
-    panier();
-    AddLocalStorage();
+    
+                // Convertir les données récupérées en objet JavaScript
+                
+                // Afficher chaque produit dans le panier
+                basket.forEach(product => {
+                    const firstLi = document.createElement("li");
+                    firstLi.classList.add("firstLi");
+                    panierUser.appendChild(firstLi);
+
+                    const secondLi = document.createElement("li");
+                    secondLi.classList.add("secondLi9");
+                    panierUser.appendChild(secondLi);
+
+                    const ul = document.createElement("ul");
+                    panierUser.appendChild(ul);
+                    
+                    const img = document.createElement("img")
+                    img.src = product.url;
+                    img.alt = product.alt;
+                    firstLi.appendChild(img);
+
+                    const nameProduct = document.createElement("h6");
+                    nameProduct.classList.add("panier-nameProduct");
+                    nameProduct.textContent = product.name;
+                    firstLi.appendChild(nameProduct);
+                    
+
+                    const prixQuantite = document.createElement("p");
+                    prixQuantite.classList.add("panier-price-quantity");
+                    prixQuantite.textContent = product.prices + " €";
+                    secondLi.appendChild(prixQuantite);
+                    
+
+                    const figure = document.createElement("figure");
+                    figure.appendChild(img);
+                    firstLi.appendChild(figure);
+                    
+
+                    const div = document.createElement("div"); 
+                    div.classList.add("divCol");
+                    secondLi.appendChild(div);
+                    div.appendChild(prixQuantite);
+                    
+                    
+                    const btnPlus = document.createElement("button");
+                    btnPlus.classList.add("btnPlus");
+                    btnPlus.classList.add("btn");
+                    btnPlus.textContent = "+";
+                    div.appendChild(btnPlus);
+
+                    const p = document.createElement("p"); 
+                    p.classList.add("quantityProduct");
+                    p.textContent = product.quantity;
+                    div.appendChild(p);
+
+                    const btnMoins = document.createElement("button");
+                    btnMoins.classList.add("btnMoins");
+                    btnMoins.classList.add("btn");
+                    btnMoins.textContent = "-";
+                    div.appendChild(btnMoins);
+                    ul.appendChild(firstLi);
+                    ul.appendChild(secondLi);
+                });
+        } else{
+            panierValue.textContent = "Votre panier est vide";
+        }
+    }
+    
+
+    bagBoutique();
+    AddLocalStorageBoutique();
     switchMaillot();
     lookProduct();
-
 
 });
 

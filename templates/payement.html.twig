@@ -57,7 +57,7 @@
                         </fieldset>
                         <p class="goLogin"> Se connecter ? <p>
                     </form>
-                    {% endif %}
+                {% endif %}
 
                     {% if userIsConect is not empty %} <!-- Quand l'utilisateur n'est pas connecter-->
                         <article>
@@ -67,10 +67,51 @@
                         </article>
                     {% endif %}
                 </article>
-            {% if userIsConect is not empty %}
+                {% if addresse is empty %}
+                <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                    <fieldset>
+                        <input type="text" id="address" name="address" placeholder="Address" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
+                    </fieldset>
+                    <fieldset>
+                        <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
+                    </fieldset>
+                    <select name="pays">
+                            <option value="FR">France</option>
+                    </select>
+                    <fieldset>
+                        <button type="submit">Valider</button>
+                    </fieldset>
+                </form>
+                {% endif %}
+                {% if addresse is not empty %}
+                        <article>
+                            <h3>Votre address<h3>
+                            <ul>
+                                <li>{{ addresse.addresse }}</li>
+                            {% if addresse.complements is not empty %}
+                                <li>{{ addresse.complements }}</li>
+                            {% endif %}
+                                <li>{{ addresse.postalcode ~ ' ' ~ addresse.city }}</li>
+
+
+                                <li>{{ addresse.pays}}</li>
+                            </ul>
+                        </article>
+                {% endif %}
+                    
+
+                    {% if userIsConect is not empty %}
                 
-            <section class="">
-                <h3>Panier</h3><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
+            <section>
+                <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
                 <div class="recapPanierUser invisible">
                     <div class="recapPanierUserDivRow">      
                         <figure class="recapPanierUserImg"></figure>
@@ -83,7 +124,9 @@
             <form action="index.php?route=stripePay" method="POST" class="formStripe">
                 <button type="submit" id="checkout-button">Passez au payement</button>
             </form>               
-            {% endif %}    
+            {% endif %} 
+
+               
         </div>
     </main>
 {% endblock %}

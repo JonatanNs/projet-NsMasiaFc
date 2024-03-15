@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="container">
+    <article class="titleBoutique img-background">
+        <figure>
+            <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+        </figure>
+        <h1>NsMasia FC</h1>
+        <p>Réservation</p>
+    </article>
+    <div class="searchAndBag">
+            <i class="gg-search search"></i>
+            <i class="gg-shopping-bag bagProduct"></i>
+    </div>
+    <section>
+        <h2>Selectionnez votre zone</h2>
+        <figure class="stadiumTicket">
+            <img src="https://live.staticflickr.com/65535/53585656868_223e557554_w.jpg" alt="stades NS Masia Fc"/>
+        </figure> 
+    </section>
+    <article>
+        <h2>Choisissez votre place</h2>
+        <ul>
+            <li>Tribune Haute Place Diponible 500
+                <ul>
+                    <li>
+                        Place
+                    </li>
+                    <li>
+                        Quantité : <input type="number" name="numberTicketHaute" max="2" />
+                    </li>
+                    <li>
+                        <button type="submit" class="addCartTicket">Ajouter au pannier</button>
+                    </li>
+                </ul>
+            </li>
+            <li>Tribune Gauche Place Diponible 500
+                <ul>
+                    <li>Place</li>
+                    <li>
+                        Quantité : <input type="number" name="numberTicketHaute" max="2" />
+                    </li>
+                    <li>
+                        <button type="submit">Ajouter au pannier</button>
+                    </li>
+                </ul>
+            </li>
+            <li>Tribune Droite Place Diponible 500
+                <ul>
+                    <li>Place</li>
+                    <li>
+                        Quantité : <input type="number" name="numberTicketHaute" max="2" />
+                    </li>
+                    <li>
+                        <button type="submit">Ajouter au pannier</button>
+                    </li>
+                </ul>
+            </li>
+            <li>Tribune Basse Place Diponible 500
+                <ul>
+                    <li>Place</li>
+                    <li>
+                        Quantité : <input type="number" name="numberTicketHaute" max="2" />
+                    </li>
+                    <li>
+                        <button type="submit">Ajouter au pannier</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </article> 
+    <section class="pannier invisible">
+        <h5>Panier</h5>
+        <div class="panierUser"></div> 
+        <div class="panier-total"></div>
+    <form action="index.php?route=payement" method="POST">
+            <button type="submit">Valider</button>
+        </form>
+    </section>
+</main>
+{% endblock %}
