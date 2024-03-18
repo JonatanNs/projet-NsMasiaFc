@@ -1,15 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <main class="">
-        <article>
+    <main class="container">
+        <article class="panier">
             <h2>Mon panier</h2>
             <p>Total : <span class="panierValue">0</span></p>
             <ul class="panierUser"></ul>
         </article>
-        <div>
-            <a class="" href="index.php?route=boutique"><button>Continuer mes achats</button></a>
-            <a class="" href="index.php?route=payement"><button>Finaliser la commande</button></a>
+        <div class="location">
+            <a href="index.php?route=boutique"><button class="btn">Continuer mes achats</button></a>
+            <a href="index.php?route=payement"><button class="btn">Finaliser la commande</button></a>
         </div>
     </main>
 {% endblock %}

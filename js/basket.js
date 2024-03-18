@@ -32,17 +32,16 @@ function removeFromBasket(product){
     saveBasket(basket);
 }
 
-function changeQuantity(product, newQuantity){
+function changeQuantity(product, quantity) {
     let basket = getBasket();
-    let foundProductIndex = basket.findIndex(p => p.id === product.id);
-
-    if (foundProductIndex !== -1) {
-        if (newQuantity <= 0) {
-            basket.splice(foundProductIndex, 1); 
-        } else {
-            basket[foundProductIndex].quantity = newQuantity; 
-        }
-        saveBasket(basket); 
+    let foundProduct = basket.find(p => p.id === product.id);
+    if (foundProduct != undefined) {
+        foundProduct.quantity += quantity;
+        if(foundProduct.quantity <=0){
+            removeFromBasket(foundProduct);
+        } else{
+            saveBasket(basket);
+        }   
     }
 }
 
@@ -265,9 +264,9 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log(basket);
             const panierUser = document.querySelector(".panierUser");
             const panierValue = document.querySelector(".panierValue");
-            panierValue.textContent = getTotalPrice() + "€";
-
-    
+            if(panierValue){
+                panierValue.textContent = getTotalPrice() + "€";
+            }
                 // Convertir les données récupérées en objet JavaScript
                 
                 // Afficher chaque produit dans le panier
@@ -277,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     panierUser.appendChild(firstLi);
 
                     const secondLi = document.createElement("li");
-                    secondLi.classList.add("secondLi9");
+                    secondLi.classList.add("secondLi");
                     panierUser.appendChild(secondLi);
 
                     const ul = document.createElement("ul");
@@ -291,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     const nameProduct = document.createElement("h6");
                     nameProduct.classList.add("panier-nameProduct");
                     nameProduct.textContent = product.name;
-                    firstLi.appendChild(nameProduct);
+                    secondLi.appendChild(nameProduct);
                     
 
                     const prixQuantite = document.createElement("p");
@@ -304,35 +303,65 @@ document.addEventListener('DOMContentLoaded', function(){
                     figure.appendChild(img);
                     firstLi.appendChild(figure);
                     
-
                     const div = document.createElement("div"); 
                     div.classList.add("divCol");
                     secondLi.appendChild(div);
                     div.appendChild(prixQuantite);
-                    
-                    
-                    const btnPlus = document.createElement("button");
-                    btnPlus.classList.add("btnPlus");
-                    btnPlus.classList.add("btn");
-                    btnPlus.textContent = "+";
-                    div.appendChild(btnPlus);
+
+                    const btnMoins = document.createElement("button");
+                    btnMoins.classList.add("btnMoins");
+                    btnMoins.classList.add("btn");
+                    btnMoins.dataset.id = product.id;
+                    btnMoins.textContent = "-";
+                    div.appendChild(btnMoins);
 
                     const p = document.createElement("p"); 
                     p.classList.add("quantityProduct");
                     p.textContent = product.quantity;
                     div.appendChild(p);
 
-                    const btnMoins = document.createElement("button");
-                    btnMoins.classList.add("btnMoins");
-                    btnMoins.classList.add("btn");
-                    btnMoins.textContent = "-";
-                    div.appendChild(btnMoins);
+                    const btnPlus = document.createElement("button");
+                    btnPlus.classList.add("btnPlus");
+                    btnPlus.classList.add("btn");
+                    btnPlus.dataset.id = product.id;
+                    btnPlus.textContent = "+";
+                    div.appendChild(btnPlus);
+                    
                     ul.appendChild(firstLi);
                     ul.appendChild(secondLi);
                 });
-        } else{
-            panierValue.textContent = "Votre panier est vide";
-        }
+                const addQuantityButtons = document.querySelectorAll(".btnPlus");
+                const removeQuantityButtons = document.querySelectorAll(".btnMoins");
+                const textQuantity = document.querySelectorAll(".quantityProduct");
+
+                addQuantityButtons.forEach((button, index) => {
+                    button.addEventListener("click", function() {
+                        let currentValue = parseInt(textQuantity[index].textContent); 
+                        currentValue++; 
+                        const productId = button.dataset.id;
+                        textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
+                        changeQuantity({id:"" + productId + ""}, +1);
+                        panierValue.textContent = getTotalPrice() + " €";
+                    });
+                });
+                removeQuantityButtons.forEach((button, index) => {
+                    button.addEventListener("click", function() {
+                        let currentValue = parseInt(textQuantity[index].textContent); 
+                        currentValue--; 
+                        const productId = button.dataset.id;
+                        textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
+                        changeQuantity({ id: productId }, -1);
+                        panierValue.textContent = getTotalPrice() + " €";
+                        if (currentValue === 0) {
+                            let blockProduct = document.querySelector(".panierUser ul:nth-child(" + (index + 1) + ")");
+                            blockProduct.style.display = "none";  
+                        }
+                        if(getTotalPrice() === 0) {
+                            localStorage.removeItem("basket");
+                        }
+                    });
+                });     
+        } 
     }
     
 

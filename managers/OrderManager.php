@@ -20,7 +20,7 @@ class OrderManager extends AbstractManager{
             return $this->db->lastInsertId();
     }
 
-    public function createOrder( string $numberOrder, Addresses $addresses, int $totalTtc) {  
+    public function createOrder( string $numberOrder, Addresse $addresses, int $totalTtc) {  
         $date = new DateTime();
         $formatted_date = $date->format('Y-m-d H:i:s');
         
@@ -35,7 +35,7 @@ class OrderManager extends AbstractManager{
             $query->execute($parameters);
     }
 
-    public function createAddresses(Users $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
+    public function createAddresses(User $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
         $query = $this->db->prepare("INSERT INTO addresses (id, user_id, addresse, complements, postal_code, city, pays) 
                                     VALUES (NULL, :user_id, :addresse, :complements, :postal_code, :city, :pays)");
         $parameters = [
@@ -51,7 +51,7 @@ class OrderManager extends AbstractManager{
         return $this->db->lastInsertId();
     }
 
-    public function getAllAddressesByUserId( Users $users){
+    public function getAllAddressesByUserId(User $users){
         $query = $this->db->prepare("SELECT * FROM addresses WHERE user_id = :user_id");
         $parameters = [
             'user_id' => $users->getId()
@@ -60,7 +60,7 @@ class OrderManager extends AbstractManager{
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($result) {
-            $addresses = new Addresses( $users , $result["addresse"], $result["postal_code"], $result["city"], $result["pays"]);
+            $addresses = new Addresse( $users , $result["addresse"], $result["postal_code"], $result["city"], $result["pays"]);
             $addresses->setComplements($result["complements"]);
             $addresses->setId($result["id"]);
             return $addresses;

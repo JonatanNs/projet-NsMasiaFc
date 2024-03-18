@@ -45,9 +45,43 @@
             </fieldset>
 
             <fieldset>
-            <button type="submit" name="submit">Ajouter</button>
+            <button type="submit" class="btn">Ajouter</button>
             </fieldset>
         </form>
     </section>
+
+    <section class="adminMatchs">
+        <h2>Matchs</h2>
+        <p>Ajouter Un match</p>
+        <form action="index.php?route=checkAddMatchs" method="POST">
+        <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
+            <fieldset>
+                <label for="location">NS Masia FC</label>
+                <select name="location">
+                    <option value="">--</option>
+                    <option value="exterieur" required >Extérieur</option>
+                    <option value="domicile" required >Domicile</option>
+                </select> 
+            </fieldset>
+            <fieldset>
+                <label for="rivalTeam">Equipe rival</label>
+                <select name="rivalTeam">
+                    <option value="">--</option>
+                {% for rival in teamRival %}
+                    <option value="{{rival.team}}" required >{{rival.team}}</option>
+                {% endfor %}
+                </select> 
+            </fieldset>
+            <fieldset>
+                <label for="date">Date</label>
+                <input type="date" name="date" required>
+            </fieldset>
+            <fieldset>
+            <button type="submit" class="btn">Ajouter</button>
+            </fieldset>
+        </form>
+    </section>
+
+    
     </main>
 {% endblock %}

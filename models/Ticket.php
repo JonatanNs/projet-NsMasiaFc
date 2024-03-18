@@ -1,9 +1,9 @@
 <?php
 
-class Tickets {
+class Ticket {
 
     private ? int $id = null;
-    public function __construct(private string $date, private string $location, private NsMasia $nsmasia_id, private RivalsTeam $rivalTeam_id) {
+    public function __construct(private string $date, private string $location, private NsMasia $nsmasia_id, private RivalTeam $rivalTeam_id) {
     }
 
     public function getId(): ? int {
@@ -34,10 +34,10 @@ class Tickets {
         $this->nsmasia_id = $nsmasia_id;
     }
 
-    public function getRivalTeamId(): RivalsTeam {
+    public function getRivalTeamId(): RivalTeam {
         return $this->rivalTeam_id;
     }
-    public function setRivalTeamId(RivalsTeam $rivalTeam_id):  void {
+    public function setRivalTeamId(RivalTeam $rivalTeam_id):  void {
         $this->rivalTeam_id = $rivalTeam_id;
     }
 }

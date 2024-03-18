@@ -8,6 +8,7 @@ class Router
         $ac = new ArticleController();
         $mc = new MerchController();
         $oc = new OrderController();
+        $adm = new AdminController();
 
         if(!isset($get["route"]))
         {
@@ -19,7 +20,11 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "checkAdmin")
         {
-            $authc->checkAdmin();
+            $adm->checkAdmin();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkAddMatchs")
+        {
+            $adm->checkAddMatchs();
         }
         else if(isset($get["route"]) && $get["route"] === "succes")
         {

@@ -33,7 +33,7 @@
             {% if rolesUser == "ADMIN" %} 
                 <form action="index.php?route=checkAdmin" method="POST">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
-                    <button type="submit">ADMIN</button>
+                    <button type="submit" class="btn">ADMIN</button>
                 </form> 
             {% endif %}
         {% endif %}

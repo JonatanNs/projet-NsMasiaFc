@@ -106,10 +106,6 @@
                             </ul>
                         </article>
                 {% endif %}
-                    
-
-                    {% if userIsConect is not empty %}
-                
             <section>
                 <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
                 <div class="recapPanierUser invisible">
@@ -120,13 +116,15 @@
                     </div>
                 </div> 
                 <p id="totalPrice"></p>
-            </section>
+            </section> 
+            {% if addresse is not empty %}
             <form action="index.php?route=stripePay" method="POST" class="formStripe">
                 <button type="submit" id="checkout-button">Passez au payement</button>
-            </form>               
-            {% endif %} 
-
-               
+            </form>  
+            {% endif %}
+            {% if addresse is empty %}
+                <p>Renseignez votre adresse de livraison pour poursuivre le processus d'achat</p>
+            {% endif %}
         </div>
     </main>
 {% endblock %}

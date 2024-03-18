@@ -1,9 +1,9 @@
 <?php
 
-class Order_tickets {
+class Order_ticket {
 
     private ? int $id = null;
-    public function __construct(private Users $user_id, private Tickets $ticket_id, private Addresses $addresses_id, private int $prices) {
+    public function __construct(private User $user_id, private Ticket $ticket_id, private Addresse $addresses_id, private int $prices) {
     }
 
     public function getId(): ? int {
@@ -13,24 +13,24 @@ class Order_tickets {
         $this->id = $id;
     }
 
-    public function getUsersId(): Users {
+    public function getUsersId(): User {
         return $this->user_id;
     }
-    public function setUsersId( Users $user_id): void {
+    public function setUsersId( User $user_id): void {
         $this->user_id = $user_id;
     }
 
-    public function getTicketsId(): Tickets {
+    public function getTicketsId(): Ticket {
         return $this->ticket_id;
     }
-    public function setTicketsId(Tickets $ticket_id):  void {
+    public function setTicketsId(Ticket $ticket_id):  void {
         $this->ticket_id = $ticket_id;
     }
 
-    public function getAddressesId(): Addresses {
+    public function getAddressesId(): Addresse {
         return $this->addresses_id;
     }
-    public function setAddressesId(Addresses $addresses_id): void {
+    public function setAddressesId(Addresse $addresses_id): void {
         $this->addresses_id = $addresses_id;
     }
 

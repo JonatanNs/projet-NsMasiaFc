@@ -18,7 +18,7 @@ function getTotalPrice(){
 
 const formPayementSucces = document.querySelector(".succesBtn");
     formPayementSucces.addEventListener("click", function(){
-        localStorage.clear();
+        localStorage.clear("basket");
     })
 
 //function InputHiddenFromPaySucces(){
@@ -29,7 +29,6 @@ const basket = JSON.parse(basketData);
 
 if(basket){
     basket.forEach(product => {
-
         let productUser = {
             "name": product.name,
             "size" : product.size,

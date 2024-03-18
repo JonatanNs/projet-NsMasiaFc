@@ -2,7 +2,7 @@
 
 class UserManager extends AbstractManager{
 
-    public function SignUpUser(Users $users) : void {
+    public function SignUpUser(User $users) : void {
         $query = $this->db->prepare("INSERT INTO users (id, first_name, last_name, email, password) 
                                     VALUES (NULL, :first_name, :last_name, :email, :password)");
         $parameters = [
@@ -21,7 +21,7 @@ class UserManager extends AbstractManager{
 
         $users = [];
         foreach($result as $item){
-            $user = new Users($item["first_name"], $item["last_name"], $item["email"], $item["password"]);
+            $user = new User($item["first_name"], $item["last_name"], $item["email"], $item["password"]);
             $user->setId($item["id"]);
             $user->setRoles($item["roles"]);
             $users[] = $item;
@@ -29,7 +29,7 @@ class UserManager extends AbstractManager{
         return $users ;
     }
 
-    public function getAllUserByEmail(string $email) : ? Users {
+    public function getAllUserByEmail(string $email) : ? User {
         $query = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $parameters = [
             'email' => $email
@@ -38,7 +38,7 @@ class UserManager extends AbstractManager{
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($result) {
-            $user = new Users($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
+            $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
             $user->setId($result["id"]);
             $user->setRoles($result["roles"]);
             return $user;
@@ -47,7 +47,7 @@ class UserManager extends AbstractManager{
         return null ;
     }
 
-    public function getAllUserById(int $id) : ? Users {
+    public function getAllUserById(int $id) : ? User {
         $query = $this->db->prepare("SELECT * FROM users WHERE id = :id");
         $parameters = [
             'id' => $id
@@ -56,7 +56,7 @@ class UserManager extends AbstractManager{
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($result) {
-            $user = new Users($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
+            $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"]);
             $user->setId($result["id"]);
             $user->setRoles($result["roles"]);
             return $user;

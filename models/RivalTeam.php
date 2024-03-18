@@ -1,14 +1,14 @@
 <?php
 
-class NsMasia {
+class RivalTeam {
 
     private ? int $id = null;
     private ? int $ranking_points = null;
-    private ? int $matchs_play = null;
+    private ? int $matchs_play = null; 
     private ? int $matchs_win = null; 
-    private ? int $matchs_lose = null;
+    private ? int $matchs_lose = null; 
     private ? int $matchs_nul = null;
-    public function __construct(private string $name, private string $logo_url, private string $logo_alt) {
+    public function __construct(private string $team, private string $logo_url, private string $logo_alt) {
     }
 
     public function getId(): ? int {
@@ -19,10 +19,10 @@ class NsMasia {
     }
 
     public function getTeam(): string {
-        return $this->name;
+        return $this->team;
     }
-    public function setTeam(string $name): void {
-        $this->name = $name;
+    public function setTeam(string $team): void {
+        $this->team = $team;
     }
 
     public function getLogoUrl(): string {

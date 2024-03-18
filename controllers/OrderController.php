@@ -10,9 +10,11 @@ class OrderController extends AbstractController
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
         $userManager = new UserManager();
-        $user = $userManager->getAllUserById($_SESSION["userId"]);
         $orderManager = new OrderManager();
-        $addresse = $orderManager->getAllAddressesByUserId($user);
+
+        $user = isset($userId) ? $userManager->getAllUserById($userId) : "";
+        $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
+
         $this->render("panier.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
@@ -32,9 +34,10 @@ class OrderController extends AbstractController
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
         $userManager = new UserManager();
-        $user = $userManager->getAllUserById($_SESSION["userId"]);
+
+        $user = isset($userId) ? $userManager->getAllUserById($_SESSION["userId"]) : "";
         $orderManager = new OrderManager();
-        $addresse = $orderManager->getAllAddressesByUserId($user);
+        $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
         $this->render("payement.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,

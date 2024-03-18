@@ -9,7 +9,7 @@
         <p>{{ valideMessage }}</p>
     {% endif %}
 
-<a href="index.php?route=home"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
+<a href="javascript:history.back()"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
 <form action="index.php?route=check-login" method="POST" class=" formLogin">
   <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
     <fieldset>
@@ -23,7 +23,7 @@
     </fieldset>
 
     <fieldset>
-      <button type="submit" name="submit">Se connecter</button>
+      <button type="submit" name="submit" class="btn">Se connecter</button>
     </fieldset>
     <p class="goSignup">Créer nouveau compte <p>
   </form>
@@ -56,7 +56,7 @@
     </fieldset>
 
     <fieldset>
-      <button type="submit" name="submit"> Créer nouveau compte</button>
+      <button type="submit" name="submit" class="btn"> Créer nouveau compte</button>
     </fieldset>
     <p class="goLogin"> Se connecter <p>
   </form>

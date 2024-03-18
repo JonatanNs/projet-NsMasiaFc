@@ -18,3 +18,19 @@
 }
 
 //}
+
+
+/*****************BUTTON**************/
+.btn{
+    background-color: $black;
+    color: $beige;
+    border: 3px solid $beige;
+    border-radius: 1rem;
+    padding: 0.5 1em;
+    &:hover{
+        background-color: $beige;
+        color: $black;
+        border: 3px solid $darkgrey;
+        transition: all 1s;
+    }
+}

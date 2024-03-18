@@ -1,10 +1,10 @@
 <?php
 
-class Addresses {
+class Addresse {
 
     private ? int $id = null;
     private ? string $complements = null;
-    public function __construct(private Users $user_id, private string $addresse, private int $postal_code, private string $city, private string $pays) {
+    public function __construct(private User $user_id, private string $addresse, private int $postal_code, private string $city, private string $pays) {
     }
 
     public function getId(): ? int {
@@ -14,11 +14,11 @@ class Addresses {
         $this->id = $id;
     }
 
-    public function getUser_id(): Users {
+    public function getUser_id(): User {
         return $this->user_id;
     }
 
-    public function setUser_id(Users $user_id): void {
+    public function setUser_id(User $user_id): void {
         $this->user_id = $user_id;
     }
 

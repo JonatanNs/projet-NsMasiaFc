@@ -33,26 +33,7 @@ class AuthController extends AbstractController
         ]);
     }
 
-    public function checkAdmin(){
-        $tokenManager = new CSRFTokenManager(); 
-        if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
-            $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-            $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-            $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
-            $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
-            $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-            unset($_SESSION["error"]);
-            unset($_SESSION["valide"]);
-            $this->render("admin.html.twig", [
-                'userIsConect' => $userIsConect,
-                'errorMessage' => $errorMessage, 
-                'valideMessage' => $valideMessage,
-                'tokenCSRF' => $tokenCSRF,
-                'rolesUser' => $rolesUser
-            ]);
-        }
-    }
-
+    
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
         isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){
@@ -73,7 +54,7 @@ class AuthController extends AbstractController
                             $last_name = htmlspecialchars($_POST["last_name"]);
                             $email = htmlspecialchars($_POST["emailSignup"]);
                             $password = password_hash($_POST["passwordSignup"], PASSWORD_BCRYPT); 
-                            $user = new Users($first_name, $last_name, $email, $password);
+                            $user = new User($first_name, $last_name, $email, $password);
 
                             //insert a la base de donner
                             $userManager->SignUpUser($user);
@@ -126,8 +107,14 @@ class AuthController extends AbstractController
                         $_SESSION["userEmail"] = $users->getEmail();
                         $_SESSION['userRoles'] = $users->getRoles();
                         $_SESSION["valide"] = "Connexion reussie.";
-                        header("Location: index.php?route=home");
-                        exit;
+                        if( $_SERVER['HTTP_REFERER'] === "http://localhost:3000/projet-3wa/projet-NsMasiaFc/index.php?route=form"){
+                            header('Location: index.php?route=home');
+                            exit;
+                        } else{
+                            header('Location: ' . $_SERVER['HTTP_REFERER']);
+                            exit;
+                        }
+                        
                     } else {
                         $_SESSION["error"] = "Identifiant ou le mot de passe est incorrect.";
                         header("Location: index.php?route=form");

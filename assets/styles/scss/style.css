@@ -183,6 +183,67 @@ h1, h2, h3, h4, h5, h6 {
     width: 50%;
   }
 }
+/**********************PANIER********************/
+.panier {
+  padding-top: 2em;
+}
+.panier h2 {
+  font-size: 2.5rem;
+  margin-left: 1em;
+}
+.panier p {
+  text-align: center;
+  font-size: 2rem;
+}
+.panier .panierUser ul {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  gap: -5em;
+  margin-bottom: 2em;
+}
+.panier .panierUser ul .firstLi figure {
+  width: 100%;
+}
+.panier .panierUser ul .firstLi figure img {
+  width: 50%;
+  border-radius: 0.5rem;
+}
+.panier .panierUser ul .secondLi {
+  margin-left: -2.5em;
+  margin-right: 1em;
+}
+.panier .panierUser ul .secondLi h6 {
+  font-size: 1.6rem;
+}
+.panier .panierUser ul .secondLi .divCol {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.panier .panierUser ul .secondLi .divCol .btnPlus, .panier .panierUser ul .secondLi .divCol .btnMoins {
+  padding: 0.1em 1em;
+  font-size: 1.5rem;
+}
+.panier .panierUser ul .secondLi .divCol .panier-price-quantity {
+  font-size: 2rem;
+}
+.panier .panierUser ul .secondLi .divCol p {
+  margin-top: 0.7em;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding-bottom: 2em;
+}
+.location button {
+  font-size: 1.6rem;
+}
+
 /********************** PAYEMENT *************************/
 @media screen and (max-width: 480px) {
   .payement {
@@ -271,4 +332,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Nunito", sans-serif;
   max-width: 480px;
   margin: 0 auto;
+}
+
+/*****************BUTTON**************/
+.btn {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 249, 237);
+  border: 3px solid rgb(255, 249, 237);
+  border-radius: 1rem;
+  padding: 0.5 1em;
+}
+.btn:hover {
+  background-color: rgb(255, 249, 237);
+  color: rgb(0, 0, 0);
+  border: 3px solid rgb(137, 137, 137);
+  transition: all 1s;
 }/*# sourceMappingURL=style.css.map */

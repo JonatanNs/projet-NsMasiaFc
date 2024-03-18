@@ -7,21 +7,45 @@ class RivalTeamManager extends AbstractManager{
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
     
-        $products = [];
+        $team = [];
     
-        foreach($result as $item){
-            $newProduct = new Products(
-                $item["name"], 
-                $item["img_url"], 
-                $item["img_alt"], 
-                $item["prices"]
+        foreach($result as $result){
+            $newTeam = new RivalTeam(
+                $result["team"], 
+                $result["logo_url"], 
+                $result["logo_alt"]
             );
-            $newProduct->setId($item["id"]);
-            $newProduct->setDescriptions($item["descriptions"] ?? '');
-            $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
-            $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
-            $products[] = $item;
+            $newTeam->setId($result["id"]);
+            $newTeam->setRankingPoints($result["ranking_points"] ?? null);
+            $newTeam->setMatchsPlay($result["match_play"] ?? null);
+            $newTeam->setMatchsWin($result["match_win"] ?? null);
+            $newTeam->setMatchsLose($result["match_lose"] ?? null);
+            $newTeam->setMatchsNul($result["match_nul"] ?? null);
+            $team[] = $result;
         }
-        return $products;
+        return $team;
     }
+
+    public function getAllRivalTeamsByName(string $team) {
+        $query = $this->db->prepare("SELECT * FROM rivalsTeam WHERE team = :team");
+        $parameters = [
+            'team' => $team
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+        if($result) {
+            $newTeam = new RivalTeam($result["team"], $result["logo_url"], $result["logo_alt"]);
+            $newTeam->setId($result["id"]);
+            $newTeam->setRankingPoints($result["ranking_points"] ?? null);
+            $newTeam->setMatchsPlay($result["match_play"] ?? null);
+            $newTeam->setMatchsWin($result["match_win"] ?? null);
+            $newTeam->setMatchsLose($result["match_lose"] ?? null);
+            $newTeam->setMatchsNul($result["match_nul"] ?? null);
+            return $newTeam;
+        }
+
+        return null ;
+    }
+
 }

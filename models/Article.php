@@ -1,6 +1,6 @@
 <?php
 
-class Articles {
+class Article {
 
     private ? int $id = null;
     public function __construct(private string $title, private string $excerpt, private string $content, private string $date, private string $img_url, private string $img_alt) {

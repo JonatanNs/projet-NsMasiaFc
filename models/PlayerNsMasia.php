@@ -1,6 +1,6 @@
 <?php
 
-class PlayersNsMasia {
+class PlayerNsMasia {
 
     private ? int $id = null;
     public function __construct(private string $first_name, private string $last_name, private string $name_jersay, private int $number) {

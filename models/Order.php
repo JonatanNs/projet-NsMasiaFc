@@ -3,7 +3,7 @@
 class Order{
 
     private ? int $id = null;
-    public function __construct(private string $numberOrder, private Addresses $addresses,private string $date, private int $totalTtc){
+    public function __construct(private string $numberOrder, private Addresse $addresses,private string $date, private int $totalTtc){
 
     }
 
@@ -21,10 +21,10 @@ class Order{
         $this->numberOrder = $numberOrder;
     }
 
-    public function getAddresses(): Addresses {
+    public function getAddresses(): Addresse {
         return $this->addresses;
     }
-    public function setAddresses(Addresses $addresses): void {
+    public function setAddresses(Addresse $addresses): void {
         $this->addresses = $addresses;
     }
 

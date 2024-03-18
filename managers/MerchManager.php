@@ -10,7 +10,7 @@ class MerchManager extends AbstractManager{
         $products = [];
     
         foreach($result as $item){
-            $newProduct = new Products(
+            $newProduct = new Product(
                 $item["name"], 
                 $item["img_url"], 
                 $item["img_alt"], 
@@ -36,7 +36,7 @@ class MerchManager extends AbstractManager{
         $products = [];
     
         foreach($result as $item){
-            $newProduct = new Products(
+            $newProduct = new Product(
                 $item["name"], 
                 $item["img_url"], 
                 $item["img_alt"], 
@@ -62,7 +62,7 @@ class MerchManager extends AbstractManager{
         $products = [];
     
         foreach($result as $item){
-            $newProduct = new Products(
+            $newProduct = new Product(
                 $item["name"], 
                 $item["img_url"], 
                 $item["img_alt"], 

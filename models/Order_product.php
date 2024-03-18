@@ -1,11 +1,11 @@
 <?php
-class Order_products {
+class Order_product {
 
 private ?int $id = null;
 
 public function __construct(
     private string $numberOrder,
-    private Products $products,
+    private Product $products,
     private int $quantity,
     private array $sizes,
     private string $date,
@@ -29,11 +29,11 @@ public function setNumberOrder(string $numberOrder): void {
     $this->numberOrder = $numberOrder;
 }
 
-public function getProducts(): Products {
+public function getProducts(): Product {
     return $this->products;
 }
 
-public function setProducts(Products $products): void {
+public function setProducts(Product $products): void {
     $this->products = $products;
 }
 

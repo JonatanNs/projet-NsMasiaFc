@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+class User {
 
     private ? int $id = null;
     private string $roles = "USER";
