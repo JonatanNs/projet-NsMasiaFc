@@ -82,7 +82,7 @@ class OrderController extends AbstractController
                 $order = new OrderManager();
                 $addressesId = $order->createAddresses($users, $address, $postal_code, $city, $pays, $complements);
                 
-                $newAddresses = new Addresses($users, $address, $postal_code , $city, $pays);
+                $newAddresses = new Addresse($users, $address, $postal_code , $city, $pays);
                 $newAddresses->setId($addressesId);
                 $newAddresses->setComplements($complements);
                 $_SESSION['Addresses'] = $newAddresses->getId();
@@ -131,7 +131,7 @@ class OrderController extends AbstractController
                 
                 var_dump($totals);
 
-                $nextOrderId = $this->generatorNumberOrder();
+                $nextOrderId = $this->generatorNumberOrderBoutique();
                 var_dump($nextOrderId);
             
                     for($i = 0; $i < count($articles); $i++){
@@ -156,12 +156,20 @@ class OrderController extends AbstractController
         } 
     }
     
-    public function generatorNumberOrder() {
+    public function generatorNumberOrderBoutique() {
         // Incrémenter le numéro de commande
         $uniqueNumber = bin2hex(random_bytes(10));
     
         // Retourner le nouveau numéro de commande
-        return "nsfc" . $uniqueNumber;
+        return "nsboutique" . $uniqueNumber;
+    }
+
+    public function generatorNumberOrderTicket() {
+        // Incrémenter le numéro de commande
+        $uniqueNumber = bin2hex(random_bytes(10));
+    
+        // Retourner le nouveau numéro de commande
+        return "nsBilet" . $uniqueNumber;
     }
         
     public function stripePayement() {;

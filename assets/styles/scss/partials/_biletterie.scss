@@ -43,6 +43,37 @@
     }
 }
 
+.allTickets{
+    text-align: center;
+    .tickets{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        padding: 1em;
+        border: 2px solid $beige;
+        .tribune{
+            grid-column: 1/2;
+        }
+        .tickets-prices{
+            grid-column: 2/2;
+        }
+        &>ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: -5em;
+            
+            li{
+                display: flex;
+                flex-direction: row;
+                gap: 0 1em;
+            }
+        }
+    }
+}
+
 
 
 

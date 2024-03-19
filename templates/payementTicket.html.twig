@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main class="container">
+        <article class="titleBoutique">
+            <figure>
+                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+            </figure>
+            <h1>NsMasia FC</h1>
+            <p>Biletterie Officiel</p>
+        </article>
+        <div class="payement">
+            <div class="orderUser">
+                <article class="orderUser-connexion">
+                {% if userIsConect is empty %}
+                <h2>Information personels</h2>
+                    <form action="index.php?route=check-login" method="POST" class=" formLogin">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <fieldset>
+                        <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <button type="submit" name="submit">Se connecter</button>
+                        </fieldset>
+                        <p class="goSignup">Créer nouveau compte ?<p>
+                    </form>
+
+                    <form action="index.php?route=check-signup" method="POST" class="formSignup invisible" id="payment-form">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <fieldset>
+                        <input type="text" id="first_name" name="first_name" placeholder="Prénom" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="text" id="last_name" name="last_name" placeholder="Nom" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="email" id="emailSignup" name="emailSignup" placeholder="Email" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="passwordSignup" name="passwordSignup" placeholder="Mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="Confirmer le mot de passe" required>
+                        </fieldset>
+
+                        <fieldset>
+                        <button type="submit" name="submit"> Créer nouveau compte</button>
+                        </fieldset>
+                        <p class="goLogin"> Se connecter ? <p>
+                    </form>
+                {% endif %}
+
+                    {% if userIsConect is not empty %} <!-- Quand l'utilisateur n'est pas connecter-->
+                        <article>
+                            <h2>Information personels</h2>
+                            <p> {{ userIsConect }}</p>
+                            <p>Poursuivre le processus d'achat</p>
+                        </article>
+                    {% endif %}
+                </article>
+            <section>
+                <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
+                <div class="recapTicketUser invisible">
+                    <div class="recapTicketUserDivRow">      
+                        <figure class="recapTicketUserImg"></figure>
+                        <div class="recapTicketUserDivCol"></div> 
+                        <div class="recapTicket-total"></div>
+                    </div>
+                </div> 
+                <p id="totalPriceTicket"></p>
+            </section> 
+            {% if userIsConect is not empty %}
+            <form action="index.php?route=stripePayTicket" method="POST" class="formStripe">
+                <button type="submit" id="checkout-button">Passez au payement</button>
+            </form>  
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

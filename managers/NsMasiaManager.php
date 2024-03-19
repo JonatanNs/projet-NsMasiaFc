@@ -9,7 +9,7 @@ class NsMasiaManager extends AbstractManager{
 
         $nsMasia = [];
         foreach($result as $item){
-            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"]);
+            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"], $item["stadium"] );
             $newMatch->setId($item["id"]);
             $newMatch->setRankingPoints($item["ranking_points"] ?? null);
             $newMatch->setMatchsPlay($item["match_play"] ?? null);

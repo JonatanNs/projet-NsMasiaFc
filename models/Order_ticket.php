@@ -3,7 +3,7 @@
 class Order_ticket {
 
     private ? int $id = null;
-    public function __construct(private User $user_id, private Ticket $ticket_id, private Addresse $addresses_id, private int $prices) {
+    public function __construct(private User $user_id, private string $numberOrder, private Ticket $ticket_id, private MatchNs $match_id, private int $quantity, private string $date, private int $total_prices) {
     }
 
     public function getId(): ? int {
@@ -20,6 +20,14 @@ class Order_ticket {
         $this->user_id = $user_id;
     }
 
+    public function getNumberOrder(): string {
+        return $this->numberOrder;
+    }
+    
+    public function setNumberOrder(string $numberOrder): void {
+        $this->numberOrder = $numberOrder;
+    }
+
     public function getTicketsId(): Ticket {
         return $this->ticket_id;
     }
@@ -27,17 +35,33 @@ class Order_ticket {
         $this->ticket_id = $ticket_id;
     }
 
-    public function getAddressesId(): Addresse {
-        return $this->addresses_id;
+    public function getMatchId(): MatchNs {
+        return $this->match_id;
     }
-    public function setAddressesId(Addresse $addresses_id): void {
-        $this->addresses_id = $addresses_id;
+    public function setMatchId(MatchNs $match_id): void {
+        $this->match_id = $match_id;
     }
 
-    public function getPrices(): int {
-        return $this->prices;
+    public function getQuantity(): int {
+        return $this->quantity;
     }
-    public function setPrices( int $prices ): void {
-        $this->prices = $prices;
+    
+    public function setQuantity(int $quantity): void {
+        $this->quantity = $quantity;
+    }
+
+    public function getDate(): string {
+        return $this->date;
+    }
+    
+    public function setDate(string $date): void {
+        $this->date = $date;
+    }
+
+    public function gettotal_Prices(): int {
+        return $this->total_prices;
+    }
+    public function settotal_Prices( int $total_prices ): void {
+        $this->total_prices = $total_prices;
     }
 }

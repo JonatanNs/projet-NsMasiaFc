@@ -2,23 +2,6 @@
 
 class MerchController extends AbstractController
 {
-    public function billeterie()
-    {
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-
-        $this->render("billeterie.html.twig", [
-            'userIsConect' => $userIsConect
-        ]);
-    }
-
-    public function reservation()
-    {
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-
-        $this->render("reservation.html.twig", [
-            'userIsConect' => $userIsConect
-        ]);
-    }
 
     public function boutique()
     {
@@ -45,6 +28,4 @@ class MerchController extends AbstractController
             'products' => $products
         ]);
     }
-
-
 }

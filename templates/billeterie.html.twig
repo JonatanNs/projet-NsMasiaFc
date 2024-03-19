@@ -11,40 +11,26 @@
             <p>Billeterie Officiel</p>
         </article>
         <ul class="matchs">
+        {% for match in matchs %}
             <ul class="reservation">
                 <li>
                     <h2>NS MASIA FC</h2>
-                    <p>As Panthère</p>
+                    <p>{{ match.team }}</p>
+                    <p>{{ match.domicileExterieur }}</p>
                 </li>
                 <li>
-                    <p>Dimanche 15 Mars - 21h</p>
+                    <p>{{ match.date |date("l j F", "Europe/Paris") }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
                 </li>
                 <li>
-                    <figure>
-                        <img src="assets\img\AS_Panthères_logo.png" alt=""/>
+                    <figure> 
+                        <img src="{{ match.logo_url }}" alt=" {{ match.logo_alt }} "/>
                     </figure>
                 </li>
                 <li>
-                    <a href="index.php?route=reservation"><button type="submit">Je réserve</button></a>
+                    <a href="index.php?route=reservation&id={{match.match_id}}"><button type="submit" class="btn">Je réserve</button></a>
                 </li>
             </ul>
-            <ul class="reservation">
-                <li>
-                    <h2>NS MASIA FC</h2>
-                    <p>As Panthère</p>
-                </li>
-                <li>
-                    <p>Dimanche 15 Mars - 21h</p>
-                </li>
-                <li>
-                    <figure>
-                        <img src="assets\img\AS_Panthères_logo.png" alt=""/>
-                    </figure>
-                </li>
-                <li>
-                    <a href="index.php?route=reservation"><button type="submit">Je réserve</button></a>
-                </li>
-            <ul>
+        {% endfor %}
         <ul>     
     </article>
 </main>

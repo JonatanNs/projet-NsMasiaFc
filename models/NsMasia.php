@@ -8,7 +8,7 @@ class NsMasia {
     private ? int $matchs_win = null; 
     private ? int $matchs_lose = null;
     private ? int $matchs_nul = null;
-    public function __construct(private string $name, private string $logo_url, private string $logo_alt) {
+    public function __construct(private string $name, private string $logo_url, private string $logo_alt, private string $stadium) {
     }
 
     public function getId(): ? int {
@@ -37,6 +37,13 @@ class NsMasia {
     }
     public function setLogoAlt(string $logo_alt): void {
         $this->logo_alt = $logo_alt;
+    }
+
+    public function getLogoStadium(): string {
+        return $this->stadium;
+    }
+    public function setLogoStadium(string $stadium): void {
+        $this->stadium = $stadium;
     }
 
     public function getRankingPoints(): ? int {

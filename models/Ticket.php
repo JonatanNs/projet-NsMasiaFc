@@ -3,7 +3,7 @@
 class Ticket {
 
     private ? int $id = null;
-    public function __construct(private string $date, private string $location, private NsMasia $nsmasia_id, private RivalTeam $rivalTeam_id) {
+    public function __construct(private string $tribune, private int $prices, private int $stock) {
     }
 
     public function getId(): ? int {
@@ -13,31 +13,24 @@ class Ticket {
         $this->id = $id;
     }
 
-    public function getDate(): string {
-        return $this->date;
+    public function getTribune(): string {
+        return $this->tribune;
     }
-    public function setDate(string $date): void {
-        $this->date = $date;
-    }
-
-    public function getLocation(): string {
-        return $this->location;
-    }
-    public function setLocation(string $location): void {
-        $this->location = $location;
+    public function setTribune(string $tribune): void {
+        $this->tribune = $tribune;
     }
 
-    public function getNsmasiaId(): NsMasia {
-        return $this->nsmasia_id;
+    public function getmatchId(): int {
+        return $this->stock;
     }
-    public function setNsmasiaId( NsMasia $nsmasia_id): void {
-        $this->nsmasia_id = $nsmasia_id;
+    public function setmatchId( int $stock): void {
+        $this->stock = $stock;
     }
 
-    public function getRivalTeamId(): RivalTeam {
-        return $this->rivalTeam_id;
+    public function getintId(): int {
+        return $this->prices;
     }
-    public function setRivalTeamId(RivalTeam $rivalTeam_id):  void {
-        $this->rivalTeam_id = $rivalTeam_id;
+    public function setintId(int $prices):  void {
+        $this->prices = $prices;
     }
 }

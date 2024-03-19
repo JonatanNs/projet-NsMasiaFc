@@ -6,9 +6,11 @@ class Router
     {
         $authc = new AuthController();
         $ac = new ArticleController();
-        $mc = new MerchController();
+        $merchController = new MerchController();
         $oc = new OrderController();
         $adm = new AdminController();
+        $MatchController = new MatchController();
+        $productId = isset($get["id"]) ? (int)$get["id"] : 0;
 
         if(!isset($get["route"]))
         {
@@ -40,20 +42,23 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "boutique")
         {
-            $mc->boutique();
+            $merchController->boutique();
         }
         else if(isset($get["route"]) && $get["route"] === "lookProduct" && isset($get["id"]))
         {
-            $productId = isset($get["id"]) ? (int)$get["id"] : 0;
-            $mc->boutiqueProduct($productId);
+            $merchController->boutiqueProduct($productId);
         }
         else if(isset($get["route"]) && $get["route"] === "billeterie")
         {
-            $mc->billeterie();
+            $MatchController->billeterie();
         }
-        else if(isset($get["route"]) && $get["route"] === "reservation")
+        else if(isset($get["route"]) && $get["route"] === "reservation" && isset($get["id"]))
         {
-            $mc->reservation();
+            $MatchController->reservation($productId);
+        }
+        else if(isset($get["route"]) && $get["route"] === "payementTicket")
+        {
+            $MatchController->payementTicket();
         }
         else if(isset($get["route"]) && $get["route"] === "panier")
         {
