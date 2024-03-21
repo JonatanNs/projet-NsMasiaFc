@@ -68,8 +68,46 @@ class OrderManager extends AbstractManager{
 
         return null ;
     }
-    
-    
+
+    public function createOrderTicket(string $numberOrder, User $user, int $ticket_id, int $match_id, int $quantity, int $totalPrices){
+        $date = new DateTime();
+        $formatted_date = $date->format('Y-m-d H:i:s');
+        $query = $this->db->prepare("INSERT INTO order_tickets (id, order_number, user_id, ticket_id, match_id, quantity, date, total_prices) 
+                                            VALUES (null, :order_number, :user_id, :ticket_id, :match_id, :quantity, :date, :total_prices)");
+        $parameters = [ 
+            'order_number' => $numberOrder, 
+            'user_id' => $user->getId(), 
+            'ticket_id' => $ticket_id, 
+            'match_id' => $match_id, 
+            'quantity' => $quantity, 
+            'date' => $formatted_date, 
+            'total_prices' => $totalPrices
+        ];
+        $query->execute($parameters);
+    }
+
+    public function getAllOrderTicketByUser(User $user){
+
+        $query = $this->db->prepare("SELECT * FROM order_tickets WHERE user_id = :user_id");
+        $parameters = [ 
+            'user_id' => $user->getId()
+        ];
+        $query->execute($parameters);
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        $matchManager = new MatchManager();
+        
+        if($result) {
+            $match = $matchManager->getAllMatchsById($result["match_id"]);
+            $ticket = $matchManager->getAllTicketsById($result["ticket_id"]);
+            $orderTicket = new Order_ticket( $user, $result["order_number"], $ticket, $match , $result["quantity"], $result["date"], $result["total_prices"]);
+            $orderTicket->setId($result["id"]);
+            return $orderTicket;
+        }
+
+        return null ;
+    }
 }
 
 

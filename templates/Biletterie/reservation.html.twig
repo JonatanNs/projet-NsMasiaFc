@@ -9,14 +9,13 @@
         <h1>NsMasia FC</h1>
         <p>Réservation</p>
     </article>
-    
     {% for match in matchs %}
     <section>
         <div>
             <h2>{{match.name ~ ' vs ' ~ match.team }} </h2>
             <p>{{ match.date |date("l j F", "Europe/Paris") }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
             <p>Le match sera à {{ match.domicileExterieur }} <span class="matchId invisible">{{match.match_id}}</span></p> 
-            <p>Le match se tiendra au stade {{ match.stadium_name }}</p> 
+            <p>Le match se tiendra au stade {{ match.matchIsAtStadium_name }}</p> 
         </div>
         <figure class="">
             <img src="{{match.logo_url}}" alt="{{match.logo_alt}}"/>
@@ -35,7 +34,6 @@
             <ul class="tickets">
                 <li class="tribune" data-id="{{ ticket.id }}"> {{ ticket.tribune }}</li>
                 <li class="tickets-prices">Prix : <span class="ticketPrice">{{ ticket.prices }}</span> €</li>
-                    
             </ul>
         {% endfor %}
     </article> 

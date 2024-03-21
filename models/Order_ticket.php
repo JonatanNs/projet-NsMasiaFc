@@ -3,7 +3,7 @@
 class Order_ticket {
 
     private ? int $id = null;
-    public function __construct(private User $user_id, private string $numberOrder, private Ticket $ticket_id, private MatchNs $match_id, private int $quantity, private string $date, private int $total_prices) {
+    public function __construct(private User $user_id, private string $numberOrder, private array $ticket_id, private array $match_id, private int $quantity, private string $date, private int $total_prices) {
     }
 
     public function getId(): ? int {
@@ -28,17 +28,17 @@ class Order_ticket {
         $this->numberOrder = $numberOrder;
     }
 
-    public function getTicketsId(): Ticket {
+    public function getTicketsId(): array {
         return $this->ticket_id;
     }
-    public function setTicketsId(Ticket $ticket_id):  void {
+    public function setTicketsId(array $ticket_id):  void {
         $this->ticket_id = $ticket_id;
     }
 
-    public function getMatchId(): MatchNs {
+    public function getMatchId(): array {
         return $this->match_id;
     }
-    public function setMatchId(MatchNs $match_id): void {
+    public function setMatchId(array $match_id): void {
         $this->match_id = $match_id;
     }
 

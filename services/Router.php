@@ -20,6 +20,10 @@ class Router
         {
             $authc->home();
         }
+        else if(isset($get["route"]) && $get["route"] === "compteUser")
+        {
+            $authc->compteUser();
+        }
         else if(isset($get["route"]) && $get["route"] === "checkAdmin")
         {
             $adm->checkAdmin();
@@ -72,6 +76,10 @@ class Router
         {
             $oc->stripePayement();
         }
+        else if(isset($get["route"]) && $get["route"] === "stripePayTicket")
+        {
+            $oc->stripePayTicket();
+        }
         else if(isset($get["route"]) && $get["route"] === "checkAddress")
         {
             $oc->checkAddress();
@@ -98,3 +106,4 @@ class Router
         }
     }
 }
+

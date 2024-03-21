@@ -65,6 +65,9 @@
                             <!--<li>Paramètres</li>-->       
                         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
                             <li>
+                                <a href="index.php?route=compteUser"><p>Mon compte</p></a>
+                            </li>
+                            <li>
                                 <a href="index.php?route=logout"> <p class="fa-solid fa-right-from-bracket fa-sm"></p> </a>
                             </li>
                         {% endif %}

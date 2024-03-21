@@ -7,7 +7,7 @@ class MatchController extends AbstractController
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $matchManager = new MatchManager();
         $matchs = $matchManager->getAllMatchs();
-        $this->render("billeterie.html.twig", [
+        $this->render("biletterie/billeterie.html.twig", [
             'userIsConect' => $userIsConect,
             'matchs' => $matchs
         ]);
@@ -20,7 +20,7 @@ class MatchController extends AbstractController
         $matchs = $matchManager->getAllMatchsById($id);
         $tickets = $matchManager->getAllTickets();
 
-        $this->render("reservation.html.twig", [
+        $this->render("biletterie/reservation.html.twig", [
             'userIsConect' => $userIsConect,
             'matchs' => $matchs,
             'tickets' => $tickets
@@ -30,12 +30,14 @@ class MatchController extends AbstractController
     public function payementTicket()
     {
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $matchManager = new MatchManager();
         $tickets = $matchManager->getAllTickets();
 
-        $this->render("payementTicket.html.twig", [
+        $this->render("biletterie/payementTicket.html.twig", [
             'userIsConect' => $userIsConect,
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'tokenCSRF' => $tokenCSRF
         ]);
     }
 

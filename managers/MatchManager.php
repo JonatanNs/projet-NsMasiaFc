@@ -37,14 +37,12 @@ class MatchManager extends AbstractManager{
         }  
     }
     
-    
-
     public function getAllMatchs() {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
                                         WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
                                         WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
-                                    END AS stadium_name
+                                    END AS matchIsAtStadium_name
                                         FROM matchs 
                                         JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
                                         JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
@@ -53,30 +51,56 @@ class MatchManager extends AbstractManager{
                                         WHERE matchs.date >= CURRENT_DATE
                                         ORDER BY matchs.date ASC ");
         $query->execute();
-        $matchs = $query->fetchAll(PDO::FETCH_ASSOC);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
     
+        $matchs = [];
+        $nsMasiaMasia = new NsMasiaManager();
+        $rivalTeamManager = new RivalTeamManager();
+        
+        foreach ($results as $result) {
+            $nsMasia = $nsMasiaMasia->getNsMasia();
+            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+    
+            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
+            $match->setId($result["id"]);
+            $matchs[] = $result;
+        }
+        
         return $matchs; 
     }
-    
-    public function getAllMatchsById(int $id) {  
 
+    public function getAllMatchsById(int $id) {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
                                         WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
                                         WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
-                                    END AS stadium_name
+                                    END AS matchIsAtStadium_name
                                         FROM matchs 
                                         JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
                                         JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
                                         LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
                                         LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
-                                    WHERE matchs.id = :id");
+                                        WHERE matchs.date >= CURRENT_DATE AND matchs.id = :id 
+                                        ORDER BY matchs.date ASC ");
         $parameters = [
             'id' => $id
         ];
         $query->execute($parameters);
-        $matchs = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
     
+        $matchs = [];
+        $nsMasiaMasia = new NsMasiaManager();
+        $rivalTeamManager = new RivalTeamManager();
+        
+        if($result) {
+            $nsMasia = $nsMasiaMasia->getNsMasia();
+            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+    
+            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
+            $match->setId($result["id"]);
+            $matchs[] = $result;
+        }
+        
         return $matchs; 
     }
 
@@ -97,7 +121,24 @@ class MatchManager extends AbstractManager{
         
     }
 
+    public function getAllTicketsById(int $id) {  
 
-    
+        $query = $this->db->prepare("SELECT * FROM tickets WHERE id = :id");
+        $parameters = [
+            'id' => $id
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC); 
+
+        $tickets = [];
+
+        if($result){
+            $ticket = new Ticket($result["tribune"], $result["prices"], $result["stock"]);
+            $ticket->setId($result["id"]);
+            $tickets[] = $result;
+        }
+        return $tickets;
+        
+    }  
 
 }

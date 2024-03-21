@@ -33,6 +33,26 @@ class AuthController extends AbstractController
         ]);
     }
 
+    public function compteUser()
+    {
+        $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
+        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+        $orderManager = new OrderManager();
+        $userManager = new UserManager();
+        $user = $userManager->getAllUserById($_SESSION["userId"]);
+        $orderTickets = $orderManager->getAllOrderTicketByUser($user);
+
+        $this->render("compteUser.html.twig", [
+            'userIsConect' => $userIsConect,
+            'tokenCSRF' => $tokenCSRF,
+            'userId' => $userId,
+            'rolesUser' => $rolesUser, 
+            'orderTickets' =>$orderTickets
+        ]);
+    }
+
     
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 

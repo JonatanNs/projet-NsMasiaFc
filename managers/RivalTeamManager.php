@@ -48,4 +48,27 @@ class RivalTeamManager extends AbstractManager{
         return null ;
     }
 
+
+    public function getAllRivalTeamsById(int $id) {
+        $query = $this->db->prepare("SELECT * FROM rivalsTeam WHERE id = :id");
+        $parameters = [
+            'id' => $id
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+        if($result) {
+            $newTeam = new RivalTeam($result["team"], $result["logo_url"], $result["logo_alt"]);
+            $newTeam->setId($result["id"]);
+            $newTeam->setRankingPoints($result["ranking_points"] ?? null);
+            $newTeam->setMatchsPlay($result["match_play"] ?? null);
+            $newTeam->setMatchsWin($result["match_win"] ?? null);
+            $newTeam->setMatchsLose($result["match_lose"] ?? null);
+            $newTeam->setMatchsNul($result["match_nul"] ?? null);
+            return $newTeam;
+        }
+
+        return null ;
+    }
+
 }

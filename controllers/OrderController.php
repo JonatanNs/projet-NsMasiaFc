@@ -15,7 +15,7 @@ class OrderController extends AbstractController
         $user = isset($userId) ? $userManager->getAllUserById($userId) : "";
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
 
-        $this->render("panier.html.twig", [
+        $this->render("boutique/panier.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
@@ -38,7 +38,7 @@ class OrderController extends AbstractController
         $user = isset($userId) ? $userManager->getAllUserById($_SESSION["userId"]) : "";
         $orderManager = new OrderManager();
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
-        $this->render("payement.html.twig", [
+        $this->render("boutique/payement.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
@@ -52,10 +52,12 @@ class OrderController extends AbstractController
     public function succesPay() {
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
+        $userEmail = isset($_SESSION["userEmail"]) ? $_SESSION["userEmail"] : null;
         // Rendu de la vue avec Twig
         echo $this->render('succes.html.twig', [
             'tokenCSRF' => $tokenCSRF,
-            'userId' => $userId
+            'userId' => $userId,
+            'userEmail' => $userEmail
         ]);
         
     } 
@@ -136,7 +138,7 @@ class OrderController extends AbstractController
             
                     for($i = 0; $i < count($articles); $i++){
                         foreach($articles[$i] as $product){
-                        $lastId = $orderManager->createOrderFromProduct(
+                        $orderManager->createOrderFromProduct(
                             $nextOrderId,
                             $product['id'],
                             $quantities[$i],
@@ -153,7 +155,32 @@ class OrderController extends AbstractController
                 header("Location: index.php?route=boutique");
                 exit;
             }        
-        } 
+        } else if(isset($_POST["arrayTickets"])){
+            $tokenManager = new CSRFTokenManager(); 
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+
+                // Parcourir les produits pour collecter les informations
+                foreach($_POST['arrayTickets'] as $ticket){
+                    $data = json_decode($ticket, true);
+                    (int)$quantities = $data['quantity'];
+                    (int)$totalPrices = $data['totalPrices'];
+                    $ticket_id = $data['ticketId'];
+                    $match_id = $data['matchId'];
+                }
+
+                $userManager = new UserManager();
+                $users = $userManager->getAllUserByEmail($_SESSION["userEmail"]);
+                
+                $numberOrder = $this->generatorNumberOrderTicket();
+
+                $orderManager = new OrderManager();
+                $orderManager->createOrderTicket($numberOrder, $users, $ticket_id, $match_id, $quantities, $totalPrices);
+
+                $_SESSION["valide"] = "Achat réalisé avec succès";
+                header("Location: index.php?route=billeterie");
+                exit;
+            }
+        }
     }
     
     public function generatorNumberOrderBoutique() {
@@ -212,6 +239,47 @@ class OrderController extends AbstractController
         header("HTTP/1.1 303 See Other");
          header("Location: " . $checkout_session->url);     
     }  
+
+    public function stripePayTicket() {;
+        var_dump($_POST);
+        $tickets = $_POST['arrayTicket'];
+
+        $api = $_ENV['API_KEY'];
+        \Stripe\Stripe::setApiKey($api);
+        
+        header('Content-Type: application/json');
+        
+        $YOUR_DOMAIN = 'http://localhost:3000';
+        
+        $line_items = [];
+        
+        foreach ($tickets as $ticket) {
+            $data = json_decode($ticket, true);
+            $line_item = [
+                'quantity' => $data['quantity'], 
+                'price_data' => [
+                    'currency' => 'EUR',
+                    'product_data' => [
+                        'name' => $data['match'],
+                        'description' => $data['tribune'],
+                    ],
+                'unit_amount' => $data['prices'] 
+                ],
+            ];
+            $line_items[] = $line_item;
+        }
+        
+        $checkout_session = \Stripe\Checkout\Session::create([
+            'submit_type' => 'pay',
+            'line_items' => $line_items,
+            'mode' => 'payment',
+            'success_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=succes',
+            'cancel_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=payementTicket',
+        ]);
+        
+        header("HTTP/1.1 303 See Other");
+         header("Location: " . $checkout_session->url);     
+    } 
 }
 
     

@@ -7,7 +7,7 @@
                 <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
             </figure>
             <h1>NsMasia FC</h1>
-            <p>Biletterie Officiel</p>
+            <p>Boutique Officiel</p>
         </article>
         <div class="payement">
             <div class="orderUser">
@@ -25,7 +25,7 @@
                         </fieldset>
 
                         <fieldset>
-                        <button type="submit" name="submit">Se connecter</button>
+                        <button type="submit" name="submit" class="btn">Se connecter</button>
                         </fieldset>
                         <p class="goSignup">Créer nouveau compte ?<p>
                     </form>
@@ -53,7 +53,7 @@
                         </fieldset>
 
                         <fieldset>
-                        <button type="submit" name="submit"> Créer nouveau compte</button>
+                        <button type="submit" name="submit" class="btn"> Créer nouveau compte</button>
                         </fieldset>
                         <p class="goLogin"> Se connecter ? <p>
                     </form>
@@ -67,21 +67,63 @@
                         </article>
                     {% endif %}
                 </article>
+                {% if addresse is empty %}
+                <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                    <fieldset>
+                        <input type="text" id="address" name="address" placeholder="Address" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
+                    </fieldset>
+                    <fieldset>
+                        <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
+                    </fieldset>
+                    <select name="pays">
+                            <option value="FR">France</option>
+                    </select>
+                    <fieldset>
+                        <button type="submit">Valider</button>
+                    </fieldset>
+                </form>
+                {% endif %}
+                {% if addresse is not empty %}
+                        <article>
+                            <h3>Votre address<h3>
+                            <ul>
+                                <li>{{ addresse.addresse }}</li>
+                            {% if addresse.complements is not empty %}
+                                <li>{{ addresse.complements }}</li>
+                            {% endif %}
+                                <li>{{ addresse.postalcode ~ ' ' ~ addresse.city }}</li>
+
+
+                                <li>{{ addresse.pays}}</li>
+                            </ul>
+                        </article>
+                {% endif %}
             <section>
                 <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
-                <div class="recapTicketUser invisible">
-                    <div class="recapTicketUserDivRow">      
-                        <figure class="recapTicketUserImg"></figure>
-                        <div class="recapTicketUserDivCol"></div> 
-                        <div class="recapTicket-total"></div>
+                <div class="recapPanierUser invisible">
+                    <div class="recapPanierUserDivRow">      
+                        <figure class="recapPanierUserImg"></figure>
+                        <div class="recapPanierUserDivCol"></div> 
+                        <div class="recapPanierUser-total"></div>
                     </div>
                 </div> 
-                <p id="totalPriceTicket"></p>
+                <p id="totalPrice"></p>
             </section> 
-            {% if userIsConect is not empty %}
-            <form action="index.php?route=stripePayTicket" method="POST" class="formStripe">
+            {% if addresse is not empty %}
+            <form action="index.php?route=stripePay" method="POST" class="formStripe">
                 <button type="submit" id="checkout-button">Passez au payement</button>
             </form>  
+            {% endif %}
+            {% if addresse is empty %}
+                <p>Renseignez votre adresse de livraison pour poursuivre le processus d'achat</p>
             {% endif %}
         </div>
     </main>

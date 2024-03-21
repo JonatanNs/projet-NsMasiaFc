@@ -8,7 +8,7 @@ class MerchController extends AbstractController
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
-        $this->render("boutique.html.twig", [
+        $this->render("boutique/boutique.html.twig", [
             'userIsConect' => $userIsConect,
             'products' => $products
         ]);
@@ -23,7 +23,7 @@ class MerchController extends AbstractController
         $products = $merchManager->getAllProductsById($id);
         
         // Rendre la vue en passant les détails du produit à afficher
-        $this->render("boutiqueProduct.html.twig", [
+        $this->render("boutique/boutiqueProduct.html.twig", [
             'userIsConect' => $userIsConect,
             'products' => $products
         ]);
