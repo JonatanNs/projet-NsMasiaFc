@@ -51,6 +51,30 @@ class OrderManager extends AbstractManager{
         return $this->db->lastInsertId();
     }
 
+    public function checkChangeAddress(User $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
+        $query = $this->db->prepare("UPDATE addresses 
+                                        SET user_id = :user_id, 
+                                        addresse = :addresse, 
+                                        complements = :complements, 
+                                        postal_code = :postal_code, 
+                                        city = :city, 
+                                        pays = :pays");
+        $parameters = [
+            'user_id' => $users->getId(),
+            'addresse' => $address,		
+            'complements' => isset($completement) ? $completement : "", 
+            'postal_code' => $postal_code, 
+            'city' => $city,
+            'pays' => $pays
+        ];
+        $query->execute($parameters);
+
+        return $this->db->lastInsertId();
+    }
+
+    
+
+
     public function getAllAddressesByUserId(User $users){
         $query = $this->db->prepare("SELECT * FROM addresses WHERE user_id = :user_id");
         $parameters = [
@@ -68,6 +92,7 @@ class OrderManager extends AbstractManager{
 
         return null ;
     }
+
 
     public function createOrderTicket(string $numberOrder, User $user, int $ticket_id, int $match_id, int $quantity, int $totalPrices){
         $date = new DateTime();
@@ -94,20 +119,58 @@ class OrderManager extends AbstractManager{
         ];
         $query->execute($parameters);
 
-        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $matchManager = new MatchManager();
         
-        if($result) {
+        foreach( $results as $result){
             $match = $matchManager->getAllMatchsById($result["match_id"]);
             $ticket = $matchManager->getAllTicketsById($result["ticket_id"]);
             $orderTicket = new Order_ticket( $user, $result["order_number"], $ticket, $match , $result["quantity"], $result["date"], $result["total_prices"]);
             $orderTicket->setId($result["id"]);
-            return $orderTicket;
         }
 
+        return $results ;
+    }
+
+    public function getOrdersByAddresse(Addresse $addresse){
+        $query = $this->db->prepare("SELECT * FROM orders WHERE addresse_id = :addresse_id");
+        $parameters = [
+            'addresse_id' => $addresse->getId()
+         ];
+        $query->execute($parameters);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach( $results as $result){
+            $newOrders = new Order($result["order_number"], $addresse , $result["date"], $result["totalTtc"]);
+            $newOrders->setId($result["id"]);
+            return $results;
+        }
         return null ;
     }
+
+    public function getordersProductByOrderNumber( string $order_number){
+
+        $query = $this->db->prepare("SELECT * FROM order_products WHERE order_number = :order_number");
+        $parameters = [
+            'order_number' => $order_number
+        ];
+        $query->execute($parameters);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        //$merchManager = new MerchManager();
+        
+        
+        foreach($results as $result){
+            //$product = $merchManager->getAllProductsById();
+            $newOrdersProduct = new Order_product($order_number, $result["product_id"]  ,$result["quantity"], $result["sizes"], $result["date"], $result["total_prices"]);
+            $newOrdersProduct->setId($result["id"]);
+        }
+        return $results ;
+    }
+
+
+
 }
 
 

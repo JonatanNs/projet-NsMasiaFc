@@ -2,12 +2,12 @@
 
 class MatchManager extends AbstractManager{
 
-    public function createMatch(int $nsMasia, int $rivalTeam, string $domicileExterieur, string $time, string $date) {  
+    public function createMatch(NsMasia $nsMasia, int $rivalTeam, string $domicileExterieur, string $time, string $date) {  
         // Insérer le nouveau match
         $query = $this->db->prepare("INSERT INTO matchs (id, ns_masia_id, rivalTeam_id, domicileExterieur, time, date) 
                                             VALUES (null, :ns_masia_id, :rivalTeam_id, :domicileExterieur, :time, :date)");
         $parameters = [ 
-            'ns_masia_id' => $nsMasia,
+            'ns_masia_id' => $nsMasia->getId(),
             'rivalTeam_id' => $rivalTeam, 
             'domicileExterieur' => $domicileExterieur, 
             'time' => $time, 
@@ -128,17 +128,16 @@ class MatchManager extends AbstractManager{
             'id' => $id
         ];
         $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC); 
+        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
 
         $tickets = [];
 
-        if($result){
-            $ticket = new Ticket($result["tribune"], $result["prices"], $result["stock"]);
-            $ticket->setId($result["id"]);
-            $tickets[] = $result;
+        foreach($result as $item){
+            $ticket = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
+            $ticket->setId($item["id"]);
+            $tickets[] = $item;
         }
-        return $tickets;
-        
+        return $tickets;  
     }  
 
 }

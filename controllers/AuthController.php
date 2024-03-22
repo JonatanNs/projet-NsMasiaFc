@@ -33,27 +33,63 @@ class AuthController extends AbstractController
         ]);
     }
 
-    public function compteUser()
-    {
+    public function compteUser() {
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $orderManager = new OrderManager();
         $userManager = new UserManager();
-        $user = $userManager->getAllUserById($_SESSION["userId"]);
-        $orderTickets = $orderManager->getAllOrderTicketByUser($user);
-
-        $this->render("compteUser.html.twig", [
-            'userIsConect' => $userIsConect,
-            'tokenCSRF' => $tokenCSRF,
-            'userId' => $userId,
-            'rolesUser' => $rolesUser, 
-            'orderTickets' =>$orderTickets
-        ]);
-    }
-
+        $matchManager = new MatchManager();
+        $merchManager = new MerchManager();
     
+        $user = $userManager->getAllUserById($userId); 
+        $address = $orderManager->getAllAddressesByUserId($user);
+    
+        // Vérifier si l'adresse est nulle
+        if ($address !== null) {
+            $allOrdersProducts = $orderManager->getOrdersByAddresse( $address);
+            $arrayNumberOrder = [];
+    
+            foreach ($allOrdersProducts as $allOrdersProduct) {
+                $arrayNumberOrder[] = $allOrdersProduct["order_number"];
+            }
+    
+            $ordersProducts = [];
+    
+            foreach ($arrayNumberOrder as $item) {
+                $ordersProducts[] = $orderManager->getordersProductByOrderNumber($item);
+            }
+    
+            $allProducts = $merchManager->getAllProducts();
+        } else {
+            // Si l'adresse est nulle, initialisez les variables à des valeurs par défaut
+            $allOrdersProducts = [];
+            $ordersProducts = [];
+            $allProducts = [];
+        }
+    
+    $orderTickets = $orderManager->getAllOrderTicketByUser($user);
+    $matchs = [];
+    foreach($orderTickets as $orderTicket){
+        $matchs[] = $matchManager->getAllMatchsById($orderTicket['match_id']);
+    }
+    
+    $this->render("compteUser.html.twig", [
+        'userIsConect' => $userIsConect,
+        'tokenCSRF' => $tokenCSRF,
+        'userId' => $userId,
+        'rolesUser' => $rolesUser, 
+        'orderTickets' => $orderTickets,
+        'matchs' => $matchs,
+        'ordersProducts' => $ordersProducts,
+        //'productAcheter' => $productAcheter,
+        'allOrdersProducts' => $allOrdersProducts,
+        'allProducts' => $allProducts,
+        'address' => $address
+
+    ]);
+}
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
         isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){

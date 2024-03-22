@@ -25,7 +25,7 @@ class MerchManager extends AbstractManager{
         return $products;
     }
 
-    public function getAllProductsById(int $id) : array{
+    public function getAllProductsById(int $id) {
         $query = $this->db->prepare("SELECT * FROM products WHERE id = :id");
         $parameters = [
             'id' => $id

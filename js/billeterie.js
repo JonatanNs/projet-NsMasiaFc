@@ -175,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let product = {
                     id: tribune.dataset.id,
-                    //userEmail : 
                     match: match.textContent,
                     matchId: matchId.textContent,
                     tribune: tribune.textContent,

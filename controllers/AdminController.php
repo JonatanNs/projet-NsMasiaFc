@@ -44,7 +44,7 @@ class AdminController extends AbstractController{
 
                 $team = $rivalTeamManager->getAllRivalTeamsByName($rivalTeam);
                 //var_dump($team->getId());
-                $matchManager->createMatch($nsMasia[0]['id'], $team->getId(), $location, $heures_input, $formatted_date);
+                $matchManager->createMatch($nsMasia, $team->getId(), $location, $heures_input, $formatted_date);
 
                 $_SESSION["valide"] = "Nouveau match Ajouter.";
                 header('Location: index.php?route=checkAdmin');

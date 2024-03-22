@@ -67,6 +67,7 @@
                         </article>
                     {% endif %}
                 </article>
+            {% block addresse %}
                 {% if addresse is empty %}
                 <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
@@ -106,6 +107,7 @@
                             </ul>
                         </article>
                 {% endif %}
+            {% endblock %}
             <section>
                 <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
                 <div class="recapPanierUser invisible">

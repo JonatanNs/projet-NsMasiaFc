@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .invisible {
-  display: none;
+  display: none !important;
 }
 
 .visible {
@@ -354,6 +354,70 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: row;
   gap: 0 1em;
+}
+
+/**********COMPTE USER***********/
+.mesCommandes .vosTickets, .mesCommandes .vosProduits {
+  font-size: 1.2rem;
+}
+.mesCommandes .vosTickets-order {
+  display: flex;
+  flex-direction: column;
+}
+.mesCommandes .vosTickets-order article {
+  padding: 1em;
+}
+.mesCommandes .vosTickets-order article + article {
+  border-top: 2px solid rgb(255, 249, 237);
+  width: 100%;
+}
+.mesCommandes .vosTickets-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.mesCommandes .vosTickets-info figure {
+  width: 50%;
+  margin-left: 2em;
+}
+.mesCommandes .vosTickets-info figure img {
+  width: 100%;
+  border-radius: 1rem;
+}
+.mesCommandes .vosTickets-info div {
+  margin-left: -3em;
+}
+.mesCommandes .vosProduits-order {
+  border: 2px solid rgb(137, 137, 137);
+  margin-bottom: 2em;
+}
+.mesCommandes .vosProduits-order article {
+  padding: 1em;
+}
+.mesCommandes .vosProduits-order article + article {
+  border-top: 2px solid rgb(255, 249, 237);
+  width: 100%;
+}
+.mesCommandes .vosProduits-order .vosProduits-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3em;
+  background-color: rgb(137, 137, 137);
+}
+.mesCommandes .vosProduits-order .vosProduits-info figure {
+  width: 30%;
+  padding: 0;
+}
+.mesCommandes .vosProduits-order .vosProduits-info figure img {
+  width: 100%;
+  border-radius: 1rem;
+}
+.mesCommandes .vosProduits-order .vosProduits-info div ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  margin-left: -1em;
 }
 
 .container {

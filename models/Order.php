@@ -14,10 +14,10 @@ class Order{
         $this->id = $id;
     }
 
-    public function getOrderProducts(): string {
+    public function getNumberOrder(): string {
         return $this->numberOrder;
     }
-    public function setOrderProducts(string $numberOrder): void {
+    public function setNumberOrder(string $numberOrder): void {
         $this->numberOrder = $numberOrder;
     }
 

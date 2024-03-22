@@ -1,9 +1,156 @@
 {% extends "base.html.twig" %}
-
 {% block main %}
+<main class="container">
     <h1>Mon Compte</h1>
+    <article>
+        <h2>Connexion et sécurité <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+    </article>
+    <article>
+        <h2>Adresses <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+        {% block addresse %}
+                {% if address is empty %}
+                <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                    <fieldset>
+                        <input type="text" id="address" name="address" placeholder="Address" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
+                    </fieldset>
+                    <fieldset>
+                        <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
+                    </fieldset>
+                    <select name="pays">
+                            <option value="FR">France</option>
+                    </select>
+                    <fieldset>
+                        <button type="submit">Valider</button>
+                    </fieldset>
+                </form>
+                {% endif %}
+                {% if address is not empty %}
+                        <article>
+                            <h3>Votre address<h3>
+                            <ul>
+                                <li>{{  address.addresse }}</li>
+                            {% if address.complements is not empty %}
+                                <li>{{ addresse.complements }}</li>
+                            {% endif %}
+                                <li>{{ address.postalcode ~ ' ' ~ address.city }}</li>
 
-    {{ dump(orderTickets) }}
-    {% for orderTickets in orderTicket %}
-    {% endfor %}
-{% endblock %}
+
+                                <li>{{ address.pays}}</li>
+                            </ul>
+                        </article>
+                        <form action="index.php?route=checkChangeAddress"  method="POST" class="formLivraison">
+                            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                            <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                            <fieldset>
+                                <input type="text" id="address" name="address" placeholder="Address" required/>
+                            </fieldset>
+                            <fieldset>
+                                <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
+                            </fieldset>
+                            <fieldset>
+                                <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
+                            </fieldset>
+                            <fieldset>
+                                <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
+                            </fieldset>
+                            <select name="pays">
+                                    <option value="FR">France</option>
+                            </select>
+                            <fieldset>
+                                <button type="submit">Valider</button>
+                            </fieldset>
+                        </form>
+                {% endif %}
+            {% endblock %}
+    </article>
+    <article class="mesCommandes">
+        <h2>Mes commandes <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+        <p class="vosTickets invisible">Vos Tickets <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed; margin-left: 0.5em;"></i></p>
+        {% for orderTicket in orderTickets %}
+            <article class="vosTickets-order invisible">
+                <article>
+                    <h3>COMMANDE EFFECTUÉE LE</h3>
+                    <p>{{ orderTicket.date }}</p>
+                </article>
+                <article>
+                    <h3>N° DE COMMANDE</h3>
+                    <p>{{ orderTicket.order_number }}</p>
+                </article>
+                <article>
+                    <h3>TOTAL</h3>
+                    <p>{{ orderTicket.total_prices }} €</p>
+                </article>
+            </article>
+            {% for match in matchs %}
+                {% for matchOf in match %}
+                    {% if orderTicket.match_id == matchOf.match_id %}
+                        <article class="vosTickets-info invisible">
+                            <figure>
+                                <img src="{{ matchOf.logo_url }}" alt="{{ matchOf.logo_alt }}"/>
+                            </figure>
+                            <div>
+                                <h3>{{ matchOf.name ~ ' vs ' ~ matchOf.team }}</h3>
+                                <p>Au stade : {{ matchOf.matchIsAtStadium_name}}</p>
+                                <p>{{ matchOf.date }} - {{ matchOf.time }}</p>
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        <p class="vosProduits invisible">Vos Produits <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed; margin-left: 0.5em;"></i></p>
+        {% for allOrdersProduct in allOrdersProducts %}
+    <article class="vosProduits-order invisible">
+        <article>
+            <h3>COMMANDE EFFECTUÉE LE</h3>
+            <p>{{ allOrdersProduct.date }}</p>
+        </article>
+        <article>
+            <h3>N° DE COMMANDE</h3>
+            <p>{{ allOrdersProduct.order_number }}</p>
+        </article>
+        <article>
+            <h3>TOTAL</h3>
+            <p>{{ allOrdersProduct.totalTtc }} €</p>
+        </article>
+
+        {% for ordersProduct in ordersProducts %}
+            {% for orderProduct in ordersProduct %}
+            {% for product in allProducts %}
+                {% if product.id == orderProduct.product_id and allOrdersProduct.order_number == orderProduct.order_number %}
+                    
+                        <article class="vosProduits-info invisible">
+                            <figure>
+                                <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                            </figure>
+                            <div>
+                                <h3>{{ product.name }}</h3>
+                                <p>Taille : {{ orderProduct.sizes }}</p>
+                                <ul>
+                                    <li>Prix : {{ product.prices }} €</li>
+                                    <li>Qté : {{ orderProduct.quantity }}</li>
+                                </ul>
+                            </div>
+                        </article>
+                    
+                {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </article> 
+{% endfor %}
+</article>
+
+    <article>
+        <h2>Nous contacter <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+    </article>
+</main
+{% endblock  %}

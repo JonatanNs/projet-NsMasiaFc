@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function(){
 
 const formSucces = document.querySelector(".formSucces");
 const basketData = localStorage.getItem("basket");
@@ -5,17 +6,9 @@ const basket = JSON.parse(basketData);
 const ticketData = localStorage.getItem("ticket");
 const tickets = JSON.parse(ticketData);
 const formPayementSucces = document.querySelector(".succesBtn");
-const ticketsBoutique = document.getElementById("ticketsBoutique");
-const productsBoutique = document.getElementById("productsBoutique");
 
 
-    formPayementSucces.addEventListener("click", function(){
-        if(ticketsBoutique){
-            localStorage.removeItem("ticket");
-        } else if(productsBoutique){
-            localStorage.removeItem("basket");
-        }
-    });
+    
 
         
     if(basket){
@@ -60,6 +53,20 @@ const productsBoutique = document.getElementById("productsBoutique");
             formSucces.appendChild(arrayTicket);
         });
     }
+
+    const ticketsBoutique = document.getElementById("ticketsBoutique");
+    const productsBoutique = document.getElementById("productsBoutique");
+
+    console.log(ticketsBoutique);
+    console.log(productsBoutique);
+    formPayementSucces.addEventListener("click", function(){
+        if(ticketsBoutique){
+            localStorage.removeItem("ticket");
+        } else if(productsBoutique){
+            localStorage.removeItem("basket");
+        }
+    });
+});
         
     
 

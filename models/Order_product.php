@@ -5,9 +5,9 @@ private ?int $id = null;
 
 public function __construct(
     private string $numberOrder,
-    private Product $products,
+    private int $products,
     private int $quantity,
-    private array $sizes,
+    private string $sizes,
     private string $date,
     private int $total_prices
 ) {
@@ -29,11 +29,11 @@ public function setNumberOrder(string $numberOrder): void {
     $this->numberOrder = $numberOrder;
 }
 
-public function getProducts(): Product {
+public function getProducts(): int {
     return $this->products;
 }
 
-public function setProducts(Product $products): void {
+public function setProducts(int $products): void {
     $this->products = $products;
 }
 
@@ -45,11 +45,11 @@ public function setQuantity(int $quantity): void {
     $this->quantity = $quantity;
 }
 
-public function getTailles(): array {
+public function getTailles(): string {
     return $this->sizes;
 }
 
-public function setTailles(array $sizes): void {
+public function setTailles(string $sizes): void {
     $this->sizes = $sizes;
 }
 
