@@ -51,29 +51,26 @@ class OrderManager extends AbstractManager{
         return $this->db->lastInsertId();
     }
 
-    public function checkChangeAddress(User $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
+    public function checkChangeAddress(Addresse $address_id, User $users , string $addresses , int $postal_code,string $city, string $pays, ? string $completement ){
         $query = $this->db->prepare("UPDATE addresses 
                                         SET user_id = :user_id, 
                                         addresse = :addresse, 
                                         complements = :complements, 
                                         postal_code = :postal_code, 
                                         city = :city, 
-                                        pays = :pays");
+                                        pays = :pays 
+                                        WHERE id = :id ");
         $parameters = [
+            'id' => $address_id->getId(),
             'user_id' => $users->getId(),
-            'addresse' => $address,		
+            'addresse' => $addresses,		
             'complements' => isset($completement) ? $completement : "", 
             'postal_code' => $postal_code, 
             'city' => $city,
             'pays' => $pays
         ];
         $query->execute($parameters);
-
-        return $this->db->lastInsertId();
     }
-
-    
-
 
     public function getAllAddressesByUserId(User $users){
         $query = $this->db->prepare("SELECT * FROM addresses WHERE user_id = :user_id");
@@ -90,6 +87,24 @@ class OrderManager extends AbstractManager{
             return $addresses;
         }
 
+        return null ;
+    }
+
+    public function getAddressesById(int $id, User $users){
+        $query = $this->db->prepare("SELECT * FROM addresses WHERE id = :id AND user_id = :user_id");
+        $parameters = [
+            'id' => $id,
+            'user_id' => $users->getId()
+         ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result) {
+            $addresses = new Addresse( $users, $result["addresse"], $result["postal_code"], $result["city"], $result["pays"]);
+            $addresses->setComplements($result["complements"]);
+            $addresses->setId($result["id"]);
+            return $addresses;
+        }
         return null ;
     }
 

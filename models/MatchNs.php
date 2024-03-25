@@ -13,11 +13,11 @@ class MatchNs {
         $this->id = $id;
     }
 
-    public function getintId(): NsMasia {
+    public function getNsMasiaId(): NsMasia {
         return $this->ns_masia_id;
     }
 
-    public function setintId(NsMasia $ns_masia_id): void {
+    public function setNsMasiaId(NsMasia $ns_masia_id): void {
         $this->ns_masia_id = $ns_masia_id;
     }
     public function getRivalTeamId(): RivalTeam {

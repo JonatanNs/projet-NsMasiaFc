@@ -4,6 +4,7 @@ class RivalTeamManager extends AbstractManager{
 
     public function getAllRivalTeams() : array{
         $query = $this->db->prepare("SELECT * FROM rivalsTeam");
+
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
     
@@ -67,8 +68,20 @@ class RivalTeamManager extends AbstractManager{
             $newTeam->setMatchsNul($result["match_nul"] ?? null);
             return $newTeam;
         }
-
         return null ;
     }
 
+    public function getAllTeams(){
+        $query = $this->db->prepare("SELECT team, logo_url, logo_alt, id, ranking_points, match_play, match_win, match_lose, match_nul
+        FROM rivalsTeam
+        UNION
+        SELECT name, logo_url, logo_alt, id, ranking_points, match_play, match_win, match_lose, match_nul
+        FROM nsMasia
+        ORDER BY ranking_points DESC;
+        ");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
 }

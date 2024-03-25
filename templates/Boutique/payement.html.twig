@@ -14,7 +14,7 @@
                 <article class="orderUser-connexion">
                 {% if userIsConect is empty %}
                 <h2>Information personels</h2>
-                    <form action="index.php?route=check-login" method="POST" class=" formLogin">
+                    <form action="index.php?route=check-login" method="POST" class="form formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                         <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required>
@@ -30,7 +30,7 @@
                         <p class="goSignup">Créer nouveau compte ?<p>
                     </form>
 
-                    <form action="index.php?route=check-signup" method="POST" class="formSignup invisible" id="payment-form">
+                    <form action="index.php?route=check-signup" method="POST" class="form formSignup invisible" id="payment-form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                         <input type="text" id="first_name" name="first_name" placeholder="Prénom" required>
@@ -67,9 +67,8 @@
                         </article>
                     {% endif %}
                 </article>
-            {% block addresse %}
                 {% if addresse is empty %}
-                <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
+                <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                     <fieldset>
@@ -107,7 +106,6 @@
                             </ul>
                         </article>
                 {% endif %}
-            {% endblock %}
             <section>
                 <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
                 <div class="recapPanierUser invisible">

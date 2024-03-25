@@ -69,7 +69,7 @@ class MatchManager extends AbstractManager{
         return $matchs; 
     }
 
-    public function getAllMatchsById(int $id) {  
+    public function getAllMatchsByIdNoPlay(int $id) {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
                                         WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
@@ -102,6 +102,57 @@ class MatchManager extends AbstractManager{
         }
         
         return $matchs; 
+    }
+
+    public function getAllMatchsByIdPlay(int $id) {  
+        $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
+                                    CASE 
+                                        WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
+                                        WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
+                                    END AS matchIsAtStadium_name
+                                        FROM matchs 
+                                        JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
+                                        JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
+                                        LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
+                                        LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
+                                        WHERE matchs.id = :id 
+                                        ORDER BY matchs.date ASC ");
+        $parameters = [
+            'id' => $id
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+        $matchs = [];
+        $nsMasiaMasia = new NsMasiaManager();
+        $rivalTeamManager = new RivalTeamManager();
+        
+        if($result) {
+            $nsMasia = $nsMasiaMasia->getNsMasia();
+            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+    
+            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
+            $match->setId($result["id"]);
+            $matchs[] = $result;
+        }
+        
+        return $matchs; 
+    }
+
+    public function getAllResultMatch(array $match) {  
+
+        $query = $this->db->prepare("SELECT * FROM result_match");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
+
+        $resultMatch = [];
+        foreach($result as $item){
+            $user = new ResultMatch( $match , $item["score_nsMasia"], $item["score_rivalTeam"]);
+            $user->setId($item["id"]);
+            $resultMatch[] = $item;
+        }
+        return $resultMatch;
+        
     }
 
 
@@ -138,6 +189,10 @@ class MatchManager extends AbstractManager{
             $tickets[] = $item;
         }
         return $tickets;  
-    }  
+    } 
+    
+     
+
+    
 
 }

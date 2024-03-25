@@ -4,17 +4,47 @@ class AuthController extends AbstractController
 {
     public function home()
     {
+        $nsMasiaManager = new NsMasiaManager();
+        $matchManager = new MatchManager();
+        $rivalTeamManager = new RivalTeamManager();
+
+        $allTeam = $rivalTeamManager->getAllTeams();
+
+        $matchs = $matchManager->getAllMatchs();
+        $dernierMatchJoue = [];
+        foreach ($matchs as $match) {
+            $dateMatch = $match["date"];
+            $dernierMatchJoue[] = $dateMatch <= date("Y-m-d") ?  $match: "";
+        }
+        $resultMatch = $matchManager->getAllResultMatch($dernierMatchJoue);
+
+        foreach($resultMatch as $result){
+        $resultLastMatch =  $matchManager->getAllMatchsByIdPlay($result["match_id"]);
+        }
+
+        $nsMasia = $nsMasiaManager->getNsMasia();
+
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
+        
+        $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
+        $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
+        unset($_SESSION["error"]);
+        unset($_SESSION["valide"]);
         $this->render("home.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
             'rolesUser' => $rolesUser,
-            'adminRnd7sX23' => $adminRnd7sX23
+            'nsMasia' => $nsMasia,
+            'matchs' => $matchs,
+            'adminRnd7sX23' => $adminRnd7sX23,
+            'resultLastMatch' => $resultLastMatch,
+            'resultMatch' => $resultMatch,
+            'allTeam' => $allTeam
         ]);
     }
 
@@ -33,63 +63,6 @@ class AuthController extends AbstractController
         ]);
     }
 
-    public function compteUser() {
-        $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-        $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
-        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        $orderManager = new OrderManager();
-        $userManager = new UserManager();
-        $matchManager = new MatchManager();
-        $merchManager = new MerchManager();
-    
-        $user = $userManager->getAllUserById($userId); 
-        $address = $orderManager->getAllAddressesByUserId($user);
-    
-        // Vérifier si l'adresse est nulle
-        if ($address !== null) {
-            $allOrdersProducts = $orderManager->getOrdersByAddresse( $address);
-            $arrayNumberOrder = [];
-    
-            foreach ($allOrdersProducts as $allOrdersProduct) {
-                $arrayNumberOrder[] = $allOrdersProduct["order_number"];
-            }
-    
-            $ordersProducts = [];
-    
-            foreach ($arrayNumberOrder as $item) {
-                $ordersProducts[] = $orderManager->getordersProductByOrderNumber($item);
-            }
-    
-            $allProducts = $merchManager->getAllProducts();
-        } else {
-            // Si l'adresse est nulle, initialisez les variables à des valeurs par défaut
-            $allOrdersProducts = [];
-            $ordersProducts = [];
-            $allProducts = [];
-        }
-    
-    $orderTickets = $orderManager->getAllOrderTicketByUser($user);
-    $matchs = [];
-    foreach($orderTickets as $orderTicket){
-        $matchs[] = $matchManager->getAllMatchsById($orderTicket['match_id']);
-    }
-    
-    $this->render("compteUser.html.twig", [
-        'userIsConect' => $userIsConect,
-        'tokenCSRF' => $tokenCSRF,
-        'userId' => $userId,
-        'rolesUser' => $rolesUser, 
-        'orderTickets' => $orderTickets,
-        'matchs' => $matchs,
-        'ordersProducts' => $ordersProducts,
-        //'productAcheter' => $productAcheter,
-        'allOrdersProducts' => $allOrdersProducts,
-        'allProducts' => $allProducts,
-        'address' => $address
-
-    ]);
-}
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
         isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){
@@ -147,7 +120,6 @@ class AuthController extends AbstractController
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){ 
                 
-
                 $userManager = new UserManager();
                 $users = $userManager->getAllUserByEmail($_POST["emailLogin"]);
 
@@ -159,6 +131,8 @@ class AuthController extends AbstractController
                     if(password_verify($_POST["passwordLogin"], $users->getPassword())){
                         unset($_SESSION["error-message"]);
                         $_SESSION["user"] = $users->getFirstName() . ' ' . $users->getLastName();
+                        $_SESSION["firstName"] = $users->getFirstName();
+                        $_SESSION["lastName"] = $users->getLastName();
                         $_SESSION["userId"] = $users->getId();
                         $_SESSION["userEmail"] = $users->getEmail();
                         $_SESSION['userRoles'] = $users->getRoles();
@@ -188,7 +162,6 @@ class AuthController extends AbstractController
     public function logout() : void
     {
         session_destroy();
-
         header("Location: index.php?route=home");
     }
 

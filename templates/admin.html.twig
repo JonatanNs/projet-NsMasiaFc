@@ -7,7 +7,7 @@
     <section>
         <h2>Boutique</h2>
         <p>Ajouter Un produit</p>
-        <form action="index.php?route=checkAddproduct" method="POST">
+        <form action="index.php?route=checkAddproduct" method="POST" class="form">
         <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
             <fieldset>
                 <label for="nameProduct">Name</label>
@@ -53,7 +53,7 @@
     <section class="adminMatchs">
         <h2>Matchs</h2>
         <p>Ajouter Un match</p>
-        <form action="index.php?route=checkAddMatchs" method="POST">
+        <form action="index.php?route=checkAddMatchs" method="POST" class="form">
         <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
             <fieldset>
                 <label for="location">NS Masia FC</label>

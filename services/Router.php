@@ -10,6 +10,7 @@ class Router
         $oc = new OrderController();
         $adm = new AdminController();
         $MatchController = new MatchController();
+        $compteUserController = new CompteUserController();
         $productId = isset($get["id"]) ? (int)$get["id"] : 0;
 
         if(!isset($get["route"]))
@@ -22,7 +23,19 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "compteUser")
         {
-            $authc->compteUser();
+            $compteUserController->compteUser();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeName")
+        {
+            $compteUserController->checkChangeName();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangerEmail")
+        {
+            $compteUserController->checkChangerEmail();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangerPassword")
+        {
+            $compteUserController->checkChangerPassword();
         }
         else if(isset($get["route"]) && $get["route"] === "checkAdmin")
         {
@@ -83,6 +96,10 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "checkAddress")
         {
             $oc->checkAddress();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeAddress")
+        {
+            $compteUserController->checkChangeAddress();
         }
         else if(isset($get["route"]) && $get["route"] === "checkSucces")
         {

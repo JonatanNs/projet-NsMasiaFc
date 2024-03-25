@@ -17,7 +17,7 @@ class MatchController extends AbstractController
     {
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $matchManager = new MatchManager();
-        $matchs = $matchManager->getAllMatchsById($id);
+        $matchs = $matchManager->getAllMatchsByIdNoPlay($id);
         $tickets = $matchManager->getAllTickets();
 
         $this->render("biletterie/reservation.html.twig", [

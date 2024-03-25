@@ -1,21 +1,23 @@
-@import "reset/reset";
+
 
 @import "vars/font";
-
+@import "reset/reset";
 @import "partials/header";
 @import "partials/nav";
 @import "partials/boutique";
 @import "partials/payement";
 @import "partials/biletterie";
 @import "partials/compteUser";
+@import "partials/home";
 
 //@media screen and (max-width: 480px) {
 .container{
     background-color: $black;
     color: $beige;
-    font-family: $font2;
     max-width: 480px;
     margin: 0 auto;
+    padding: 0;
+    font-family: $font2 !important;
 }
 
 //}
@@ -33,5 +35,22 @@
         color: $black;
         border: 3px solid $darkgrey;
         transition: all 1s;
+    }
+}
+
+.form{
+    fieldset{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input{
+            background-color: $beige;
+            border-radius: 0.5rem;
+            border: 1px solid $bleu;
+        }
+        label{
+            font-family: $font2;
+        }
     }
 }

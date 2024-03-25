@@ -104,7 +104,6 @@ class OrderController extends AbstractController
             exit;
         }
     }
-
     public function checkSucces() { 
         var_dump($_POST);
         if(isset($_POST["products"])) {

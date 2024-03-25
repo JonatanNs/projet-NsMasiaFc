@@ -10,7 +10,7 @@
     {% endif %}
 
 <a href="javascript:history.back()"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
-<form action="index.php?route=check-login" method="POST" class=" formLogin">
+<form action="index.php?route=check-login" method="POST" class="form formLogin">
   <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
     <fieldset>
       <label for="emailLogin">Email</label>
@@ -18,7 +18,7 @@
     </fieldset>
 
     <fieldset>
-      <label for="passwordLogin">Password</label>
+      <label for="passwordLogin">Mot de passe</label>
       <input type="password" id="passwordLogin" name="passwordLogin" required>
     </fieldset>
 
@@ -28,7 +28,7 @@
     <p class="goSignup">Créer nouveau compte <p>
   </form>
 
-<form action="index.php?route=check-signup" method="POST" class="formSignup invisible">
+<form action="index.php?route=check-signup" method="POST" class="form formSignup invisible">
   <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
     <fieldset>
       <label for="first_name">Prénom</label>

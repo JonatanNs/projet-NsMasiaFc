@@ -61,7 +61,34 @@ class UserManager extends AbstractManager{
             $user->setRoles($result["roles"]);
             return $user;
         }
-
         return null ;
+    }
+
+    public function changeName(int $id, string $first_name, string $last_name){
+        $query = $this->db->prepare("UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'first_name' => $first_name, 
+        'last_name' => $last_name, 
+        ];
+        $query->execute($parameters);
+    }
+
+    public function changePassword(int $id, string $password){
+        $query = $this->db->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'password' => $password, 
+        ];
+        $query->execute($parameters);
+    }
+
+    public function changeEmail(int $id, string $email){
+        $query = $this->db->prepare("UPDATE users SET email = :email WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'email' => $email, 
+        ];
+        $query->execute($parameters);
     }
 }

@@ -4,12 +4,90 @@
     <h1>Mon Compte</h1>
     <article>
         <h2>Connexion et sécurité <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+        
+        <h3>Modifier son nom</h3>
+        <p>{{errorMessage}}</p>
+        <p>{{valideMessage}}</p>
+        <form action="index.php?route=checkChangeName" method="POST" class="form">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+            <fieldset>
+            <label for="changeFirstName">Prénom</label>
+            <input type="text" id="changeFirstName" name="changeFirstName" required>
+            </fieldset>
+
+            <fieldset>
+            <label for="changeLast_name">Nom</label>
+            <input type="text" id="changeLast_name" name="changeLast_name" required>
+            </fieldset>
+
+            <fieldset>
+            <label for="passwordForChangeName">Mot de passe</label>
+            <input type="password" id="passwordForChangeName" name="passwordForChangeName" required>
+            </fieldset>
+
+            <fieldset>
+            <button type="submit" name="submit" class="btn">Modifier</button>
+            </fieldset>
+        </form>
+
+        <h3>Modifier son mot de passe</h3>
+        <form action="index.php?route=checkChangerPassword" method="POST" class="form formChangerPassword">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+            <fieldset>
+                <label for="emailForChangePassword">Email</label>
+                <input type="email" id="emailForChangePassword" name="emailForChangePassword" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="actualPassword">Mot de passe actuel</label>
+                <input type="password" id="actualPassword" name="actualPassword" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="changePassword">Nouveau Mot de passe</label>
+                <input type="password" id="changePassword" name="changePassword" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="confirmChangePassword">Confirmer Nouveau le mot de passe</label>
+                <input type="password" id="confirmChangePassword" name="confirmChangePassword" required>
+            </fieldset>
+
+            <fieldset>
+                <button type="submit" name="submit" class="btn">Modifier</button>
+            </fieldset>
+        </form>
+        <h3>Modifier Email</h3>
+        <form action="index.php?route=checkChangerEmail" method="POST" class="form formChangerEmail">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+            <fieldset>
+                <label for="emailForChange">Email actuel</label>
+                <input type="email" id="emailForChange" name="emailForChange" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="newEmail">Nouvelle Email</label>
+                <input type="email" id="newEmail" name="newEmail" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="confirmNewEmail">Confirmer le nouvelle Email</label>
+                <input type="email" id="confirmNewEmail" name="confirmNewEmail" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="passwordForNewEmail">Mot de passe</label>
+                <input type="password" id="passwordForNewEmail" name="passwordForNewEmail" required>
+            </fieldset>
+            <fieldset>
+                <button type="submit" name="submit" class="btn">Modifier</button>
+            </fieldset>
+        </form>
     </article>
     <article>
         <h2>Adresses <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
-        {% block addresse %}
                 {% if address is empty %}
-                <form action="index.php?route=checkAddress"  method="POST" class="formLivraison">
+                <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                     <fieldset>
@@ -28,7 +106,7 @@
                             <option value="FR">France</option>
                     </select>
                     <fieldset>
-                        <button type="submit">Valider</button>
+                        <button type="submit" class="btn">Valider</button>
                     </fieldset>
                 </form>
                 {% endif %}
@@ -41,14 +119,14 @@
                                 <li>{{ addresse.complements }}</li>
                             {% endif %}
                                 <li>{{ address.postalcode ~ ' ' ~ address.city }}</li>
-
-
                                 <li>{{ address.pays}}</li>
                             </ul>
                         </article>
-                        <form action="index.php?route=checkChangeAddress"  method="POST" class="formLivraison">
+                        <h4>Modifier son adresse</h4>
+                        <form action="index.php?route=checkChangeAddress"  method="POST" class="form formForChangeAddress">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                             <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                            <input type="hidden" name="address_id" id="address_id" value="{{ address.id }}"/>
                             <fieldset>
                                 <input type="text" id="address" name="address" placeholder="Address" required/>
                             </fieldset>
@@ -65,11 +143,10 @@
                                     <option value="FR">France</option>
                             </select>
                             <fieldset>
-                                <button type="submit">Valider</button>
+                                <button type="submit" class="btn">Modifier</button>
                             </fieldset>
                         </form>
                 {% endif %}
-            {% endblock %}
     </article>
     <article class="mesCommandes">
         <h2>Mes commandes <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
@@ -151,6 +228,7 @@
 
     <article>
         <h2>Nous contacter <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed;margin-left: 0.5em;"></i></h2>
+        
     </article>
 </main
 {% endblock  %}

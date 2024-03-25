@@ -39,6 +39,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .invisible {
@@ -420,12 +421,93 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: -1em;
 }
 
+.home {
+  background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 85vh;
+  padding: 0;
+  margin-top: -1em;
+}
+.home h1 {
+  font-size: 7rem;
+  font-weight: 700;
+  text-wrap: wrap;
+  margin: 0.5em;
+  padding-top: 1em;
+}
+.home figure {
+  width: 20%;
+  margin: 0 auto;
+  padding-top: 5em;
+}
+.home figure img {
+  width: 100%;
+  margin-top: 2em;
+}
+.home button {
+  font-size: 2rem;
+  margin-left: 6em;
+  margin-top: 5em;
+}
+
+.container-prochainMatch {
+  padding: 1em;
+}
+.container-prochainMatch article {
+  border: 2px solid rgb(255, 249, 237);
+  border-radius: 1rem;
+  padding: 1em;
+  text-align: center;
+  margin: 1em;
+}
+.container-prochainMatch .prochainMatch .teamForMatch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 1em;
+}
+.container-prochainMatch .prochainMatch .teamForMatch figure {
+  width: 20%;
+}
+.container-prochainMatch .prochainMatch .teamForMatch figure img {
+  width: 100%;
+}
+.container-prochainMatch .prochainMatch .teamForMatch figure figcaption {
+  margin-top: 0.5em;
+  text-wrap: pretty;
+}
+.container-prochainMatch .lastResult .teamForLastMatch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.container-prochainMatch .lastResult .teamForLastMatch p {
+  background-color: rgb(25, 30, 59);
+  padding: 0.5em;
+}
+.container-prochainMatch .lastResult figure {
+  width: 20%;
+}
+.container-prochainMatch .lastResult figure img {
+  width: 100%;
+}
+.container-prochainMatch .ranking {
+  text-align: center;
+}
+.container-prochainMatch .ranking h2 {
+  text-align: center;
+}
 .container {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 249, 237);
-  font-family: "Nunito", sans-serif;
   max-width: 480px;
   margin: 0 auto;
+  padding: 0;
+  font-family: "Nunito", sans-serif !important;
 }
 
 /*****************BUTTON**************/
@@ -441,4 +523,18 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(0, 0, 0);
   border: 3px solid rgb(137, 137, 137);
   transition: all 1s;
+}
+
+.form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form fieldset input {
+  background-color: rgb(255, 249, 237);
+  border-radius: 0.5rem;
+  border: 1px solid rgb(25, 30, 59);
+}
+.form fieldset label {
+  font-family: "Nunito", sans-serif;
 }/*# sourceMappingURL=style.css.map */
