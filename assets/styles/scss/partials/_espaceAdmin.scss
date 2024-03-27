@@ -1,0 +1,23 @@
+
+.espaceAdmin{
+    text-align: center;
+    padding-bottom: 2em;
+    width: 100%;
+    h1{
+        padding: 2em;
+    }
+    ul{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        li{
+            border: 3px solid $beige;
+            border-radius: 1rem;
+            padding: 1em;
+            width: 100%;
+            a{
+                color: $beige;
+            }
+        }
+    } 
+}

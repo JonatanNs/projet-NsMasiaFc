@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="container">
+    <section class="adminMatchs">
+        <h1>Matchs</h1>
+        <p>Ajouter Un match</p>
+        <form action="index.php?route=checkAddMatchs" method="POST" class="form">
+        <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
+            <fieldset>
+                <label for="location">NS Masia FC</label>
+                <select name="location">
+                    <option value="">--</option>
+                    <option value="exterieur" required >Extérieur</option>
+                    <option value="domicile" required >Domicile</option>
+                </select> 
+            </fieldset>
+            <fieldset>
+                <label for="rivalTeam">Equipe rival</label>
+                <select name="rivalTeam">
+                    <option value="">--</option>
+                {% for rival in teamRival %}
+                    <option value="{{rival.team}}" required >{{rival.team}}</option>
+                {% endfor %}
+                </select> 
+            </fieldset>
+            <fieldset>
+                <label for="time">Heure</label>
+                <input type="time" name="time" required>
+            </fieldset>
+            <fieldset>
+                <label for="date">Date</label>
+                <input type="date" name="date" required>
+            </fieldset>
+            <fieldset>
+            <button type="submit" class="btn">Ajouter</button>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="addResultMatch">
+    <h2>Ajouter le résultat des matchs joués</h2>
+    {% set resultFound = false %}
+    {% for matchPlay in matchPlays %}
+        {% set matchFound = false %}
+        {% for resultMatch in resultMatchs %}
+            {% if matchPlay.match_id == resultMatch.match_id %}
+                {% set matchFound = true %}
+            {% endif %}
+        {% endfor %}
+        {% if not matchFound %}
+            {% set resultFound = true %}
+            <form action="index.php?route=checkAddResult" method="POST" class="form">
+                <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
+                <input type="hidden" name="matchId" value="{{ matchPlay.match_id }}">
+                <input type="hidden" name="nsMasiaTeam" value="{{ matchPlay.ns_masia_id }}">
+                <input type="hidden" name="rivalTeam_id" value="{{ matchPlay.rivalTeam_id }}">
+                <h1>Match joué le {{ matchPlay.date }}</h1>
+                <fieldset>
+                    <label for="teamNsMasia">{{ matchPlay.name }}</label>
+                    <input type="number" name="teamNsMasia" min="0" required>
+                </fieldset>
+                <fieldset>
+                    <label for="teamRival">{{ matchPlay.team }}</label>
+                    <input type="number" name="teamRival" min="0" required>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" class="btn">Ajouter</button>
+                </fieldset>
+            </form>
+        {% endif %}
+    {% endfor %}
+    {% if resultFound == false %}
+        <p>Pas de résultat à ajouter.</p>
+    {% endif %}
+</section>
+
+</main>
+{% endblock %}

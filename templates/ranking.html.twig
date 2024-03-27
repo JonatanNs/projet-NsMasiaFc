@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="container">
+    <article class="allRanking">
+    <a href="index.php?route=home"><button class="btn">Retour</button></a>
+        <h1>Classement</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>POS</th>
+                    <th>Equipe</th>
+                    <th>J</th>
+                    <th>G</th>
+                    <th>N</th>
+                    <th>P</th>
+                    <th>PTS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in allTeam %}
+                <tr>
+                    <td class="td">{{ loop.index }}</td> 
+                    <td class="tdTeam"> <img src="{{ team.logo_url }}" alt="{{ team.logo_alt }}"/> {{ team.team }}</td>
+                    <td class="td">{{ team.match_play }}</td>
+                    <td class="td">{{ team.match_win }}</td>
+                    <td class="td">{{ team.match_nul }}</td>
+                    <td class="td">{{ team.match_lose }}</td>
+                    <td class="td">{{ team.ranking_points }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</main>
+{% endblock %}

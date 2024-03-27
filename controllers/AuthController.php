@@ -8,19 +8,12 @@ class AuthController extends AbstractController
         $matchManager = new MatchManager();
         $rivalTeamManager = new RivalTeamManager();
 
+        $matchPlays = $matchManager->getMatchsPlay();
+        $resultMatchs = $matchManager->getAllResultMatch();
+
         $allTeam = $rivalTeamManager->getAllTeams();
 
         $matchs = $matchManager->getAllMatchs();
-        $dernierMatchJoue = [];
-        foreach ($matchs as $match) {
-            $dateMatch = $match["date"];
-            $dernierMatchJoue[] = $dateMatch <= date("Y-m-d") ?  $match: "";
-        }
-        $resultMatch = $matchManager->getAllResultMatch($dernierMatchJoue);
-
-        foreach($resultMatch as $result){
-        $resultLastMatch =  $matchManager->getAllMatchsByIdPlay($result["match_id"]);
-        }
 
         $nsMasia = $nsMasiaManager->getNsMasia();
 
@@ -36,15 +29,58 @@ class AuthController extends AbstractController
         unset($_SESSION["valide"]);
         $this->render("home.html.twig", [
             'userIsConect' => $userIsConect,
+            'errorMessage' => $errorMessage,
+            'valideMessage' => $valideMessage,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
             'rolesUser' => $rolesUser,
             'nsMasia' => $nsMasia,
             'matchs' => $matchs,
             'adminRnd7sX23' => $adminRnd7sX23,
-            'resultLastMatch' => $resultLastMatch,
-            'resultMatch' => $resultMatch,
-            'allTeam' => $allTeam
+            'allTeam' => $allTeam,
+            'matchPlays' => $matchPlays,
+            'resultMatchs' => $resultMatchs
+        ]);
+    }
+
+    public function allRanking()
+    {
+        $nsMasiaManager = new NsMasiaManager();
+        $matchManager = new MatchManager();
+        $rivalTeamManager = new RivalTeamManager();
+
+        $matchPlays = $matchManager->getMatchsPlay();
+        $resultMatchs = $matchManager->getAllResultMatch();
+
+        $allTeam = $rivalTeamManager->getAllTeams();
+
+        $matchs = $matchManager->getAllMatchs();
+
+        $nsMasia = $nsMasiaManager->getNsMasia();
+
+        $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
+        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+        $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
+        
+        $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
+        $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
+        unset($_SESSION["error"]);
+        unset($_SESSION["valide"]);
+        $this->render("ranking.html.twig", [
+            'userIsConect' => $userIsConect,
+            'errorMessage' => $errorMessage,
+            'valideMessage' => $valideMessage,
+            'tokenCSRF' => $tokenCSRF,
+            'userId' => $userId,
+            'rolesUser' => $rolesUser,
+            'nsMasia' => $nsMasia,
+            'matchs' => $matchs,
+            'adminRnd7sX23' => $adminRnd7sX23,
+            'allTeam' => $allTeam,
+            'matchPlays' => $matchPlays,
+            'resultMatchs' => $resultMatchs
         ]);
     }
 

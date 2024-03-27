@@ -37,10 +37,6 @@ class Router
         {
             $compteUserController->checkChangerPassword();
         }
-        else if(isset($get["route"]) && $get["route"] === "checkAdmin")
-        {
-            $adm->checkAdmin();
-        }
         else if(isset($get["route"]) && $get["route"] === "checkAddMatchs")
         {
             $adm->checkAddMatchs();
@@ -117,6 +113,45 @@ class Router
         {
             $authc->checkSignup();
         }
+        else if(isset($get["route"]) && $get["route"] === "allRanking")
+        {
+            $authc->allRanking();
+        }
+        /*********************************************************
+                            * ESPACE ADMIN *
+        *********************************************************/
+        else if(isset($get["route"]) && $get["route"] === "checkAdmin")
+        {
+            $adm->checkAdmin();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminHome")
+        {
+            $adm->adminHome();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminClub")
+        {
+            $adm->adminClub();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminActualite")
+        {
+            $adm->adminActualite();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminBiletterie")
+        {
+            $adm->adminBiletterie();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkAddResult")
+        {
+            $adm->checkAddResult();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminBoutique")
+        {
+            $adm->adminBoutique();
+        }
+        /*********************************************************
+                            * DECONNEXION *
+        *********************************************************/
+
         else if(isset($get["route"]) && $get["route"] === "logout")
         {
             $authc->logout();

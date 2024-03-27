@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main class="container">
+    <article class="espaceAdmin">
+        <h1>Espace admin</h1>
+        <ul>
+            <li>
+                <a href="index.php?route=adminHome">home</a>
+            </li>
+            <li>
+                <a href="index.php?route=adminActualite">Actualité</a>
+            </li>
+            <li>
+                <a href="index.php?route=adminClub">Club</a>
+            </li>
+            <li>
+                <a href="index.php?route=adminBoutique">Boutique</a>
+            </li>
+            <li>
+                <a href="index.php?route=adminBiletterie">Billeterie</a>
+            </li>
+        </ul>
+    </article>
+</main>
+{% endblock %}

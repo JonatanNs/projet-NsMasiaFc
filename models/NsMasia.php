@@ -3,11 +3,11 @@
 class NsMasia {
 
     private ? int $id = null;
-    private ? int $ranking_points = null;
-    private ? int $matchs_play = null;
-    private ? int $matchs_win = null; 
-    private ? int $matchs_lose = null;
-    private ? int $matchs_nul = null;
+    private ? int $ranking_points = 0;
+    private ? int $matchs_play = 0;
+    private ? int $matchs_win = 0; 
+    private ? int $matchs_lose = 0;
+    private ? int $matchs_nul = 0;
     public function __construct(private string $name, private string $logo_url, private string $logo_alt, private string $stadium) {
     }
 

@@ -15,41 +15,33 @@
     <section class="container-prochainMatch">
         <article class="lastResult">
             <h2>Dernier résultat</h2>
-            {% set dernierMatch = null %}
-            {% for match in resultLastMatch %}
-                {% if match.date <= "now"|date("Y-m-d") %}
-                    {% if dernierMatch is null or match.date > dernierMatch.date %}
-                        {% set dernierMatch = match %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            {% if dernierMatch is not null %}
-                <p>Le {{ dernierMatch.date }} à {{ dernierMatch.time }}.</p>
-                <p>{{ dernierMatch.stadium }}</p>
+            {% for match in matchPlays %}
+                <p>Le {{ match.date }} à {{ match.time }}.</p>
+                <p>{{ match.matchIsAtStadium_name }}</p>
                 <div class="teamForLastMatch">
                     <figure>
-                        <img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/>
-                        <figcaption>{{dernierMatch.name}}</figcaption>
+                        <img src="assets/img/logo-ns_masia.png" alt=""/>
+                        <figcaption>{{ match.name }}</figcaption>
                     </figure> 
-                    {% for score in resultMatch %}
+                    {% for result in resultMatchs %}
+                        {% if result.match_id == match.match_id %}
                     <p>
-                    {{ score.score_nsMasia ~ ' - ' ~ score.score_rivalTeam }}
+                        {{ result.score_nsMasia ~ ' - ' ~ result.score_rivalTeam}}
                     </p>
+                        {% endif %}
                     {% endfor %}
                     <figure>  
-                        <img src="{{ dernierMatch.logo_url }}" alt="{{dernierMatch.logo_alt}}" />
-                        <figcaption>{{dernierMatch.team}}</figcaption>
+                        <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}" />
+                        <figcaption>{{ match.team }}</figcaption>
                     </figure>
                 </div>
-            {% else %}
-                <p>Aucun match joué.</p>
-            {% endif %}
+             {% endfor %}
         </article>
 
         <article class="prochainMatch">
             <h2>Prochaine rencontre</h2>
             {% set prochainMatch = null %}
-            {% set dateActuelle = "now"|date("Y-m-d") %} {# Obtenir la date actuelle au format "YYYY-MM-DD" #}
+            {% set dateActuelle = "now"|date("Y-m-d") %} 
             {% for match in matchs %}
                 {% if match.date >= dateActuelle %}
                     {% if prochainMatch is null or match.date < prochainMatch.date %}
@@ -89,27 +81,46 @@
                     <tr>
                         <th>POS</th>
                         <th>Equipe</th>
-                        <th>PTS</th>
                         <th>J</th>
                         <th>G</th>
                         <th>N</th>
                         <th>P</th>
+                        <th>PTS</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr>
-                        <td>2</td> 
-                        <td>Rennes</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    
+                    {% set sortedTeams = allTeam|sort((a, b) => b.ranking_points <=> a.ranking_points) %}
+                    {% set teamsToShow = [] %}
+                    {% for team in sortedTeams %}
+                        {% if team.team == 'nsMasiaFC' or loop.index <= 3 %}
+                            {% set teamsToShow = teamsToShow|merge([team]) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for team in teamsToShow %}
+                        <tr>
+                            <td class="rankingTd">{{ loop.index }}</td> 
+                            <td class="rankingTdTeam"> {{ team.team }}</td>
+                            <td class="rankingTd">{{ team.match_play }}</td>
+                            <td class="rankingTd">{{ team.match_win }}</td>
+                            <td class="rankingTd">{{ team.match_nul }}</td>
+                            <td class="rankingTd">{{ team.match_lose }}</td>
+                            <td class="rankingTd">{{ team.ranking_points }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-            <button class="btn">Classement complet</button>
+            <a href="index.php?route=allRanking"><button class="btn">Classement complet</button></a>
+        </article>
+    </section>
+
+    <section class="homeActualite">
+        <h3>Actualité</h3>
+        <article>
+            <h4></h4>
+            <p></p>
+            <figure>
+                <img src="" alt=""/>
+            </figure>
         </article>
     </section>
 </main>

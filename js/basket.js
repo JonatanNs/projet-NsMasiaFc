@@ -64,9 +64,7 @@ function getTotalPrice(){
     return total;
 }
 
-
 document.addEventListener('DOMContentLoaded', function(){  
- 
     function bagBoutique(){
         const theBag = document.querySelector(".bagProduct");
         if (theBag){

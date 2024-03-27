@@ -88,6 +88,21 @@
         }
         table{
             
+            td{
+                border-top: 1px solid $beige;
+            }
+
+            .rankingTd{
+                width: 5%;
+            }
+            .rankingTdTeam{
+                width: 15%;
+                
+                img{
+                    width: 10%;
+                    
+                }
+            }
         }
     }
 }

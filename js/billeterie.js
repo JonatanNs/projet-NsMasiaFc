@@ -243,8 +243,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             const ptotalPrices = document.createElement("p");
                             ptotalPrices.textContent ="TotalTTC : " + getTotalPriceTicket() + " €";
                             recapTicketUserTotal.appendChild(ptotalPrices);
-
-                            
                         });
                     }
                     if(formTicketStripe){
