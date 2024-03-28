@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', function(){
     //menuMobile
     const menu = document.querySelector(".openMenu");
     const closeMenu = document.querySelector(".closeMenu");
+
+    let compteur = 0;
+    let timer, elements, sliders;
+
+    window.onload = () =>{
+        const allArticle = document.querySelector(".allArticle");
+        const article = document.querySelectorAll(".article");
+    }
+
+    
+
     
     function form() {
         // Vérifiez si les éléments existent

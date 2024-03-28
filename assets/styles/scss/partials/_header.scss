@@ -1,12 +1,36 @@
 /********************** HEADER *****************/
 
 .header{
+    padding-left: 1em;
+    padding-right: 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: $beige;
-    padding: 1em;
+    width: 100%;
+    position: relative;
+    position:fixed;
+    z-index: 100;
+    div{
+        p{
+            color: $black ;
+        }
+    }
+    figure{
+        position: absolute;
+        top: 0;
+        right: 45%;
+        width: 10%;
+        padding-top: 0.5em;
+        margin-left: -6em;
+        img{
+            width: 100%;
+        }
+    }
+    .openMenu{
+        margin-top: 0.5em;
+    }
 }
 
 

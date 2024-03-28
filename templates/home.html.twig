@@ -9,12 +9,29 @@
             <img src="assets/img/logo adidad nsmasia.png" alt="{{nsMasia.logoalt}}"/>
         </figure>
         <h1>NS<br>Masia FC</h1>
-        <button class="btn">Prochain match</button>
+        <div class="btnProchainMatch">
+            <button class="btn">Prochain match</button>
+        </div>
     </section>
 
-    <section class="container-prochainMatch">
+    <section class="homeActualite">
+        <h2>Actualité</h2>
+        <div class="allArticle">
+        {% for article in articles %}
+                <article style="background-image: url({{ article.img_url }})" class="article">
+                    <h3>{{ article.title }}</h3>
+                    <div>
+                        <button> < </button>
+                        <button> > </button>
+                    </div>
+                </article>
+        {% endfor %}
+        </div>
+    </section>
+
+    <div class="container-prochainMatch">
         <article class="lastResult">
-            <h2>Dernier résultat</h2>
+            <h3>Dernier résultat</h3>
             {% for match in matchPlays %}
                 <p>Le {{ match.date }} à {{ match.time }}.</p>
                 <p>{{ match.matchIsAtStadium_name }}</p>
@@ -111,18 +128,19 @@
             </table>
             <a href="index.php?route=allRanking"><button class="btn">Classement complet</button></a>
         </article>
-    </section>
+    </div>
 
-    <section class="homeActualite">
-        <h3>Actualité</h3>
-        <article>
-            <h4></h4>
-            <p></p>
-            <figure>
-                <img src="" alt=""/>
-            </figure>
-        </article>
+    <section>
+        <h3>Club</h3>
+            <article>
+                <h4>Chien CHien</h4>
+                <p>Lorem ipsum dolor sit amet. Aut aperiam magnam non vitae possimus est labore cupiditate est esse dicta. 33 molestiae voluptatem ea distinctio minus ea veniam perferendis quo quos voluptatem cum possimus commodi? Sit consectetur vitae aut consequatur eaque vel dolores autem?</p>
+                <figure>
+                    <img src="" alt=""/> 
+                </figure>
+            </article>
     </section>
+    
 </main>
 {% endblock %}
 

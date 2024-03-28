@@ -1,110 +1,223 @@
-
-.home{
-    background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 85vh;
-    padding: 0;
-    margin-top: -1em;
-
-    h1{
-        font-size: 7rem;
-        font-weight : 700;
-        text-wrap: wrap;
-        margin: 0.5em;
-        padding-top: 1em;
-    }
-    figure{
-        width: 20%;
-        margin: 0 auto;
-        padding-top: 5em;
-        img{
-            width: 100%;
-            margin-top: 2em;
+@media screen and (max-width: 480px) {
+    /*********************************
+                * HOME *
+    *********************************/
+    @keyframes showContent {
+        to{
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
         }
     }
-    button{
-        font-size: 2rem;
-        margin-left: 6em;
-        margin-top: 5em;
-    }
-}
 
-.container-prochainMatch{
-    padding: 1em;
-    article{
-        border: 2px solid $beige;
-        border-radius: 1rem;
-        padding: 1em;
-        text-align: center;
-        margin: 1em;
-    }
-    .prochainMatch{
+    .home{
+        background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        padding-bottom: 2em;
 
-        .teamForMatch{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            margin: 0 1em;
+        h1{
+            font-size: 7rem;
+            font-weight : 700;
+            text-wrap: wrap;
+            padding-top: 1em;
+            text-shadow: 0 10px 10px $black;
+            text-transform: uppercase;
+            font-style: italic;
+            text-align: center;
+            padding-top: 2em;
+
+            /*transform: translateY(50px);
+            filter: blur(20px);
+            opacity: 0;
+            animation: showContent 0.3s 1s linear 1 forwards;*/
             
+        }
+        figure{
+            width: 20%;
+            margin: 0 auto;
+            padding-top: 5em;
+
+            img{
+                width: 100%;
+                margin-top: 2em;
+
+                /*transform: translateY(50px);
+                filter: blur(20px);
+                opacity: 0;
+                animation: showContent 0.3s 1s linear 1 forwards;*/
+            }
+        }
+        .btnProchainMatch{
+            display: flex;
+            justify-content: center;
+            padding-top: 10em;
+            button{
+                font-size: 2rem;
+                border-radius: 2rem;
+                padding: 0.5em 1em ;
+            }
+        }
+    }
+
+    .container-prochainMatch{
+        padding: 1em;
+        article{
+            border: 2px solid $beige;
+            border-radius: 1rem;
+            padding: 1em;
+            text-align: center;
+            margin: 1em;
+
+        }
+        .prochainMatch{
+
+            .teamForMatch{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                margin: 0 1em;
+                
+                figure{
+                    width: 20%;
+                    img{
+                        width: 100%;
+                    }
+                    figcaption{
+                        margin-top: 0.5em;
+                        text-wrap:pretty;
+                    } 
+                }
+                        
+                
+            }
+        }
+        .lastResult{
+            
+            .teamForLastMatch{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                p{
+                    background-color: $bleu;
+                    padding: 0.5em;
+                }
+            }
             figure{
                 width: 20%;
                 img{
                     width: 100%;
                 }
-                figcaption{
-                    margin-top: 0.5em;
-                    text-wrap:pretty;
-                } 
-            }
-                    
-            
-        }
-    }
-    .lastResult{
-        .teamForLastMatch{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-            p{
-                background-color: $bleu;
-                padding: 0.5em;
             }
         }
-        figure{
-            width: 20%;
-            img{
-                width: 100%;
-            }
-        }
-    }
-    .ranking{
-        text-align: center;
-        h2{
+        .ranking{
             text-align: center;
-        }
-        table{
-            
-            td{
-                border-top: 1px solid $beige;
-            }
 
-            .rankingTd{
-                width: 5%;
+            h2{
+                text-align: center;
             }
-            .rankingTdTeam{
-                width: 15%;
+            table{
                 
-                img{
-                    width: 10%;
+                td{
+                    border-top: 1px solid $beige;
+                }
+
+                .rankingTd{
+                    width: 5%;
+                }
+                .rankingTdTeam{
+                    width: 15%;
                     
+                    img{
+                        width: 10%;
+                        
+                    }
                 }
             }
         }
     }
+
+    .homeActualite{ 
+
+        h2{
+            position: absolute;
+            z-index: 99;
+            color: $white;
+            padding: 0.5em;
+            background-color: black;
+        }
+        .allArticle{ 
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            .article{ 
+                flex : 1 0 100%;
+                height: 95vh;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                text-align: left;
+                margin-bottom: 2em;
+                    h3{
+                        margin-left: 10%;
+                        color: $white;
+                        font-size: 2rem;  
+                        text-wrap: wrap;
+                        background-color: black;
+                        border: 3px solid $beige;
+                        padding: 0.5em;
+                        position: absolute;
+                        bottom: 10%;
+                        width: 70%;
+                    }   
+                    div{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0.5em;
+                        position: absolute;
+                        z-index: 98;
+                        left: 40%;
+                        bottom: 5%;
+                        button{
+                            background-color: $black;
+                            color: $beige;
+                            border: 2px solid $beige;
+                            border-radius: 1rem;
+                            padding: 0.1em 1em;
+                            opacity: 0.3;
+                        }
+                    }
+                
+                figure{ 
+                    position: absolute ;
+                    bottom: 5%;
+                    display: flex;
+                    flex-direction: row;
+                    padding-left: 1em;
+                    gap: 1em;
+                    width: 30%;
+                    text-shadow: 0 5px 10px $black;
+                    img{
+                        flex-shrink: 0;
+                        cursor: pointer;
+                        width: 100%;
+                        object-fit: cover;
+                        &:hover{
+                            background-color: $white;
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+
 }
 
 

@@ -1,63 +1,68 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
+<main class="container">
+  <section class="formulaire">
+      <a href="javascript:history.back()"><i class="fa-solid fa-circle-chevron-left fa-2xl" style="color: #ffffff;"></i></a>
+      <h1>Connexion / Inscription</h1>
     {% if errorMessage is not empty %}
-        <p>{{ errorMessage }}</p>
-    {% endif %}
+          <p>{{ errorMessage }}</p>
+      {% endif %}
 
-    {% if valideMessage is not empty %}
-        <p>{{ valideMessage }}</p>
-    {% endif %}
+      {% if valideMessage is not empty %}
+          <p>{{ valideMessage }}</p>
+      {% endif %}
 
-<a href="javascript:history.back()"><p class="fa-solid fa-circle-chevron-left fa-2xl"></p></a>
-<form action="index.php?route=check-login" method="POST" class="form formLogin">
-  <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
-    <fieldset>
-      <label for="emailLogin">Email</label>
-      <input type="email" id="emailLogin" name="emailLogin" required>
-    </fieldset>
+    <form action="index.php?route=check-login" method="POST" class="form formLogin">
+      <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+        <fieldset>
+          <label for="emailLogin">Email</label>
+          <input type="email" id="emailLogin" name="emailLogin" required>
+        </fieldset>
 
-    <fieldset>
-      <label for="passwordLogin">Mot de passe</label>
-      <input type="password" id="passwordLogin" name="passwordLogin" required>
-    </fieldset>
+        <fieldset>
+          <label for="passwordLogin">Mot de passe</label>
+          <input type="password" id="passwordLogin" name="passwordLogin" required>
+        </fieldset>
 
-    <fieldset>
-      <button type="submit" name="submit" class="btn">Se connecter</button>
-    </fieldset>
-    <p class="goSignup">Créer nouveau compte <p>
-  </form>
+        <fieldset>
+          <button type="submit" name="submit" class="btn">Se connecter</button>
+        </fieldset>
+        <p class="goSignup">Créer nouveau compte <p>
+      </form>
 
-<form action="index.php?route=check-signup" method="POST" class="form formSignup invisible">
-  <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
-    <fieldset>
-      <label for="first_name">Prénom</label>
-      <input type="text" id="first_name" name="first_name" required>
-    </fieldset>
+    <form action="index.php?route=check-signup" method="POST" class="form formSignup invisible">
+      <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+        <fieldset>
+          <label for="first_name">Prénom</label>
+          <input type="text" id="first_name" name="first_name" required>
+        </fieldset>
 
-    <fieldset>
-      <label for="last_name">Nom</label>
-      <input type="text" id="last_name" name="last_name" required>
-    </fieldset>
+        <fieldset>
+          <label for="last_name">Nom</label>
+          <input type="text" id="last_name" name="last_name" required>
+        </fieldset>
 
-    <fieldset>
-      <label for="emailLogin">Email</label>
-      <input type="email" id="emailSignup" name="emailSignup" required>
-    </fieldset>
+        <fieldset>
+          <label for="emailLogin">Email</label>
+          <input type="email" id="emailSignup" name="emailSignup" required>
+        </fieldset>
 
-    <fieldset>
-      <label for="passwordLogin">Mot de passe</label>
-      <input type="password" id="passwordSignup" name="passwordSignup" required>
-    </fieldset>
+        <fieldset>
+          <label for="passwordLogin">Mot de passe</label>
+          <input type="password" id="passwordSignup" name="passwordSignup" required>
+        </fieldset>
 
-    <fieldset>
-      <label for="confirmPasswordLogin">Confirmer le mot de passe</label>
-      <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" required>
-    </fieldset>
+        <fieldset>
+          <label for="confirmPasswordLogin">Confirmer le mot de passe</label>
+          <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" required>
+        </fieldset>
 
-    <fieldset>
-      <button type="submit" name="submit" class="btn"> Créer nouveau compte</button>
-    </fieldset>
-    <p class="goLogin"> Se connecter <p>
-  </form>
+        <fieldset>
+          <button type="submit" name="submit" class="btn"> Créer nouveau compte</button>
+        </fieldset>
+        <p class="goLogin"> Se connecter <p>
+      </form>
+  </section>
+</main>
 {% endblock %}

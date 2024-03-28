@@ -7,6 +7,7 @@ class AuthController extends AbstractController
         $nsMasiaManager = new NsMasiaManager();
         $matchManager = new MatchManager();
         $rivalTeamManager = new RivalTeamManager();
+        $articleManager = new ArticleManager();
 
         $matchPlays = $matchManager->getMatchsPlay();
         $resultMatchs = $matchManager->getAllResultMatch();
@@ -16,6 +17,8 @@ class AuthController extends AbstractController
         $matchs = $matchManager->getAllMatchs();
 
         $nsMasia = $nsMasiaManager->getNsMasia();
+
+        $articles = $articleManager->getAllArticle();
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
@@ -39,12 +42,12 @@ class AuthController extends AbstractController
             'adminRnd7sX23' => $adminRnd7sX23,
             'allTeam' => $allTeam,
             'matchPlays' => $matchPlays,
-            'resultMatchs' => $resultMatchs
+            'resultMatchs' => $resultMatchs,
+            'articles' => $articles
         ]);
     }
 
-    public function allRanking()
-    {
+    public function allRanking(){
         $nsMasiaManager = new NsMasiaManager();
         $matchManager = new MatchManager();
         $rivalTeamManager = new RivalTeamManager();
@@ -182,7 +185,7 @@ class AuthController extends AbstractController
                         }
                         
                     } else {
-                        $_SESSION["error"] = "Identifiant ou le mot de passe est incorrect.";
+                        $_SESSION["error"] = "Identifiant mot de passe incorrect.";
                         header("Location: index.php?route=form");
                     exit;
                     }          

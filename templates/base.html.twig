@@ -28,7 +28,7 @@
     <header class="header">       
         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter-->
             <div>
-                <p> Bienvenu {{ userIsConect }}</p> 
+                <p>{{ userIsConect }}</p> 
             </div> 
             {% if rolesUser == "ADMIN" %} 
                 <form action="index.php?route=checkAdmin" method="POST">
@@ -39,10 +39,12 @@
         {% endif %}
         {% if userIsConect is empty %} <!-- Quand l'utilisateur n'est pas connecter-->
             <div>
-                <a href="index.php?route=form"> <i class="fa-solid fa-user fa-xl" id="toggleForm"> </i></a> <!-- Go form -->
+                <a href="index.php?route=form"> <i class="fa-solid fa-user fa-lg" id="toggleForm"> </i></a> <!-- Go form -->
             </div>
         {% endif %}
-
+        <figure>
+            <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/></a>
+        </figure>
         <div class="menu">
             <p class="gg-menu openMenu" style="color: #000000;"></p> 
             {% block menuDeroulant %} 

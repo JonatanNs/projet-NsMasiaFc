@@ -2,6 +2,9 @@
 
 class MatchManager extends AbstractManager{
 
+    /***************************************
+                * MATCHS *
+    **************************************/
     public function createMatch(NsMasia $nsMasia, int $rivalTeam, string $domicileExterieur, string $time, string $date) {  
         // Insérer le nouveau match
         $query = $this->db->prepare("INSERT INTO matchs (id, ns_masia_id, rivalTeam_id, domicileExterieur, time, date) 
@@ -173,30 +176,9 @@ class MatchManager extends AbstractManager{
         return $matchs; 
     }
 
-    public function getAllResultMatchByMatch(array $match) : array {  
-
-        $query = $this->db->prepare("SELECT * FROM result_match");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        $resultMatch = [];
-        foreach($result as $item){
-            $user = new ResultMatch( $match , $item["score_nsMasia"], $item["score_rivalTeam"]);
-            $user->setId($item["id"]);
-            $resultMatch[] = $item;
-        }
-        return $resultMatch; 
-    }
-
-    public function getAllResultMatch() : array {  
-
-        $query = $this->db->prepare("SELECT * FROM result_match");
-        $query->execute();
-        $resultMatch = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        return $resultMatch; 
-    }
-
+    /***************************************
+            * TICKET MATCH *
+    **************************************/
 
     public function getAllTickets() : array {  
 
@@ -232,6 +214,34 @@ class MatchManager extends AbstractManager{
         }
         return $tickets;  
     } 
+
+/***************************************
+        * RESULT MATCH *
+ **************************************/
+
+    public function getAllResultMatch() : array {  
+
+        $query = $this->db->prepare("SELECT * FROM result_match");
+        $query->execute();
+        $resultMatch = $query->fetchAll(PDO::FETCH_ASSOC); 
+
+        return $resultMatch; 
+    }
+
+    public function getAllResultMatchByMatch(array $match) : array {  
+
+        $query = $this->db->prepare("SELECT * FROM result_match");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
+
+        $resultMatch = [];
+        foreach($result as $item){
+            $user = new ResultMatch( $match , $item["score_nsMasia"], $item["score_rivalTeam"]);
+            $user->setId($item["id"]);
+            $resultMatch[] = $item;
+        }
+        return $resultMatch; 
+    }
 
 
     public function addResulteMatch(array $matchNs, int $score_nsMasia, int $score_rivalTeam, int $rivalTeamId, int $nsMasiaId) {  
@@ -322,12 +332,6 @@ class MatchManager extends AbstractManager{
                 'match_lose' => $matchLoseNs + 1
             ];
             $query->execute($parameters);
-
         }
-    }
-    
-     
-
-    
-
+    }  
 }
