@@ -2,14 +2,6 @@
     /*********************************
                 * HOME *
     *********************************/
-    @keyframes showContent {
-        to{
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0);
-        }
-    }
-
     .home{
         background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);
         background-repeat: no-repeat;
@@ -17,6 +9,7 @@
         background-size: cover;
         width: 100%;
         padding-bottom: 2em;
+        height: 100vh;
 
         h1{
             font-size: 7rem;
@@ -27,33 +20,22 @@
             text-transform: uppercase;
             font-style: italic;
             text-align: center;
-            padding-top: 2em;
-
-            /*transform: translateY(50px);
-            filter: blur(20px);
-            opacity: 0;
-            animation: showContent 0.3s 1s linear 1 forwards;*/
+            padding-top: -5em;
             
         }
         figure{
             width: 20%;
             margin: 0 auto;
-            padding-top: 5em;
+            padding-top: 8em;
 
             img{
                 width: 100%;
                 margin-top: 2em;
-
-                /*transform: translateY(50px);
-                filter: blur(20px);
-                opacity: 0;
-                animation: showContent 0.3s 1s linear 1 forwards;*/
             }
         }
         .btnProchainMatch{
             display: flex;
             justify-content: center;
-            padding-top: 10em;
             button{
                 font-size: 2rem;
                 border-radius: 2rem;
@@ -142,7 +124,7 @@
     }
 
     .homeActualite{ 
-
+        position: relative;
         h2{
             position: absolute;
             z-index: 99;
@@ -153,16 +135,25 @@
         .allArticle{ 
             position: relative;
             display: flex;
-            flex-direction: row;
             overflow: hidden;
+            transition: transform 0.3s ease;
             .article{ 
+                
                 flex : 1 0 100%;
                 height: 95vh;
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
                 text-align: left;
                 margin-bottom: 2em;
+                a{
+                    button{
+                        position: absolute;
+                        bottom: 9%;
+                        left: 10%;
+                        background-color: $beige;
+                        border: 3px solid $black;
+                        border-radius: 1rem;
+                        color: $black;
+                    }
+                }
                     h3{
                         margin-left: 10%;
                         color: $white;
@@ -172,52 +163,101 @@
                         border: 3px solid $beige;
                         padding: 0.5em;
                         position: absolute;
-                        bottom: 10%;
+                        bottom: 13%;
                         width: 70%;
                     }   
-                    div{
-                        display: flex;
-                        flex-direction: row;
-                        gap: 0.5em;
-                        position: absolute;
-                        z-index: 98;
-                        left: 40%;
-                        bottom: 5%;
-                        button{
-                            background-color: $black;
-                            color: $beige;
-                            border: 2px solid $beige;
-                            border-radius: 1rem;
-                            padding: 0.1em 1em;
-                            opacity: 0.3;
+                    figure{
+                        img{
+                            height: 95vh;
+                            object-fit: cover;
                         }
                     }
-                
-                figure{ 
-                    position: absolute ;
-                    bottom: 5%;
-                    display: flex;
-                    flex-direction: row;
-                    padding-left: 1em;
-                    gap: 1em;
-                    width: 30%;
-                    text-shadow: 0 5px 10px $black;
-                    img{
-                        flex-shrink: 0;
-                        cursor: pointer;
-                        width: 100%;
-                        object-fit: cover;
-                        &:hover{
-                            background-color: $white;
-                            opacity: 0.5;
-                        }
-                    }
-                }
             }
         }
     }
-    
-
+    .buttonNextPrevious{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        position: absolute;
+        bottom: 7%;
+        left: 40%;
+        button{
+            background-color: $black;
+            color: $beige;
+            border: 2px solid $beige;
+            border-radius: 1rem;
+            padding: 0.1em 1em;
+        }
+    }
 }
+
+.homeClub{ 
+    position: relative;
+    h4{
+        position: absolute;
+        z-index: 99;
+        color: $white;
+        padding: 0.5em;
+        background-color: black;
+    }
+    .slide{ 
+        position: relative;
+        display: flex;
+        //overflow: hidden;
+        //transition: transform 0.3s ease;
+        
+        .playersNsMasia{ 
+            flex : 1 0 100%;
+            margin-right: -5em;
+            text-align: left;
+            margin-bottom: 2em;
+            div{
+                h3{
+                    margin-left: 10%;
+                    color: $white;
+                    font-size: 2rem;  
+                    text-wrap: wrap;
+                    background-color: black;
+                    border: 3px solid $beige;
+                    padding: 0.5em;
+                    position: absolute;
+                    bottom: 13%;
+                    width: 70%;
+                }  
+                p:first-of-type{
+
+                } 
+                p{
+
+                }
+            }
+             
+                figure{
+                    img{
+                        height: 70vh;
+                        object-fit: cover;
+                    }
+                }
+        }
+    }
+}
+.buttonNextPrevious{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    position: absolute;
+    bottom: 7%;
+    left: 40%;
+    button{
+        background-color: $black;
+        color: $beige;
+        border: 2px solid $beige;
+        border-radius: 1rem;
+        padding: 0.1em 1em;
+    }
+}
+
+
 
 

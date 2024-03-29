@@ -2,7 +2,11 @@
 
 class ArticleManager extends AbstractManager{
 
-    public function getAllArticle(){
+    /**********************************************************
+                             * FETCH *
+    **********************************************************/
+
+    public function getAllArticle() : array {
         $query = $this->db->prepare("SELECT * FROM articles");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -16,13 +20,13 @@ class ArticleManager extends AbstractManager{
         return $articles ;
     }
 
-    public function getAllArticleById(Article $id){
+    public function getAllArticleById(int $id) : ? Article {
         $query = $this->db->prepare("SELECT * FROM articles WHERE id = :id");
         $parameters = [
             'id' => $id
         ];
         $query->execute($parameters);
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($result){
             $article = new Article($result["title"], $result["excerpt"], $result["content"], $result["date"], $result["img_url"], $result["img_alt"]);

@@ -5,7 +5,7 @@
     <article class="nextMatch">
         <article class="titleBoutique img-background">
             <figure>
-                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
             </figure>
             <h1>NsMasia FC</h1>
             <p>Billeterie Officiel</p>
@@ -13,11 +13,19 @@
         <ul class="matchs">
         {% for match in matchs %}
             <ul class="reservation">
+            {% if match.domicileExterieur == "domicile" %}
                 <li>
                     <h2>NS MASIA FC</h2>
                     <p>{{ match.team }}</p>
                     <p>{{ match.domicileExterieur }}</p>
                 </li>
+            {% else %}
+                <li>
+                    <h2>{{ match.team }}</h2>
+                    <p>NS MASIA FC</p>
+                    <p>{{ match.domicileExterieur }}</p>
+                </li>
+            {% endif %}
                 <li>
                     <p>{{ match.date |date("l j F", "Europe/Paris") }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
                 </li>
@@ -27,10 +35,12 @@
                         
                     </figure>
                 </li>
+                {% if match.domicileExterieur == "domicile" %}
                 <li>
                     <a href="index.php?route=reservation&id={{match.match_id}}"><button type="submit" class="btn">Je réserve</button></a>
                 </li>
-            </ul>
+                {% endif %}
+            </ul>      
         {% endfor %}
         <ul>    
     </article>

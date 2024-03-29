@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="container">
+    <article class="articleContent">
+        <h1>{{articles.title}}</h1>
+        <figure>
+            <img src="{{articles.imgurl}}" alt="{{articles.img_alt}}"/>
+            <figcaption>{{articles.img_alt}}</figcaption>
+        </figure>
+        <p>{{articles.content}}</p>
+        <p>Date : {{articles.date}}</p>
+    </article>
+</main>
+{% endblock %}

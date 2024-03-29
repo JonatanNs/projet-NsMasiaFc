@@ -2,7 +2,15 @@
 
 class OrderManager extends AbstractManager{
 
-    public function createOrderFromProduct(string $numberOrder, int $products, int $quantities, string $sizes, int $totalPrices) {  
+    /**********************************************************
+                             * CREATE *
+    **********************************************************/
+
+    /***************************
+        * CREATE ORDER PRODUCT *
+    ****************************/
+
+    public function createOrderFromProduct(string $numberOrder, int $products, int $quantities, string $sizes, int $totalPrices) : int{  
         $date = new DateTime();
         $formatted_date = $date->format('Y-m-d H:i:s');
             $query = $this->db->prepare("INSERT INTO order_products (id, order_number, product_id, quantity, sizes, date, total_prices) 
@@ -20,7 +28,7 @@ class OrderManager extends AbstractManager{
             return $this->db->lastInsertId();
     }
 
-    public function createOrder( string $numberOrder, Addresse $addresses, int $totalTtc) {  
+    public function createOrder( string $numberOrder, Addresse $addresses, int $totalTtc) : void {  
         $date = new DateTime();
         $formatted_date = $date->format('Y-m-d H:i:s');
         
@@ -35,7 +43,11 @@ class OrderManager extends AbstractManager{
             $query->execute($parameters);
     }
 
-    public function createAddresses(User $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ){
+    /***************************
+        * CREATE ADDRESS *
+    ****************************/
+
+    public function createAddresses(User $users, string $address, int $postal_code,string $city, string $pays, ? string $completement ) : int {
         $query = $this->db->prepare("INSERT INTO addresses (id, user_id, addresse, complements, postal_code, city, pays) 
                                     VALUES (NULL, :user_id, :addresse, :complements, :postal_code, :city, :pays)");
         $parameters = [
@@ -51,7 +63,33 @@ class OrderManager extends AbstractManager{
         return $this->db->lastInsertId();
     }
 
-    public function checkChangeAddress(Addresse $address_id, User $users , string $addresses , int $postal_code,string $city, string $pays, ? string $completement ){
+    /***************************
+        * CREATE TICKET *
+    ****************************/
+
+    public function createOrderTicket(string $numberOrder, User $user, int $ticket_id, int $match_id, int $quantity, int $totalPrices) : void{
+        $date = new DateTime();
+        $formatted_date = $date->format('Y-m-d H:i:s');
+        $query = $this->db->prepare("INSERT INTO order_tickets (id, order_number, user_id, ticket_id, match_id, quantity, date, total_prices) 
+                                            VALUES (null, :order_number, :user_id, :ticket_id, :match_id, :quantity, :date, :total_prices)");
+        $parameters = [ 
+            'order_number' => $numberOrder, 
+            'user_id' => $user->getId(), 
+            'ticket_id' => $ticket_id, 
+            'match_id' => $match_id, 
+            'quantity' => $quantity, 
+            'date' => $formatted_date, 
+            'total_prices' => $totalPrices
+        ];
+        $query->execute($parameters);
+    }
+
+    /**********************************************************
+                             * CHECK *
+    **********************************************************/
+
+
+    public function checkChangeAddress(Addresse $address_id, User $users , string $addresses , int $postal_code,string $city, string $pays, ? string $completement ) : void{
         $query = $this->db->prepare("UPDATE addresses 
                                         SET user_id = :user_id, 
                                         addresse = :addresse, 
@@ -72,7 +110,15 @@ class OrderManager extends AbstractManager{
         $query->execute($parameters);
     }
 
-    public function getAllAddressesByUserId(User $users){
+    /**********************************************************
+                             * FETCH *
+    **********************************************************/
+
+    /***************************
+        * FETCH ADDRESS *
+    ****************************/
+
+    public function getAllAddressesByUserId(User $users) : ? Addresse{
         $query = $this->db->prepare("SELECT * FROM addresses WHERE user_id = :user_id");
         $parameters = [
             'user_id' => $users->getId()
@@ -90,7 +136,7 @@ class OrderManager extends AbstractManager{
         return null ;
     }
 
-    public function getAddressesById(int $id, User $users){
+    public function getAddressesById(int $id, User $users) : ? Addresse{
         $query = $this->db->prepare("SELECT * FROM addresses WHERE id = :id AND user_id = :user_id");
         $parameters = [
             'id' => $id,
@@ -108,47 +154,7 @@ class OrderManager extends AbstractManager{
         return null ;
     }
 
-
-    public function createOrderTicket(string $numberOrder, User $user, int $ticket_id, int $match_id, int $quantity, int $totalPrices){
-        $date = new DateTime();
-        $formatted_date = $date->format('Y-m-d H:i:s');
-        $query = $this->db->prepare("INSERT INTO order_tickets (id, order_number, user_id, ticket_id, match_id, quantity, date, total_prices) 
-                                            VALUES (null, :order_number, :user_id, :ticket_id, :match_id, :quantity, :date, :total_prices)");
-        $parameters = [ 
-            'order_number' => $numberOrder, 
-            'user_id' => $user->getId(), 
-            'ticket_id' => $ticket_id, 
-            'match_id' => $match_id, 
-            'quantity' => $quantity, 
-            'date' => $formatted_date, 
-            'total_prices' => $totalPrices
-        ];
-        $query->execute($parameters);
-    }
-
-    public function getAllOrderTicketByUser(User $user){
-
-        $query = $this->db->prepare("SELECT * FROM order_tickets WHERE user_id = :user_id");
-        $parameters = [ 
-            'user_id' => $user->getId()
-        ];
-        $query->execute($parameters);
-
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        $matchManager = new MatchManager();
-        
-        foreach( $results as $result){
-            $match = $matchManager->getAllMatchsById($result["match_id"]);
-            $ticket = $matchManager->getAllTicketsById($result["ticket_id"]);
-            $orderTicket = new Order_ticket( $user, $result["order_number"], $ticket, $match , $result["quantity"], $result["date"], $result["total_prices"]);
-            $orderTicket->setId($result["id"]);
-        }
-
-        return $results ;
-    }
-
-    public function getOrdersByAddresse(Addresse $addresse){
+    public function getOrdersByAddresse(Addresse $addresse) : ? array{
         $query = $this->db->prepare("SELECT * FROM orders WHERE addresse_id = :addresse_id");
         $parameters = [
             'addresse_id' => $addresse->getId()
@@ -164,7 +170,37 @@ class OrderManager extends AbstractManager{
         return null ;
     }
 
-    public function getordersProductByOrderNumber( string $order_number){
+    /***************************
+        * FETCH TICKET *
+    ****************************/
+
+    public function getAllOrderTicketByUser(User $user) : array{
+
+        $query = $this->db->prepare("SELECT * FROM order_tickets WHERE user_id = :user_id");
+        $parameters = [ 
+            'user_id' => $user->getId()
+        ];
+        $query->execute($parameters);
+
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $matchManager = new MatchManager();
+        
+        foreach( $results as $result){
+            $match = $matchManager->getAllMatchsByIdNoPlay($result["match_id"]);
+            $ticket = $matchManager->getAllTicketsById($result["ticket_id"]);
+            $orderTicket = new Order_ticket( $user, $result["order_number"], $ticket, $match , $result["quantity"], $result["date"], $result["total_prices"]);
+            $orderTicket->setId($result["id"]);
+        }
+
+        return $results ;
+    }
+
+    /***************************
+        * FETCH PRODUCT *
+    ****************************/
+
+    public function getordersProductByOrderNumber( string $order_number) : array{
 
         $query = $this->db->prepare("SELECT * FROM order_products WHERE order_number = :order_number");
         $parameters = [
@@ -173,19 +209,12 @@ class OrderManager extends AbstractManager{
         $query->execute($parameters);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        //$merchManager = new MerchManager();
-        
-        
         foreach($results as $result){
-            //$product = $merchManager->getAllProductsById();
             $newOrdersProduct = new Order_product($order_number, $result["product_id"]  ,$result["quantity"], $result["sizes"], $result["date"], $result["total_prices"]);
             $newOrdersProduct->setId($result["id"]);
         }
         return $results ;
     }
-
-
-
 }
 
 

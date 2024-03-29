@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     p.style.cssText = "white-space: nowrap; color:red; margin: 1em 0 0 -4em ";
                     theBag.appendChild(p);   
                 }else{
+
                     const panier = document.querySelector(".pannier");
                     const panierUser = document.querySelector(".panierUser");
                     const panierTotal = document.querySelector(".panier-total");
@@ -259,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                     basket.forEach(product => {
                         const firstLi = document.createElement("li");
-                        firstLi.classList.add("firstLi");
+                        firstLi.classList.add("firstLi"); 
                         panierUser.appendChild(firstLi);
-
+                        
                         const secondLi = document.createElement("li");
                         secondLi.classList.add("secondLi");
                         panierUser.appendChild(secondLi);

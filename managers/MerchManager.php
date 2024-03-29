@@ -2,6 +2,10 @@
 
 class MerchManager extends AbstractManager{
 
+    /**********************************************************
+                             * FETCH *
+    **********************************************************/
+
     public function getAllProducts() : array{
         $query = $this->db->prepare("SELECT * FROM products");
         $query->execute();

@@ -20,6 +20,8 @@ class AuthController extends AbstractController
 
         $articles = $articleManager->getAllArticle();
 
+        $players = $nsMasiaManager->getPlayerNsMasia();
+
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
@@ -43,7 +45,8 @@ class AuthController extends AbstractController
             'allTeam' => $allTeam,
             'matchPlays' => $matchPlays,
             'resultMatchs' => $resultMatchs,
-            'articles' => $articles
+            'articles' => $articles,
+            'players' => $players
         ]);
     }
 

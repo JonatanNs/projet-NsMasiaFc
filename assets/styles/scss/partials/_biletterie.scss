@@ -1,22 +1,33 @@
 /*********************Biletterie***********************/
 //@media screen and (min-width: 375px) and (max-width: 480px) {
-    .img-background{
-        background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
-        background-size: cover;
-        margin-left: -0.4em;
-        margin-right: -0.4em;
-        padding: 3em;
-    }
+    
     .nextMatch{
-            h2{
-                text-align: center;
+        padding-top: 2em;
+        .img-background{
+            background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
+            background-size: cover;
+            margin-left: -0.4em;
+            margin-right: -0.4em;
+            padding: 3em;
+            figure{
+                width: 20%;
+                img{
+                    width: 100%;
+                }
             }
+        }
+
+        h2{
+            text-align: center;
+        }
         
         .matchs{
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1em;
             padding: 0;
+            width: 90%;
+            margin: 0 auto;
             
             .reservation{
                 background-color: $black;

@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="container">
+    <article class="blockArticle">
+        <h1>Actualité</h1>
+        {% for article in articles %}
+        <article class="articleContent">
+            <h2>{{article.title}}</h2>
+            <figure>
+                <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
+                <figcaption>{{article.img_alt}}</figcaption>
+            </figure>
+            <p>{{article.excerpt}}</p>
+            <p>Date : {{article.date}}</p>
+            <a href="index.php?route=homeArticle&id={{article.id}}">
+                <button>Lire</button>
+            </a>
+        </article>
+        {% endfor %}
+    </article>
+</main>
+{% endblock %}

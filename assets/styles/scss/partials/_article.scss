@@ -1,0 +1,31 @@
+/************************************
+            * ARTICLES *
+*************************************/
+.blockArticle{
+    padding-top: 4em;
+    h1{
+        margin-left: 1em;
+    }
+    .articleContent{
+        padding-top: 2em;
+        h2{
+            text-align: center;
+        }
+        figure{
+            margin-top: 2em;
+            margin-bottom: 2em;
+            figcaption{
+                text-align: center;
+            }
+        }
+        p+p{
+            margin-top: 1em;
+        }
+        p{
+            text-align: justify;
+            width: 90%;
+            margin: 0 auto;
+        }
+    
+    }
+}

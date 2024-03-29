@@ -55,8 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /********************** HEADER *****************/
 .header {
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0.5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -116,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 1em;
+    padding: 3em 0;
   }
   .searchAndBag .numberBag {
     color: rgb(255, 249, 237);
@@ -316,14 +315,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /*********************Biletterie***********************/
-.img-background {
+.nextMatch {
+  padding-top: 2em;
+}
+.nextMatch .img-background {
   background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
   background-size: cover;
   margin-left: -0.4em;
   margin-right: -0.4em;
   padding: 3em;
 }
-
+.nextMatch .img-background figure {
+  width: 20%;
+}
+.nextMatch .img-background figure img {
+  width: 100%;
+}
 .nextMatch h2 {
   text-align: center;
 }
@@ -332,6 +339,8 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 1fr 1fr;
   gap: 1em;
   padding: 0;
+  width: 90%;
+  margin: 0 auto;
 }
 .nextMatch .matchs .reservation {
   background-color: rgb(0, 0, 0);
@@ -450,13 +459,6 @@ h1, h2, h3, h4, h5, h6 {
   /*********************************
               * HOME *
   *********************************/
-  @keyframes showContent {
-    to {
-      opacity: 1;
-      filter: blur(0);
-      transform: translateY(0);
-    }
-  }
   .home {
     background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);
     background-repeat: no-repeat;
@@ -464,6 +466,7 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     width: 100%;
     padding-bottom: 2em;
+    height: 100vh;
   }
   .home h1 {
     font-size: 7rem;
@@ -474,29 +477,20 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
     font-style: italic;
     text-align: center;
-    padding-top: 2em;
-    /*transform: translateY(50px);
-    filter: blur(20px);
-    opacity: 0;
-    animation: showContent 0.3s 1s linear 1 forwards;*/
+    padding-top: -5em;
   }
   .home figure {
     width: 20%;
     margin: 0 auto;
-    padding-top: 5em;
+    padding-top: 8em;
   }
   .home figure img {
     width: 100%;
     margin-top: 2em;
-    /*transform: translateY(50px);
-    filter: blur(20px);
-    opacity: 0;
-    animation: showContent 0.3s 1s linear 1 forwards;*/
   }
   .home .btnProchainMatch {
     display: flex;
     justify-content: center;
-    padding-top: 10em;
   }
   .home .btnProchainMatch button {
     font-size: 2rem;
@@ -564,6 +558,9 @@ h1, h2, h3, h4, h5, h6 {
   .container-prochainMatch .ranking table .rankingTdTeam img {
     width: 10%;
   }
+  .homeActualite {
+    position: relative;
+  }
   .homeActualite h2 {
     position: absolute;
     z-index: 99;
@@ -574,17 +571,23 @@ h1, h2, h3, h4, h5, h6 {
   .homeActualite .allArticle {
     position: relative;
     display: flex;
-    flex-direction: row;
     overflow: hidden;
+    transition: transform 0.3s ease;
   }
   .homeActualite .allArticle .article {
     flex: 1 0 100%;
     height: 95vh;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     text-align: left;
     margin-bottom: 2em;
+  }
+  .homeActualite .allArticle .article a button {
+    position: absolute;
+    bottom: 9%;
+    left: 10%;
+    background-color: rgb(255, 249, 237);
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 1rem;
+    color: rgb(0, 0, 0);
   }
   .homeActualite .allArticle .article h3 {
     margin-left: 10%;
@@ -595,52 +598,90 @@ h1, h2, h3, h4, h5, h6 {
     border: 3px solid rgb(255, 249, 237);
     padding: 0.5em;
     position: absolute;
-    bottom: 10%;
+    bottom: 13%;
     width: 70%;
   }
-  .homeActualite .allArticle .article div {
+  .homeActualite .allArticle .article figure img {
+    height: 95vh;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .buttonNextPrevious {
     display: flex;
     flex-direction: row;
     gap: 0.5em;
     position: absolute;
-    z-index: 98;
+    bottom: 7%;
     left: 40%;
-    bottom: 5%;
   }
-  .homeActualite .allArticle .article div button {
+  .buttonNextPrevious button {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 249, 237);
     border: 2px solid rgb(255, 249, 237);
     border-radius: 1rem;
     padding: 0.1em 1em;
-    opacity: 0.3;
-  }
-  .homeActualite .allArticle .article figure {
-    position: absolute;
-    bottom: 5%;
-    display: flex;
-    flex-direction: row;
-    padding-left: 1em;
-    gap: 1em;
-    width: 30%;
-    text-shadow: 0 5px 10px rgb(0, 0, 0);
-  }
-  .homeActualite .allArticle .article figure img {
-    flex-shrink: 0;
-    cursor: pointer;
-    width: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-  .homeActualite .allArticle .article figure img:hover {
-    background-color: rgb(250, 250, 250);
-    opacity: 0.5;
   }
 }
+.homeClub {
+  position: relative;
+}
+.homeClub h4 {
+  position: absolute;
+  z-index: 99;
+  color: rgb(250, 250, 250);
+  padding: 0.5em;
+  background-color: black;
+}
+.homeClub .slide {
+  position: relative;
+  display: flex;
+}
+.homeClub .slide .playersNsMasia {
+  flex: 1 0 100%;
+  margin-right: -5em;
+  text-align: left;
+  margin-bottom: 2em;
+}
+.homeClub .slide .playersNsMasia div h3 {
+  margin-left: 10%;
+  color: rgb(250, 250, 250);
+  font-size: 2rem;
+  text-wrap: wrap;
+  background-color: black;
+  border: 3px solid rgb(255, 249, 237);
+  padding: 0.5em;
+  position: absolute;
+  bottom: 13%;
+  width: 70%;
+}
+.homeClub .slide .playersNsMasia figure img {
+  height: 70vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.buttonNextPrevious {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  position: absolute;
+  bottom: 7%;
+  left: 40%;
+}
+.buttonNextPrevious button {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 249, 237);
+  border: 2px solid rgb(255, 249, 237);
+  border-radius: 1rem;
+  padding: 0.1em 1em;
+}
+
 .espaceAdmin {
+  padding-top: 2em;
   text-align: center;
   padding-bottom: 2em;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 .espaceAdmin h1 {
   padding: 2em;
@@ -649,6 +690,7 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
+  padding: 0;
 }
 .espaceAdmin ul li {
   border: 3px solid rgb(255, 249, 237);
@@ -661,7 +703,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .allRanking {
-  height: 100vh;
+  padding-top: 3em;
 }
 .allRanking button {
   margin: 2em;
@@ -725,6 +767,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 .form fieldset label {
   font-family: "Nunito", sans-serif;
+}
+
+/************************************
+            * ARTICLES *
+*************************************/
+.blockArticle {
+  padding-top: 4em;
+}
+.blockArticle h1 {
+  margin-left: 1em;
+}
+.blockArticle .articleContent {
+  padding-top: 2em;
+}
+.blockArticle .articleContent h2 {
+  text-align: center;
+}
+.blockArticle .articleContent figure {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.blockArticle .articleContent figure figcaption {
+  text-align: center;
+}
+.blockArticle .articleContent p + p {
+  margin-top: 1em;
+}
+.blockArticle .articleContent p {
+  text-align: justify;
+  width: 90%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 480px) {

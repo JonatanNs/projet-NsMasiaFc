@@ -11,15 +11,22 @@ class Router
         $adm = new AdminController();
         $MatchController = new MatchController();
         $compteUserController = new CompteUserController();
-        $productId = isset($get["id"]) ? (int)$get["id"] : 0;
+        $id = isset($get["id"]) ? (int)$get["id"] : 0;
 
         if(!isset($get["route"]))
         {
             $authc->home();
         }
+        /*********************************************************
+                            * HOME PAGE *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "home")
         {
             $authc->home();
+        }
+        else if(isset($get["route"]) && $get["route"] === "homeArticle" && isset($get["id"]))
+        {
+            $ac->homeArticle($id);
         }
         else if(isset($get["route"]) && $get["route"] === "compteUser")
         {
@@ -59,7 +66,7 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "lookProduct" && isset($get["id"]))
         {
-            $merchController->boutiqueProduct($productId);
+            $merchController->boutiqueProduct($id);
         }
         else if(isset($get["route"]) && $get["route"] === "billeterie")
         {
@@ -67,7 +74,7 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "reservation" && isset($get["id"]))
         {
-            $MatchController->reservation($productId);
+            $MatchController->reservation($id);
         }
         else if(isset($get["route"]) && $get["route"] === "payementTicket")
         {

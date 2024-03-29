@@ -27,7 +27,7 @@ class RivalTeamManager extends AbstractManager{
         return $team;
     }
 
-    public function getAllRivalTeamsByName(string $team) {
+    public function getAllRivalTeamsByName(string $team) : ? RivalTeam {
         $query = $this->db->prepare("SELECT * FROM rivalsTeam WHERE team = :team");
         $parameters = [
             'team' => $team
@@ -50,7 +50,7 @@ class RivalTeamManager extends AbstractManager{
     }
 
 
-    public function getAllRivalTeamsById(int $id) {
+    public function getAllRivalTeamsById(int $id) : ? RivalTeam {
         $query = $this->db->prepare("SELECT * FROM rivalsTeam WHERE id = :id");
         $parameters = [
             'id' => $id
@@ -71,7 +71,7 @@ class RivalTeamManager extends AbstractManager{
         return null ;
     }
 
-    public function getAllTeams(){
+    public function getAllTeams() : array{
         $query = $this->db->prepare("SELECT team, logo_url, logo_alt, id, ranking_points, match_play, match_win, match_lose, match_nul
         FROM rivalsTeam
         UNION

@@ -16,16 +16,24 @@
 
     <section class="homeActualite">
         <h2>Actualité</h2>
-        <div class="allArticle">
-        {% for article in articles %}
-                <article style="background-image: url({{ article.img_url }})" class="article">
-                    <h3>{{ article.title }}</h3>
-                    <div>
-                        <button> < </button>
-                        <button> > </button>
-                    </div>
+        <div class="diapo" data-speed="3000" data-transition="2">
+            <div class="allArticle">
+            {% for article in articles %}
+                <article class="article">
+                        <h3>{{ article.title }}</h3>
+                    <a href="index.php?route=homeArticle&id={{article.id}}">
+                        <button>Lire</button>
+                    </a>
+                        <figure>
+                            <img src="{{ article.img_url }}" alt="{{ article.img_alt }}" />
+                        </figure>
                 </article>
-        {% endfor %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="buttonNextPrevious">
+            <button class="btnPreviousSlide"><i class="fa-solid fa-angle-left"></i></button>
+            <button class="btnNextSlide"> <i class="fa-solid fa-angle-left fa-flip-horizontal"></i></button>
         </div>
     </section>
 
@@ -56,7 +64,7 @@
         </article>
 
         <article class="prochainMatch">
-            <h2>Prochaine rencontre</h2>
+            <h3>Prochaine rencontre</h3>
             {% set prochainMatch = null %}
             {% set dateActuelle = "now"|date("Y-m-d") %} 
             {% for match in matchs %}
@@ -92,7 +100,7 @@
 
 
         <article class="ranking">
-            <h2>Classement</h2>
+            <h3>Classement</h3>
             <table>
                 <thead>
                     <tr>
@@ -130,18 +138,36 @@
         </article>
     </div>
 
-    <section>
-        <h3>Club</h3>
-            <article>
-                <h4>Chien CHien</h4>
-                <p>Lorem ipsum dolor sit amet. Aut aperiam magnam non vitae possimus est labore cupiditate est esse dicta. 33 molestiae voluptatem ea distinctio minus ea veniam perferendis quo quos voluptatem cum possimus commodi? Sit consectetur vitae aut consequatur eaque vel dolores autem?</p>
-                <figure>
-                    <img src="" alt=""/> 
-                </figure>
-            </article>
+    <section class="homeClub">
+        <h4>Club</h4>
+        <article class="homeClubHistoire">
+            <h5>Histoire du club</h5>
+            <p>est esse dicta. 33 molestiae voluptut consequatur eaque vel dolores autem?</p>
+            <button class="btn">EN SAVOIR PLUS</button>
+        </article>
+        <div class="" data-speed="3000" data-transition="2">
+            <div class="slide">
+            {% for player in players %}
+                <article class="playersNsMasia">
+                        <div>
+                            <h6>{{ player.first_name}} </h6>
+                            <p>{{player.last_name}}</p>
+                            <p>{{ player.number}}</p>
+                        </div>
+                        <figure>
+                            <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="" />
+                        </figure>
+                </article>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="">
+            <button class=""><i class="fa-solid fa-angle-left"></i></button>
+            <button class=""> <i class="fa-solid fa-angle-left fa-flip-horizontal"></i></button>
+        </div>
     </section>
-    
 </main>
 {% endblock %}
+
 
           

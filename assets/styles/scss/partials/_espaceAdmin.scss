@@ -1,8 +1,10 @@
 
 .espaceAdmin{
+    padding-top: 2em;
     text-align: center;
     padding-bottom: 2em;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     h1{
         padding: 2em;
     }
@@ -10,6 +12,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 1em;
+        padding: 0;
         li{
             border: 3px solid $beige;
             border-radius: 1rem;

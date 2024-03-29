@@ -2,6 +2,14 @@
 
 class UserManager extends AbstractManager{
 
+    /**********************************************************
+                             * CREATE *
+    **********************************************************/
+
+    /***************************
+        * CREATE USER *
+    ****************************/
+
     public function SignUpUser(User $users) : void {
         $query = $this->db->prepare("INSERT INTO users (id, first_name, last_name, email, password) 
                                     VALUES (NULL, :first_name, :last_name, :email, :password)");
@@ -13,6 +21,10 @@ class UserManager extends AbstractManager{
         ];
         $query->execute($parameters);
     }
+
+    /**********************************************************
+                             * FETCH *
+    **********************************************************/
 
     public function getAllUser() : array {
         $query = $this->db->prepare("SELECT * FROM users");
@@ -64,7 +76,11 @@ class UserManager extends AbstractManager{
         return null ;
     }
 
-    public function changeName(int $id, string $first_name, string $last_name){
+    /**********************************************************
+                             * CHANGE USER INFORMATION *
+    **********************************************************/
+
+    public function changeName(int $id, string $first_name, string $last_name) : void {
         $query = $this->db->prepare("UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id");
         $parameters = [
         'id' => $id,
@@ -74,7 +90,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
     }
 
-    public function changePassword(int $id, string $password){
+    public function changePassword(int $id, string $password) : void {
         $query = $this->db->prepare("UPDATE users SET password = :password WHERE id = :id");
         $parameters = [
         'id' => $id,
@@ -83,7 +99,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
     }
 
-    public function changeEmail(int $id, string $email){
+    public function changeEmail(int $id, string $email) : void {
         $query = $this->db->prepare("UPDATE users SET email = :email WHERE id = :id");
         $parameters = [
         'id' => $id,
