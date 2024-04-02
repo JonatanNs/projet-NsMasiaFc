@@ -72,9 +72,7 @@
                         margin-top: 0.5em;
                         text-wrap:pretty;
                     } 
-                }
-                        
-                
+                }  
             }
         }
         .lastResult{
@@ -175,86 +173,118 @@
             }
         }
     }
-    .buttonNextPrevious{
-        display: flex;
-        flex-direction: row;
-        gap: 0.5em;
-        position: absolute;
-        bottom: 7%;
-        left: 40%;
-        button{
-            background-color: $black;
-            color: $beige;
-            border: 2px solid $beige;
-            border-radius: 1rem;
-            padding: 0.1em 1em;
-        }
-    }
-}
-
-.homeClub{ 
-    position: relative;
-    h4{
-        position: absolute;
-        z-index: 99;
-        color: $white;
-        padding: 0.5em;
-        background-color: black;
-    }
-    .slide{ 
-        position: relative;
-        display: flex;
-        //overflow: hidden;
-        //transition: transform 0.3s ease;
-        
-        .playersNsMasia{ 
-            flex : 1 0 100%;
-            margin-right: -5em;
-            text-align: left;
-            margin-bottom: 2em;
-            div{
-                h3{
-                    margin-left: 10%;
-                    color: $white;
-                    font-size: 2rem;  
-                    text-wrap: wrap;
-                    background-color: black;
-                    border: 3px solid $beige;
-                    padding: 0.5em;
-                    position: absolute;
-                    bottom: 13%;
-                    width: 70%;
-                }  
-                p:first-of-type{
-
-                } 
-                p{
-
-                }
+        .buttonNextPrevious{
+            display: flex;
+            flex-direction: row;
+            gap: 0.5em;
+            position: absolute;
+            bottom: 7%;
+            left: 40%;
+            button{
+                background-color: $black;
+                color: $beige;
+                border: 2px solid $beige;
+                border-radius: 1rem;
+                padding: 0.1em 1em;
             }
-             
-                figure{
-                    img{
-                        height: 70vh;
+        }
+
+    .homeClub { 
+        position: relative;
+        
+        h4 {
+            position: absolute;
+            z-index: 99;
+            color: $white;
+            padding: 0.5em;
+            background-color: black;
+        }
+
+        .slideHomeClub { 
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            margin: 5em;
+
+            .playersNsMasia { 
+                flex: 1 0 100%;
+                text-align: left;
+                display: flex;
+                align-items: center;
+                transition: none;
+                .playersLenght{
+                    position: absolute;
+                    bottom: 0;
+                    text-wrap: nowrap;
+                    font-size: 2rem;
+                    font-family: $font;
+                }
+                h6 {
+                    font-size: 7rem;
+                    font-weight: 900;
+                    font-family: $font;
+                    color: $bleu;
+                    position: absolute;
+                    bottom: 15%;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    position: absolute;
+                    bottom: 5%;
+                    margin-left: -2em;
+
+                    p:first-child {
+                        font-size: 2rem;
+                        position: absolute;
+                        bottom: 60%;
+                        left: 22%;
+                        font-weight: 500;
+                    }
+
+                    p:nth-child(2) {
+                        font-size: 3rem;
+                        padding-left: 1em;
+                        font-weight: 900;
+                        font-family: $font;
+                    }
+                }
+
+                figure {
+                    img {
+                        height: 60vh;
                         object-fit: cover;
                     }
                 }
+            }
         }
-    }
-}
-.buttonNextPrevious{
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
-    position: absolute;
-    bottom: 7%;
-    left: 40%;
-    button{
-        background-color: $black;
-        color: $beige;
-        border: 2px solid $beige;
-        border-radius: 1rem;
-        padding: 0.1em 1em;
+
+        .homeClubBtn {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            button {
+                background-color: $bleu;
+                color: $beige;
+                border: 2px solid $beige;
+                border: none;
+                padding: 1em;
+            }
+
+            button:first-of-type {
+                position: absolute;
+                bottom: 40%;
+            }
+
+            button:nth-of-type(2) {
+                position: absolute;
+                bottom: 40%;
+                right: 0;
+            }
+        }
     }
 }
 

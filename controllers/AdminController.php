@@ -4,7 +4,7 @@ class AdminController extends AbstractController{
 
     public function checkAdmin(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -15,7 +15,6 @@ class AdminController extends AbstractController{
 
         $rivalTeamManager = new RivalTeamManager();
         $nsMasiaManager = new NsMasiaManager();
-
 
         $this->render("Admin/admin.html.twig", [
             'userIsConect' => $userIsConect,
@@ -29,7 +28,7 @@ class AdminController extends AbstractController{
 
     public function adminHome(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -50,7 +49,7 @@ class AdminController extends AbstractController{
 
     public function adminClub(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -71,7 +70,7 @@ class AdminController extends AbstractController{
 
     public function adminActualite(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -92,7 +91,7 @@ class AdminController extends AbstractController{
 
     public function adminBoutique(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -113,7 +112,7 @@ class AdminController extends AbstractController{
 
     public function adminBiletterie(){
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
@@ -169,7 +168,6 @@ class AdminController extends AbstractController{
     }
 
     public function checkAddMatchs(){
-        var_dump($_POST);
         if(isset($_POST["location"]) && isset($_POST["rivalTeam"]) && isset($_POST["date"]) && isset($_POST["time"])){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
@@ -184,11 +182,9 @@ class AdminController extends AbstractController{
                 $matchManager = new MatchManager();
                 $nsManager = new NsMasiaManager();
                 $rivalTeamManager = new RivalTeamManager();
-                $nsMasia = $nsManager->getNsMasia();
-                //var_dump($nsMasia[0]['id']);
 
+                $nsMasia = $nsManager->getNsMasia();
                 $team = $rivalTeamManager->getAllRivalTeamsByName($rivalTeam);
-                //var_dump($team->getId());
                 $matchManager->createMatch($nsMasia, $team->getId(), $location, $heures_input, $formatted_date);
 
                 $_SESSION["valide"] = "Nouveau match Ajouter.";

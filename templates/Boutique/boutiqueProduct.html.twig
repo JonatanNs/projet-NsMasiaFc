@@ -9,14 +9,14 @@
         </div>
         <article class="titleBoutique">
             <figure>
-                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
             </figure>
             <h1>NsMasia FC</h1>
             <p>Boutique Officiel</p>
         </article>
-        <div class="maillot maillot{{ product.id }}">
+        <div class="shirts shirts{{ product.id }}">
             <section class="shirtSale">
-                <div class="maillotFace">
+                <div class="frontShirt">
                     <figure class="shirtOne" id="{{ product.id }}">
                         <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
                     </figure> 
@@ -25,7 +25,7 @@
                     </figure> 
                 </div>
 
-                <div class="maillotDos invisible">
+                <div class="backShirt invisible">
                     <figure class="shirtOne" id="{{ product.id }}">
                         <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
                     </figure>
@@ -41,9 +41,9 @@
                     <li>
                         <p>Prix : <span class="prices">{{ product.prices }}</span>€</p>
                     </li>
-                    <li class="taille">
-                        <label for="taille">Taille : </label>
-                            <select name="taille" id="taille">
+                    <li class="size">
+                        <label for="size">Taille : </label>
+                            <select name="size" id="size">
                                 <option value=""> <i class="fa-solid fa-chevron-down fa-sm"></i> </option>
                                 <option value="XS">XS</option>
                                 <option value="S">S</option>
@@ -60,14 +60,14 @@
             </section>
             <article class="description">
                 <h3>Descriptions<i class="fa-solid fa-chevron-down fa-sm"></i></h3>
-                <p>{{ product.descriptions }}</p>
+                <p class="invisible">{{ product.descriptions }}</p>
             </article>
         </div>
     {% endfor %}
-    <section class="pannier invisible">
+    <section class="bagProductsUser invisible">
             <h5>Panier</h5>
-            <div class="panierUser"></div> 
-            <div class="panier-total"></div>
+            <div class="bagProducts"></div> 
+            <div class="bagProductsTotal"></div>
             <form action="index.php?route=panier" method="POST">
                 <button type="submit" class="btn">Valider</button>
             </form>

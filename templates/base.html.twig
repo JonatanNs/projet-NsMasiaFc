@@ -53,29 +53,29 @@
                     <div class="nav-links">
                         <ul>
                             <li>
-                                <a href="index.php?route=news">Actualité</a>
+                                <a href="index.php?route=news">Actualité <span class="fa-solid fa-newspaper" style="color: #000000;"></span></a>
                             </li>
 
                             <li>
-                                <a href="index.php?route=club">Club</a>
+                                <a href="index.php?route=club">Club <span class="fa-regular fa-futbol" style="color: #000000;"></span></a>
                             </li>
                         </ul>
                         <ul>
                             <li>
-                                <a href="index.php?route=boutique">Boutique</a>
+                                <a href="index.php?route=boutique">Boutique <span class="fa-solid fa-shop" style="color: #000000;"></span></a>
                             </li>
                             <li>
-                                <a href="index.php?route=billeterie">Billeterie</a>
+                                <a href="index.php?route=billeterie">Billeterie <span class="fa-solid fa-ticket" style="color: #000000;"></span></a>
                             </li>
                         </ul>
                         <ul>
                             <!--<li>Paramètres</li>-->       
                         {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
                             <li>
-                                <a href="index.php?route=compteUser"><p>Mon compte</p></a>
+                                <a href="index.php?route=compteUser"><p>Mon compte <span class="fa-solid fa-user" style="color: #000000;"></span></p></a>
                             </li>
                             <li>
-                                <a href="index.php?route=logout"> <i class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
+                                <a href="index.php?route=logout">Déconnexion <i class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
                             </li>
                         {% endif %}
                         </ul>

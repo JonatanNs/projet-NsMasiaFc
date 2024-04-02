@@ -6,10 +6,6 @@ const basket = JSON.parse(basketData);
 const ticketData = localStorage.getItem("ticket");
 const tickets = JSON.parse(ticketData);
 const formPayementSucces = document.querySelector(".succesBtn");
-
-
-    
-
         
     if(basket){
         basket.forEach(product => {
@@ -57,8 +53,6 @@ const formPayementSucces = document.querySelector(".succesBtn");
     const ticketsBoutique = document.getElementById("ticketsBoutique");
     const productsBoutique = document.getElementById("productsBoutique");
 
-    console.log(ticketsBoutique);
-    console.log(productsBoutique);
     formPayementSucces.addEventListener("click", function(){
         if(ticketsBoutique){
             localStorage.removeItem("ticket");

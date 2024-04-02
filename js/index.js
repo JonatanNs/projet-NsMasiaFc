@@ -75,6 +75,64 @@ document.addEventListener('DOMContentLoaded', function(){
             stopTimer();
         });
     }
+
+    const playersNsMasia = document.querySelectorAll('.playersNsMasia');
+    const slideHomeClub = document.querySelector('.slideHomeClub');
+    const homeClubBtnNext = document.querySelector('.homeClubBtnNext');
+    const homeClubBtnPrevious = document.querySelector('.homeClubBtnPrevious');
+    const imgHomeClub = document.querySelector(".playersNsMasia > figure");
+
+    if(slideHomeClub){
+        let firstImg = slideHomeClub.firstElementChild.cloneNode(true);
+        slideHomeClub.appendChild(firstImg);
+    }
+    
+    let slideClubIndex = 0;
+    
+    function translatePlayerClub() {
+        const slideWidth = imgHomeClub.getBoundingClientRect().width;0
+        playersNsMasia.forEach((player, index) => {
+            const translateValue = -slideClubIndex * slideWidth;
+            player.style.transform = `translateX(${translateValue}px)`;
+        });
+    }
+    
+    function nextSlideHomeClub() {
+        // Incrémentez l'index du slide
+        slideClubIndex++;
+        // Récupérez la largeur du slide
+        const slideWidth = imgHomeClub.getBoundingClientRect().width;
+        // Appliquez la translation
+        translatePlayerClub();
+        let playersLength = parseInt(slideHomeClub.dataset.player); // Correction du nom de l'attribut et conversion en nombre
+        if (slideClubIndex === playersLength) { // Correction de la condition pour vérifier la fin du diaporama
+            setTimeout(() => {
+                slideClubIndex = 0;
+                playersNsMasia.forEach((player, index) => {
+                    player.style.transform = 'translateX(0)';
+                });
+            }, 0); // Ajoutez un délai pour que la transition soit terminée avant la réinitialisation
+        }
+    }
+
+    function previousSlideHomeClub() {
+        if (slideClubIndex === 0) {
+            return; // Ne rien faire si nous sommes déjà sur la première diapositive
+        }
+        // Décrémentez l'index du slide
+        slideClubIndex--;
+    
+        // Récupérez la largeur du slide
+        const slideWidth = imgHomeClub.getBoundingClientRect().width;
+    
+        // Appliquez la translation
+        translatePlayerClub();
+    }
+    
+    if(homeClubBtnNext){
+        homeClubBtnNext.addEventListener("click", nextSlideHomeClub);
+        homeClubBtnPrevious.addEventListener("click", previousSlideHomeClub);
+    }
     
     function form() {
         // Vérifiez si les éléments existent
@@ -104,8 +162,6 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }
     }
-
-
     
     form();
     menuMobile();

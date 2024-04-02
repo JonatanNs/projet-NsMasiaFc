@@ -1,45 +1,46 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    function panierPayement(){
-        const vertical = document.querySelector("#lookPanier");
-        const recapPanierUser = document.querySelector(".recapPanierUser");
+    function cartPayement(){
+        const lookCart = document.querySelector("#lookCart");
+        const recapCartUser = document.querySelector(".recapCartUser");
 
-        const recapPanierUserImg = document.querySelector(".recapPanierUserImg");
-        const recapPanierUserDivCol = document.querySelector(".recapPanierUserDivCol");
-        const recapPanierUserTotal = document.querySelector(".recapPanierUser-total");
         const basketData = localStorage.getItem("basket");
             const basket = JSON.parse(basketData);
-        if(vertical){
-            vertical.addEventListener("click", function(){
-                recapPanierUser.classList.toggle("invisible");
+        if(lookCart){
+            lookCart.addEventListener("click", function(){
+                recapCartUser.classList.toggle("invisible");
     
-                recapPanierUserTotal.innerHTML ="";
-                recapPanierUserImg.innerHTML = "";
-                recapPanierUserDivCol.innerHTML = "";
+                recapCartUser.innerHTML = "";
     
                 basket.forEach(product => {
+
+                    const article = document.createElement("article");
+                    article.classList.add("recapCartUserCol");
+                    recapCartUser.appendChild(article);
+
+                    const figure = document.createElement("figure");
+                    figure.classList.add("recapCartUserImg");
+                    article.appendChild(figure);
+
                     const img = document.createElement("img");
                     img.src = product.url;
                     img.alt = product.alt;
-                    recapPanierUserImg.appendChild(img);
-                    // Créer un élément h6 pour le nom du produit
+                    figure.appendChild(img);
                     
-                    const nameProduct = document.createElement("h4");
-                    nameProduct.classList.add("panier-nameProduct");
+                    // Créer un élément h6 pour le nom du produit
+                    const nameProduct = document.createElement("h5");
+                    nameProduct.classList.add("cartNameProduct");
                     nameProduct.textContent = product.name;
-                    recapPanierUserDivCol.appendChild(nameProduct);
+                    article.appendChild(nameProduct);
                 
                     // Créer un élément p pour le prix du produit
                     const prixQuantite = document.createElement("p");
-                    prixQuantite.classList.add("panier-price-quantity");
+                    prixQuantite.classList.add("cartPriceQuantity");
                     prixQuantite.textContent = product.prices + " € x " + product.quantity;
-                    recapPanierUserDivCol.appendChild(prixQuantite);
-                });
-                
+                    article.appendChild(prixQuantite);
+                });   
            });
-        }
-        
-        
+        }         
     }
 
     function InputHidden(){
@@ -76,9 +77,7 @@ document.addEventListener('DOMContentLoaded', function(){
         
     }
     
-
-    
-    panierPayement();
+    cartPayement();
     InputHidden();
 });
 

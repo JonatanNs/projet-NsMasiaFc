@@ -10,21 +10,21 @@
         <p>Réservation</p>
     </article>
     {% for match in matchs %}
-    <section>
+    <section class="matchPresentation">
         <div>
             <h2>{{match.name ~ ' vs ' ~ match.team }} </h2>
             <p>{{ match.date |date("l j F", "Europe/Paris") }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
-            <p>Le match sera à {{ match.domicileExterieur }} <span class="matchId invisible">{{match.match_id}}</span></p> 
-            <p>Le match se tiendra au stade {{ match.matchIsAtStadium_name }}</p> 
+            <p>Le match sera à {{ match.domicileExterieur }}. <span class="matchId invisible">{{match.match_id}}</span></p> 
+            <p>Le match se tiendra au stade {{ match.matchIsAtStadium_name }}.</p> 
         </div>
         <figure class="">
             <img src="{{match.logo_url}}" alt="{{match.logo_alt}}"/>
         </figure> 
     </section>
     {% endfor %}
-    <section>
+    <section class="selectPlaceMatch">
         <h2>Selectionnez votre zone</h2>
-        <figure class="stadiumTicket">
+        <figure>
             <img src="https://live.staticflickr.com/65535/53585656868_223e557554_w.jpg" alt="stades NS Masia Fc"/>
         </figure> 
     </section>

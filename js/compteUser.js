@@ -1,36 +1,33 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const mesCommandesh2i = document.querySelector(".mesCommandes > h2 > i");
-    const vosTickets = document.querySelector(".vosTickets");
-    const vosProduits = document.querySelector(".vosProduits");
-    const vosTicketsOrder = document.querySelectorAll(".vosTickets-order");
-    const vosTicketsInfo = document.querySelectorAll(".vosTickets-info");
-    const vosProduitsOrder = document.querySelectorAll(".vosProduits-order");
-    const vosProduitsInfo = document.querySelectorAll(".vosProduits-info");
+    const lookMyOrder = document.querySelector(".myOrder > h2 > span");
+    const yourTickets = document.querySelector(".yourTickets");
+    const yourProducts = document.querySelector(".yourProducts");
+    const yourTicketsOrder = document.querySelectorAll(".yourTickets-order");
+    const yourTicketsInfo = document.querySelectorAll(".yourTickets-info");
+    const yourProductsOrder = document.querySelectorAll(".yourProducts-order");
+    const yourProductsInfo = document.querySelectorAll(".yourProducts-info");
 
-    if(mesCommandesh2i){
-        mesCommandesh2i.addEventListener("click", function(){
-                vosProduits.classList.toggle("invisible");
-                vosTickets.classList.toggle("invisible");
+    if(lookMyOrder){
+        lookMyOrder.addEventListener("click", function(){
+            yourProducts.classList.toggle("invisible");
+            yourTickets.classList.toggle("invisible");
             
-                vosTickets.addEventListener("click", function(){
-                    vosTicketsOrder.forEach(orderTickets =>{
-                        orderTickets.classList.toggle("invisible");
-                    });
-                    vosTicketsInfo.forEach(ticket =>{
-                        ticket.classList.toggle("invisible");
-                    });
+            yourTickets.addEventListener("click", function(){
+                yourTicketsOrder.forEach(orderTickets =>{
+                    orderTickets.classList.toggle("invisible");
                 });
-
-                vosProduits.addEventListener("click", function(){
-                    vosProduitsInfo.forEach(produitsInfo =>{
-                        produitsInfo.classList.toggle("invisible");
-                    });
-                    vosProduitsOrder.forEach(produitsOrder =>{
-                        produitsOrder.classList.toggle("invisible");
-                    });
+                yourTicketsInfo.forEach(ticket =>{
+                    ticket.classList.toggle("invisible");
                 });
-           
-            });  
-        
+            });
+            yourProducts.addEventListener("click", function(){
+                yourProductsInfo.forEach(productsInfo =>{
+                    productsInfo.classList.toggle("invisible");
+                });
+                yourProductsOrder.forEach(productsOrder =>{
+                    productsOrder.classList.toggle("invisible");
+                });
+            }); 
+        });  
     }
 });

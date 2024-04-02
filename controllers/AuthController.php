@@ -23,7 +23,7 @@ class AuthController extends AbstractController
         $players = $nsMasiaManager->getPlayerNsMasia();
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
@@ -65,7 +65,7 @@ class AuthController extends AbstractController
         $nsMasia = $nsMasiaManager->getNsMasia();
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
@@ -172,7 +172,7 @@ class AuthController extends AbstractController
                 } else{
                     if(password_verify($_POST["passwordLogin"], $users->getPassword())){
                         unset($_SESSION["error-message"]);
-                        $_SESSION["user"] = $users->getFirstName() . ' ' . $users->getLastName();
+                        $_SESSION["firstAndLastName"] = $users->getFirstName() . ' ' . $users->getLastName();
                         $_SESSION["firstName"] = $users->getFirstName();
                         $_SESSION["lastName"] = $users->getLastName();
                         $_SESSION["userId"] = $users->getId();

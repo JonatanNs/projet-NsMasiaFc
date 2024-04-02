@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   min-width: 0;
   font: inherit;
@@ -80,9 +79,6 @@ h1, h2, h3, h4, h5, h6 {
 .header figure img {
   width: 100%;
 }
-.header .openMenu {
-  margin-top: 0.5em;
-}
 
 /***********************  NAVIGATION  ***********************/
 .navMobile {
@@ -96,11 +92,20 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: -5em;
   z-index: 5;
 }
+.navMobile .openMenu {
+  margin-top: 0.5em;
+}
 .navMobile .closeMenu {
-  margin-left: 1em;
+  padding: 2em 0 2em 50%;
+}
+.navMobile .nav-links ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .navMobile .nav-links ul li {
-  padding-top: 2em;
+  text-transform: uppercase;
+  padding: 1em 0;
 }
 
 .bodyBack {
@@ -109,13 +114,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /************************** BOUTIQUE ***********************/
 @media screen and (max-width: 480px) {
-  /* Votre code CSS pour les écrans dont la largeur est entre 0px et 480px */
   .searchAndBag {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 3em 0;
+    padding: 4em 0 1em 0;
   }
   .searchAndBag .numberBag {
     color: rgb(255, 249, 237);
@@ -128,20 +132,22 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     align-items: center;
   }
-  .titleBoutique figure a {
+  .titleBoutique figure {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .titleBoutique figure a img {
+  .titleBoutique figure img {
     width: 20%;
+    margin: 0 auto;
   }
   .allShirt {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-content: space-evenly;
+    margin: 1em;
   }
   .allShirt .shirtSale {
     display: flex;
@@ -158,6 +164,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1em;
     border-radius: 1rem;
     cursor: pointer;
+    box-shadow: rgb(255, 249, 237) 0px 10px 15px -3px, rgb(255, 249, 237) 0px 4px 6px -2px;
   }
   .allShirt .shirtSale ul li h2 {
     cursor: pointer;
@@ -171,22 +178,7 @@ h1, h2, h3, h4, h5, h6 {
   .allShirt .shirtSale ul li p {
     cursor: pointer;
   }
-  .maillot .shirtOne {
-    width: 100%;
-  }
-  .maillot .shirtOne img {
-    border-radius: 2rem;
-    width: 100%;
-  }
-  .maillot .shirtTwo {
-    width: 100%;
-  }
-  .maillot .shirtTwo img {
-    width: 25%;
-    margin: 0 auto;
-    border-radius: 1rem;
-  }
-  .pannier {
+  .bagProductsUser {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 249, 237);
     border: 5px solid rgb(255, 249, 237);
@@ -199,78 +191,151 @@ h1, h2, h3, h4, h5, h6 {
     top: 7em;
     left: 4em;
   }
-  .pannier .divRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .bagProductsUser .bagProducts .firstLi {
+    display: flex;
+    justify-content: space-around;
     align-items: center;
   }
-  .pannier .divRow figure img {
+  .bagProductsUser .bagProducts .firstLi figure {
+    width: 30%;
+  }
+  .bagProductsUser .bagProducts .firstLi figure img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  /**********************PANIER********************/
+  .carts {
+    padding-top: 5em;
+  }
+  .carts h2 {
+    font-size: 2.5rem;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  .carts p {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .carts .cartsProducts ul {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    margin-bottom: 2em;
+  }
+  .carts .cartsProducts ul .firstLi figure {
     width: 50%;
   }
+  .carts .cartsProducts ul .firstLi figure img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  .carts .cartsProducts ul .secondLi {
+    margin-left: -2.5em;
+    margin-right: 1em;
+  }
+  .carts .cartsProducts ul .secondLi h6 {
+    font-size: 1.6rem;
+  }
+  .carts .cartsProducts ul .secondLi .divCol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .carts .cartsProducts ul .secondLi .divCol .btnAdd, .carts .cartsProducts ul .secondLi .divCol .btnLess {
+    padding: 0.1em 1em;
+    font-size: 1.5rem;
+  }
+  .carts .cartsProducts ul .secondLi .divCol .cartsPriceQuantity {
+    font-size: 2rem;
+  }
+  .carts .cartsProducts ul .secondLi .divCol p {
+    margin-top: 0.7em;
+  }
+  .location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding-bottom: 2em;
+  }
+  .location button {
+    font-size: 2rem;
+  }
+  /**********************************************
+              * BOUTIQUE PRODUCTS *
+  ************************************************/
+  .shirts {
+    margin: 2em;
+  }
+  .shirts .shirtSale .shirtOne {
+    width: 100%;
+  }
+  .shirts .shirtSale .shirtOne img {
+    border-radius: 2rem;
+    width: 100%;
+    box-shadow: rgb(255, 249, 237) 0px 13px 25px -5px, rgb(255, 249, 237) 0px 8px 16px -8px;
+  }
+  .shirts .shirtSale .shirtTwo {
+    width: 100%;
+  }
+  .shirts .shirtSale .shirtTwo img {
+    width: 25%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+  .shirts .shirtSale ul {
+    padding: 0;
+    font-size: 2rem;
+  }
+  .shirts .shirtSale ul .size #size {
+    padding: 0.01em 0.5em;
+    border-radius: 1rem;
+  }
+  .shirts .shirtSale ul .addCart {
+    text-align: center;
+    width: 100%;
+    margin: 3em 0;
+  }
+  .shirts .description {
+    text-align: justify;
+    border-top: 2px solid rgb(255, 249, 237);
+    border-bottom: 2px solid rgb(255, 249, 237);
+    padding: 1em;
+  }
+  .shirts .description h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .shirts .description p {
+    padding: 1em 0;
+  }
 }
-/**********************PANIER********************/
-.panier {
-  padding-top: 2em;
-}
-.panier h2 {
-  font-size: 2.5rem;
-  margin-left: 1em;
-}
-.panier p {
-  text-align: center;
-  font-size: 2rem;
-}
-.panier .panierUser ul {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-  gap: -5em;
-  margin-bottom: 2em;
-}
-.panier .panierUser ul .firstLi figure {
-  width: 100%;
-}
-.panier .panierUser ul .firstLi figure img {
-  width: 50%;
-  border-radius: 0.5rem;
-}
-.panier .panierUser ul .secondLi {
-  margin-left: -2.5em;
-  margin-right: 1em;
-}
-.panier .panierUser ul .secondLi h6 {
-  font-size: 1.6rem;
-}
-.panier .panierUser ul .secondLi .divCol {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.panier .panierUser ul .secondLi .divCol .btnPlus, .panier .panierUser ul .secondLi .divCol .btnMoins {
-  padding: 0.1em 1em;
-  font-size: 1.5rem;
-}
-.panier .panierUser ul .secondLi .divCol .panier-price-quantity {
-  font-size: 2rem;
-}
-.panier .panierUser ul .secondLi .divCol p {
-  margin-top: 0.7em;
-}
-
-.location {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  padding-bottom: 2em;
-}
-.location button {
-  font-size: 1.6rem;
-}
-
 /********************** PAYEMENT *************************/
 @media screen and (max-width: 480px) {
+  .titleBoutiquePayement, .titleBiletteriePayement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5em;
+  }
+  .titleBoutiquePayement figure, .titleBiletteriePayement figure {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .titleBoutiquePayement figure img, .titleBiletteriePayement figure img {
+    width: 20%;
+    margin: 0 auto;
+  }
+  .personalInfoUser p:last-child {
+    margin: 2em 0;
+  }
   .payement {
     width: 80%;
     margin: 0 auto;
@@ -281,6 +346,7 @@ h1, h2, h3, h4, h5, h6 {
   .payement .orderUser .orderUser-connexion h2 {
     border-right: 1px solid rgb(255, 249, 237);
     border-left: 1px solid rgb(255, 249, 237);
+    margin: 1em 0;
   }
   .payement .orderUser .orderUser-connexion form {
     margin: 2em 0;
@@ -294,6 +360,21 @@ h1, h2, h3, h4, h5, h6 {
   }
   .payement .orderUser .orderUser-connexion form p {
     cursor: pointer;
+  }
+  .payement .orderUser .orderUser-connexion form button {
+    margin-bottom: 1em;
+    padding: 0.5em 2em;
+    font-size: 1.3rem;
+  }
+  .payement .orderUser .orderUser-connexion .personalInfo {
+    margin-top: 2em;
+  }
+  .payement .orderUser .orderUser-connexion .personalInfo p:nth-of-type(2) {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .payement .orderUser .orderUser-address {
+    margin-bottom: 2em;
   }
   .payement .orderUser .orderUser-address h2 {
     text-align: center;
@@ -313,141 +394,303 @@ h1, h2, h3, h4, h5, h6 {
   .payement .orderUser .orderUser-address form p {
     cursor: pointer;
   }
+  .payement .orderUser .orderUser-address form button {
+    padding: 0.5em 2em;
+    font-size: 1.3rem;
+  }
+  .payement .orderUser .orderUser-address article h3 {
+    margin-top: 2em;
+  }
+  .payement .orderUser .orderUser-address article ul {
+    text-align: center;
+    margin: 2em;
+  }
+  .payement .orderUser .orderUser-address article a {
+    color: rgb(255, 249, 237);
+    cursor: pointer;
+    padding-left: 4em;
+  }
+  .payement .orderUser .orderUser-address article a:hover {
+    color: rgb(25, 30, 59);
+  }
+  .payement .payementCart {
+    border-top: 2px solid rgb(255, 249, 237);
+    border-bottom: 2px solid rgb(255, 249, 237);
+    margin-bottom: 2em;
+  }
+  .payement .payementCart h4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    padding: 1em;
+  }
+  .payement .payementCart .recapCartUser .recapCartUserCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 2em;
+  }
+  .payement .payementCart .recapCartUser .recapCartUserCol h5 {
+    font-size: 1.6rem;
+    text-align: left;
+    padding-top: -1em;
+    margin-left: -2em;
+    text-wrap: nowrap;
+  }
+  .payement .payementCart .recapCartUser .recapCartUserCol figure {
+    width: 70%;
+  }
+  .payement .payementCart .recapCartUser .recapCartUserCol figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  .payement .payementCart .recapCartUser .recapCartUserCol .cartPriceQuantity {
+    text-align: left;
+    font-size: 2rem;
+    grid-column: 2/2;
+    margin-top: -2em;
+    margin-left: -1em;
+  }
+  .payement .payementCart #totalPrice {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .formStripe {
+    margin-bottom: 3em;
+  }
+  .formStripe button {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+  /***********************************************************
+              * PAYEMENT TICKET *
+  ***********************************************************/
+  .recapCartUser {
+    padding: 1em;
+    border-top: 2px solid rgb(255, 249, 237);
+    border-bottom: 2px solid rgb(255, 249, 237);
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  .recapCartUser h4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+  }
+  .formTicketStripe button {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  /***********************************************************
+              * PAYEMENT SUCCES *
+  ***********************************************************/
+  .payementPassed {
+    margin: 2em;
+    padding-top: 8em;
+  }
+  .payementPassed h1 {
+    text-align: center;
+  }
+  .payementPassed figure {
+    width: 30%;
+    margin: 2em auto;
+  }
+  .payementPassed figure img {
+    width: 100%;
+  }
+  .payementPassed p {
+    margin-top: 3em;
+  }
+  .payementPassed form {
+    margin-top: 3em;
+  }
+  .payementPassed form button {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
 /*********************Biletterie***********************/
-.nextMatch {
-  padding-top: 2em;
+@media screen and (max-width: 480px) {
+  .nextMatch {
+    padding-top: 2em;
+  }
+  .nextMatch h2 {
+    text-align: center;
+  }
+  .nextMatch .matchs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    padding: 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .nextMatch .matchs .reservation { /* ul */
+    background-color: rgb(0, 0, 0);
+    box-shadow: rgb(255, 249, 237) 0px 25px 20px -20px;
+    color: rgb(255, 249, 237);
+    border-radius: 1rem;
+    border: 5px solid rgb(255, 249, 237);
+    text-align: center;
+    padding: 1em;
+    margin-top: -2em;
+    margin-bottom: 5em;
+  }
+  .nextMatch .matchs .reservation li {
+    text-transform: capitalize;
+  }
+  .nextMatch .matchs .reservation li figure {
+    width: 90%;
+    margin: 1em auto;
+  }
+  .nextMatch .matchs .reservation li figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  /**************************RESERVATION*************************/
+  .img-background {
+    background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
+    background-size: cover;
+    padding-top: 6em;
+  }
+  .img-background figure {
+    width: 20%;
+  }
+  .img-background figure img {
+    width: 100%;
+  }
+  .matchPresentation {
+    margin: 2em;
+  }
+  .matchPresentation div {
+    text-align: center;
+  }
+  .matchPresentation figure {
+    width: 50%;
+    margin: 2em auto;
+  }
+  .matchPresentation figure img {
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: rgb(255, 249, 237) 0px 4px 16px, rgb(255, 249, 237) 0px 8px 32px;
+  }
+  .selectPlaceMatch {
+    margin: 2em;
+  }
+  .selectPlaceMatch h2 {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  .selectPlaceMatch figure {
+    width: 100%;
+  }
+  .selectPlaceMatch figure img {
+    width: 100%;
+  }
+  .allTickets {
+    text-align: center;
+  }
+  .allTickets h2 {
+    margin-bottom: 2em;
+  }
+  .allTickets .tickets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+    border: 2px solid rgb(255, 249, 237);
+  }
+  .allTickets .tickets .tribune {
+    grid-column: 1/2;
+  }
+  .allTickets .tickets .tickets-prices {
+    grid-column: 2/2;
+  }
+  .allTickets .tickets > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -7em;
+    margin-top: 1em;
+  }
+  .allTickets .tickets > ul li {
+    display: flex;
+    flex-direction: row;
+    gap: 0 1em;
+  }
 }
-.nextMatch .img-background {
-  background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
-  background-size: cover;
-  margin-left: -0.4em;
-  margin-right: -0.4em;
-  padding: 3em;
-}
-.nextMatch .img-background figure {
-  width: 20%;
-}
-.nextMatch .img-background figure img {
-  width: 100%;
-}
-.nextMatch h2 {
-  text-align: center;
-}
-.nextMatch .matchs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1em;
-  padding: 0;
-  width: 90%;
-  margin: 0 auto;
-}
-.nextMatch .matchs .reservation {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 249, 237);
-  border-radius: 1rem;
-  border: 5px solid rgb(255, 249, 237);
-  text-align: center;
-  padding: 1em;
-  margin-top: -2em;
-  margin-bottom: 5em;
-}
-
-/**************************RESERVATION*************************/
-.stadiumTicket {
-  position: relative;
-}
-.stadiumTicket img {
-  margin: 0 auto;
-}
-
-.allTickets {
-  text-align: center;
-}
-.allTickets .tickets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  padding: 1em;
-  border: 2px solid rgb(255, 249, 237);
-}
-.allTickets .tickets .tribune {
-  grid-column: 1/2;
-}
-.allTickets .tickets .tickets-prices {
-  grid-column: 2/2;
-}
-.allTickets .tickets > ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: -5em;
-}
-.allTickets .tickets > ul li {
-  display: flex;
-  flex-direction: row;
-  gap: 0 1em;
-}
-
 /**********COMPTE USER***********/
-.mesCommandes .vosTickets, .mesCommandes .vosProduits {
+.myAccount {
+  padding-top: 5em;
+  margin: 0 2em;
+}
+.myAccount h1 {
+  text-align: center;
+  margin-bottom: 2em;
+}
+.myAccount .myOrder .yourTickets, .myAccount .myOrder .yourProducts {
   font-size: 1.2rem;
 }
-.mesCommandes .vosTickets-order {
+.myAccount .myOrder .yourTickets-order {
   display: flex;
   flex-direction: column;
 }
-.mesCommandes .vosTickets-order article {
+.myAccount .myOrder .yourTickets-order article {
   padding: 1em;
 }
-.mesCommandes .vosTickets-order article + article {
+.myAccount .myOrder .yourTickets-order article + article {
   border-top: 2px solid rgb(255, 249, 237);
   width: 100%;
 }
-.mesCommandes .vosTickets-info {
+.myAccount .myOrder .yourTickets-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.mesCommandes .vosTickets-info figure {
+.myAccount .myOrder .yourTickets-info figure {
   width: 50%;
   margin-left: 2em;
 }
-.mesCommandes .vosTickets-info figure img {
+.myAccount .myOrder .yourTickets-info figure img {
   width: 100%;
   border-radius: 1rem;
 }
-.mesCommandes .vosTickets-info div {
+.myAccount .myOrder .yourTickets-info div {
   margin-left: -3em;
 }
-.mesCommandes .vosProduits-order {
+.myAccount .myOrder .yourProducts-order {
   border: 2px solid rgb(137, 137, 137);
   margin-bottom: 2em;
 }
-.mesCommandes .vosProduits-order article {
+.myAccount .myOrder .yourProducts-order article {
   padding: 1em;
 }
-.mesCommandes .vosProduits-order article + article {
+.myAccount .myOrder .yourProducts-order article + article {
   border-top: 2px solid rgb(255, 249, 237);
   width: 100%;
 }
-.mesCommandes .vosProduits-order .vosProduits-info {
+.myAccount .myOrder .yourProducts-order .yourProducts-info {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 3em;
   background-color: rgb(137, 137, 137);
 }
-.mesCommandes .vosProduits-order .vosProduits-info figure {
+.myAccount .myOrder .yourProducts-order .yourProducts-info figure {
   width: 30%;
   padding: 0;
 }
-.mesCommandes .vosProduits-order .vosProduits-info figure img {
+.myAccount .myOrder .yourProducts-order .yourProducts-info figure img {
   width: 100%;
   border-radius: 1rem;
 }
-.mesCommandes .vosProduits-order .vosProduits-info div ul {
+.myAccount .myOrder .yourProducts-order .yourProducts-info div ul {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -621,61 +864,93 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 1rem;
     padding: 0.1em 1em;
   }
+  .homeClub {
+    position: relative;
+  }
+  .homeClub h4 {
+    position: absolute;
+    z-index: 99;
+    color: rgb(250, 250, 250);
+    padding: 0.5em;
+    background-color: black;
+  }
+  .homeClub .slideHomeClub {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    margin: 5em;
+  }
+  .homeClub .slideHomeClub .playersNsMasia {
+    flex: 1 0 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    transition: none;
+  }
+  .homeClub .slideHomeClub .playersNsMasia .playersLenght {
+    position: absolute;
+    bottom: 0;
+    text-wrap: nowrap;
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+  }
+  .homeClub .slideHomeClub .playersNsMasia h6 {
+    font-size: 7rem;
+    font-weight: 900;
+    font-family: "Poppins", sans-serif;
+    color: rgb(25, 30, 59);
+    position: absolute;
+    bottom: 15%;
+  }
+  .homeClub .slideHomeClub .playersNsMasia div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 5%;
+    margin-left: -2em;
+  }
+  .homeClub .slideHomeClub .playersNsMasia div p:first-child {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 60%;
+    left: 22%;
+    font-weight: 500;
+  }
+  .homeClub .slideHomeClub .playersNsMasia div p:nth-child(2) {
+    font-size: 3rem;
+    padding-left: 1em;
+    font-weight: 900;
+    font-family: "Poppins", sans-serif;
+  }
+  .homeClub .slideHomeClub .playersNsMasia figure img {
+    height: 60vh;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .homeClub .homeClubBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .homeClub .homeClubBtn button {
+    background-color: rgb(25, 30, 59);
+    color: rgb(255, 249, 237);
+    border: 2px solid rgb(255, 249, 237);
+    border: none;
+    padding: 1em;
+  }
+  .homeClub .homeClubBtn button:first-of-type {
+    position: absolute;
+    bottom: 40%;
+  }
+  .homeClub .homeClubBtn button:nth-of-type(2) {
+    position: absolute;
+    bottom: 40%;
+    right: 0;
+  }
 }
-.homeClub {
-  position: relative;
-}
-.homeClub h4 {
-  position: absolute;
-  z-index: 99;
-  color: rgb(250, 250, 250);
-  padding: 0.5em;
-  background-color: black;
-}
-.homeClub .slide {
-  position: relative;
-  display: flex;
-}
-.homeClub .slide .playersNsMasia {
-  flex: 1 0 100%;
-  margin-right: -5em;
-  text-align: left;
-  margin-bottom: 2em;
-}
-.homeClub .slide .playersNsMasia div h3 {
-  margin-left: 10%;
-  color: rgb(250, 250, 250);
-  font-size: 2rem;
-  text-wrap: wrap;
-  background-color: black;
-  border: 3px solid rgb(255, 249, 237);
-  padding: 0.5em;
-  position: absolute;
-  bottom: 13%;
-  width: 70%;
-}
-.homeClub .slide .playersNsMasia figure img {
-  height: 70vh;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.buttonNextPrevious {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-  position: absolute;
-  bottom: 7%;
-  left: 40%;
-}
-.buttonNextPrevious button {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 249, 237);
-  border: 2px solid rgb(255, 249, 237);
-  border-radius: 1rem;
-  padding: 0.1em 1em;
-}
-
 .espaceAdmin {
   padding-top: 2em;
   text-align: center;
@@ -780,6 +1055,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blockArticle .articleContent {
   padding-top: 2em;
+  border: 3px solid rgb(255, 249, 237);
+  margin: 1em;
+  box-shadow: rgb(255, 249, 237) 0px 20px 25px -5px, rgb(255, 249, 237) 0px 10px 10px -5px;
 }
 .blockArticle .articleContent h2 {
   text-align: center;
@@ -798,6 +1076,14 @@ h1, h2, h3, h4, h5, h6 {
   text-align: justify;
   width: 90%;
   margin: 0 auto;
+  margin-bottom: 1em;
+}
+.blockArticle .articleContent a button {
+  margin: 0 auto;
+  width: 100%;
+  background-color: rgb(25, 30, 59);
+  color: rgb(255, 249, 237);
+  font-size: 2rem;
 }
 
 @media screen and (max-width: 480px) {
@@ -839,6 +1125,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 3px solid rgb(255, 249, 237);
   border-radius: 1rem;
   padding: 0.5 1em;
+  box-shadow: rgb(255, 249, 237) 0px 5px 5px -5px, rgb(255, 249, 237) 0px 5px 10px -5px;
 }
 .btn:hover {
   background-color: rgb(255, 249, 237);

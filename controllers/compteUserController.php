@@ -6,7 +6,7 @@ class CompteUserController extends AbstractController{
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
@@ -45,7 +45,7 @@ class CompteUserController extends AbstractController{
         $orderTickets = $orderManager->getAllOrderTicketByUser($user);
         $matchs = [];
         foreach($orderTickets as $orderTicket){
-            $matchs[] = $matchManager->getAllMatchsById($orderTicket['match_id']);
+            $matchs[] = $matchManager->getAllMatchsByIdNoPlay($orderTicket['match_id']);
         }
         
         $this->render("compteUser.html.twig", [
@@ -58,7 +58,6 @@ class CompteUserController extends AbstractController{
             'orderTickets' => $orderTickets,
             'matchs' => $matchs,
             'ordersProducts' => $ordersProducts,
-            //'productAcheter' => $productAcheter,
             'allOrdersProducts' => $allOrdersProducts,
             'allProducts' => $allProducts,
             'address' => $address

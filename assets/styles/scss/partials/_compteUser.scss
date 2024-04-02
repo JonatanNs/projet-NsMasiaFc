@@ -1,68 +1,81 @@
 /**********COMPTE USER***********/
-.mesCommandes{
-    
-    .vosTickets, .vosProduits{
-        font-size: 1.2rem;
+.myAccount{
+    padding-top: 5em;
+    margin: 0 2em;
+    h1{
+        text-align: center;
+        margin-bottom: 2em;
     }
-    .vosTickets-order{
-        display: flex;
-        flex-direction: column;
-        article{
-            padding: 1em;
-        }
-        article+article{
-            border-top: 2px solid $beige;
-            width: 100%;
+    .connectionAndSecurity{
+        h2{
             
         }
     }
-    .vosTickets-info{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        figure{
-            width: 50%;
-            margin-left: 2em;
-            img{
+    .myOrder{
+    
+        .yourTickets, .yourProducts{
+            font-size: 1.2rem;
+        }
+        .yourTickets-order{
+            display: flex;
+            flex-direction: column;
+            article{
+                padding: 1em;
+            }
+            article+article{
+                border-top: 2px solid $beige;
                 width: 100%;
-                border-radius: 1rem;
+                
             }
         }
-        div{
-            margin-left: -3em;
-        }
-    }
-
-    .vosProduits-order{
-            border: 2px solid $darkgrey;
-            margin-bottom: 2em;
-        article{
-            padding: 1em;
-        }
-        article+article{
-            border-top: 2px solid $beige;
-            width: 100%;
-        }
-        .vosProduits-info{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 3em;
-            background-color: $darkgrey;
+        .yourTickets-info{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             figure{
-                width: 30%;
-                padding: 0;
+                width: 50%;
+                margin-left: 2em;
                 img{
                     width: 100%;
                     border-radius: 1rem;
                 }
             }
             div{
-                ul{
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    gap: 1em;
-                    margin-left: -1em;
+                margin-left: -3em;
+            }
+        }
+    
+        .yourProducts-order{
+                border: 2px solid $darkgrey;
+                margin-bottom: 2em;
+            article{
+                padding: 1em;
+            }
+            article+article{
+                border-top: 2px solid $beige;
+                width: 100%;
+            }
+            .yourProducts-info{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 3em;
+                background-color: $darkgrey;
+                figure{
+                    width: 30%;
+                    padding: 0;
+                    img{
+                        width: 100%;
+                        border-radius: 1rem;
+                    }
+                }
+                div{
+                    ul{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 1em;
+                        margin-left: -1em;
+                    }
                 }
             }
         }

@@ -1,22 +1,8 @@
 /*********************Biletterie***********************/
-//@media screen and (min-width: 375px) and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     
     .nextMatch{
         padding-top: 2em;
-        .img-background{
-            background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
-            background-size: cover;
-            margin-left: -0.4em;
-            margin-right: -0.4em;
-            padding: 3em;
-            figure{
-                width: 20%;
-                img{
-                    width: 100%;
-                }
-            }
-        }
-
         h2{
             text-align: center;
         }
@@ -29,8 +15,9 @@
             width: 90%;
             margin: 0 auto;
             
-            .reservation{
+            .reservation{ /* ul */
                 background-color: $black;
+                box-shadow: $beige 0px 25px 20px -20px;
                 color:  $beige;
                 border-radius: 1rem;
                 border: 5px solid $beige;
@@ -38,6 +25,18 @@
                 padding: 1em;
                 margin-top: -2em;
                 margin-bottom: 5em;
+                li {
+                    text-transform: capitalize;
+                    figure{
+                        width: 90%;
+                        margin: 1em auto;
+                        
+                        img{
+                            width: 100%;
+                            border-radius: 1rem;
+                        }
+                    }
+                }
             } 
         }
     }
@@ -46,46 +45,80 @@
 
 /**************************RESERVATION*************************/
 
-
-.stadiumTicket {
-    position: relative;
-    img{
-        margin: 0 auto;
+    .img-background{
+        background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
+        background-size: cover;
+        padding-top: 6em;
+        figure{
+            width: 20%;
+            img{
+                width: 100%;
+            }
+        }
     }
-}
 
-.allTickets{
-    text-align: center;
-    .tickets{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-        align-items: center;
-        padding: 1em;
-        border: 2px solid $beige;
-        .tribune{
-            grid-column: 1/2;
+    .matchPresentation{
+        margin: 2em;
+        div{
+            text-align: center;
         }
-        .tickets-prices{
-            grid-column: 2/2;
+        figure{
+            width: 50%;
+            margin: 2em auto;
+            img{
+                width: 100%;
+                border-radius: 1rem;
+                box-shadow: $beige 0px 4px 16px, $beige 0px 8px 32px;
+            }
         }
-        &>ul{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+    }
+
+    .selectPlaceMatch{
+        margin: 2em;
+        h2{
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        figure{
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+    }
+
+    .allTickets{
+        text-align: center;
+        h2{
+            margin-bottom: 2em;
+        }
+        .tickets{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
             align-items: center;
-            margin-right: -5em;
-            
-            li{
+            margin: 1em;
+            padding: 1em;
+            border: 2px solid $beige;
+            .tribune{
+                grid-column: 1/2;
+            }
+            .tickets-prices{
+                grid-column: 2/2;
+            }
+            &>ul{
                 display: flex;
                 flex-direction: row;
-                gap: 0 1em;
+                justify-content: space-between;
+                align-items: center;
+                margin-right: -7em;
+                margin-top: 1em;
+                li{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0 1em;
+                }  
             }
         }
     }
 }
-
-
-
-
-//}

@@ -8,6 +8,9 @@
     }
     .articleContent{
         padding-top: 2em;
+        border: 3px solid $beige;
+        margin: 1em;
+        box-shadow: $beige 0px 20px 25px -5px, $beige 0px 10px 10px -5px;
         h2{
             text-align: center;
         }
@@ -25,7 +28,16 @@
             text-align: justify;
             width: 90%;
             margin: 0 auto;
+            margin-bottom: 1em;
         }
-    
+        a{
+            button{
+                margin: 0 auto;
+                width: 100%;
+                background-color: $bleu;
+                color: $beige;
+                font-size: 2rem;
+            }
+        }
     }
 }

@@ -2,9 +2,9 @@
 
 {% block main %}
     <main class="container">
-        <article class="titleBoutique">
+        <article class="titleBiletteriePayement">
             <figure>
-                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
             </figure>
             <h1>NsMasia FC</h1>
             <p>Biletterie Officiel</p>
@@ -13,19 +13,21 @@
             <div class="orderUser">
                 <article class="orderUser-connexion">
                 {% if userIsConect is empty %}
-                <h2>Information personels</h2>
+                <h2>Informations personels</h2>
                     <form action="index.php?route=check-login" method="POST" class=" formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
-                        <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required>
+                            <label for="emailLogin">Email</label>
+                            <input type="email" id="emailLogin" name="emailLogin" placeholder="email@gmail.com" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Mot de passe" required>
+                            <label for="passwordLogin">Mot de passe</label>
+                            <input type="password" id="passwordLogin" name="passwordLogin" placeholder="********" required>
                         </fieldset>
 
                         <fieldset>
-                        <button type="submit" name="submit" class="btn">Se connecter</button>
+                            <button type="submit" name="submit" class="btn">Se connecter</button>
                         </fieldset>
                         <p class="goSignup">Créer nouveau compte ?<p>
                     </form>
@@ -33,23 +35,28 @@
                     <form action="index.php?route=check-signup" method="POST" class="formSignup invisible" id="payment-form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
-                        <input type="text" id="first_name" name="first_name" placeholder="Prénom" required>
+                            <label for="first_name">Prénom</label>
+                            <input type="text" id="first_name" name="first_name" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="text" id="last_name" name="last_name" placeholder="Nom" required>
+                            <label for="emailLogin">Nom</label>
+                            <input type="text" id="last_name" name="last_name" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="email" id="emailSignup" name="emailSignup" placeholder="Email" required>
+                            <label for="emailSignup">Email</label>
+                            <input type="email" id="emailSignup" name="emailSignup" placeholder="email@gmail.com" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="passwordSignup" name="passwordSignup" placeholder="Mot de passe" required>
+                            <label for="passwordSignup">Mot de passe</label>
+                            <input type="password" id="passwordSignup" name="passwordSignup" placeholder="********" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="Confirmer le mot de passe" required>
+                            <label for="confirmPasswordSignup">Confirmer le mot de passe</label>
+                            <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="********" required>
                         </fieldset>
 
                         <fieldset>
@@ -60,16 +67,16 @@
                 {% endif %}
 
                     {% if userIsConect is not empty %} <!-- Quand l'utilisateur n'est pas connecter-->
-                        <article>
+                        <article class="personalInfoUser">
                             <h2>Information personels</h2>
                             <p> {{ userIsConect }}</p>
                             <p class="invisible userEmail"> {{ userEmail}}</p>
-                            <p>Poursuivre le processus d'achat</p>
+                            <p>Poursuivre le processus d'achat <span class="fa-solid fa-circle-down" style="color: #ffffff;"></span></p>
                         </article>
                     {% endif %}
                 </article>
-            <section>
-                <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookTicket" style="color: #ffffff;"></i>
+            <section class="recapCartUser">
+                <h4>Panier <span class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookTicket" style="color: #ffffff;"></span></h4>
                 <div class="recapTicketUser invisible">
                         <div class="recapTicketUserDivCol">
                            <!-- <h5>Match</h5>

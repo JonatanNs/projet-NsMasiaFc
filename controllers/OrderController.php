@@ -3,7 +3,7 @@ class OrderController extends AbstractController
 {
     public function panier() {
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
@@ -27,7 +27,7 @@ class OrderController extends AbstractController
     }
     public function payement() {
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
@@ -53,13 +53,12 @@ class OrderController extends AbstractController
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userEmail = isset($_SESSION["userEmail"]) ? $_SESSION["userEmail"] : null;
-        // Rendu de la vue avec Twig
+
         echo $this->render('succes.html.twig', [
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
             'userEmail' => $userEmail
         ]);
-        
     } 
     
     public function checkAddress(){
@@ -195,7 +194,7 @@ class OrderController extends AbstractController
         $uniqueNumber = bin2hex(random_bytes(10));
     
         // Retourner le nouveau numéro de commande
-        return "nsBilet" . $uniqueNumber;
+        return "nsTicket" . $uniqueNumber;
     }
         
     public function stripePayement() {;

@@ -27,9 +27,43 @@
             width: 100%;
         }
     }
+}
+
+/***********************  NAVIGATION  ***********************/
+.navMobile{
+    padding-top: 2em;
+    position: fixed;
+    top: 3.5em;
+    left: 0;
+    background-color: $beige ;
+    width: 100vw;
+    height: 110vh;
+    margin-top: -5em;
+    z-index: 5;
+
     .openMenu{
         margin-top: 0.5em;
     }
+    .closeMenu{
+        padding: 2em 0 2em 50%;
+    }
+    .nav-links{
+        ul{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            li{
+                text-transform: uppercase;
+                padding: 1em 0;
+            }
+        } 
+    }
+}
+
+.bodyBack{
+    background-color: $black;
+    
 }
 
 

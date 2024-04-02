@@ -266,8 +266,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         }
-    
-                    
 
     // Appel de la fonction selectTribune
     selectTribune();

@@ -3,7 +3,6 @@
 @import "vars/font";
 @import "reset/reset";
 @import "partials/header";
-@import "partials/nav";
 @import "partials/boutique";
 @import "partials/payement";
 @import "partials/biletterie";
@@ -57,6 +56,7 @@
     border: 3px solid $beige;
     border-radius: 1rem;
     padding: 0.5 1em;
+    box-shadow: $beige 0px 5px 5px -5px, $beige 0px 5px 10px -5px;
     &:hover{
         background-color: $beige;
         color: $black;

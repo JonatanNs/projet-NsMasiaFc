@@ -8,7 +8,7 @@ class ArticleController extends AbstractController
 
         $articles = $articleManager->getAllArticle();
 
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         unset($_SESSION["error"]);
@@ -16,7 +16,6 @@ class ArticleController extends AbstractController
         $this->render("news.html.twig", [
             'articles' => $articles,
             'userIsConect' => $userIsConect,
-            
         ]);
     }
 
@@ -27,7 +26,7 @@ class ArticleController extends AbstractController
         $articles = $articleManager->getAllArticleById($id);
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;

@@ -2,7 +2,7 @@
 
 {% block main %}
     <main class="container">
-        <article class="titleBoutique">
+        <article class="titleBoutiquePayement">
             <figure>
                 <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
             </figure>
@@ -13,15 +13,17 @@
             <div class="orderUser">
                 <article class="orderUser-connexion">
                 {% if userIsConect is empty %}
-                <h2>Information personels</h2>
+                <h2>Information personels <span class="fa-regular fa-circle-info" style="color: #ffffff;"></span></h2>
                     <form action="index.php?route=check-login" method="POST" class="form formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
-                        <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required>
+                            <label for="emailLogin">Email</label>
+                            <input type="email" id="emailLogin" name="emailLogin" placeholder="email@gmail.com" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Mot de passe" required>
+                            <label for="passwordLogin">Mot de passe</label>
+                            <input type="password" id="passwordLogin" name="passwordLogin" placeholder="**********" required>
                         </fieldset>
 
                         <fieldset>
@@ -33,96 +35,101 @@
                     <form action="index.php?route=check-signup" method="POST" class="form formSignup invisible" id="payment-form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
-                        <input type="text" id="first_name" name="first_name" placeholder="Prénom" required>
+                            <label for="first_name">Prénom</label>
+                            <input type="text" id="first_name" name="first_name" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="text" id="last_name" name="last_name" placeholder="Nom" required>
+                            <label for="last_name">Nom</label>
+                            <input type="text" id="last_name" name="last_name" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="email" id="emailSignup" name="emailSignup" placeholder="Email" required>
+                            <label for="last_name">Nom</label>
+                            <input type="email" id="emailSignup" name="emailSignup" placeholder="Email" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="passwordSignup" name="passwordSignup" placeholder="Mot de passe" required>
+                            <label for="passwordSignup">Mot de passe</label>
+                            <input type="password" id="passwordSignup" name="passwordSignup" placeholder="*********" required>
                         </fieldset>
 
                         <fieldset>
-                        <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="Confirmer le mot de passe" required>
+                            <label for="confirmPasswordSignup">Confirmer le mot de passe</label>
+                            <input type="password" id="confirmPasswordSignup" name="confirmPasswordSignup" placeholder="*********" required>
                         </fieldset>
 
                         <fieldset>
                         <button type="submit" name="submit" class="btn"> Créer nouveau compte</button>
                         </fieldset>
-                        <p class="goLogin"> Se connecter ? <p>
+                        <p class="goLogin">Vous avez déjà un compte ?<p>
                     </form>
                 {% endif %}
 
                     {% if userIsConect is not empty %} <!-- Quand l'utilisateur n'est pas connecter-->
-                        <article>
+                        <article class="personalInfo">
                             <h2>Information personels</h2>
                             <p> {{ userIsConect }}</p>
-                            <p>Poursuivre le processus d'achat</p>
+                            <p>Poursuivre le processus d'achat <span class="fa-solid fa-circle-up fa-flip-vertical" style="color: #fcfcfc;"></span></p>
                         </article>
                     {% endif %}
                 </article>
-                {% if addresse is empty %}
-                <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison">
-                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
-                    <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
-                    <fieldset>
-                        <input type="text" id="address" name="address" placeholder="Address" required/>
-                    </fieldset>
-                    <fieldset>
-                        <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
-                    </fieldset>
-                    <fieldset>
-                        <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
-                    </fieldset>
-                    <fieldset>
-                        <input type="text" id="orderCity" name="orderCity" placeholder="Ville" required/>
-                    </fieldset>
-                    <select name="pays">
-                            <option value="FR">France</option>
-                    </select>
-                    <fieldset>
-                        <button type="submit">Valider</button>
-                    </fieldset>
-                </form>
-                {% endif %}
-                {% if addresse is not empty %}
-                        <article>
-                            <h3>Votre address<h3>
-                            <ul>
-                                <li>{{ addresse.addresse }}</li>
-                            {% if addresse.complements is not empty %}
-                                <li>{{ addresse.complements }}</li>
-                            {% endif %}
-                                <li>{{ addresse.postalcode ~ ' ' ~ addresse.city }}</li>
 
-
-                                <li>{{ addresse.pays}}</li>
-                            </ul>
-                        </article>
-                {% endif %}
-            <section>
-                <h4>Panier</h4><i class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookPanier" style="color: #ffffff;"></i>
-                <div class="recapPanierUser invisible">
-                    <div class="recapPanierUserDivRow">      
-                        <figure class="recapPanierUserImg"></figure>
-                        <div class="recapPanierUserDivCol"></div> 
-                        <div class="recapPanierUser-total"></div>
-                    </div>
-                </div> 
+                <article class="orderUser-address">
+                    <h2>Adresse de livraison</h2>
+                    {% if addresse is empty %}
+                    <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison">
+                        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
+                        <fieldset>
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" name="address" required/>
+                        </fieldset>
+                        <fieldset>
+                            <label for="orderComplements">Appartement, suite, etc.. (optionnel)</label>
+                            <input type="text" id="orderComplements" name="orderComplements" />
+                        </fieldset>
+                        <fieldset>
+                            <label for="orderZipCode">Code Postal</label>
+                            <input type="number" id="orderZipCode" name="orderZipCode" required/>
+                        </fieldset>
+                        <fieldset>
+                            <label for="orderCity">Ville</label>
+                            <input type="text" id="orderCity" name="orderCity" required/>
+                        </fieldset>
+                        <select name="pays">
+                                <option value="FR">France</option>
+                        </select>
+                        <fieldset>
+                            <button type="submit" class="btn">Valider</button>
+                        </fieldset>
+                    </form>
+                    {% endif %}
+                    {% if addresse is not empty %}
+                            <article>
+                                <h3>Votre adresse<h3>
+                                <ul>
+                                    <li>{{ addresse.addresse }}</li>
+                                {% if addresse.complements is not empty %}
+                                    <li>{{ addresse.complements }}</li>
+                                {% endif %}
+                                    <li>{{ addresse.postalcode ~ ' ' ~ addresse.city }}</li>
+                                    <li>{{ addresse.pays}}</li>
+                                </ul>
+                                <a href="index.php?route=compteUser">Modifier votre adresse <span class="fa-solid fa-repeat" style="color: #ffffff;"></span></a>
+                            </article>
+                    {% endif %}
+                </article>
+            <section class="payementCart">
+                <h4>Panier <span class="fa-solid fa-angle-up fa-flip-vertical fa-xl" id="lookCart" style="color: #ffffff;"></span></h4>
+                <div class="recapCartUser invisible"></div> 
                 <p id="totalPrice"></p>
             </section> 
             {% if addresse is not empty %}
             <form action="index.php?route=stripePay" method="POST" class="formStripe">
-                <button type="submit" id="checkout-button">Passez au payement</button>
+                <button type="submit" id="checkout-button" class="btn">Passer au payement</button>
             </form>  
-            {% endif %}
-            {% if addresse is empty %}
+            {% else %}
                 <p>Renseignez votre adresse de livraison pour poursuivre le processus d'achat</p>
             {% endif %}
         </div>

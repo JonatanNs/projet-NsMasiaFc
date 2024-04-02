@@ -79,15 +79,15 @@ document.addEventListener('DOMContentLoaded', function(){
                     theBag.appendChild(p);   
                 }else{
 
-                    const panier = document.querySelector(".pannier");
-                    const panierUser = document.querySelector(".panierUser");
-                    const panierTotal = document.querySelector(".panier-total");
+                    const bagProductsUser = document.querySelector(".bagProductsUser");
+                    const bagProducts = document.querySelector(".bagProducts");
+                    const bagProductsTotal = document.querySelector(".bagProductsTotal");
                     // Le panier n'est pas vide, afficher son contenu
 
-                    panierUser.innerHTML = '';
-                    panierTotal.innerHTML = '';
+                    bagProducts.innerHTML = '';
+                    bagProductsTotal.innerHTML = '';
                     
-                    panier.classList.toggle("invisible");
+                    bagProductsUser.classList.toggle("invisible");
         
                     // Convertir les données récupérées en objet JavaScript
                     const basket = JSON.parse(basketData);
@@ -96,24 +96,21 @@ document.addEventListener('DOMContentLoaded', function(){
                     basket.forEach(product => {
                         const firstLi = document.createElement("div");
                         firstLi.classList.add("firstLi");
-                        panierUser.appendChild(firstLi);
+                        bagProducts.appendChild(firstLi);
                         
                         const img = document.createElement("img")
                         img.src = product.url;
                         img.alt = product.alt;
                         firstLi.appendChild(img);
-                        //img.appendChild(panierImg);
 
                         const nameProduct = document.createElement("h6");
-                        nameProduct.classList.add("panier-nameProduct");
+                        nameProduct.classList.add("bagNameProduct");
                         nameProduct.textContent = product.name;
-                        //pannierDivCol.appendChild(nameProduct);
                         firstLi.appendChild(nameProduct);
 
                         const prixQuantite = document.createElement("p");
-                        prixQuantite.classList.add("panier-price-quantity");
+                        prixQuantite.classList.add("bagPriceQuantity");
                         prixQuantite.textContent = product.prices + " € x " + product.quantity;
-                        //pannierDivCol.appendChild(prixQuantite);
                         firstLi.appendChild(prixQuantite);
 
                         const figure = document.createElement("figure");
@@ -130,52 +127,52 @@ document.addEventListener('DOMContentLoaded', function(){
                     const totalp = document.createElement("p");
                         totalp.classList.add("totalp");
                         totalp.textContent = "Total = " +  getTotalPrice() + "€";
-                        panierTotal.appendChild(totalp);
+                        bagProductsTotal.appendChild(totalp);
                 }
             });
         }  
     } 
 
-    function switchMaillot(){
-        const maillotDos = document.querySelectorAll(".maillotDos");
-        const maillotFace = document.querySelectorAll(".maillotFace");
-        const allShirtTwo = document.querySelectorAll("div.maillot > section > div.maillotFace > figure.shirtTwo > img");
-        const AllOne = document.querySelectorAll("div.maillot > section > div.maillotDos > figure.shirtTwo img");
+    function switchShirts(){
+        const backShirt = document.querySelectorAll(".backShirt");
+        const frontShirt = document.querySelectorAll(".frontShirt");
+        const allShirtTwo = document.querySelectorAll("div.shirts > section > div.frontShirt > figure.shirtTwo > img");
+        const AllOne = document.querySelectorAll("div.shirts > section > div.backShirt > figure.shirtTwo img");
 
         allShirtTwo.forEach(shirtTwo => {
             shirtTwo.addEventListener("click", function() {
-                maillotDos.forEach(dos => {
-                    dos.classList.remove("invisible");
+                backShirt.forEach(back => {
+                    back.classList.remove("invisible");
                 });
-                maillotFace.forEach(face => {
-                    face.classList.add("invisible");
+                frontShirt.forEach(front => {
+                    front.classList.add("invisible");
                 });
             });
         });
 
         AllOne.forEach(face => {
             face.addEventListener("click", function() {
-                maillotFace.forEach(face => {
-                    face.classList.remove("invisible");
+                frontShirt.forEach(front => {
+                    front.classList.remove("invisible");
                 });
-                maillotDos.forEach(dos => {
-                    dos.classList.add("invisible");
+                backShirt.forEach(back => {
+                    back.classList.add("invisible");
                 });
             });
         });
 
         const productLength = document.querySelector(".productLength");
         if(productLength){
-            const maillotLength = parseInt(productLength.textContent); 
-            for(let i = 1; i <= maillotLength; i++){
-                let otherMaillot = document.querySelector(".other" + i);
-                if(otherMaillot){
-                    otherMaillot.addEventListener("click", function(){
+            const shirtsLength = parseInt(productLength.textContent); 
+            for(let i = 1; i <= shirtsLength; i++){
+                let otherShirts = document.querySelector(".other" + i);
+                if(otherShirts){
+                    otherShirts.addEventListener("click", function(){
                     
-                        let maillot = document.querySelector(".maillot:not(.invisible)");
-                        let maillot2 = document.querySelector(".maillot.invisible");
-                        maillot.classList.add("invisible");
-                        maillot2.classList.remove("invisible"); 
+                        const shirts = document.querySelector(".shirts:not(.invisible)");
+                        const shirts2 = document.querySelector(".shirts.invisible");
+                        shirts.classList.add("invisible");
+                        shirts2.classList.remove("invisible"); 
                     })
                 } 
             }
@@ -185,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function(){
     function AddLocalStorageBoutique() {
         const productIdElements = document.querySelectorAll(".shirtOne");
         const shirtSale = document.querySelectorAll('.shirtSale');
-        const taille = document.getElementById("taille");
+        const size = document.getElementById("size");
     
-        if (taille) {
-            taille.addEventListener("change", function() {
-                size = taille.value; 
+        if (size) {
+            size.addEventListener("change", function() {
+                sizeChoice = size.value; 
             });
         }
     
@@ -205,19 +202,19 @@ document.addEventListener('DOMContentLoaded', function(){
             addCartButtons.forEach((button, i) => {
                 const productLength = document.querySelector('.productLength');
                 button.addEventListener("click", function() {
-                    const maillotId = "maillot" + (i + 1);
+                    const shirtsId = "shirts" + (i + 1);
                     const productUrl = productImgUrl;
                     const productAlt = productImgAlt;
                     const productQuantity = ""; 
     
                     for (let j = 0; j < parseInt(productLength.textContent); j++) {
-                        if (maillotId === "maillot" + (j + 1)) {
+                        if (shirtsId === "shirts" + (j + 1)) {
                             addBasket({
                                 id: productId,
                                 name: productName.trim(),
                                 url: productUrl,
                                 alt: productAlt,
-                                size: size, 
+                                size: sizeChoice, 
                                 prices: productPrice,
                                 quantity: productQuantity
                             });
@@ -232,43 +229,46 @@ document.addEventListener('DOMContentLoaded', function(){
     function lookProduct(){
         const lookProductButtons = document.querySelectorAll(".lookProduct");
         lookProductButtons.forEach(function(button) {
-            document.querySelectorAll(".maillot").forEach(function(maillot) {
-                maillot.classList.add("invisible");
+            document.querySelectorAll(".shirts").forEach(function(shirts) {
+                shirts.classList.add("invisible");
             });
             button.addEventListener("click", function() {
                 // Récupérer l'ID du produit associé à ce bouton
                 const productId = button.closest(".shirtSale").querySelector(".shirtOne").getAttribute("id");
-                // Masquer tous les maillots
-                document.querySelectorAll(".maillot").forEach(function(maillot) {
-                    maillot.classList.add("invisible");
+                // Masquer tous les shirtss
+                document.querySelectorAll(".shirts").forEach(function(shirts) {
+                    shirts.classList.add("invisible");
                 });
-                // Afficher le maillot correspondant à l'ID du produit
-                document.querySelector(".maillot" + productId).classList.remove("invisible");
+                // Afficher le shirts correspondant à l'ID du produit
+                document.querySelector(".shirts" + productId).classList.remove("invisible");
             });
         });
     }
 
-    function panierUser(){
+    function cartUser(){
         const basketData = localStorage.getItem("basket");
         if(basketData){
             const basket = JSON.parse(basketData);
             if(basket){
-                const panierUser = document.querySelector(".panierUser");
-                const panierValue = document.querySelector(".panierValue");
-                if(panierValue){
-                    panierValue.textContent = getTotalPrice() + "€";
+                const bagProducts = document.querySelector(".cartsProducts");
+                const cartQuantityValue = document.querySelector(".cartQuantityValue");
+                if(cartQuantityValue){
+                    cartQuantityValue.textContent = getTotalPrice() + "€";
                 }
                     basket.forEach(product => {
                         const firstLi = document.createElement("li");
-                        firstLi.classList.add("firstLi"); 
-                        panierUser.appendChild(firstLi);
+                        firstLi.classList.add("firstLi");
                         
                         const secondLi = document.createElement("li");
                         secondLi.classList.add("secondLi");
-                        panierUser.appendChild(secondLi);
-
+        
                         const ul = document.createElement("ul");
-                        panierUser.appendChild(ul);
+
+                        if(bagProducts) {
+                            bagProducts.appendChild(firstLi);
+                            bagProducts.appendChild(secondLi);
+                            bagProducts.appendChild(ul);
+                        }    
                         
                         const img = document.createElement("img")
                         img.src = product.url;
@@ -276,12 +276,12 @@ document.addEventListener('DOMContentLoaded', function(){
                         firstLi.appendChild(img);
 
                         const nameProduct = document.createElement("h6");
-                        nameProduct.classList.add("panier-nameProduct");
+                        nameProduct.classList.add("cartNameProduct");
                         nameProduct.textContent = product.name;
                         secondLi.appendChild(nameProduct);
                         
                         const prixQuantite = document.createElement("p");
-                        prixQuantite.classList.add("panier-price-quantity");
+                        prixQuantite.classList.add("cartPriceQuantity");
                         prixQuantite.textContent = product.prices + " €";
                         secondLi.appendChild(prixQuantite);
                         
@@ -294,30 +294,30 @@ document.addEventListener('DOMContentLoaded', function(){
                         secondLi.appendChild(div);
                         div.appendChild(prixQuantite);
 
-                        const btnMoins = document.createElement("button");
-                        btnMoins.classList.add("btnMoins");
-                        btnMoins.classList.add("btn");
-                        btnMoins.dataset.id = product.id;
-                        btnMoins.textContent = "-";
-                        div.appendChild(btnMoins);
+                        const btnLess = document.createElement("button");
+                        btnLess.classList.add("btnLess");
+                        btnLess.classList.add("btn");
+                        btnLess.dataset.id = product.id;
+                        btnLess.textContent = "-";
+                        div.appendChild(btnLess);
 
                         const p = document.createElement("p"); 
                         p.classList.add("quantityProduct");
                         p.textContent = product.quantity;
                         div.appendChild(p);
 
-                        const btnPlus = document.createElement("button");
-                        btnPlus.classList.add("btnPlus");
-                        btnPlus.classList.add("btn");
-                        btnPlus.dataset.id = product.id;
-                        btnPlus.textContent = "+";
-                        div.appendChild(btnPlus);
+                        const btnAdd = document.createElement("button");
+                        btnAdd.classList.add("btnAdd");
+                        btnAdd.classList.add("btn");
+                        btnAdd.dataset.id = product.id;
+                        btnAdd.textContent = "+";
+                        div.appendChild(btnAdd);
                         
                         ul.appendChild(firstLi);
                         ul.appendChild(secondLi);
                     });
-                    const addQuantityButtons = document.querySelectorAll(".btnPlus");
-                    const removeQuantityButtons = document.querySelectorAll(".btnMoins");
+                    const addQuantityButtons = document.querySelectorAll(".btnAdd");
+                    const removeQuantityButtons = document.querySelectorAll(".btnLess");
                     const textQuantity = document.querySelectorAll(".quantityProduct");
 
                     addQuantityButtons.forEach((button, index) => {
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             const productId = button.dataset.id;
                             textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
                             changeQuantity({id:"" + productId + ""}, +1);
-                            panierValue.textContent = getTotalPrice() + " €";
+                            cartQuantityValue.textContent = getTotalPrice() + " €";
                         });
                     });
                     removeQuantityButtons.forEach((button, index) => {
@@ -337,9 +337,9 @@ document.addEventListener('DOMContentLoaded', function(){
                             const productId = button.dataset.id;
                             textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
                             changeQuantity({ id: productId }, -1);
-                            panierValue.textContent = getTotalPrice() + " €";
+                            cartQuantityValue.textContent = getTotalPrice() + " €";
                             if (currentValue === 0) {
-                                let blockProduct = document.querySelector(".panierUser ul:nth-child(" + (index + 1) + ")");
+                                let blockProduct = document.querySelector("bagProducts ul:nth-child(" + (index + 1) + ")");
                                 blockProduct.style.display = "none";  
                             }
                             if(getTotalPrice() === 0) {
@@ -351,12 +351,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
     
-
     bagBoutique();
     AddLocalStorageBoutique();
-    switchMaillot();
+    switchShirts();
     lookProduct();
-    panierUser();
+    cartUser();
 
 });
 
