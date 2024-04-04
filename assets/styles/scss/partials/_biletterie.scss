@@ -48,12 +48,20 @@
     .img-background{
         background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
         background-size: cover;
-        padding-top: 6em;
+        padding: 3em;
         figure{
             width: 20%;
+            padding-top: 2em;
+            margin-bottom: -2em;
             img{
                 width: 100%;
             }
+        }
+        h1{
+            padding-top: 2em;
+        }
+        p{
+            margin-top: -0.5em;
         }
     }
 

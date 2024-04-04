@@ -1,7 +1,7 @@
 
 .allRanking{
     padding-top: 3em;
-
+    margin: 0 1em;
     button{
         margin: 2em;
     }
@@ -10,11 +10,16 @@
     }
     table{
         margin: 2em auto;
+        //border: 3px solid $beige;
+
         thead{
             tr{
                 th{
                     border-right: 1px solid $beige;
+                    border-bottom: 1px solid $beige;
                     text-align: center;
+                    background-color: $bleu;
+                    padding: 0.5em;
                 }
             }
         }
@@ -24,11 +29,7 @@
                     text-align: center;
                     padding-top: 1em;
                     padding-bottom: 1em;
-                    
                     border-bottom: 2px solid $beige;
-                }
-                .td{
-                    width: 8%;
                 }
 
                 .tdTeam{
@@ -36,11 +37,13 @@
                     flex-direction: row;
                     align-items: center;
                     gap: 0.5em;
+                    padding-left: 1em;
+                    text-transform: uppercase;
                     img{
-                        width: 15%;
+                        width: 30%;
                         border-radius: 50%;
-                    }
                 }
+            }
             }
         }
     }

@@ -41,3 +41,23 @@
         }
     }
 }
+
+.articleAllContent {
+    padding-top: 4em;
+    button{
+        margin: 1em;
+    }
+    h1{
+        text-align: center;
+        padding-bottom: 1em;
+    }
+    figure{
+        figcaption{
+            text-align: center;
+        }
+    }
+    p{
+        margin: 1em;
+        text-align: justify;
+    }
+}

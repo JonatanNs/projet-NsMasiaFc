@@ -41,32 +41,34 @@
         <article class="lastResult">
             <h3>Dernier résultat</h3>
             {% for match in matchPlays %}
-                <p>Le {{ match.date }} à {{ match.time }}.</p>
-                <p>{{ match.matchIsAtStadium_name }}</p>
+                <p class="lastResultDate">{{ match.date|format_datetime('full', 'none', locale='fr') }}</p>
+                {% if match.domicileExterieur == 'domicile' %}
+                    <p class="lastResultDom">{{ match.name }}</p>
+                    <p class="lastResultEx">{{ match.team }}</p>
+                {% else %}
+                    <p class="lastResultDom">{{match.team}}</p>
+                    <p class="lastResultEx">{{match.name}}</p>
+                {% endif %}
                 <div class="teamForLastMatch">
                     <figure>
                         <img src="assets/img/logo-ns_masia.png" alt=""/>
-                        <figcaption>{{ match.name }}</figcaption>
                     </figure> 
                     {% for result in resultMatchs %}
                         {% if result.match_id == match.match_id %}
-                    <p>
-                        {{ result.score_nsMasia ~ ' - ' ~ result.score_rivalTeam}}
-                    </p>
+                            <p>{{ result.score_nsMasia ~ ' - ' ~ result.score_rivalTeam }}</p>
                         {% endif %}
                     {% endfor %}
                     <figure>  
                         <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}" />
-                        <figcaption>{{ match.team }}</figcaption>
                     </figure>
                 </div>
-             {% endfor %}
+            {% endfor %}
         </article>
 
         <article class="prochainMatch">
             <h3>Prochaine rencontre</h3>
             {% set prochainMatch = null %}
-            {% set dateActuelle = "now"|date("Y-m-d") %} 
+            {% set dateActuelle = "now"|date("d-m-Y") %} 
             {% for match in matchs %}
                 {% if match.date >= dateActuelle %}
                     {% if prochainMatch is null or match.date < prochainMatch.date %}
@@ -75,23 +77,30 @@
                 {% endif %}
             {% endfor %}
             {% if prochainMatch is not null %}
-                <p>Le {{ prochainMatch.date }} à {{ prochainMatch.time }}.</p>
-                <p>{{ prochainMatch.stadium }}</p>
+                {% if prochainMatch.domicileExterieur == 'domicile' %}
+                    <p class="prochainMatchDom">{{prochainMatch.name}}</p>
+                    <p class="prochainMatchEx">{{prochainMatch.team}}</p>
+                {% else %}
+                    <p class="prochainMatchDom">{{prochainMatch.team}}</p>
+                    <p class="prochainMatchEx">{{prochainMatch.name}}</p>
+                {% endif %}
+                <p class="prochainMatchDate">{{ prochainMatch.date|format_datetime('full', 'none', locale='fr') }}</p>
+
                 <div class="teamForMatch">
                     <figure>
                         <img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/>
-                        <figcaption>{{prochainMatch.name}}</figcaption>
+                        <figcaption></figcaption>
                     </figure> 
-                    <p>VS</p>
+                    <p>{{ prochainMatch.time |date("H:i", "Europe/Paris") }}</p>
                     <figure>  
                         <img src="{{ prochainMatch.logo_url }}" alt="{{prochainMatch.logo_alt}}" />
-                        <figcaption>{{prochainMatch.team}}</figcaption>
+                        <figcaption></figcaption>
                     </figure>
                 </div>
                 {% if prochainMatch.domicileExterieur == 'domicile' %}
                 <a href="index.php?route=billeterie"><button class="btn">Billetterie</button></a>
                 {% else %}
-                <p>Match à l'exterieur</p>
+                <p>Match à l'exterieur.</p>
                 {% endif %}
             {% else %}
                 <p>Aucun match à venir.</p>
@@ -123,6 +132,15 @@
                     {% endfor %}
                     {% for team in teamsToShow %}
                         <tr>
+                        {% if team.team == 'NS Masia FC' %}
+                            <td class="rankingTd rankingTdNsMasia">{{ loop.index }}</td> 
+                            <td class="rankingTdTeam rankingTdNsMasia"> {{ team.team }}</td>
+                            <td class="rankingTd rankingTdNsMasia">{{ team.match_play }}</td>
+                            <td class="rankingTd rankingTdNsMasia">{{ team.match_win }}</td>
+                            <td class="rankingTd rankingTdNsMasia">{{ team.match_nul }}</td>
+                            <td class="rankingTd rankingTdNsMasia">{{ team.match_lose }}</td>
+                            <td class="rankingTd rankingTdNsMasia">{{ team.ranking_points }}</td>
+                        {% else %}
                             <td class="rankingTd">{{ loop.index }}</td> 
                             <td class="rankingTdTeam"> {{ team.team }}</td>
                             <td class="rankingTd">{{ team.match_play }}</td>
@@ -130,6 +148,7 @@
                             <td class="rankingTd">{{ team.match_nul }}</td>
                             <td class="rankingTd">{{ team.match_lose }}</td>
                             <td class="rankingTd">{{ team.ranking_points }}</td>
+                        {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -142,8 +161,10 @@
         <h4>Club</h4>
         <article class="homeClubHistoire">
             <h5>Histoire du club</h5>
-            <p>est esse dicta. 33 molestiae voluptut consequatur eaque vel dolores autem?</p>
-            <button class="btn">EN SAVOIR PLUS</button>
+            <p>NS MASIA F.C. 2024</p>
+            <figure>
+                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
+            </figure>
         </article>
         <div class="diapoClub">
             <div class="slideHomeClub" data-player="{{players|length}}">
@@ -155,7 +176,7 @@
                             <p>{{player.last_name}}</p>
                         </div>
                         <figure>
-                            <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="" />
+                            <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc" />
                         </figure>
                         <p class="playersLenght">{{ loop.index }} / {{ players|length }}</p>
                 </article>

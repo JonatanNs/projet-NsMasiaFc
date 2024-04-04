@@ -555,13 +555,21 @@ h1, h2, h3, h4, h5, h6 {
   .img-background {
     background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
     background-size: cover;
-    padding-top: 6em;
+    padding: 3em;
   }
   .img-background figure {
     width: 20%;
+    padding-top: 2em;
+    margin-bottom: -2em;
   }
   .img-background figure img {
     width: 100%;
+  }
+  .img-background h1 {
+    padding-top: 2em;
+  }
+  .img-background p {
+    margin-top: -0.5em;
   }
   .matchPresentation {
     margin: 2em;
@@ -631,12 +639,40 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 5em;
   margin: 0 2em;
 }
+.myAccount form input, .myAccount form select {
+  width: 100%;
+  padding: 0.3em;
+  border-radius: 1rem;
+}
+.myAccount form button {
+  margin-top: 1em;
+  width: 50%;
+}
+.myAccount h2 {
+  margin: 2em 0;
+  width: 80%;
+  cursor: pointer;
+}
+.myAccount h2:hover {
+  color: rgb(137, 137, 137);
+}
+.myAccount h3 {
+  color: rgb(250, 250, 250);
+  width: 80%;
+  cursor: pointer;
+}
+.myAccount h3:hover {
+  color: rgb(137, 137, 137);
+}
 .myAccount h1 {
   text-align: center;
   margin-bottom: 2em;
 }
-.myAccount .myOrder .yourTickets, .myAccount .myOrder .yourProducts {
-  font-size: 1.2rem;
+.myAccount .connectionAndSecurity .formChangeName {
+  margin-bottom: 2em;
+}
+.myAccount .connectionAndSecurity .formChangerPassword {
+  margin-bottom: 2em;
 }
 .myAccount .myOrder .yourTickets-order {
   display: flex;
@@ -740,67 +776,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 2rem;
     padding: 0.5em 1em;
   }
-  .container-prochainMatch {
-    padding: 1em;
-  }
-  .container-prochainMatch article {
-    border: 2px solid rgb(255, 249, 237);
-    border-radius: 1rem;
-    padding: 1em;
-    text-align: center;
-    margin: 1em;
-  }
-  .container-prochainMatch .prochainMatch .teamForMatch {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 1em;
-  }
-  .container-prochainMatch .prochainMatch .teamForMatch figure {
-    width: 20%;
-  }
-  .container-prochainMatch .prochainMatch .teamForMatch figure img {
-    width: 100%;
-  }
-  .container-prochainMatch .prochainMatch .teamForMatch figure figcaption {
-    margin-top: 0.5em;
-    text-wrap: pretty;
-  }
-  .container-prochainMatch .lastResult .teamForLastMatch {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .container-prochainMatch .lastResult .teamForLastMatch p {
-    background-color: rgb(25, 30, 59);
-    padding: 0.5em;
-  }
-  .container-prochainMatch .lastResult figure {
-    width: 20%;
-  }
-  .container-prochainMatch .lastResult figure img {
-    width: 100%;
-  }
-  .container-prochainMatch .ranking {
-    text-align: center;
-  }
-  .container-prochainMatch .ranking h2 {
-    text-align: center;
-  }
-  .container-prochainMatch .ranking table td {
-    border-top: 1px solid rgb(255, 249, 237);
-  }
-  .container-prochainMatch .ranking table .rankingTd {
-    width: 5%;
-  }
-  .container-prochainMatch .ranking table .rankingTdTeam {
-    width: 15%;
-  }
-  .container-prochainMatch .ranking table .rankingTdTeam img {
-    width: 10%;
-  }
+  /*********************************
+              * HOME ACTU *
+  ********************************/
   .homeActualite {
     position: relative;
   }
@@ -864,15 +842,170 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 1rem;
     padding: 0.1em 1em;
   }
+  /*********************************
+              * HOME MATCH *
+  ********************************/
+  .container-prochainMatch {
+    padding: 1em;
+    /************ NEXT MATCH **********/
+    /************ LAST MATCH **********/
+    /************ RANKING **********/
+  }
+  .container-prochainMatch article {
+    border: 2px solid rgb(255, 249, 237);
+    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
+    border-radius: 1rem;
+    padding: 1em;
+    text-align: center;
+    margin: 1em;
+  }
+  .container-prochainMatch .prochainMatch {
+    background-color: rgb(137, 137, 137);
+  }
+  .container-prochainMatch .prochainMatch h3 {
+    color: rgb(0, 0, 0);
+  }
+  .container-prochainMatch .prochainMatch .prochainMatchDom {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: "Poppins", sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: -0.5em;
+  }
+  .container-prochainMatch .prochainMatch .prochainMatchEx {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .container-prochainMatch .prochainMatch .prochainMatchDate {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+  .container-prochainMatch .prochainMatch .teamForMatch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 1em;
+  }
+  .container-prochainMatch .prochainMatch .teamForMatch p {
+    background-color: rgb(0, 0, 0);
+    font-weight: 900;
+    padding: 0.5em;
+    border-radius: 1rem;
+  }
+  .container-prochainMatch .prochainMatch .teamForMatch figure {
+    width: 20%;
+  }
+  .container-prochainMatch .prochainMatch .teamForMatch figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  .container-prochainMatch .prochainMatch .teamForMatch figure figcaption {
+    margin-top: 0.5em;
+    text-wrap: pretty;
+  }
+  .container-prochainMatch .lastResult {
+    background-color: rgb(137, 137, 137);
+  }
+  .container-prochainMatch .lastResult h3 {
+    color: rgb(0, 0, 0);
+  }
+  .container-prochainMatch .lastResult .lastResultDom {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: "Poppins", sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: -0.5em;
+  }
+  .container-prochainMatch .lastResult .lastResultEx {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .container-prochainMatch .lastResult .lastResultDate {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+  .container-prochainMatch .lastResult .teamForLastMatch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .container-prochainMatch .lastResult .teamForLastMatch p {
+    background-color: rgb(25, 30, 59);
+    font-weight: 900;
+    padding: 0.5em;
+    border-radius: 1rem;
+  }
+  .container-prochainMatch .lastResult figure {
+    width: 20%;
+  }
+  .container-prochainMatch .lastResult figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  .container-prochainMatch .ranking {
+    text-align: center;
+    background-color: rgb(137, 137, 137);
+  }
+  .container-prochainMatch .ranking h3 {
+    color: rgb(0, 0, 0);
+  }
+  .container-prochainMatch .ranking table td {
+    border-top: 1px solid rgb(255, 249, 237);
+  }
+  .container-prochainMatch .ranking table .rankingTd {
+    width: 5%;
+  }
+  .container-prochainMatch .ranking table .rankingTdNsMasia {
+    background-color: rgb(25, 30, 59);
+  }
+  .container-prochainMatch .ranking table .rankingTdTeam {
+    width: 15%;
+  }
+  .container-prochainMatch .ranking button {
+    width: 100%;
+    padding: 0.3em;
+    margin-top: 1em;
+    font-size: 1.3rem;
+  }
+  /*********************************
+              * HOME CLUB *
+  ********************************/
   .homeClub {
     position: relative;
   }
   .homeClub h4 {
-    position: absolute;
-    z-index: 99;
     color: rgb(250, 250, 250);
     padding: 0.5em;
-    background-color: black;
+    margin: 2em;
+  }
+  .homeClub .homeClubHistoire {
+    margin: 0 1em;
+  }
+  .homeClub .homeClubHistoire:hover {
+    background-color: rgb(255, 249, 237);
+  }
+  .homeClub .homeClubHistoire figure {
+    width: 100%;
+  }
+  .homeClub .homeClubHistoire figure img {
+    width: 100%;
+  }
+  .homeClub .homeClubHistoire h5 {
+    position: absolute;
+    z-index: 96;
+    top: 27%;
+    left: 8%;
+    font-size: 2.5rem;
+  }
+  .homeClub .homeClubHistoire p {
+    position: absolute;
+    z-index: 96;
+    top: 31%;
+    left: 8%;
   }
   .homeClub .slideHomeClub {
     position: relative;
@@ -979,6 +1112,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .allRanking {
   padding-top: 3em;
+  margin: 0 1em;
 }
 .allRanking button {
   margin: 2em;
@@ -991,7 +1125,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .allRanking table thead tr th {
   border-right: 1px solid rgb(255, 249, 237);
+  border-bottom: 1px solid rgb(255, 249, 237);
   text-align: center;
+  background-color: rgb(25, 30, 59);
+  padding: 0.5em;
 }
 .allRanking table tbody tr td {
   text-align: center;
@@ -999,17 +1136,16 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 1em;
   border-bottom: 2px solid rgb(255, 249, 237);
 }
-.allRanking table tbody tr .td {
-  width: 8%;
-}
 .allRanking table tbody tr .tdTeam {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5em;
+  padding-left: 1em;
+  text-transform: uppercase;
 }
 .allRanking table tbody tr .tdTeam img {
-  width: 15%;
+  width: 30%;
   border-radius: 50%;
 }
 
@@ -1084,6 +1220,24 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgb(25, 30, 59);
   color: rgb(255, 249, 237);
   font-size: 2rem;
+}
+
+.articleAllContent {
+  padding-top: 4em;
+}
+.articleAllContent button {
+  margin: 1em;
+}
+.articleAllContent h1 {
+  text-align: center;
+  padding-bottom: 1em;
+}
+.articleAllContent figure figcaption {
+  text-align: center;
+}
+.articleAllContent p {
+  margin: 1em;
+  text-align: justify;
 }
 
 @media screen and (max-width: 480px) {

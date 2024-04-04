@@ -2,20 +2,50 @@
 .myAccount{
     padding-top: 5em;
     margin: 0 2em;
+    form{
+        
+            input, select{
+                width: 100%;
+                padding: 0.3em;
+                border-radius: 1rem;
+            }
+            button{
+                margin-top: 1em;
+                width: 50%;
+            }
+        
+    }
+    
+    h2{
+        margin: 2em 0 ;
+        width: 80%;
+        cursor: pointer;
+        &:hover{
+            color: $darkgrey;
+        }
+    }
+    h3{
+        color: $white;
+        width: 80%;
+        cursor: pointer;
+        &:hover{
+            color: $darkgrey;
+        }
+    }
     h1{
         text-align: center;
         margin-bottom: 2em;
     }
     .connectionAndSecurity{
-        h2{
-            
+        .formChangeName{
+            margin-bottom: 2em;
+        }
+        .formChangerPassword{
+            margin-bottom: 2em;
         }
     }
     .myOrder{
-    
-        .yourTickets, .yourProducts{
-            font-size: 1.2rem;
-        }
+
         .yourTickets-order{
             display: flex;
             flex-direction: column;

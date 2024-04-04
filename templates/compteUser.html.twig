@@ -4,26 +4,26 @@
     <section class="myAccount">
         <h1>Mon Compte</h1>
         <section class="connectionAndSecurity">
-            <h2>Connexion et sécurité <span class="fa-solid fa-lock" style="color: #FFF;"></span></h2> 
-            <article class="invisible">
-                <h3>Modifier son nom</h3>
+            <h2>Connexion et sécurité  <span class="fa-solid fa-lock" style="color: #FFD43B;"></span></h2> 
+            <article class="changeName invisible">
+                <h3>Modifier son nom <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
                 <p>{{errorMessage}}</p>
                 <p>{{valideMessage}}</p>
-                <form action="index.php?route=checkChangeName" method="POST" class="form">
+                <form action="index.php?route=checkChangeName" method="POST" class="form formChangeName invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="changeFirstName">Prénom</label>
-                        <input type="text" id="changeFirstName" name="changeFirstName" required>
+                        <input type="text" id="changeFirstName" name="changeFirstName" placeholder="Prénom" required>
                     </fieldset>
 
                     <fieldset>
                         <label for="changeLast_name">Nom</label>
-                        <input type="text" id="changeLast_name" name="changeLast_name" required>
+                        <input type="text" id="changeLast_name" name="changeLast_name" placeholder="Nom" required>
                     </fieldset>
 
                     <fieldset>
                         <label for="passwordForChangeName">Mot de passe</label>
-                        <input type="password" id="passwordForChangeName" name="passwordForChangeName" required>
+                        <input type="password" id="passwordForChangeName" name="passwordForChangeName" placeholder="***********" required>
                     </fieldset>
 
                     <fieldset>
@@ -32,28 +32,28 @@
                 </form>
             </article>
 
-            <article class="invisible">
-                <h3>Modifier son mot de passe</h3>
+            <article class="changePassword invisible">
+                <h3>Modifier son mot de passe <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
                 <form action="index.php?route=checkChangerPassword" method="POST" class="form formChangerPassword invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="emailForChangePassword">Email</label>
-                        <input type="email" id="emailForChangePassword" name="emailForChangePassword" required>
+                        <input type="email" id="emailForChangePassword" name="emailForChangePassword" placeholder="email@gmail.com" required>
                     </fieldset>
 
                     <fieldset>
                         <label for="actualPassword">Mot de passe actuel</label>
-                        <input type="password" id="actualPassword" name="actualPassword" required>
+                        <input type="password" id="actualPassword" name="actualPassword" placeholder="email@gmail.com" required>
                     </fieldset>
 
                     <fieldset>
                         <label for="changePassword">Nouveau Mot de passe</label>
-                        <input type="password" id="changePassword" name="changePassword" required>
+                        <input type="password" id="changePassword" name="changePassword" placeholder="***********" required>
                     </fieldset>
 
                     <fieldset>
                         <label for="confirmChangePassword">Confirmer Nouveau le mot de passe</label>
-                        <input type="password" id="confirmChangePassword" name="confirmChangePassword" required>
+                        <input type="password" id="confirmChangePassword" name="confirmChangePassword" placeholder="***********" required>
                     </fieldset>
 
                     <fieldset>
@@ -62,8 +62,8 @@
                 </form>
             </article>
 
-            <article class="invisible">
-                <h3>Modifier Email</h3>
+            <article class="changeEmail invisible">
+                <h3>Modifier Email <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
                 <form action="index.php?route=checkChangerEmail" method="POST" class="form formChangerEmail invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
@@ -91,10 +91,10 @@
                 </form>
             </article>
         </section>
-        <article>
-            <h2>Adresses <span class="fa-solid fa-map" style="color: #ffffff;"></span></h2>
+        <article class="addressforDelivery">
+            <h2>Mon adresse de livraison <span class="fa-solid fa-map" style="color: #ffffff;"></span></h2>
             {% if address is empty %}
-                <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison invisible">
+                <form action="index.php?route=checkAddress"  method="POST" class="form formDelivery invisible">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                     <fieldset>
@@ -121,7 +121,7 @@
                     </fieldset>
                 </form>
             {% else %}
-                <article class="invisible">
+                <article class="userAddress invisible">
                     <h3>Votre address<h3>
                     <ul>
                         <li>{{  address.addresse }}</li>
@@ -132,19 +132,22 @@
                         <li>{{ address.pays}}</li>
                     </ul>
                 </article>
-                <article class="invisible">
-                    <h4>Modifier son adresse</h4>
-                    <form action="index.php?route=checkChangeAddress"  method="POST" class="form formForChangeAddress">
+                <article class="changeAddress invisible">
+                    <h3>Modifier son adresse <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
+                    <form action="index.php?route=checkChangeAddress"  method="POST" class="form formForChangeAddress invisible">
                         <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                         <input type="hidden" name="address_id" id="address_id" value="{{ address.id }}"/>
                         <fieldset>
-                            <input type="text" id="address" name="address" placeholder="Address" required/>
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" name="address" placeholder="Adresse" required/>
                         </fieldset>
                         <fieldset>
+                            <label for="orderComplements">Appartement, suite, etc.. (optionnel)</label>
                             <input type="text" id="orderComplements" name="orderComplements" placeholder="Appartement, suite, etc.. (optionnel)" />
                         </fieldset>
                         <fieldset>
+                            <label for="orderZipCode">Code Postal</label>
                             <input type="number" id="orderZipCode" name="orderZipCode" placeholder="Code Postal" required/>
                         </fieldset>
                         <fieldset>
@@ -163,19 +166,19 @@
         </article>
         <section class="myOrder">
             <h2>Mes commandes <span class="fa-solid fa-basket-shopping" style="color: #00ff33;"></span></h2>
-            <p class="yourTickets invisible">Vos Tickets <span class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed; margin-left: 0.5em;"></span></p>
+            <h3 class="yourTickets invisible">Vos Tickets <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
             {% for orderTicket in orderTickets %}
                 <article class="yourTickets-order invisible">
                     <article>
-                        <h3>COMMANDE EFFECTUÉE LE</h3>
+                        <h4>COMMANDE EFFECTUÉE LE</h4>
                         <p>{{ orderTicket.date }}</p>
                     </article>
                     <article>
-                        <h3>N° DE COMMANDE</h3>
+                        <h4>N° DE COMMANDE</h4>
                         <p>{{ orderTicket.order_number }}</p>
                     </article>
                     <article>
-                        <h3>TOTAL</h3>
+                        <h4>TOTAL</h4>
                         <p>{{ orderTicket.total_prices }} €</p>
                     </article>
                 </article>
@@ -187,7 +190,7 @@
                                     <img src="{{ matchOf.logo_url }}" alt="{{ matchOf.logo_alt }}"/>
                                 </figure>
                                 <div>
-                                    <h3>{{ matchOf.name ~ ' vs ' ~ matchOf.team }}</h3>
+                                    <h4>{{ matchOf.name ~ ' vs ' ~ matchOf.team }}</h4>
                                     <p>Au stade : {{ matchOf.matchIsAtStadium_name}}</p>
                                     <p>{{ matchOf.date }} - {{ matchOf.time }}</p>
                                 </div>
@@ -196,19 +199,19 @@
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            <p class="yourProducts invisible">Vos Produits <i class="fa-solid fa-caret-up fa-flip-vertical fa-xl" style="color: #fff9ed; margin-left: 0.5em;"></i></p>
+            <h3 class="yourProducts invisible">Vos Produits <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
             {% for allOrdersProduct in allOrdersProducts %}
             <article class="yourProducts-order invisible">
                 <article>
-                    <h3>COMMANDE EFFECTUÉE LE</h3>
+                    <h4>COMMANDE EFFECTUÉE LE</h4>
                     <p>{{ allOrdersProduct.date }}</p>
                 </article>
                 <article>
-                    <h3>N° DE COMMANDE</h3>
+                    <h4>N° DE COMMANDE</h4>
                     <p>{{ allOrdersProduct.order_number }}</p>
                 </article>
                 <article>
-                    <h3>TOTAL</h3>
+                    <h4>TOTAL</h4>
                     <p>{{ allOrdersProduct.totalTtc }} €</p>
                 </article>
                 {% for ordersProduct in ordersProducts %}
@@ -220,7 +223,7 @@
                                     <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
                                 </figure>
                                 <div>
-                                    <h3>{{ product.name }}</h3>
+                                    <h4>{{ product.name }}</h4>
                                     <p>Taille : {{ orderProduct.sizes }}</p>
                                     <ul>
                                         <li>Prix : {{ product.prices }} €</li>
@@ -236,8 +239,12 @@
         {% endfor %}
         </section>
 
-        <article>
-            <h2>Nous contacter <span class="fa-solid fa-headset" style="color: #ffffff;"></span></h2>  
+        <article class="contact">
+            <h2>Nous contacter  <span class="fa-solid fa-headset" style="color: #005eff;"></span></h2>  
+            <ul class="coordinate invisible">
+                <li>06 55 88 77 99 </li>
+                <li></li>
+            </ul>
         </article>
     </section>
 </main

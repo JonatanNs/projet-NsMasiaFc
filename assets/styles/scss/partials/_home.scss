@@ -44,82 +44,9 @@
         }
     }
 
-    .container-prochainMatch{
-        padding: 1em;
-        article{
-            border: 2px solid $beige;
-            border-radius: 1rem;
-            padding: 1em;
-            text-align: center;
-            margin: 1em;
-
-        }
-        .prochainMatch{
-
-            .teamForMatch{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-                margin: 0 1em;
-                
-                figure{
-                    width: 20%;
-                    img{
-                        width: 100%;
-                    }
-                    figcaption{
-                        margin-top: 0.5em;
-                        text-wrap:pretty;
-                    } 
-                }  
-            }
-        }
-        .lastResult{
-            
-            .teamForLastMatch{
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-around;
-                p{
-                    background-color: $bleu;
-                    padding: 0.5em;
-                }
-            }
-            figure{
-                width: 20%;
-                img{
-                    width: 100%;
-                }
-            }
-        }
-        .ranking{
-            text-align: center;
-
-            h2{
-                text-align: center;
-            }
-            table{
-                
-                td{
-                    border-top: 1px solid $beige;
-                }
-
-                .rankingTd{
-                    width: 5%;
-                }
-                .rankingTdTeam{
-                    width: 15%;
-                    
-                    img{
-                        width: 10%;
-                        
-                    }
-                }
-            }
-        }
-    }
+    /*********************************
+                * HOME ACTU *
+    ********************************/
 
     .homeActualite{ 
         position: relative;
@@ -173,31 +100,203 @@
             }
         }
     }
-        .buttonNextPrevious{
-            display: flex;
-            flex-direction: row;
-            gap: 0.5em;
-            position: absolute;
-            bottom: 7%;
-            left: 40%;
-            button{
-                background-color: $black;
-                color: $beige;
-                border: 2px solid $beige;
-                border-radius: 1rem;
-                padding: 0.1em 1em;
+
+    .buttonNextPrevious{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        position: absolute;
+        bottom: 7%;
+        left: 40%;
+        button{
+            background-color: $black;
+            color: $beige;
+            border: 2px solid $beige;
+            border-radius: 1rem;
+            padding: 0.1em 1em;
+        }
+    }
+
+    /*********************************
+                * HOME MATCH *
+    ********************************/
+
+    .container-prochainMatch{
+        padding: 1em;
+        article{
+            border: 2px solid $beige;
+            box-shadow: $beige 0px 2px 8px 0px;
+            border-radius: 1rem;
+            padding: 1em;
+            text-align: center;
+            margin: 1em;
+        }
+        /************ NEXT MATCH **********/
+        .prochainMatch{
+            background-color: $darkgrey;
+            h3{
+                color: $black;
+            }
+            .prochainMatchDom{
+                text-transform: uppercase;
+                font-weight: 900;
+                font-family: $font;
+                font-size: 2.2rem;
+                margin-bottom: -0.5em;
+            }
+            .prochainMatchEx{
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+            .prochainMatchDate{
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 1.3rem;
+            }
+            .teamForMatch{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                margin: 0 1em;
+                p{
+                    background-color: $black;
+                    font-weight: 900;
+                    padding: 0.5em;
+                    border-radius: 1rem;
+                }
+                
+                figure{
+                    width: 20%;
+                    img{
+                        width: 100%;
+                        border-radius: 1rem;
+                    }
+                    figcaption{
+                        margin-top: 0.5em;
+                        text-wrap:pretty;
+                    } 
+                }  
             }
         }
 
+        /************ LAST MATCH **********/
+
+        .lastResult{
+            background-color: $darkgrey;
+            h3{
+                color: $black;
+            }
+            .lastResultDom{
+                text-transform: uppercase;
+                font-weight: 900;
+                font-family: $font;
+                font-size: 2.2rem;
+                margin-bottom: -0.5em;
+            }
+            .lastResultEx{
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            .lastResultDate{
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 1.3rem;
+            }
+            .teamForLastMatch{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                p{
+                    background-color: $bleu;
+                    font-weight: 900;
+                    padding: 0.5em;
+                    border-radius: 1rem;
+                }
+            }
+            figure{
+                width: 20%;
+                img{
+                    width: 100%;
+                    border-radius: 1rem;
+                }
+            }
+        }
+
+        /************ RANKING **********/
+
+        .ranking{
+            text-align: center;
+            background-color: $darkgrey;
+            h3{
+                color: $black;
+            }
+            table{
+                
+                td{
+                    border-top: 1px solid $beige;
+                }
+
+                .rankingTd{
+                    width: 5%;
+                }
+                .rankingTdNsMasia{
+                    background-color: $bleu;
+                }
+                .rankingTdTeam{
+                    width: 15%;
+                }
+            }
+            button{
+                width: 100%;
+                padding: 0.3em;
+                margin-top: 1em;
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    /*********************************
+                * HOME CLUB *
+    ********************************/
+
     .homeClub { 
         position: relative;
-        
+
         h4 {
-            position: absolute;
-            z-index: 99;
             color: $white;
             padding: 0.5em;
-            background-color: black;
+            margin: 2em;
+        }
+
+        .homeClubHistoire{
+            margin: 0 1em ;
+            &:hover{
+                background-color: $beige;
+            }
+            figure{
+                
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
+            h5{
+                position: absolute;
+                z-index: 96;
+                top: 27%;
+                left: 8%;
+                font-size: 2.5rem;
+            }
+            p{
+                position: absolute;
+                z-index: 96;
+                top: 31%;
+                left: 8%;
+            }
+
         }
 
         .slideHomeClub { 
