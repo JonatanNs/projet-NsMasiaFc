@@ -10,7 +10,7 @@
         </figure>
         <h1>NS<br>Masia FC</h1>
         <div class="btnProchainMatch">
-            <button class="btn">Prochain match</button>
+            <button class="btn">Prochain match <span class="fa-solid fa-circle-left fa-rotate-270" style="color: #ffffff;"></span></button>
         </div>
     </section>
 
@@ -98,7 +98,7 @@
                     </figure>
                 </div>
                 {% if prochainMatch.domicileExterieur == 'domicile' %}
-                <a href="index.php?route=billeterie"><button class="btn">Billetterie</button></a>
+                <a href="index.php?route=billeterie"><button class="btn">Billetterie <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span></button></a>
                 {% else %}
                 <p>Match à l'exterieur.</p>
                 {% endif %}
@@ -106,7 +106,6 @@
                 <p>Aucun match à venir.</p>
             {% endif %}
         </article>
-
 
         <article class="ranking">
             <h3>Classement</h3>
@@ -153,18 +152,29 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="index.php?route=allRanking"><button class="btn">Classement complet</button></a>
+            <a href="index.php?route=allRanking"><button class="btn">Classement complet <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span></button></a>
         </article>
     </div>
 
     <section class="homeClub">
         <h4>Club</h4>
         <article class="homeClubHistoire">
+            <a href="index.php?route=club">
             <h5>Histoire du club</h5>
             <p>NS MASIA F.C. 2024</p>
             <figure>
-                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
+               <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
             </figure>
+            </a>
+        </article>
+        <article class="homeClubPlayers">
+            <a href="index.php?route=club">
+            <h5>Joueur du club</h5>
+            <p>NS MASIA F.C. 2024</p>
+            <figure>
+                <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
+            </figure>
+            </a>
         </article>
         <div class="diapoClub">
             <div class="slideHomeClub" data-player="{{players|length}}">

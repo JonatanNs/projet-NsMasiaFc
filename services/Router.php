@@ -11,6 +11,7 @@ class Router
         $adm = new AdminController();
         $MatchController = new MatchController();
         $compteUserController = new CompteUserController();
+        $pc = new PlayerNsMasiaController();
         $id = isset($get["id"]) ? (int)$get["id"] : 0;
 
         if(!isset($get["route"]))
@@ -58,7 +59,7 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "club")
         {
-            $ac->club();
+            $pc->club();
         }
         else if(isset($get["route"]) && $get["route"] === "boutique")
         {

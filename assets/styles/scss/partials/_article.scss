@@ -1,63 +1,68 @@
-/************************************
-            * ARTICLES *
-*************************************/
-.blockArticle{
-    padding-top: 4em;
-    h1{
-        margin-left: 1em;
+/*********************************
+        * ARTICLES NEWS *
+*********************************/
+@media screen and (max-width: 480px) {
+    .blockArticle{
+        padding-top: 4em;
+        margin-bottom: 7em;
+        h1{
+            margin-left: 1em;
+        }
+        .articleContent{
+            padding-top: 2em;
+            border: 3px solid $beige;
+            margin: 1em;
+            box-shadow: $beige 0px 20px 25px -5px, $beige 0px 10px 10px -5px;
+            h2{
+                text-align: center;
+            }
+            figure{
+                margin-top: 2em;
+                margin-bottom: 2em;
+                figcaption{
+                    text-align: center;
+                }
+            }
+            p+p{
+                margin-top: 1em;
+            }
+            p{
+                text-align: justify;
+                width: 90%;
+                margin: 0 auto;
+                margin-bottom: 1em;
+            }
+            a{
+                button{
+                    margin: 0 auto;
+                    width: 100%;
+                    background-color: $bleu;
+                    color: $beige;
+                    font-size: 2rem;
+                }
+            }
+        }
     }
-    .articleContent{
-        padding-top: 2em;
-        border: 3px solid $beige;
-        margin: 1em;
-        box-shadow: $beige 0px 20px 25px -5px, $beige 0px 10px 10px -5px;
-        h2{
+
+    .articleAllContent {
+        margin-bottom: 7em;
+        padding-top: 4em;
+        button{
+            margin: 1em;
+        }
+        h1{
             text-align: center;
+            padding-bottom: 1em;
         }
         figure{
-            margin-top: 2em;
-            margin-bottom: 2em;
             figcaption{
                 text-align: center;
             }
         }
-        p+p{
-            margin-top: 1em;
-        }
         p{
+            margin: 1em;
             text-align: justify;
-            width: 90%;
-            margin: 0 auto;
-            margin-bottom: 1em;
-        }
-        a{
-            button{
-                margin: 0 auto;
-                width: 100%;
-                background-color: $bleu;
-                color: $beige;
-                font-size: 2rem;
-            }
         }
     }
-}
 
-.articleAllContent {
-    padding-top: 4em;
-    button{
-        margin: 1em;
-    }
-    h1{
-        text-align: center;
-        padding-bottom: 1em;
-    }
-    figure{
-        figcaption{
-            text-align: center;
-        }
-    }
-    p{
-        margin: 1em;
-        text-align: justify;
-    }
 }

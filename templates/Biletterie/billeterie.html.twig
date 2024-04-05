@@ -28,7 +28,7 @@
                 </li>
             {% endif %}
                 <li>
-                    <p>{{ match.date |format_datetime('full', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
+                    <p>{{ match.date |format_datetime( 'short', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
                 </li>
                 <li>
                     <figure> 

@@ -1,5 +1,4 @@
 
-
 @import "vars/font";
 @import "reset/reset";
 @import "partials/header";
@@ -8,10 +7,12 @@
 @import "partials/biletterie";
 @import "partials/compteUser";
 @import "partials/home";
-@import "partials/espaceAdmin";
 @import "partials/ranking";
 @import "partials/form";
 @import "partials/article";
+@import "partials/club";
+@import "partials/admin";
+@import "partials/footer";
 
 @media screen and (max-width: 480px) {
     .container{

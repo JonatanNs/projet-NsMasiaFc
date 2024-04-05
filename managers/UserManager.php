@@ -6,9 +6,6 @@ class UserManager extends AbstractManager{
                              * CREATE *
     **********************************************************/
 
-    /***************************
-        * CREATE USER *
-    ****************************/
 
     public function SignUpUser(User $users) : void {
         $query = $this->db->prepare("INSERT INTO users (id, first_name, last_name, email, password) 
@@ -18,6 +15,38 @@ class UserManager extends AbstractManager{
             'last_name' => $users->getLastName(), 
             'email' => $users->getEmail(), 
             'password' => $users->getPassword()
+        ];
+        $query->execute($parameters);
+    }
+
+    /**********************************************************
+                    * CHANGE USER INFORMATION *
+    **********************************************************/
+
+    public function changeName(int $id, string $first_name, string $last_name) : void {
+        $query = $this->db->prepare("UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'first_name' => $first_name, 
+        'last_name' => $last_name, 
+        ];
+        $query->execute($parameters);
+    }
+
+    public function changePassword(int $id, string $password) : void {
+        $query = $this->db->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'password' => $password, 
+        ];
+        $query->execute($parameters);
+    }
+
+    public function changeEmail(int $id, string $email) : void {
+        $query = $this->db->prepare("UPDATE users SET email = :email WHERE id = :id");
+        $parameters = [
+        'id' => $id,
+        'email' => $email, 
         ];
         $query->execute($parameters);
     }
@@ -74,37 +103,5 @@ class UserManager extends AbstractManager{
             return $user;
         }
         return null ;
-    }
-
-    /**********************************************************
-                             * CHANGE USER INFORMATION *
-    **********************************************************/
-
-    public function changeName(int $id, string $first_name, string $last_name) : void {
-        $query = $this->db->prepare("UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id");
-        $parameters = [
-        'id' => $id,
-        'first_name' => $first_name, 
-        'last_name' => $last_name, 
-        ];
-        $query->execute($parameters);
-    }
-
-    public function changePassword(int $id, string $password) : void {
-        $query = $this->db->prepare("UPDATE users SET password = :password WHERE id = :id");
-        $parameters = [
-        'id' => $id,
-        'password' => $password, 
-        ];
-        $query->execute($parameters);
-    }
-
-    public function changeEmail(int $id, string $email) : void {
-        $query = $this->db->prepare("UPDATE users SET email = :email WHERE id = :id");
-        $parameters = [
-        'id' => $id,
-        'email' => $email, 
-        ];
-        $query->execute($parameters);
     }
 }

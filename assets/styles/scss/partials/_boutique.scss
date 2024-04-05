@@ -1,5 +1,6 @@
-/************************** BOUTIQUE ***********************/
-
+/*********************************
+            * SHOP *
+*********************************/
 @media screen and (max-width: 480px) {
     .searchAndBag{
         display: flex;
@@ -15,12 +16,10 @@
     }
 
     .titleBoutique{
-        //NsMasia FC + Boutique Officiel
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        //padding-top: 3em;
         figure {
             width: 100%;
             display: flex;
@@ -38,7 +37,7 @@
         grid-template-columns: 1fr 1fr;
         align-items: center;
         justify-content: space-evenly;
-        margin: 1em;
+        margin: 1em 1em 7em 1em;
         .shirtSale{
             display: flex;
             flex-direction: column;
@@ -58,7 +57,6 @@
             ul{
                 li{
                     h2{
-                        //NsMasia FC Domicile
                         cursor: pointer;
                         a{
                             color: $beige;
@@ -70,7 +68,6 @@
                 }
                 li{
                     p{
-                        //Maillot domicile 2024/2025
                         cursor: pointer;
                     }
                 }
@@ -103,12 +100,10 @@
                     }
                 }
             }
-        }
-        
+        } 
     }
 
-
-/**********************PANIER********************/
+/**********************CART********************/
     .carts{
         padding-top: 5em;
         h2{
@@ -155,7 +150,6 @@
                     .cartsPriceQuantity{
                         font-size: 2rem;
                     }
-                    
                     p{
                         margin-top: 0.7em;
                     }
@@ -171,21 +165,19 @@
         align-items: center;
         gap: 1em;
         padding-bottom: 2em;
+        margin-bottom: 7em;
 
         button{
             font-size: 2rem;
-        }
-
-        
-        
+        }  
     }
 
 /**********************************************
-            * BOUTIQUE PRODUCTS *
+            * SHOP PRODUCTS *
 ************************************************/
 
     .shirts{
-        margin: 2em;
+        margin: 2em 2em 7em 2em;
 
         .shirtSale{
                 
@@ -235,7 +227,6 @@
             p{
                 padding: 1em 0;
             }
-           
         }
     }
 

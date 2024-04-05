@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             changeQuantity({ id: productId }, -1);
                             cartQuantityValue.textContent = getTotalPrice() + " €";
                             if (currentValue === 0) {
-                                let blockProduct = document.querySelector("bagProducts ul:nth-child(" + (index + 1) + ")");
+                                let blockProduct = document.querySelector(".cartsProducts > ul:nth-child(" + (index + 1) + ")");
                                 blockProduct.style.display = "none";  
                             }
                             if(getTotalPrice() === 0) {

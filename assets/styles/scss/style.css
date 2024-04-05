@@ -112,7 +112,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgb(0, 0, 0);
 }
 
-/************************** BOUTIQUE ***********************/
+/*********************************
+            * SHOP *
+*********************************/
 @media screen and (max-width: 480px) {
   .searchAndBag {
     display: flex;
@@ -147,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-content: space-evenly;
-    margin: 1em;
+    margin: 1em 1em 7em 1em;
   }
   .allShirt .shirtSale {
     display: flex;
@@ -203,7 +205,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     border-radius: 0.5rem;
   }
-  /**********************PANIER********************/
+  /**********************CART********************/
   .carts {
     padding-top: 5em;
   }
@@ -259,15 +261,16 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 1em;
     padding-bottom: 2em;
+    margin-bottom: 7em;
   }
   .location button {
     font-size: 2rem;
   }
   /**********************************************
-              * BOUTIQUE PRODUCTS *
+              * SHOP PRODUCTS *
   ************************************************/
   .shirts {
-    margin: 2em;
+    margin: 2em 2em 7em 2em;
   }
   .shirts .shirtSale .shirtOne {
     width: 100%;
@@ -314,7 +317,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1em 0;
   }
 }
-/********************** PAYEMENT *************************/
+/*************************************************
+                * PAYEMENT  *
+*************************************************/
 @media screen and (max-width: 480px) {
   .titleBoutiquePayement, .titleBiletteriePayement {
     display: flex;
@@ -338,7 +343,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .payement {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 7em auto;
   }
   .payement .orderUser .orderUser-connexion {
     text-align: center;
@@ -464,9 +469,9 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     font-size: 1.5rem;
   }
-  /***********************************************************
+  /*****************************************************
               * PAYEMENT TICKET *
-  ***********************************************************/
+  *****************************************************/
   .recapCartUser {
     padding: 1em;
     border-top: 2px solid rgb(255, 249, 237);
@@ -513,10 +518,13 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
   }
 }
-/*********************Biletterie***********************/
+/*********************************
+            * BILETTERIE *
+*********************************/
 @media screen and (max-width: 480px) {
   .nextMatch {
     padding-top: 2em;
+    margin-bottom: 5em;
   }
   .nextMatch h2 {
     text-align: center;
@@ -601,6 +609,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .allTickets {
     text-align: center;
+    margin-bottom: 7em;
   }
   .allTickets h2 {
     margin-bottom: 2em;
@@ -634,106 +643,109 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0 1em;
   }
 }
-/**********COMPTE USER***********/
-.myAccount {
-  padding-top: 5em;
-  margin: 0 2em;
+/*********************************
+            * USER ACCOUNT *
+*********************************/
+@media screen and (max-width: 480px) {
+  .myAccount {
+    padding-top: 5em;
+    margin: 0 2em;
+  }
+  .myAccount form input, .myAccount form select {
+    width: 100%;
+    padding: 0.3em;
+    border-radius: 1rem;
+  }
+  .myAccount form button {
+    margin-top: 1em;
+    width: 50%;
+  }
+  .myAccount h2 {
+    margin: 2em 0;
+    width: 80%;
+    cursor: pointer;
+  }
+  .myAccount h2:hover {
+    color: rgb(137, 137, 137);
+  }
+  .myAccount h3 {
+    color: rgb(250, 250, 250);
+    width: 80%;
+    cursor: pointer;
+  }
+  .myAccount h3:hover {
+    color: rgb(137, 137, 137);
+  }
+  .myAccount h1 {
+    text-align: center;
+    margin-bottom: 2em;
+  }
+  .myAccount .connectionAndSecurity .formChangeName {
+    margin-bottom: 2em;
+  }
+  .myAccount .connectionAndSecurity .formChangerPassword {
+    margin-bottom: 2em;
+  }
+  .myAccount .myOrder .yourTickets-order {
+    display: flex;
+    flex-direction: column;
+  }
+  .myAccount .myOrder .yourTickets-order article {
+    padding: 1em;
+  }
+  .myAccount .myOrder .yourTickets-order article + article {
+    border-top: 2px solid rgb(255, 249, 237);
+    width: 100%;
+  }
+  .myAccount .myOrder .yourTickets-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .myAccount .myOrder .yourTickets-info figure {
+    width: 50%;
+    margin-left: 2em;
+  }
+  .myAccount .myOrder .yourTickets-info figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  .myAccount .myOrder .yourTickets-info div {
+    margin-left: -3em;
+  }
+  .myAccount .myOrder .yourProducts-order {
+    border: 2px solid rgb(137, 137, 137);
+    margin-bottom: 2em;
+  }
+  .myAccount .myOrder .yourProducts-order article {
+    padding: 1em;
+  }
+  .myAccount .myOrder .yourProducts-order article + article {
+    border-top: 2px solid rgb(255, 249, 237);
+    width: 100%;
+  }
+  .myAccount .myOrder .yourProducts-order .yourProducts-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3em;
+    background-color: rgb(137, 137, 137);
+  }
+  .myAccount .myOrder .yourProducts-order .yourProducts-info figure {
+    width: 30%;
+    padding: 0;
+  }
+  .myAccount .myOrder .yourProducts-order .yourProducts-info figure img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  .myAccount .myOrder .yourProducts-order .yourProducts-info div ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    margin-left: -1em;
+  }
 }
-.myAccount form input, .myAccount form select {
-  width: 100%;
-  padding: 0.3em;
-  border-radius: 1rem;
-}
-.myAccount form button {
-  margin-top: 1em;
-  width: 50%;
-}
-.myAccount h2 {
-  margin: 2em 0;
-  width: 80%;
-  cursor: pointer;
-}
-.myAccount h2:hover {
-  color: rgb(137, 137, 137);
-}
-.myAccount h3 {
-  color: rgb(250, 250, 250);
-  width: 80%;
-  cursor: pointer;
-}
-.myAccount h3:hover {
-  color: rgb(137, 137, 137);
-}
-.myAccount h1 {
-  text-align: center;
-  margin-bottom: 2em;
-}
-.myAccount .connectionAndSecurity .formChangeName {
-  margin-bottom: 2em;
-}
-.myAccount .connectionAndSecurity .formChangerPassword {
-  margin-bottom: 2em;
-}
-.myAccount .myOrder .yourTickets-order {
-  display: flex;
-  flex-direction: column;
-}
-.myAccount .myOrder .yourTickets-order article {
-  padding: 1em;
-}
-.myAccount .myOrder .yourTickets-order article + article {
-  border-top: 2px solid rgb(255, 249, 237);
-  width: 100%;
-}
-.myAccount .myOrder .yourTickets-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.myAccount .myOrder .yourTickets-info figure {
-  width: 50%;
-  margin-left: 2em;
-}
-.myAccount .myOrder .yourTickets-info figure img {
-  width: 100%;
-  border-radius: 1rem;
-}
-.myAccount .myOrder .yourTickets-info div {
-  margin-left: -3em;
-}
-.myAccount .myOrder .yourProducts-order {
-  border: 2px solid rgb(137, 137, 137);
-  margin-bottom: 2em;
-}
-.myAccount .myOrder .yourProducts-order article {
-  padding: 1em;
-}
-.myAccount .myOrder .yourProducts-order article + article {
-  border-top: 2px solid rgb(255, 249, 237);
-  width: 100%;
-}
-.myAccount .myOrder .yourProducts-order .yourProducts-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 3em;
-  background-color: rgb(137, 137, 137);
-}
-.myAccount .myOrder .yourProducts-order .yourProducts-info figure {
-  width: 30%;
-  padding: 0;
-}
-.myAccount .myOrder .yourProducts-order .yourProducts-info figure img {
-  width: 100%;
-  border-radius: 1rem;
-}
-.myAccount .myOrder .yourProducts-order .yourProducts-info div ul {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1em;
-  margin-left: -1em;
-}
-
 @media screen and (max-width: 480px) {
   /*********************************
               * HOME *
@@ -981,53 +993,134 @@ h1, h2, h3, h4, h5, h6 {
     color: rgb(250, 250, 250);
     padding: 0.5em;
     margin: 2em;
+    position: relative;
+    overflow: hidden;
+  }
+  .homeClub h4::after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 3px solid rgb(255, 249, 237);
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+  .homeClub h4::after {
+    left: 15%;
   }
   .homeClub .homeClubHistoire {
     margin: 0 1em;
+    position: relative;
   }
   .homeClub .homeClubHistoire:hover {
-    background-color: rgb(255, 249, 237);
+    cursor: pointer;
+    color: rgb(137, 137, 137);
+    border: 3px solid rgb(137, 137, 137);
+    border-radius: 2rem;
+    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
   }
-  .homeClub .homeClubHistoire figure {
+  .homeClub .homeClubHistoire a {
+    color: rgb(250, 250, 250);
+  }
+  .homeClub .homeClubHistoire a figure {
     width: 100%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
   }
-  .homeClub .homeClubHistoire figure img {
+  .homeClub .homeClubHistoire a figure img {
+    border-radius: 1rem;
     width: 100%;
+    height: 100px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: bottom;
+       object-position: bottom;
+    filter: blur(2px);
   }
-  .homeClub .homeClubHistoire h5 {
+  .homeClub .homeClubHistoire a h5 {
     position: absolute;
     z-index: 96;
-    top: 27%;
-    left: 8%;
+    bottom: 22%;
+    left: 5%;
     font-size: 2.5rem;
   }
-  .homeClub .homeClubHistoire p {
+  .homeClub .homeClubHistoire a p {
     position: absolute;
     z-index: 96;
-    top: 31%;
-    left: 8%;
+    bottom: 0;
+    left: 5%;
+    font-weight: 500;
   }
-  .homeClub .slideHomeClub {
+  .homeClub .homeClubPlayers {
+    margin: 1em;
+    position: relative;
+  }
+  .homeClub .homeClubPlayers:hover {
+    cursor: pointer;
+    color: rgb(137, 137, 137);
+    border: 3px solid rgb(137, 137, 137);
+    border-radius: 2rem;
+    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
+    filter: blur(0px);
+  }
+  .homeClub .homeClubPlayers a {
+    color: rgb(250, 250, 250);
+  }
+  .homeClub .homeClubPlayers a figure {
+    width: 100%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+  .homeClub .homeClubPlayers a figure img {
+    border-radius: 1rem;
+    width: 100%;
+    height: 100px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: top;
+       object-position: top;
+    filter: blur(2px);
+  }
+  .homeClub .homeClubPlayers a h5 {
+    position: absolute;
+    z-index: 96;
+    bottom: 22%;
+    left: 5%;
+    font-size: 2.5rem;
+  }
+  .homeClub .homeClubPlayers a p {
+    position: absolute;
+    z-index: 96;
+    bottom: 0;
+    left: 5%;
+    font-weight: 500;
+  }
+  .homeClub .diapoClub {
+    margin-top: -4em;
+  }
+  .homeClub .diapoClub .slideHomeClub {
     position: relative;
     display: flex;
     overflow: hidden;
     margin: 5em;
   }
-  .homeClub .slideHomeClub .playersNsMasia {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia {
     flex: 1 0 100%;
     text-align: left;
     display: flex;
     align-items: center;
     transition: none;
   }
-  .homeClub .slideHomeClub .playersNsMasia .playersLenght {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia .playersLenght {
     position: absolute;
     bottom: 0;
     text-wrap: nowrap;
     font-size: 2rem;
     font-family: "Poppins", sans-serif;
   }
-  .homeClub .slideHomeClub .playersNsMasia h6 {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia h6 {
     font-size: 7rem;
     font-weight: 900;
     font-family: "Poppins", sans-serif;
@@ -1035,7 +1128,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     bottom: 15%;
   }
-  .homeClub .slideHomeClub .playersNsMasia div {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1043,20 +1136,20 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 5%;
     margin-left: -2em;
   }
-  .homeClub .slideHomeClub .playersNsMasia div p:first-child {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia div p:first-child {
     font-size: 2rem;
     position: absolute;
     bottom: 60%;
     left: 22%;
     font-weight: 500;
   }
-  .homeClub .slideHomeClub .playersNsMasia div p:nth-child(2) {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia div p:nth-child(2) {
     font-size: 3rem;
     padding-left: 1em;
     font-weight: 900;
     font-family: "Poppins", sans-serif;
   }
-  .homeClub .slideHomeClub .playersNsMasia figure img {
+  .homeClub .diapoClub .slideHomeClub .playersNsMasia figure img {
     height: 60vh;
     -o-object-fit: cover;
        object-fit: cover;
@@ -1076,79 +1169,57 @@ h1, h2, h3, h4, h5, h6 {
   }
   .homeClub .homeClubBtn button:first-of-type {
     position: absolute;
-    bottom: 40%;
+    bottom: 30%;
   }
   .homeClub .homeClubBtn button:nth-of-type(2) {
     position: absolute;
-    bottom: 40%;
+    bottom: 30%;
     right: 0;
   }
 }
-.espaceAdmin {
-  padding-top: 2em;
-  text-align: center;
-  padding-bottom: 2em;
-  width: 90%;
-  margin: 0 auto;
+/*********************************
+            * RANKING *
+*********************************/
+@media screen and (max-width: 480px) {
+  .allRanking {
+    padding-top: 3em;
+    margin: 0 1em 7em 1em;
+  }
+  .allRanking button {
+    margin: 2em;
+  }
+  .allRanking h1 {
+    text-align: center;
+  }
+  .allRanking table {
+    margin: 2em auto;
+  }
+  .allRanking table thead tr th {
+    border-right: 1px solid rgb(255, 249, 237);
+    border-bottom: 1px solid rgb(255, 249, 237);
+    text-align: center;
+    background-color: rgb(25, 30, 59);
+    padding: 0.5em;
+  }
+  .allRanking table tbody tr td {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: 2px solid rgb(255, 249, 237);
+  }
+  .allRanking table tbody tr .tdTeam {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    padding-left: 1em;
+    text-transform: uppercase;
+  }
+  .allRanking table tbody tr .tdTeam img {
+    width: 30%;
+    border-radius: 50%;
+  }
 }
-.espaceAdmin h1 {
-  padding: 2em;
-}
-.espaceAdmin ul {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1em;
-  padding: 0;
-}
-.espaceAdmin ul li {
-  border: 3px solid rgb(255, 249, 237);
-  border-radius: 1rem;
-  padding: 1em;
-  width: 100%;
-}
-.espaceAdmin ul li a {
-  color: rgb(255, 249, 237);
-}
-
-.allRanking {
-  padding-top: 3em;
-  margin: 0 1em;
-}
-.allRanking button {
-  margin: 2em;
-}
-.allRanking h1 {
-  text-align: center;
-}
-.allRanking table {
-  margin: 2em auto;
-}
-.allRanking table thead tr th {
-  border-right: 1px solid rgb(255, 249, 237);
-  border-bottom: 1px solid rgb(255, 249, 237);
-  text-align: center;
-  background-color: rgb(25, 30, 59);
-  padding: 0.5em;
-}
-.allRanking table tbody tr td {
-  text-align: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  border-bottom: 2px solid rgb(255, 249, 237);
-}
-.allRanking table tbody tr .tdTeam {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5em;
-  padding-left: 1em;
-  text-transform: uppercase;
-}
-.allRanking table tbody tr .tdTeam img {
-  width: 30%;
-  border-radius: 50%;
-}
-
 .formulaire {
   padding-top: 5em;
   text-align: center;
@@ -1180,64 +1251,323 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Nunito", sans-serif;
 }
 
-/************************************
-            * ARTICLES *
-*************************************/
-.blockArticle {
-  padding-top: 4em;
+/*********************************
+        * ARTICLES NEWS *
+*********************************/
+@media screen and (max-width: 480px) {
+  .blockArticle {
+    padding-top: 4em;
+    margin-bottom: 7em;
+  }
+  .blockArticle h1 {
+    margin-left: 1em;
+  }
+  .blockArticle .articleContent {
+    padding-top: 2em;
+    border: 3px solid rgb(255, 249, 237);
+    margin: 1em;
+    box-shadow: rgb(255, 249, 237) 0px 20px 25px -5px, rgb(255, 249, 237) 0px 10px 10px -5px;
+  }
+  .blockArticle .articleContent h2 {
+    text-align: center;
+  }
+  .blockArticle .articleContent figure {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .blockArticle .articleContent figure figcaption {
+    text-align: center;
+  }
+  .blockArticle .articleContent p + p {
+    margin-top: 1em;
+  }
+  .blockArticle .articleContent p {
+    text-align: justify;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+  }
+  .blockArticle .articleContent a button {
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgb(25, 30, 59);
+    color: rgb(255, 249, 237);
+    font-size: 2rem;
+  }
+  .articleAllContent {
+    margin-bottom: 7em;
+    padding-top: 4em;
+  }
+  .articleAllContent button {
+    margin: 1em;
+  }
+  .articleAllContent h1 {
+    text-align: center;
+    padding-bottom: 1em;
+  }
+  .articleAllContent figure figcaption {
+    text-align: center;
+  }
+  .articleAllContent p {
+    margin: 1em;
+    text-align: justify;
+  }
 }
-.blockArticle h1 {
-  margin-left: 1em;
+/*********************************
+                * CLUB *
+*********************************/
+@media screen and (max-width: 480px) {
+  .pageClub {
+    padding-top: 5em;
+    margin: 0 2em 7em 2em;
+  }
+  .pageClub nav {
+    margin: 2em 0;
+  }
+  .pageClub nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .pageClub nav ul li:first-of-type {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    padding: 0.5em;
+    border-radius: 1rem;
+  }
+  .pageClub nav ul li:first-of-type:hover {
+    display: inline-block;
+    color: rgb(250, 250, 250);
+    box-shadow: rgb(255, 249, 237) 0px 3px 10px 0px;
+  }
+  .pageClub nav ul li:nth-of-type(2) {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    padding: 0.5em;
+    border-radius: 1rem;
+  }
+  .pageClub nav ul li:nth-of-type(2):hover {
+    display: inline-block;
+    color: rgb(250, 250, 250);
+    box-shadow: rgb(255, 249, 237) 0px 3px 10px 0px;
+  }
+  .pageClub .historyClub {
+    text-align: justify;
+  }
+  .pageClub .historyClub h2 {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .pageClub .historyClub h2::before, .pageClub .historyClub h2::after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 5px solid rgb(25, 30, 59);
+    margin: auto;
+    position: absolute;
+    top: 0.5%;
+    width: 100%;
+  }
+  .pageClub .historyClub h2::before {
+    right: 75%;
+  }
+  .pageClub .historyClub h2::after {
+    left: 75%;
+  }
+  .pageClub .historyClub h3 {
+    text-align: left;
+    margin: 2em 0;
+  }
+  .pageClub .playersClub {
+    margin: 0;
+  }
+  .pageClub .playersClub h2 {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin: 2em 0;
+  }
+  .pageClub .playersClub h2::before, .pageClub .playersClub h2::after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 5px solid rgb(25, 30, 59);
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+  .pageClub .playersClub h2::before {
+    right: 70%;
+  }
+  .pageClub .playersClub h2::after {
+    left: 70%;
+  }
+  .pageClub .playersClub article h3 {
+    text-align: center;
+    margin: 2em 0;
+  }
+  .pageClub .playersClub article ul {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding: 1em;
+    background-color: rgb(25, 30, 59);
+    border: none;
+    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
+    border-radius: 0.5rem;
+    margin: 1em 0;
+  }
+  .pageClub .playersClub article ul li:first-of-type {
+    font-size: 5rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    position: absolute;
+    bottom: -20%;
+  }
+  .pageClub .playersClub article ul li:nth-of-type(2) {
+    padding-left: 4em;
+  }
+  .pageClub .playersClub article ul li:nth-of-type(3) {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+  }
+  .pageClub .playersClub article ul .playersClubImg img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: top;
+       object-position: top;
+    height: 57px;
+  }
 }
-.blockArticle .articleContent {
-  padding-top: 2em;
-  border: 3px solid rgb(255, 249, 237);
-  margin: 1em;
-  box-shadow: rgb(255, 249, 237) 0px 20px 25px -5px, rgb(255, 249, 237) 0px 10px 10px -5px;
+/*********************************
+            * ADMIN *
+*********************************/
+@media screen and (max-width: 480px) {
+  .adminMatchs form fieldset select option {
+    width: 100%;
+  }
+  /********************************
+              * SPACE ADMIN *
+  *********************************/
+  .espaceAdmin {
+    padding-top: 2em;
+    text-align: center;
+    padding-bottom: 2em;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .espaceAdmin h1 {
+    padding: 2em;
+  }
+  .espaceAdmin ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+    padding: 0;
+  }
+  .espaceAdmin ul li {
+    border: 3px solid rgb(255, 249, 237);
+    border-radius: 1rem;
+    padding: 1em;
+    width: 100%;
+  }
+  .espaceAdmin ul li a {
+    color: rgb(255, 249, 237);
+  }
+  /********************************
+          * ADMIN ACTUALITY * 
+          * ADMIN CLUB *
+          * ADMIN BOUTIQUE * 
+          * ADMIN BILETTERIE *
+  *********************************/
+  .admin {
+    padding-top: 5em;
+  }
+  .admin a {
+    margin: 2em;
+  }
+  .admin h1 {
+    margin: 1.5em;
+  }
+  .admin .handle {
+    margin: 2em;
+  }
+  .admin .handle h2 {
+    text-align: center;
+  }
+  .admin .handle ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2em;
+    padding: 0;
+  }
+  .admin .handle .add, .admin .handle .change, .admin .handle .remove {
+    margin: 3em 0;
+  }
+  .admin .handle .add h3, .admin .handle .change h3, .admin .handle .remove h3 {
+    margin: 2em 0;
+  }
+  .admin .handle .add form fieldset input, .admin .handle .add form fieldset select, .admin .handle .add form fieldset textarea, .admin .handle .change form fieldset input, .admin .handle .change form fieldset select, .admin .handle .change form fieldset textarea, .admin .handle .remove form fieldset input, .admin .handle .remove form fieldset select, .admin .handle .remove form fieldset textarea {
+    width: 100%;
+    padding: 0.3em;
+    border-radius: 0.5rem;
+  }
+  .admin .handle .add form fieldset button, .admin .handle .change form fieldset button, .admin .handle .remove form fieldset button {
+    margin: 2em;
+    width: 50%;
+    font-size: 1.4rem;
+  }
 }
-.blockArticle .articleContent h2 {
-  text-align: center;
-}
-.blockArticle .articleContent figure {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-.blockArticle .articleContent figure figcaption {
-  text-align: center;
-}
-.blockArticle .articleContent p + p {
-  margin-top: 1em;
-}
-.blockArticle .articleContent p {
-  text-align: justify;
-  width: 90%;
-  margin: 0 auto;
-  margin-bottom: 1em;
-}
-.blockArticle .articleContent a button {
-  margin: 0 auto;
+.footer .socialNetworks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac_w.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  height: 170px;
   width: 100%;
-  background-color: rgb(25, 30, 59);
-  color: rgb(255, 249, 237);
-  font-size: 2rem;
 }
-
-.articleAllContent {
-  padding-top: 4em;
+.footer .socialNetworks figure {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
 }
-.articleAllContent button {
-  margin: 1em;
+.footer .socialNetworks figure img {
+  width: 100%;
 }
-.articleAllContent h1 {
+.footer .socialNetworks ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: -2em;
+}
+.footer .infoClub {
+  margin-top: 2em;
+}
+.footer .infoClub ul li {
   text-align: center;
-  padding-bottom: 1em;
 }
-.articleAllContent figure figcaption {
-  text-align: center;
-}
-.articleAllContent p {
-  margin: 1em;
-  text-align: justify;
+.footer a {
+  color: rgb(250, 250, 250);
 }
 
 @media screen and (max-width: 480px) {

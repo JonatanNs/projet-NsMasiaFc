@@ -162,7 +162,35 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }
     }
+
+    function toggleInvisible(item){
+        item.classList.toggle("invisible");
+    }
+
+    function pageClub() {
+        const historyClubNav = document.querySelector('.historyClubNav');
+        const playersClubNav = document.querySelector('.playersClubNav');
+        const historyClub = document.querySelector('.historyClub');
+        const playersClub = document.querySelector('.playersClub');
     
+        if (playersClubNav && historyClubNav) {
+            playersClubNav.addEventListener("click", function() {
+                playersClub.classList.remove("invisible");
+                historyClub.classList.add("invisible");
+            });
+    
+            historyClubNav.addEventListener("click", function() {
+                historyClub.classList.remove("invisible");
+                playersClub.classList.add("invisible");
+            });
+        }
+    }
+    
+    
+    
+
+    
+    pageClub();
     form();
     menuMobile();
 

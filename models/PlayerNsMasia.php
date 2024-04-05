@@ -3,7 +3,7 @@
 class PlayerNsMasia {
 
     private ? int $id = null;
-    public function __construct(private string $first_name, private string $last_name, private string $name_jersay, private int $number) {
+    public function __construct(private string $first_name, private string $last_name, private string $name_jersay, private int $number, private string $position) {
     }
 
     public function getId(): ? int {
@@ -33,5 +33,19 @@ class PlayerNsMasia {
     }
     public function setNameJersay(string $name_jersay){
         $this->name_jersay = $name_jersay;
+    }
+
+    public function getNumber(): int {
+        return $this->number;
+    }
+    public function setNumber(int $number){
+        $this->number = $number;
+    }
+
+    public function getPosition(): string {
+        return $this->position;
+    }
+    public function setPosition(string $position){
+        $this->position = $position;
     }
 }

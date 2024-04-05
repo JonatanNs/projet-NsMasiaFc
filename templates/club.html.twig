@@ -2,7 +2,75 @@
 
 {% block main %}
 <main class="container">
-    <h1>Club</h1>  
-    
+    <section class="pageClub">
+        <h1>Club</h1> 
+        <nav>
+            <ul>
+                <li class="historyClubNav">Histoire du club</li>
+                <li class="playersClubNav">Joueurs du club</li>
+            </ul>
+        </nav>
+        <article class="historyClub">
+            <h2>NS MASIA F.C</h2>
+            <article>
+                <h3>Chapitre 1 : Les Origines et la Genèse</h3>
+                <p>L'histoire du NS MASIA FC débute à Rennes, une ville imprégnée de passion pour le football. Inspirés par les grands clubs européens et désireux de créer une institution qui incarne les valeurs de solidarité, d'effort et de jeu collectif, un groupe de jeunes visionnaires se réunit en 2024 pour donner naissance à une nouvelle ère du football rennais.</p>
+            </article>
+            <article>
+                <h3>Chapitre 2 : Les Débuts et l'Ascension</h3>
+                <p>Les premières années sont marquées par des défis et des succès modestes. Le club démarre dans les ligues locales, attirant des jeunes joueurs passionnés. Sous la direction de ses fondateurs dévoués et d'un staff technique compétent, NS MASIA FC établit rapidement sa réputation pour son style de jeu attrayant. Grâce à des investissements judicieux dans la formation et le recrutement, le club monte en puissance, atteignant les divisions supérieures du football français.</p>
+            </article>
+            <article>
+                <h3>Chapitre 3 : La Consécration et la Légende</h3>
+                <p>L'apogée arrive lorsque NS MASIA FC accède à la Ligue 1, le sommet du football français. Malgré les défis de la compétition de haut niveau, le club reste fidèle à sa philosophie de jeu offensif. Les supporters embrassent l'identité du club, faisant du stade de Rennes un bastion de passion et d'enthousiasme. NS MASIA FC entre dans l'histoire en remportant son premier titre de champion de Ligue 1, fruit d'années de travail acharné et d'innovation tactique.</p>
+            </article>
+            <article>
+                <h3>Chapitre 4 : L'Héritage et l'Avenir</h3>
+                <p>Aujourd'hui, NS MASIA FC continue de prospérer en tant que pilier du football français. Son académie de formation est reconnue comme l'une des meilleures du pays, produisant régulièrement des talents qui brillent sur la scène nationale et internationale. Le club reste ancré dans ses valeurs fondamentales, servant de phare pour tous ceux qui croient en la puissance du jeu collectif et de la jeunesse.</p>
+            </article>
+        </article>
+        <acticle class="playersClub invisible">
+            <h2>La NS TEAM</h2>
+            <article>
+                <h3>Gardiens</h3>
+                {% for player in playersNs %}
+                    {% if player.position == 'Gardien' %}
+                    <ul>
+                        <li>{{ player.number }}</li>
+                        <li>{{ player.first_name }}</li>
+                        <li>{{ player.name_jersay }}</li> 
+                        <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+            </article>
+            <article>
+                <h3>Défenseurs</h3>
+                {% for player in playersNs %}
+                    {% if player.position == 'Défenseur' %}
+                        <ul>
+                            <li>{{ player.number }}</li>
+                            <li>{{ player.first_name }}</li>
+                            <li>{{ player.name_jersay }}</li>
+                            <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </article>
+            <article>
+                <h3>Attaquants</h3>
+                {% for player in playersNs %}
+                    {% if player.position == 'Attaquant' %}
+                        <ul>
+                            <li>{{ player.number }}</li>
+                            <li>{{ player.first_name }}</li>
+                            <li>{{ player.name_jersay }}</li>
+                            <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </article>
+        </acticle>
+    </section>
 </main>
 {% endblock %}
