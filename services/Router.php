@@ -16,6 +16,7 @@ class Router
 
         if(!isset($get["route"]))
         {
+            
             $authc->home();
         }
         /*********************************************************
@@ -29,6 +30,28 @@ class Router
         {
             $ac->homeArticle($id);
         }
+        else if(isset($get["route"]) && $get["route"] === "allRanking")
+        {
+            $authc->allRanking();
+        }
+        /*********************************************************
+                            * FORM *
+        *********************************************************/
+        else if(isset($get["route"]) && $get["route"] === "form")
+        {
+            $authc->form();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-login")
+        {
+            $authc->checkLogin();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-signup")
+        {
+            $authc->checkSignup();
+        }
+        /*********************************************************
+                            * used account *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "compteUser")
         {
             $compteUserController->compteUser();
@@ -45,22 +68,27 @@ class Router
         {
             $compteUserController->checkChangerPassword();
         }
-        else if(isset($get["route"]) && $get["route"] === "checkAddMatchs")
+        else if(isset($get["route"]) && $get["route"] === "checkChangeAddress")
         {
-            $adm->checkAddMatchs();
+            $compteUserController->checkChangeAddress();
         }
-        else if(isset($get["route"]) && $get["route"] === "succes")
-        {
-            $oc->succesPay();
-        }
+        /*********************************************************
+                            * ARTICLE NEWS  *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "news")
         {
             $ac->news();
         }
+        /*********************************************************
+                            * CLUB *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "club")
         {
             $pc->club();
         }
+        /*********************************************************
+                            * SHOP *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "boutique")
         {
             $merchController->boutique();
@@ -69,6 +97,18 @@ class Router
         {
             $merchController->boutiqueProduct($id);
         }
+        else if(isset($get["route"]) && $get["route"] === "payement")
+        {
+            $oc->payement();
+        }
+        else if(isset($get["route"]) && $get["route"] === "stripePay")
+        {
+            $oc->stripePayement();
+        }
+        
+        /*********************************************************
+                            * Bileterrie *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "billeterie")
         {
             $MatchController->billeterie();
@@ -81,18 +121,7 @@ class Router
         {
             $MatchController->payementTicket();
         }
-        else if(isset($get["route"]) && $get["route"] === "panier")
-        {
-            $oc->panier();
-        }
-        else if(isset($get["route"]) && $get["route"] === "payement")
-        {
-            $oc->payement();
-        }
-        else if(isset($get["route"]) && $get["route"] === "stripePay")
-        {
-            $oc->stripePayement();
-        }
+        
         else if(isset($get["route"]) && $get["route"] === "stripePayTicket")
         {
             $oc->stripePayTicket();
@@ -101,29 +130,23 @@ class Router
         {
             $oc->checkAddress();
         }
-        else if(isset($get["route"]) && $get["route"] === "checkChangeAddress")
+
+        /******** CART ********* */
+        else if(isset($get["route"]) && $get["route"] === "panier")
         {
-            $compteUserController->checkChangeAddress();
+            $oc->panier();
         }
+        /***************** */
+        /*********************************************************
+                            * PEYEMENT SUCCES *
+        *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "checkSucces")
         {
             $oc->checkSucces();
         }
-        else if(isset($get["route"]) && $get["route"] === "form")
+        else if(isset($get["route"]) && $get["route"] === "succes")
         {
-            $authc->form();
-        }
-        else if(isset($get["route"]) && $get["route"] === "check-login")
-        {
-            $authc->checkLogin();
-        }
-        else if(isset($get["route"]) && $get["route"] === "check-signup")
-        {
-            $authc->checkSignup();
-        }
-        else if(isset($get["route"]) && $get["route"] === "allRanking")
-        {
-            $authc->allRanking();
+            $oc->succesPay();
         }
         /*********************************************************
                             * ESPACE ADMIN *
@@ -152,12 +175,16 @@ class Router
         {
             $adm->checkAddResult();
         }
+        else if(isset($get["route"]) && $get["route"] === "checkAddMatchs")
+        {
+            $adm->checkAddMatchs();
+        }
         else if(isset($get["route"]) && $get["route"] === "adminBoutique")
         {
             $adm->adminBoutique();
         }
         /*********************************************************
-                            * DECONNEXION *
+                            * LOGOUT *
         *********************************************************/
 
         else if(isset($get["route"]) && $get["route"] === "logout")

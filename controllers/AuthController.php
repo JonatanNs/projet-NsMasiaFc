@@ -105,6 +105,18 @@ class AuthController extends AbstractController
         ]);
     }
 
+    public function mailUserSignup(string $addAddress, string $name) : void {
+        $subject = "Merci pour votre inscription !";
+        $body = "Cher(e) $name,
+        \n\nNous vous remercions chaleureusement pour votre inscription au site NS MASIA FC !
+        \n\nVotre soutien compte énormément pour nous et nous sommes ravis de vous avoir parmi nous.
+        \n\nN'hésitez pas à explorer notre site et à profiter des contenus exclusifs réservés aux membres.
+        \n\nBienvenue dans la communauté NS MASIA FC !\n\nCordialement,\n\nL'équipe du NS MASIA FC";
+    
+        // Ajoutez ici l'adresse e-mail de l'expéditeur, l'adresse e-mail de réponse, le nom de l'expéditeur, etc.
+        $this->sendEmail($addAddress, $name, $subject, $body);
+    }
+
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
         isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){
@@ -128,12 +140,15 @@ class AuthController extends AbstractController
                             $user = new User($first_name, $last_name, $email, $password);
 
                             //insert a la base de donner
+
                             $userManager->SignUpUser($user);
 
-                            $_SESSION["valide"] = "Inscription réussi, connectez-vous !";
-                            header("Location: index.php?route=form");
-                            exit;
+                            $this->mailUserSignup($email, $first_name);
 
+                            $_SESSION["valide"] = "Inscription réussi, connectez-vous ! Un email vous a été envoyé.";
+                            header("Location: index.php?route=form");
+                            exit;  
+                            
                         } else{
                             $_SESSION["error"] = "Cette adresse e-mail est déjà utilisée par un autre utilisateur.";
                             header("Location: index.php?route=form");
