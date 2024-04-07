@@ -44,13 +44,13 @@ abstract class AbstractController {
             $this->mail->Host       = 'smtp.gmail.com';  //Set the SMTP server to send through
             $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $this->mail->Username   = 'jonatdu35200@gmail.com';                     //SMTP username
-            $this->mail->Password   = 'aulwoujtbyuqcytq'; 
+            $this->mail->Username   = $_ENV['emailSiteWeb'];                     //SMTP username
+            $this->mail->Password   = $_ENV['passwordEmail']; 
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $this->mail->CharSet       = "utf-8";                                   
             
             //Recipients
-            $this->mail->setFrom('jonatdu35200@gmail.com', 'NS MASIA FC');
+            $this->mail->setFrom($_ENV['emailSiteWeb'], 'NS MASIA FC');
             $this->mail->addAddress($addAddress, $name);     //Add a recipient
             $this->mail->addReplyTo('no-reply@gmail.com', 'Information');
             //$this->mail->addCC('cc@example.com');
