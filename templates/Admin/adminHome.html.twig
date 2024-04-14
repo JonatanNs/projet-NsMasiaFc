@@ -96,8 +96,15 @@
                 <ul>
                     <li><span class="fa-solid fa-futbol fa-2xl" style="color: #fbff00;"></span></li>
                 </ul>
+                {% if errorMessage is not empty %}
+                    <p>{{ errorMessage }}</p>
+                {% endif %}
+
+                {% if valideMessage is not empty %}
+                    <p>{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+                {% endif %}
                 <article class="add">
-                    <h3>Ajouter le résultat des matchs joués <span class="fa-solid fa-futbol" style="color: #fbff00;"></span></h3>
+                    <h3>Ajouter le résultat des matchs joués <span class="fa-solid fa-futbol" style="color: #fbff00;"></span></h3>  
                     {% set resultFound = false %}
                     {% for matchPlay in matchPlays %}
                         {% set matchFound = false %}
@@ -111,16 +118,15 @@
                             <form action="index.php?route=checkAddResult" method="POST" class="form">
                                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
                                 <input type="hidden" name="matchId" value="{{ matchPlay.match_id }}">
-                                <input type="hidden" name="nsMasiaTeam" value="{{ matchPlay.ns_masia_id }}">
-                                <input type="hidden" name="rivalTeam_id" value="{{ matchPlay.rivalTeam_id }}">
+                                
                                 <h1>Match joué le {{ matchPlay.date }}</h1>
                                 <fieldset>
-                                    <label for="teamNsMasia">{{ matchPlay.name }}</label>
-                                    <input type="number" name="teamNsMasia" min="0" required>
+                                    <label for="resultTeamNsMasia">{{ matchPlay.name }}</label>
+                                    <input type="number" name="resultTeamNsMasia" min="0" required>
                                 </fieldset>
                                 <fieldset>
-                                    <label for="teamRival">{{ matchPlay.team }}</label>
-                                    <input type="number" name="teamRival" min="0" required>
+                                    <label for="resultTeamRival">{{ matchPlay.team }}</label>
+                                    <input type="number" name="resultTeamRival" min="0" required>
                                 </fieldset>
                                 <fieldset>
                                     <button type="submit" class="btn">Ajouter</button>

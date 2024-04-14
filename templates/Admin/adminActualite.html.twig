@@ -98,6 +98,13 @@
                         <li><span class="fa-solid fa-repeat fa-2xl" style="color: #0534f0;"></span></li>
                         <li><span class="fa-solid fa-trash-can fa-2xl" style="color: #ff0000;"></span></li>
                     </ul>
+                    {% if errorMessage is not empty %}
+                        <p>{{ errorMessage }}</p>
+                    {% endif %}
+
+                    {% if valideMessage is not empty %}
+                        <p>{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+                    {% endif %}
                     <article class="add">
                         <h3>Ajouter un article <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
                         <form action="index.php?route=checkAddArticle" method="POST" class="form formAddArticle">
@@ -124,7 +131,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <label for="imgUrlArticle">Image Alt</label>
-                                    <input type="url" id="imgAltArticle" name="imgAltArticle" placeholder="https://example.com" required>
+                                    <input type="text" id="imgAltArticle" name="imgAltArticle" placeholder="Description de l'image" required>
                                 </fieldset>
                             <fieldset>
                                 <button type="submit" class="btn">Ajouter</button>
@@ -133,39 +140,118 @@
                     </article>
 
                     <article class="change">
-                        <h3>Modifier un article <span class="fa-solid fa-repeat fa-2xl" style="color: #0534f0;"></span></h3>
+                        <h3>Modifier un article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
                         <form action="index.php?route=checkChangeArticle" method="POST" class="form formChangeArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                                 <fieldset>
                                     <label for="article">Choisissez l'article à modifier : </label>
-                                    <select name="article" id="article" required>
-                                        <option value=""> <i class="fa-solid fa-chevron-down fa-sm"></i> </option>
-                                        <option value="">XS</option>
+                                    <select name="articleId" id="articleId" required>
+                                        <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span></option>
+                                        {% for article in articles %}
+                                        <option value="{{ article.id }}">{{ article.title }}</option>
+                                        {% endfor %}
                                     </select>
                                 </fieldset>
                                 <fieldset>
-                                    <label for="titleArticle">Titre</label>
-                                    <input type="text" id="titleArticle" name="titleArticle" >
+                                    <label for="changeTitleArticle">Titre</label>
+                                    <input type="text" id="changeTitleArticle" name="changeTitleArticle" >
                                 </fieldset>
                                 <fieldset>
-                                    <label for="excerptArticle">Résumé</label>
-                                    <textarea id="excerptArticle" name="excerptArticle" maxlength="550"></textarea>
+                                    <label for="changeExcerptArticle">Résumé</label>
+                                    <textarea id="changeExcerptArticle" name="changeExcerptArticle" maxlength="550"></textarea>
                                 </fieldset>
                                 <fieldset>
-                                    <label for="contentArticle">Contenu</label>
-                                    <textarea id="contentArticle" name="contentArticle"></textarea>
+                                    <label for="changeContentArticle">Contenu</label>
+                                    <textarea id="changeContentArticle" name="changeContentArticle"></textarea>
                                 </fieldset>
                                 <fieldset>
                                     <label for="dateArticle">Date</label>
-                                    <input type="date" id="dateArticle" name="dateArticle">
+                                    <input type="date" id="changeDateArticle" name="changeDateArticle">
                                 </fieldset>
                                 <fieldset>
-                                    <label for="imgUrl">Image Url</label>
-                                    <input type="url" id="imgUrlArticle" name="imgUrlArticle">
+                                    <label for="changeImgUrlArticle">Image Url</label>
+                                    <input type="url" id="changeImgUrlArticle" name="changeImgUrlArticle">
                                 </fieldset>
                                 <fieldset>
-                                    <label for="imgUrlArticle">Image Alt</label>
-                                    <input type="url" id="imgAltArticle" name="imgAltArticle">
+                                    <label for="changeImgUrlArticle">Image Alt</label>
+                                    <input type="text" id="changeImgAltArticle" name="changeImgAltArticle">
+                                </fieldset>
+                            <fieldset>
+                                <button type="submit" class="btn">Modifier</button>
+                            </fieldset>
+                        </form>
+                    </article>
+
+                    <article class="changeTitle">
+                        <h3>Modifier le titre de l'article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
+                        <form action="index.php?route=checkChangeTitleArticle" method="POST" class="form formChangeArticle">
+                            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                                <fieldset>
+                                    <label for="article">Choisissez l'article à modifier : </label>
+                                    <select name="articleId" id="articleId" required>
+                                        <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span></option>
+                                        {% for article in articles %}
+                                        <option value="{{ article.id }}">{{ article.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </fieldset>
+                                <fieldset>
+                                    <label for="changeTitleArticle">Titre</label>
+                                    <input type="text" id="changeTitleArticle" name="changeTitleArticle" >
+                                </fieldset>
+                            <fieldset>
+                                <button type="submit" class="btn">Modifier</button>
+                            </fieldset>
+                        </form>
+                    </article>
+
+                    <article class="change">
+                        <h3>Modifier le contenue de l'article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
+                        <form action="index.php?route=checkChangeContentArticle" method="POST" class="form formChangeArticle">
+                            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                                <fieldset>
+                                    <label for="article">Choisissez l'article à modifier : </label>
+                                    <select name="articleId" id="articleId" required>
+                                        <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span></option>
+                                        {% for article in articles %}
+                                        <option value="{{ article.id }}">{{ article.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </fieldset>
+                                <fieldset>
+                                    <label for="changeExcerptArticle">Résumé</label>
+                                    <textarea id="changeExcerptArticle" name="changeExcerptArticle" maxlength="550"></textarea>
+                                </fieldset>
+                                <fieldset>
+                                    <label for="changeContentArticle">Contenu</label>
+                                    <textarea id="changeContentArticle" name="changeContentArticle"></textarea>
+                                </fieldset>
+                            <fieldset>
+                                <button type="submit" class="btn">Modifier</button>
+                            </fieldset>
+                        </form>
+                    </article>
+
+                    <article class="change">
+                        <h3>Modifier l'image de l'article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
+                        <form action="index.php?route=checkChangeImgArticle" method="POST" class="form formChangeArticle">
+                            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                                <fieldset>
+                                    <label for="article">Choisissez l'article à modifier : </label>
+                                    <select name="articleId" id="articleId" required>
+                                        <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span></option>
+                                        {% for article in articles %}
+                                        <option value="{{ article.id }}">{{ article.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </fieldset>
+                                <fieldset>
+                                    <label for="changeImgUrlArticle">Image Url</label>
+                                    <input type="url" id="changeImgUrlArticle" name="changeImgUrlArticle">
+                                </fieldset>
+                                <fieldset>
+                                    <label for="changeImgUrlArticle">Image Alt</label>
+                                    <input type="text" id="changeImgAltArticle" name="changeImgAltArticle">
                                 </fieldset>
                             <fieldset>
                                 <button type="submit" class="btn">Modifier</button>
@@ -174,14 +260,16 @@
                     </article>
 
                     <article class="remove">
-                        <h3>Supprimer un article <span class="fa-solid fa-trash-can fa-2xl" style="color: #ff0000;"></span></h3>
+                        <h3>Supprimer un article <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h3>
                         <form action="index.php?route=checkRemoveArticle" method="POST" class="form formRemoveArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                             <fieldset>
                                 <label for="article">Choisissez l'article à suprimmer : </label>
-                                <select name="article" id="article" required>
+                                <select name="articleId" id="articleId" required>
                                     <option value=""> <i class="fa-solid fa-chevron-down fa-sm"></i> </option>
-                                    <option value="">XS</option>
+                                    {% for article in articles %}
+                                        <option value="{{ article.id }}">{{ article.title }}</option>
+                                    {% endfor %}
                                 </select>
                             </fieldset>
                             <fieldset>

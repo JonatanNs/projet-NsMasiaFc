@@ -149,7 +149,7 @@ class Router
             $oc->succesPay();
         }
         /*********************************************************
-                            * ESPACE ADMIN *
+                            * ESPACE ADMIN * Page
         *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "checkAdmin")
         {
@@ -171,6 +171,87 @@ class Router
         {
             $adm->adminBiletterie();
         }
+        else if(isset($get["route"]) && $get["route"] === "adminBoutique")
+        {
+            $adm->adminBoutique();
+        }
+        /*****************************
+            * Check Home *
+        *****************************/
+
+        /*****************************
+            * Check Club *
+        *****************************/
+        else if(isset($get["route"]) && $get["route"] === "checkaddPlayer")
+        {
+            $adm->checkaddPlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangePlayer")
+        {
+            $adm->checkChangePlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeNamePlayer")
+        {
+            $adm->checkChangeNamePlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeNameJerseyPlayer")
+        {
+            $adm->checkChangeNameJerseyPlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeNumberPlayer")
+        {
+            $adm->checkChangeNumberPlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangePositionPlayer")
+        {
+            $adm->checkChangePositionPlayer();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkRemovePlayer")
+        {
+            $adm->checkRemovePlayer();
+        }
+
+        /*****************************
+            * Check Actuality *
+        *****************************/
+        else if(isset($get["route"]) && $get["route"] === "checkAddArticle")
+        {
+            $adm->checkAddArticle();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeArticle")
+        {
+            $adm->checkChangeAllArticle();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeTitleArticle")
+        {
+            $adm->checkChangeTitleArticle();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeContentArticle")
+        {
+            $adm->checkChangeContentArticle();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangeImgArticle")
+        {
+            $adm->checkChangeImgArticle();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkRemoveArticle")
+        {
+            $adm->checkRemoveArticle();
+        }
+        /*****************************
+            * Check Biletterie *
+        *****************************/
         else if(isset($get["route"]) && $get["route"] === "checkAddResult")
         {
             $adm->checkAddResult();
@@ -179,10 +260,12 @@ class Router
         {
             $adm->checkAddMatchs();
         }
-        else if(isset($get["route"]) && $get["route"] === "adminBoutique")
-        {
-            $adm->adminBoutique();
-        }
+        /*****************************
+            * Check Boutique *
+        *****************************/
+
+        
+
         /*********************************************************
                             * LOGOUT *
         *********************************************************/

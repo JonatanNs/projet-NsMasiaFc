@@ -5,7 +5,7 @@ class NsMasiaManager extends AbstractManager{
     /**********************************************************
                              * CREATE PLAYER *
     **********************************************************/
-    public function createPlayer(string $first_name, string $last_name, int $name_jersay, int $number, string $position) : void {
+    public function createPlayer(string $first_name, string $last_name,  $name_jersay, int $number, string $position) : void {
         $query = $this->db->prepare("INSERT INTO playersNsMasia (id, first_name, last_name, name_jersay, number, position) 
         VALUES (null, :first_name, :last_name, :name_jersay, :number, :position)");
         $parameters = [
@@ -21,7 +21,7 @@ class NsMasiaManager extends AbstractManager{
     /**********************************************************
                              * CHANGE PLAYER *
     **********************************************************/
-    public function changePlayer(int $id, string $first_name, string $last_name, int $name_jersay, int $number, string $position) : void {
+    public function changePlayer(int $id, string $first_name, string $last_name, string $name_jersay, int $number, string $position) : void {
         $query = $this->db->prepare("UPDATE playersNsMasia SET first_name = :first_name, last_name = :last_name, name_jersay = :name_jersay, number = :number, position = :position WHERE id = :id");
 
         $parameters = [
@@ -30,6 +30,47 @@ class NsMasiaManager extends AbstractManager{
             'last_name' => $last_name, 
             'name_jersay' => $name_jersay, 
             'number' => $number, 
+            'position' => $position
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeNamePlayer(int $id, string $first_name, string $last_name) : void {
+        $query = $this->db->prepare("UPDATE playersNsMasia SET first_name = :first_name, last_name = :last_name WHERE id = :id");
+
+        $parameters = [
+            'id' => $id,
+            'first_name' =>$first_name, 
+            'last_name' => $last_name
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeNameJerseyPlayer(int $id, string $name_jersay) : void {
+        $query = $this->db->prepare("UPDATE playersNsMasia SET name_jersay = :name_jersay WHERE id = :id");
+
+        $parameters = [
+            'id' => $id,
+            'name_jersay' => $name_jersay
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeNumberPlayer(int $id, int $number) : void {
+        $query = $this->db->prepare("UPDATE playersNsMasia SET number = :number WHERE id = :id");
+
+        $parameters = [
+            'id' => $id,
+            'number' => $number
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changePositionPlayer(int $id, string $position) : void {
+        $query = $this->db->prepare("UPDATE playersNsMasia SET position = :position WHERE id = :id");
+
+        $parameters = [
+            'id' => $id, 
             'position' => $position
         ];
         $query->execute($parameters); 
@@ -107,6 +148,16 @@ class NsMasiaManager extends AbstractManager{
         return $players ;
     }
 
+    public function isJerseyNumberExists($number): bool {
+        $query = $this->db->prepare("SELECT number FROM playersNsMasia WHERE number = :number");
+        $query->bindParam(':number', $number, PDO::PARAM_INT);
+        $query->execute();
+        $count = $query->fetchColumn();
+        
+        return $count > 0;
+    }
+    
+    
     public function getPlayerNsMasiaById(int $id) : ? PlayerNsMasia{
         $query = $this->db->prepare("SELECT * FROM playersNsMasia WHERE id = :id");
         $parameters = [

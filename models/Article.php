@@ -50,10 +50,10 @@ class Article {
         $this->img_url = $img_url;
     }
 
-    public function getImg_alt(): string {
+    public function getImgAlt(): string {
         return $this->img_alt;
     }
-    public function setImg_alt(string $img_alt): void {
+    public function setImgAlt(string $img_alt): void {
         $this->img_alt = $img_alt;
     }
 }

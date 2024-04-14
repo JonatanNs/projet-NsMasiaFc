@@ -18,7 +18,7 @@
         <h2>Actualité</h2>
         <div class="diapo" data-speed="5000" data-transition="2">
             <div class="allArticle">
-            {% for article in articles %}
+            {% for article in articles|slice(0, 3) %}
                 <article class="article">
                         <h3>{{ article.title }}</h3>
                     <a href="index.php?route=homeArticle&id={{article.id}}">

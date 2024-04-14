@@ -194,7 +194,7 @@ class AuthController extends AbstractController
                         $_SESSION["userEmail"] = $users->getEmail();
                         $_SESSION['userRoles'] = $users->getRoles();
                         $_SESSION["valide"] = "Connexion reussie.";
-                        if( $_SERVER['HTTP_REFERER'] === "http://localhost:3000/projet-3wa/projet-NsMasiaFc/index.php?route=form"){
+                        if( $_SERVER['HTTP_REFERER'] === "http://localhost:3000/projet-NsMasiaFc/index.php?route=form"){
                             header('Location: index.php?route=home');
                             exit;
                         } else{

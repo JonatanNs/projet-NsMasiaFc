@@ -1,5 +1,6 @@
 
-.footer{
+
+
     .socialNetworks{
         display: flex;
         flex-direction: column;
@@ -43,8 +44,11 @@
             }
         }
     }
-    
-    a{
-        color: $white;
+
+    .footer{
+        a{
+            color: $white;
+        }
     }
-}
+    
+    

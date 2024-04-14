@@ -7,8 +7,13 @@
             <h2>Connexion et sécurité  <span class="fa-solid fa-lock" style="color: #FFD43B;"></span></h2> 
             <article class="changeName invisible">
                 <h3>Modifier son nom <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
-                <p>{{errorMessage}}</p>
-                <p>{{valideMessage}}</p>
+                {% if errorMessage is not empty %}
+                    <p>{{ errorMessage }}</p>
+                {% endif %}
+
+                {% if valideMessage is not empty %}
+                    <p>{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+                {% endif %}
                 <form action="index.php?route=checkChangeName" method="POST" class="form formChangeName invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
@@ -240,7 +245,7 @@
         </section>
 
         <article class="contact">
-            <h2>Nous contacter  <span class="fa-solid fa-headset" style="color: #005eff;"></span></h2>  
+            <h2>Nous contacter <span class="fa-solid fa-headset" style="color: #005eff;"></span></h2>  
             <ul class="coordinate invisible">
                 <li>06 55 88 77 99 </li>
                 <li></li>

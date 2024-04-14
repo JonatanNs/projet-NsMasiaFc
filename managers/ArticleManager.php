@@ -23,8 +23,8 @@ class ArticleManager extends AbstractManager{
                              * CHANGE *
     **********************************************************/
     public function changeArticle(int $id, string $title, string $excerpt, string $content, string $date, string $img_url, string $img_alt) : void {
-        $query = $this->db->prepare("UPDATE articles SET title = :title, excerpt = :excerpt, content = :content, date = :date, img_url = :img_url, :img_alt WHERE id = :id");
-
+        $query = $this->db->prepare("UPDATE articles SET title = :title, excerpt = :excerpt, content = :content, date = :date, img_url = :img_url, img_alt = :img_alt WHERE id = :id");
+    
         $parameters = [
             'id' => $id,
             'title' =>  $title, 
@@ -36,6 +36,49 @@ class ArticleManager extends AbstractManager{
         ];
         $query->execute($parameters); 
     }
+
+    public function changeTitleArticle(int $id, string $title) : void {
+        $query = $this->db->prepare("UPDATE articles SET title = :title WHERE id = :id");
+    
+        $parameters = [
+            'id' => $id,
+            'title' =>  $title
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeContentArticle(int $id, string $excerpt, string $content) : void {
+        $query = $this->db->prepare("UPDATE articles SET excerpt = :excerpt, content = :content WHERE id = :id");
+    
+        $parameters = [
+            'id' => $id,
+            'excerpt' => $excerpt, 
+            'content' => $content
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeDateArticle(int $id, string $date) : void {
+        $query = $this->db->prepare("UPDATE articles SET date = :date WHERE id = :id");
+    
+        $parameters = [
+            'id' => $id,
+            'date' =>  $date
+        ];
+        $query->execute($parameters); 
+    }
+
+    public function changeImgArticle(int $id, string $img_url, string $img_alt) : void {
+        $query = $this->db->prepare("UPDATE articles SET img_url = :img_url, img_alt = :img_alt WHERE id = :id");
+    
+        $parameters = [
+            'id' => $id, 
+            'img_url' => $img_url, 
+            'img_alt' => $img_alt
+        ];
+        $query->execute($parameters); 
+    }
+    
 
     /**********************************************************
                              * REMOVE *
@@ -53,7 +96,7 @@ class ArticleManager extends AbstractManager{
     **********************************************************/
 
     public function getAllArticle() : array {
-        $query = $this->db->prepare("SELECT * FROM articles");
+        $query = $this->db->prepare("SELECT * FROM articles WHERE date <= CURRENT_DATE() ORDER BY date DESC");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 

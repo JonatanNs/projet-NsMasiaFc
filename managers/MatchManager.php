@@ -40,10 +40,10 @@ class MatchManager extends AbstractManager{
         }  
     }
 
-    public function addResulteMatch(array $matchNs, int $score_nsMasia, int $score_rivalTeam, int $rivalTeamId, int $nsMasiaId) : void{  
-        foreach($matchNs as $match){
+    public function addResulteMatch(/*array $matchNs,*/MatchNs $matchNs, int $matchId, int $score_nsMasia, int $score_rivalTeam) : void{  
+        /*foreach($matchNs as $match){
            $matchId = $match["match_id"];
-        }
+        }*/
         $query = $this->db->prepare("INSERT INTO result_match (id, match_id, score_nsMasia, score_rivalTeam) 
                                         VALUES (null, :match_id, :score_nsMasia, :score_rivalTeam)");
         $parameters = [
@@ -53,17 +53,14 @@ class MatchManager extends AbstractManager{
         ];
         $query->execute($parameters);
 
-        $rivalTeamManager = new RivalTeamManager();
-        $nsMasiaManager = new NsMasiaManager();
+        $rivalTeam = $matchNs->getRivalTeamId();
+        $nsMasia = $matchNs->getNsMasiaId();
 
-        $rival = $rivalTeamManager->getAllRivalTeamsById($rivalTeamId);
-        $nsMasia = $nsMasiaManager->getNsMasia();
-
-        $rankingPoint = $rival->getRankingPoints();
-        $matchNul = $rival->getMatchsNul();
-        $matchPlay = $rival->getMatchsPlay();
-        $matchWin = $rival->getMatchsWin();
-        $matchLose = $rival->getMatchsLose();
+        $rankingPoint = $rivalTeam->getRankingPoints();
+        $matchNul = $rivalTeam->getMatchsNul();
+        $matchPlay = $rivalTeam->getMatchsPlay();
+        $matchWin = $rivalTeam->getMatchsWin();
+        $matchLose = $rivalTeam->getMatchsLose();
 
         $matchLoseNs = $nsMasia->getMatchsLose();
         $matchWinNs = $nsMasia->getMatchsWin();
@@ -75,7 +72,7 @@ class MatchManager extends AbstractManager{
 
             $query = $this->db->prepare("UPDATE rivalsTeam SET ranking_points = :ranking_points, match_play = :match_play, match_nul = :match_nul WHERE id = :id");
             $parameters = [
-                'id' => $rival->getId(),
+                'id' => $rivalTeam->getId(),
                 'ranking_points' => $rankingPoint + 1,
                 'match_play' => $matchPlay + 1,
                 'match_nul' => $matchNul + 1,
@@ -95,7 +92,7 @@ class MatchManager extends AbstractManager{
 
             $query = $this->db->prepare("UPDATE rivalsTeam SET match_play = :match_play, match_lose = :match_lose WHERE id = :id");
             $parameters = [
-                'id' => $rival->getId(),
+                'id' => $rivalTeam->getId(),
                 'match_play' => $matchPlay + 1,
                 'match_lose' => $matchLose + 1
             ];
@@ -114,7 +111,7 @@ class MatchManager extends AbstractManager{
             
             $query = $this->db->prepare("UPDATE rivalsTeam SET ranking_points = :ranking_points, match_play = :match_play, match_win = :match_win WHERE id = :id");
             $parameters = [
-                'id' => $rival->getId(),
+                'id' => $rivalTeam->getId(),
                 'ranking_points' => $rankingPoint + 3,
                 'match_play' => $matchPlay + 1,
                 'match_win' => $matchWin + 1
@@ -202,7 +199,7 @@ class MatchManager extends AbstractManager{
         return $matchs; 
     }
 
-    public function getAllMatchsByIdPlay(int $id) : array {  
+    public function getAllMatchsByIdPlay(int $id) : ? MatchNs {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
                                         WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
@@ -221,7 +218,6 @@ class MatchManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
     
-        $matchs = [];
         $nsMasiaMasia = new NsMasiaManager();
         $rivalTeamManager = new RivalTeamManager();
         
@@ -231,10 +227,10 @@ class MatchManager extends AbstractManager{
     
             $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
             $match->setId($result["id"]);
-            $matchs[] = $result;
+            return $match;
         }
         
-        return $matchs; 
+        return null; 
     }
 
     public function getMatchsPlay() : array {  
