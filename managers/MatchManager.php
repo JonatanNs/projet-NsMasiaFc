@@ -199,7 +199,7 @@ class MatchManager extends AbstractManager{
         return $matchs; 
     }
 
-    public function getAllMatchsByIdPlay(int $id) : ? MatchNs {  
+    public function getMatchsByIdPlay(int $id) : ? MatchNs {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
                                         WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
@@ -232,7 +232,7 @@ class MatchManager extends AbstractManager{
         
         return null; 
     }
-
+    //retourne le dernier match jouer
     public function getMatchsPlay() : array {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                         CASE 

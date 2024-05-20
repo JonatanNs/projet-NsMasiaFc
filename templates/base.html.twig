@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--SEO-->
-    <meta name="robots" content="index,follow">
-    <meta name="description" content="Site officiel du FC NsMasia. Toute l'actualité autour de la Ns, vente de maillots et de places." >
-    <link rel="icon" href="assets/img/logo-ns_masia.png" alt="Logo NsMasiaFC">
-    <!-- Stripe -->
-    <script src="https://js.stripe.com/v3/" ></script>
-    <!--Font POPPIN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <!--Font Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"><!-- Css.gg-->
-    <link href="https://css.gg/css" rel="stylesheet" />
-    <!-- Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- CSS-->
-    <link rel="stylesheet" href="assets/styles/scss/style.css">
-    <title>Site officiel du NsMasia F.C</title>   
-</head>
-<body>
-    <header class="header">       
-        {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter-->
-            <div>
-                <p>{{ userIsConect }}</p> 
-            </div> 
-            {% if rolesUser == "ADMIN" %} 
-                <form action="index.php?route=checkAdmin" method="POST">
-                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
-                    <button type="submit" class="btn">ADMIN</button>
-                </form> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--SEO-->
+        <meta name="robots" content="index,follow">
+        <meta name="description" content="Site officiel du FC NsMasia. Toute l'actualité autour de la Ns, vente de maillots et de places." >
+        <link rel="icon" href="assets/img/logo-ns_masia.png" alt="Logo NsMasiaFC">
+        <!-- Stripe -->
+        <script src="https://js.stripe.com/v3/" ></script>
+        <!--Font POPPIN -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <!--Font Nunito -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"><!-- Css.gg-->
+        <link href="https://css.gg/css" rel="stylesheet" />
+        <!-- Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- CSS-->
+        <link rel="stylesheet" href="assets/styles/scss/style.css">
+        <title>Site officiel du NsMasia F.C</title>   
+    </head>
+    <body>
+        <header class="header">       
+            {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter-->
+                <div>
+                    <p>{{ userIsConect }}</p> 
+                </div> 
+                {% if rolesUser == "ADMIN" %} 
+                    <form action="index.php?route=checkAdmin" method="POST">
+                        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <button type="submit" class="btn">ADMIN</button>
+                    </form> 
+                {% endif %}
             {% endif %}
-        {% endif %}
-        {% if userIsConect is empty %} <!-- Quand l'utilisateur n'est pas connecter-->
-            <div>
-                <a href="index.php?route=form"> <i class="fa-solid fa-user fa-lg" id="toggleForm"> </i></a> <!-- Go form -->
-            </div>
-        {% endif %}
-        <figure>
-            <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/></a>
-        </figure>
-        <div class="menu">
-            <p class="gg-menu openMenu" style="color: #000000;"></p> 
-            {% block menuDeroulant %} 
-                <nav class="navMobile invisible"> 
-                    <p class="fa-solid fa-x fa-lg closeMenu" style="color: #000000;"></p>
+            {% if userIsConect is empty %} <!-- Quand l'utilisateur n'est pas connecter-->
+                <div>
+                    <a href="index.php?route=form"> 
+                        <span class="fa-solid fa-user fa-lg" style="color: #ffffff;" id="toggleForm"> </span>
+                    </a> <!-- Go form -->
+                </div>
+            {% endif %}
+            <figure>
+                <a href="index.php?route=home">
+                    <img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/>
+                </a>
+            </figure>
+            <div class="menu">
+                <p class="gg-menu openMenu" style="color: #ffffff;"></p> 
+                <nav class="navMobile "> 
+                    <p class="fa-solid fa-x fa-lg closeMenu" ></p>
                     <div class="nav-links">
                         <ul>
                             <li>
                                 <a href="index.php?route=news">Actualité <span class="fa-solid fa-newspaper" style="color: #000000;"></span></a>
                             </li>
-
                             <li>
                                 <a href="index.php?route=club">Club <span class="fa-regular fa-futbol" style="color: #000000;"></span></a>
                             </li>
-                        </ul>
-                        <ul>
                             <li>
                                 <a href="index.php?route=boutique">Boutique <span class="fa-solid fa-shop" style="color: #000000;"></span></a>
                             </li>
@@ -68,66 +68,85 @@
                                 <a href="index.php?route=billeterie">Billeterie <span class="fa-solid fa-ticket" style="color: #000000;"></span></a>
                             </li>
                         </ul>
-                        <ul>
-                            <!--<li>Paramètres</li>-->       
-                        {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
-                            <li>
-                                <a href="index.php?route=compteUser"><p>Mon compte <span class="fa-solid fa-user" style="color: #000000;"></span></p></a>
-                            </li>
-                            <li>
-                                <a href="index.php?route=logout">Déconnexion <i class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
-                            </li>
-                        {% endif %}
+                            {# <p class="gg-menu openMenuDesktop" style="color: #000000;"></p> #}
+                        <ul>      
+                            {% if userIsConect is not empty %} <!-- Quand l'utilisateur est connecter il s'affiche-->
+                                <li>
+                                    <a href="index.php?route=compteUser"><p>Mon compte <span class="fa-solid fa-user" style="color: #000000;"></span></p></a>
+                                </li>
+                                <li>
+                                    <a href="index.php?route=logout">Déconnexion <span class="fa-solid fa-right-from-bracket fa-sm"></span> </a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>
-            {% endblock %}
-        </div>
-    </header>
+            </div>
+        </header>
 
-    {% block main %}{% endblock %}
-    
-    <footer class="footer">
-        <div class="socialNetworks">
-            <figure>
-                <img src="assets/img/logo adidad nsmasia.png" alt="Logo Adidas" />
-                <img src="assets/img/logo-ns_masia.png" alt="Logo Ns Masia F.C" />
-            </figure>
-            <ul>
-                <a href=""><li><span class="invisible">Facebook</span><span class="fa-brands fa-facebook fa-2xl" style="color: #158CF0;"></span></li></a>
-                <a href=""><li><span class="invisible">Twitter</span><span class="fa-brands fa-x-twitter fa-2xl" style="color: #F7F7F7;"></span></li></a>
-                <a href=""><li><span class="invisible">Instagram</span><span class="fa-brands fa-instagram fa-2xl" style="color: #F7F7F7;"></span></li></a>
-                <a href=""><li><span class="invisible">TikTok</span><span class="fa-brands fa-tiktok fa-2xl" style="color: #F7F7F7;"></span></li></a>
-                <a href=""><li><span class="invisible">Youtube</span><span class="fa-brands fa-youtube fa-2xl" style="color: #fa0505;"></span></li></a>
-            </ul>
-        </div>
-
-        <div class="infoClub">
-            <ul>
-                <h1>Informations</h1>
-                <a href=""><li>Mentions légales</li></a>
-                <a href=""><li>Retours/SAV</li></a>
-                <a href=""><li>Politique de confidentialité</li></a>
-                <a href=""><li>Gestion des cookies</li></a>
-                <a href=""><li>Conditions générales de ventes</li></a>
-            </ul>
-            <ul>
-                <h1>Contacts</h1>
-                <a href=""><li>Tel : 09 89 77 66 33</li></a>
-                <a href=""><li>Email : nsNasia.contact@gmail.com</li></a>
-                <a href=""><li>Nous contacter</li></a>
-            </ul>
-        </div>
-    </footer>
-    
-    <!-- Bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   <!-- FontAwesone-->
-    <script src="https://kit.fontawesome.com/3b11095cd8.js" crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
-    <script src="js/basket.js"></script>
-    <script src="js/payement.js"></script>
-    <script src="js/billeterie.js"></script>
-    <script src="js/compteUser.js"></script>
-</body>
+        {% block main %}{% endblock %}
+        
+        <footer class="footer">
+            <div class="socialNetworks">
+                <figure>
+                    <img src="assets/img/logo adidad nsmasia.png" alt="Logo Adidas" />
+                    <img src="assets/img/logo-ns_masia.png" alt="Logo Ns Masia F.C" />
+                </figure>
+                <ul>
+                    <li>
+                        <a href="">
+                            <span class="invisible">Facebook</span><span class="fa-brands fa-facebook fa-2xl" style="color: #158CF0;"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="invisible">Twitter</span><span class="fa-brands fa-x-twitter fa-2xl" style="color: #F7F7F7;"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="invisible">Instagram</span><span class="fa-brands fa-instagram fa-2xl" style="color: #F7F7F7;"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="invisible">TikTok</span><span class="fa-brands fa-tiktok fa-2xl" style="color: #F7F7F7;"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="invisible">Youtube</span><span class="fa-brands fa-youtube fa-2xl" style="color: #fa0505;"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="infoClub">
+                <ul>
+                    <h1>Informations</h1>
+                    <a href=""><li>Mentions légales</li></a>
+                    <a href=""><li>Retours/SAV</li></a>
+                    <a href=""><li>Politique de confidentialité</li></a>
+                    <a href=""><li>Gestion des cookies</li></a>
+                    <a href=""><li>Conditions générales de ventes</li></a>
+                </ul>
+                <ul>
+                    <h1>Contacts</h1>
+                    <a href=""><li>Tel : 09 89 77 66 33</li></a>
+                    <a href=""><li>Email : nsNasia.contact@gmail.com</li></a>
+                    <a href=""><li>Nous contacter</li></a>
+                </ul>
+            </div>
+        </footer>
+        
+        <!-- Bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- FontAwesone-->
+        <script src="https://kit.fontawesome.com/3b11095cd8.js" crossorigin="anonymous"></script>
+        <script src="js/index.js"></script>
+        <script src="js/basket.js"></script>
+        <script src="js/payement.js"></script>
+        <script src="js/billeterie.js"></script>
+        <script src="js/compteUser.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    </body>
 </html>

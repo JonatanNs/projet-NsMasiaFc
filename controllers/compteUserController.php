@@ -1,5 +1,4 @@
 <?php
-
 class CompteUserController extends AbstractController{
 
     public function compteUser() {
@@ -18,16 +17,16 @@ class CompteUserController extends AbstractController{
     
         $user = $userManager->getAllUserById($userId); 
         $address = $orderManager->getAllAddressesByUserId($user);
-    
         // Vérifier si l'adresse est nulle
         if ($address !== null) {
-            $allOrdersProducts = $orderManager->getOrdersByAddresse( $address);
+            $allOrdersProducts = $orderManager->getOrdersByAddresse($address);
             $arrayNumberOrder = [];
-    
-            foreach ($allOrdersProducts as $allOrdersProduct) {
-                $arrayNumberOrder[] = $allOrdersProduct["order_number"];
+            if (!is_null($allOrdersProducts)) {
+                foreach ($allOrdersProducts as $allOrdersProduct) {
+                    $arrayNumberOrder[] = $allOrdersProduct["order_number"];
+                }
             }
-    
+
             $ordersProducts = [];
     
             foreach ($arrayNumberOrder as $item) {

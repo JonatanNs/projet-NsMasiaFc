@@ -4,20 +4,22 @@
 <main class="container">
     <article class="blockArticle">
         <h1>Actualité</h1>
-        {% for article in articles %}
-        <article class="articleContent">
-            <h2>{{article.title}}</h2>
-            <figure>
-                <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
-                <figcaption>{{article.img_alt}}</figcaption>
-            </figure>
-            <p>{{article.excerpt}}</p>
-            <p>Date : {{article.date}}</p>
-            <a href="index.php?route=homeArticle&id={{article.id}}">
-                <button>Lire l'article</button>
-            </a>
-        </article>
-        {% endfor %}
+        <div>
+            {% for article in articles %}
+            <article class="articleContent">
+                <h2>{{article.title}}</h2>
+                <figure>
+                    <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
+                    <figcaption>{{article.img_alt}}</figcaption>
+                </figure>
+                <p>{{article.excerpt}}</p>
+                <p>Date : {{article.date}}</p>
+                <a href="index.php?route=homeArticle&id={{article.id}}">
+                    <button>Lire l'article</button>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
     </article>
 </main>
 {% endblock %}

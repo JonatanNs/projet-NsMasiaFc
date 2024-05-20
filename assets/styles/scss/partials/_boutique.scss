@@ -1,7 +1,23 @@
 /*********************************
             * SHOP *
 *********************************/
-@media screen and (max-width: 480px) {
+.pageBoutique{
+    width: 100%;
+    margin: 0 ;
+    padding: 5em 0em;
+    h1, p{
+        text-align: center;
+    }
+    figure {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 20%; 
+            margin: 0 auto;
+        }
+    }
     .searchAndBag{
         display: flex;
         flex-direction: row;
@@ -13,21 +29,12 @@
             margin-left: 1.5em;
             margin-top: -1em;  
         }
-    }
-
-    .titleBoutique{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        figure {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            img{
-                width: 20%; 
-                margin: 0 auto;
+        .bagProduct{
+            .valueBasket{
+                background-color: red;
+                border-radius: 1rem;
+                text-align: center;
+                margin-top: 1em;
             }
         }
     }
@@ -58,6 +65,7 @@
                 li{
                     h2{
                         cursor: pointer;
+                        text-align: center;
                         a{
                             color: $beige;
                             &:hover{
@@ -106,6 +114,7 @@
 /**********************CART********************/
     .carts{
         padding-top: 5em;
+        height: 81vh;
         h2{
             font-size: 2.5rem;
             margin-left: 1em;
@@ -229,5 +238,20 @@
             }
         }
     }
-
 }
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+    
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        
+    }
+    
+    @media screen and (min-width: 1440px) {
+        
+    }

@@ -16,6 +16,7 @@ class ArticleManager extends AbstractManager{
             'img_url' => $img_url, 
             'img_alt' => $img_alt
         ];
+        
         $query->execute($parameters); 
     }
     

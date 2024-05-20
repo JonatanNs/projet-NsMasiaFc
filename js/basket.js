@@ -54,6 +54,15 @@ function getNumberProduct(){
     return number;
 }
 
+function getProductLenght(){
+    let basket = getBasket();
+    let number = 0;
+    for(let product of basket){
+        number += product.length;
+    }
+    return number;
+}
+
 
 function getTotalPrice(){
     let basket = getBasket();
@@ -74,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(!basketData){
                     // Le panier est vide, afficher un message approprié
                     const p = document.createElement("p");
+                    p.classList.add("basketEmpty");
                     p.textContent = "Votre panier est vide";
                     p.style.cssText = "white-space: nowrap; color:red; margin: 1em 0 0 -4em ";
                     theBag.appendChild(p);   
@@ -180,6 +190,26 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     function AddLocalStorageBoutique() {
+
+        const valueBasket = document.querySelector(".valueBasket");
+            const basketData = localStorage.getItem("basket");
+            const basket = JSON.parse(basketData);
+
+            let arrayProduct = [];
+            // Parcourir chaque produit dans le panier
+            basket.forEach(product => {
+                // Ajouter le produit au tableau arrayProduct
+                arrayProduct.push(product);
+            });
+            console.log(arrayProduct.length);
+
+            /*if (valueBasket) {
+                if (basketData) {
+                    const totalItems = basket.length;
+                    valueBasket.textContent = totalItems;
+                } 
+            }*/
+
         const productIdElements = document.querySelectorAll(".shirtOne");
         const shirtSale = document.querySelectorAll('.shirtSale');
         const size = document.getElementById("size");
@@ -198,15 +228,21 @@ document.addEventListener('DOMContentLoaded', function(){
             const productPrice = element.querySelector('.prices').textContent;
     
             const addCartButtons = element.querySelectorAll(".addCart");
-    
+
             addCartButtons.forEach((button, i) => {
                 const productLength = document.querySelector('.productLength');
-                button.addEventListener("click", function() {
+                button.addEventListener("click", function(){
+                    
                     const shirtsId = "shirts" + (i + 1);
                     const productUrl = productImgUrl;
                     const productAlt = productImgAlt;
-                    const productQuantity = ""; 
-    
+                    const productQuantity = "";  
+
+                    const basketEmpty = document.querySelector(".basketEmpty");
+                    if(basketEmpty){
+                        basketEmpty.classList.add("invisible");
+                    }
+
                     for (let j = 0; j < parseInt(productLength.textContent); j++) {
                         if (shirtsId === "shirts" + (j + 1)) {
                             addBasket({
@@ -218,9 +254,14 @@ document.addEventListener('DOMContentLoaded', function(){
                                 prices: productPrice,
                                 quantity: productQuantity
                             });
+                            basket.forEach(product => {
+                                // Ajouter le produit au tableau arrayProduct
+                                arrayProduct.push(product);
+                                valueBasket.textContent = arrayProduct.length;
+                            });
                             break; 
                         }
-                    }
+                    }  
                 });
             });
         });

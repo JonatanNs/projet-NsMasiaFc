@@ -104,7 +104,6 @@ class OrderController extends AbstractController
         }
     }
     public function checkSucces() { 
-        var_dump($_POST);
         if(isset($_POST["products"])) {
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
@@ -128,15 +127,12 @@ class OrderController extends AbstractController
                     $sizes[] = $data['size'];
                     $totals[] = $data['total'];
                 }
-                
-                var_dump($totals);
 
                 $nextOrderId = $this->generatorNumberOrderBoutique();
-                var_dump($nextOrderId);
             
                     for($i = 0; $i < count($articles); $i++){
                         foreach($articles[$i] as $product){
-                        $orderManager->createOrderFromProduct(
+                        $lastId = $orderManager->createOrderFromProduct(
                             $nextOrderId,
                             $product['id'],
                             $quantities[$i],
@@ -147,7 +143,14 @@ class OrderController extends AbstractController
                     }
 
                 $orderManager->createOrder($nextOrderId, $address, array_sum($totals));
+
+                $userManager = new UserManager();
+                $users = $userManager->getAllUserByEmail($_SESSION["userEmail"]);
+                $name = $users->getFirstName() . ' ' . $users->getLastName();
                 
+                $order = $orderManager->getAllOrdersProductById($lastId);
+
+                $this->baseEmailPurchases($users->getEmail(), $name, $order);
 
                 $_SESSION["valide"] = "Achat réalisé avec succès";
                 header("Location: index.php?route=boutique");
@@ -173,11 +176,19 @@ class OrderController extends AbstractController
 
                 $orderManager = new OrderManager();
                 $orderManager->createOrderTicket($numberOrder, $users, $ticket_id, $match_id, $quantities, $totalPrices);
+                $name = $users->getFirstName() . ' ' . $users->getLastName();
+                $order = $orderManager->getOrderTicketById($ticket_id);
+
+                $this->baseEmailTicket($users->getEmail(), $name, $order);
 
                 $_SESSION["valide"] = "Achat réalisé avec succès";
                 header("Location: index.php?route=billeterie");
                 exit;
             }
+        } else{
+            $_SESSION["error"] = "Une erreur est survenue";
+            header("Location: index.php?route=payement");
+            exit;
         }
     }
     
@@ -230,8 +241,8 @@ class OrderController extends AbstractController
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=succes',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=payement',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=succes',
+            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=payement',
         ]);
         
         header("HTTP/1.1 303 See Other");
@@ -271,8 +282,8 @@ class OrderController extends AbstractController
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=succes',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-3wa/projet-NsMasiaFc/index.php?route=payementTicket',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=succes',
+            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=payementTicket',
         ]);
         
         header("HTTP/1.1 303 See Other");

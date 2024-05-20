@@ -10,12 +10,13 @@ class AdminController extends AbstractController{
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+        
         $rivalTeam = new RivalTeamManager();
         $teamRival = $rivalTeam->getAllRivalTeams();
-
+            
         $rivalTeamManager = new RivalTeamManager();
         $nsMasiaManager = new NsMasiaManager();
-
+    
         $this->render("Admin/admin.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage, 
@@ -156,7 +157,7 @@ class AdminController extends AbstractController{
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
                 $matchManager = new MatchManager();
 
-                $match = $matchManager->getAllMatchsByIdPlay($_POST["matchId"]);
+                $match = $matchManager->getMatchsByIdPlay($_POST["matchId"]);
                 $score_nsMasia = htmlspecialchars($_POST["resultTeamNsMasia"]);
                 $score_rivalTeam = htmlspecialchars($_POST["resultTeamRival"]);
 
@@ -595,7 +596,27 @@ class AdminController extends AbstractController{
     }
 
     public function checkChangeNamePlayer(){
+        if(isset($_POST["playerId"]) && 
+        isset($_POST["changeFirst_name"]) &&
+        isset($_POST["changeLast_name"]) &&
+        isset($_POST["changeNameJersay"]) &&
+        isset($_POST["changeNumberJersay"]) &&
+        isset($_POST["changePoste"]))  {
+            $tokenManager = new CSRFTokenManager(); 
+            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+                
+                $playerId = htmlspecialchars($_POST["playerId"]);
+                $changeFirstName = htmlspecialchars($_POST["changeFirst_name"]);
+                $changeLastName = htmlspecialchars($_POST["changeLast_name"]);
+                $changeNameJersay = htmlspecialchars($_POST["changeNameJersay"]);
+                $numberJersay = htmlspecialchars($_POST["changeNumberJersay"]);
+                $changePoste = htmlspecialchars($_POST["changePoste"]);
 
+                $playerManager = new NsMasiaManager();
+                //$playerManager->changeNameJerseyPlayer();
+            }
+            
+        }
     }
 
     public function checkChangeNameJerseyPlayer(){

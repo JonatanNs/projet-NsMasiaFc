@@ -129,10 +129,10 @@
                             <label for="addPoste">Choisissez son poste : </label>
                             <select name="addPoste">
                                 <option value="position"> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
-                                <option value="gardien">Gardien</option>
-                                <option value="defenseur">Défenseur</option>
-                                <option value="milieu">Milieu</option>
-                                <option value="attaquant">Attaquant</option>
+                                <option value="Gardien">Gardien</option>
+                                <option value="Defenseur">Défenseur</option>
+                                <option value="Milieu">Milieu</option>
+                                <option value="Attaquant">Attaquant</option>
                             </select>
                         </fieldset>
                         <fieldset>
@@ -208,6 +208,29 @@
                                 <option value="milieu">Milieu</option>
                                 <option value="attaquant">Attaquant</option>
                             </select>
+                        </fieldset>
+                        <fieldset>
+                            <button type="submit" class="btn">Modifier</button>
+                        </fieldset>
+                    </form>
+                </article>
+
+                <article class="change">
+                    <h3>Modifier le numéro d'un joueur <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
+                    <form action="index.php?route=checkChangeNumber" method="POST" class="form ">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                        <fieldset>
+                            <label for="player">Choisissez le joueur à modifier : </label>
+                            <select name="playerId" id="playerId" required>
+                                <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
+                                {% for player in players %}
+                                <option value="{{player.id}}">{{player.name_jersay}}</option>
+                                {% endfor %}
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="changeNumberJersay">Numéro de maillot</label>
+                            <input type="number" id="changeNumberJersay" name="changeNumberJersay" min="0" max="99">
                         </fieldset>
                         <fieldset>
                             <button type="submit" class="btn">Modifier</button>

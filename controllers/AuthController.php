@@ -105,18 +105,6 @@ class AuthController extends AbstractController
         ]);
     }
 
-    public function mailUserSignup(string $addAddress, string $name) : void {
-        $subject = "Merci pour votre inscription !";
-        $body = "Cher(e) $name,
-        \n\nNous vous remercions chaleureusement pour votre inscription au site NS MASIA FC !
-        \n\nVotre soutien compte énormément pour nous et nous sommes ravis de vous avoir parmi nous.
-        \n\nN'hésitez pas à explorer notre site et à profiter des contenus exclusifs réservés aux membres.
-        \n\nBienvenue dans la communauté NS MASIA FC !\n\nCordialement,\n\nL'équipe du NS MASIA FC";
-    
-        // Ajoutez ici l'adresse e-mail de l'expéditeur, l'adresse e-mail de réponse, le nom de l'expéditeur, etc.
-        $this->sendEmail($addAddress, $name, $subject, $body);
-    }
-
     public function checkSignup() {
         if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
         isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){
@@ -143,7 +131,9 @@ class AuthController extends AbstractController
 
                             $userManager->SignUpUser($user);
 
-                            $this->mailUserSignup($email, $first_name);
+                            $name = $first_name . ' ' . $last_name;
+
+                            $this->baseEmailSignup($email, $name);
 
                             $_SESSION["valide"] = "Inscription réussi, connectez-vous ! Un email vous a été envoyé.";
                             header("Location: index.php?route=form");
@@ -193,15 +183,10 @@ class AuthController extends AbstractController
                         $_SESSION["userId"] = $users->getId();
                         $_SESSION["userEmail"] = $users->getEmail();
                         $_SESSION['userRoles'] = $users->getRoles();
+
                         $_SESSION["valide"] = "Connexion reussie.";
-                        if( $_SERVER['HTTP_REFERER'] === "http://localhost:3000/projet-NsMasiaFc/index.php?route=form"){
-                            header('Location: index.php?route=home');
-                            exit;
-                        } else{
-                            header('Location: ' . $_SERVER['HTTP_REFERER']);
-                            exit;
-                        }
-                        
+                        header('Location: index.php?route=home');
+                        exit; 
                     } else {
                         $_SESSION["error"] = "Identifiant mot de passe incorrect.";
                         header("Location: index.php?route=form");

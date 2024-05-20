@@ -6,7 +6,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: $beige;
+    background-color: transparent;
     width: 100%;
     position: relative;
     position:fixed;
@@ -18,19 +18,24 @@
     }
     figure{
         position: absolute;
-        top: 0;
-        right: 45%;
-        width: 10%;
+        top: -0.2em;
+        right: 48.5%;
+        width: 7%;
         padding-top: 0.5em;
         margin-left: -6em;
         img{
             width: 100%;
+            display: none;
         }
     }
 }
 
 /***********************  NAVIGATION  ***********************/
+.openMenu{
+    margin-top: 0.5em;
+}
 .navMobile{
+    display: none;
     padding-top: 2em;
     position: fixed;
     top: 3.5em;
@@ -40,9 +45,10 @@
     height: 110vh;
     margin-top: -5em;
     z-index: 5;
-
-    .openMenu{
-        margin-top: 0.5em;
+    div{
+        p{
+            color: $black ;
+        }
     }
     .closeMenu{
         padding: 2em 0 2em 50%;
@@ -52,19 +58,165 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-
             li{
                 text-transform: uppercase;
-                padding: 1em 0;
+                padding: 1em 0;  
             }
         } 
     }
 }
 
 .bodyBack{
-    background-color: $black;
-    
+    background-color: $black; 
 }
 
 
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .header{
+        padding: 1em;
+        flex-direction: row;
+        align-items: center;
+        background-color: transparent;
+        figure{
+            width: 4%;
+            
+            img{
+                width: 100%;
+                left: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
+}
 
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .header{
+        padding: 1em;
+        flex-direction: row;
+        align-items: center;
+        background-color: transparent;
+        figure{
+            width: 4%;
+            
+            img{
+                width: 100%;
+                left: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .header{
+        padding: 1em;
+        flex-direction: row-reverse;
+        align-items: center;
+        background-color: transparent;
+        figure{
+            width: 4%;
+            
+            img{
+                width: 100%;
+                left: 50%;
+                margin: 0 auto;
+            }
+        }
+        .openMenu {
+            display: none;
+        }
+    /***********************  NAVIGATION  ***********************/
+        .navMobile{
+            display: block;
+            top: 3em;
+            left: 0;
+            height: 0vh;
+            .closeMenu{
+                display: none;
+            }
+            .nav-links{
+                ul{
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 3em;
+                    padding: 0;
+                    li:nth-of-type(2){
+                        margin-right: 6em;
+                    }
+                    li:nth-of-type(3){
+                        margin-left: 6em;
+                    }
+                    a{
+                        color: white;
+                        font-size: 2.5rem;
+                        font-weight: 900;
+                        text-align: center;
+                        font-family: $font;
+                    }
+                    span{
+                        display: none;
+                    }
+                } 
+            } 
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .header{
+        padding: 1em;
+        flex-direction: row-reverse;
+        align-items: center;
+        background-color: transparent;
+        figure{
+            width: 4%;
+            
+            img{
+                width: 100%;
+                left: 50%;
+                margin: 0 auto;
+            }
+        }
+        .openMenu {
+            display: none;
+        }
+    /***********************  NAVIGATION  ***********************/
+        .navMobile{
+            display: block;
+            top: 3em;
+            left: 0;
+            height: 0vh;
+            .closeMenu{
+                display: none;
+            }
+            .nav-links{
+                ul{
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 3em;
+                    padding: 0;
+                    li:nth-of-type(2){
+                        margin-right: 6em;
+                    }
+                    li:nth-of-type(3){
+                        margin-left: 6em;
+                    }
+                    a{
+                        color: white;
+                        font-size: 2.5rem;
+                        font-weight: 900;
+                        text-align: center;
+                        font-family: $font;
+                    }
+                    span{
+                        display: none;
+                    }
+                } 
+            } 
+        }
+    }
+}

@@ -1,18 +1,24 @@
 /*********************************
         * ARTICLES NEWS *
 *********************************/
-@media screen and (max-width: 480px) {
-    .blockArticle{
-        padding-top: 4em;
-        margin-bottom: 7em;
-        h1{
-            margin-left: 1em;
-        }
+.blockArticle{
+    padding-top: 5em;
+    margin: 0 0 5em 0;
+    width: 100%;
+    h1{
+        margin-left: 1em;
+        margin-bottom: 2em;
+    }
+    div{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        align-items: center;
+        
         .articleContent{
             padding-top: 2em;
             border: 3px solid $beige;
             margin: 1em;
-            box-shadow: $beige 0px 20px 25px -5px, $beige 0px 10px 10px -5px;
+            box-shadow: $beige 0px 3px 20px -5px, $beige 0px 5px 5px -5px;
             h2{
                 text-align: center;
             }
@@ -31,6 +37,10 @@
                 width: 90%;
                 margin: 0 auto;
                 margin-bottom: 1em;
+                display: -webkit-box;
+                    overflow: hidden;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
             }
             a{
                 button{
@@ -43,26 +53,41 @@
             }
         }
     }
+}
 
-    .articleAllContent {
-        margin-bottom: 7em;
-        padding-top: 4em;
-        button{
-            margin: 1em;
-        }
-        h1{
+.articleAllContent {
+    margin-bottom: 7em;
+    padding-top: 4em;
+    button{
+        margin: 1em;
+    }
+    h1{
+        text-align: center;
+        padding-bottom: 1em;
+    }
+    figure{
+        figcaption{
             text-align: center;
-            padding-bottom: 1em;
-        }
-        figure{
-            figcaption{
-                text-align: center;
-            }
-        }
-        p{
-            margin: 1em;
-            text-align: justify;
         }
     }
+    p{
+        margin: 1em;
+        text-align: justify;
+    }
+}
 
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .blockArticle{
+        padding-top: 8em;
+        margin: 0 20% 10em 10%;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .blockArticle{
+        padding-top: 8em;
+        margin: 0 20% 10em 20%;
+        width: 100%;
+    }
 }

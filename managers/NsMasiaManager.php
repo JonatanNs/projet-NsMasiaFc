@@ -97,7 +97,7 @@ class NsMasiaManager extends AbstractManager{
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach($result as $item){
-            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"], $item["stadium"] );
+            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"], $item["email"], $item["stadium"] );
             $newMatch->setId($item["id"]);
             $newMatch->setRankingPoints($item["ranking_points"] ?? null);
             $newMatch->setMatchsPlay($item["match_play"] ?? null);
@@ -118,7 +118,7 @@ class NsMasiaManager extends AbstractManager{
         $item = $query->fetch(PDO::FETCH_ASSOC);
 
         if($item){
-            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"], $item["stadium"] );
+            $newMatch = new NsMasia($item["name"], $item["logo_url"], $item["logo_alt"], $item["email"], $item["stadium"] );
             $newMatch->setId($item["id"]);
             $newMatch->setRankingPoints($item["ranking_points"] ?? null);
             $newMatch->setMatchsPlay($item["match_play"] ?? null);

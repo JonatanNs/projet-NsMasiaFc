@@ -1,6 +1,4 @@
 
-
-
     .socialNetworks{
         display: flex;
         flex-direction: column;
@@ -15,13 +13,16 @@
         width: 100%;
         
         figure{
-            width: 30%;
+            width: 40%;
             display: flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: center;
             gap: 2em;
+            margin-top: -1.5em;
             img{
                 width: 100%;
-                
+                object-fit: cover;
             }
         }
         ul{
@@ -36,9 +37,6 @@
     .infoClub{
         margin-top: 2em;
         ul{
-            h1{
-
-            }
             li{
                 text-align: center;
             }
@@ -46,9 +44,177 @@
     }
 
     .footer{
+        padding-bottom: 0.5em;
         a{
             color: $white;
         }
     }
     
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .socialNetworks{
+            padding: 0 2em;
+            height: 30vh;
+            background-position: center 65%;
+            figure{
+                width: 40%;
+                gap: 2em;
+                margin-top: -1.5em;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            ul{
+                li{
+                    padding: 1em;
+                    span{
+                        font-size: 4rem;
+                    }
+                }
+            }
+        }
     
+        .infoClub{
+            margin: 2em;
+            ul{
+                li{
+                    text-align: center; 
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .socialNetworks{
+            padding: 0 2em;
+            height: 30vh;
+            background-position: center 65%;
+            figure{
+                width: 25%;
+                gap: 2em;
+                margin-top: -1.5em;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            ul{
+                li{
+                    padding: 1em;
+                    span{
+                        font-size: 5rem;
+                    }
+                }
+            }
+        }
+    
+        .infoClub{
+            margin: 2em;
+            ul{
+                li{
+                    text-align: center; 
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .socialNetworks{
+            padding: 0 2em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 30vh;
+            background-position: center 65%;
+            figure{
+                width: 20%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                margin-top: 1.5em;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            ul{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1em;
+                margin-bottom: -2em;
+                li{
+                    padding: 1em;
+                    span{
+                        font-size: 6rem;
+                    }
+                }
+            }
+        }
+        .infoClub{
+            margin: 2em;
+            ul:nth-of-type(2){
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                li{
+                    text-align: center; 
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .socialNetworks{
+            padding: 0 2em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            height: 30vh;
+            background-position: center 65%;
+            figure{
+                width: 15%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                margin-top: 0.5em;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            ul{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                margin-bottom: -2em;
+                li{
+                    padding: 1em;
+                    span{
+                        font-size: 5rem;
+                    }
+                }
+            }
+        }
+        .infoClub{
+            margin: 2em;
+            ul{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                li{
+                    text-align: center;
+                }
+            }
+        }
+    }

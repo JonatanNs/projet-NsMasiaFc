@@ -2,49 +2,49 @@
 
 {% block main %}
     <main class="container">
-        <div class="searchAndBag">
-            <span class="gg-search search"></span>
-            <span class="gg-shopping-bag bagProduct"></span>
-        </div>
-        <article class="titleBoutique">
+        <section class="pageBoutique">
+            <div class="searchAndBag">
+                <span class="gg-search search"></span>
+                <span class="gg-shopping-bag bagProduct"></span>
+            </div>
             <figure>
                 <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
             </figure>
             <h1>NsMasia FC</h1>
             <p>Boutique Officiel</p>
-        </article>
-        <div class="allShirt">
-        <span class="productLength invisible">{{products|length}}</span>
-        {% for product in products %}
-            <section class="shirtSale">
-                <figure class="shirtOne" id="{{product.id}}">
-                    <a href="index.php?route=lookProduct&id={{product.id}}">
-                        <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
-                    </a>
-                </figure> 
-                <ul>
-                    <li>
-                        <h2>
-                            <a href="index.php?route=lookProduct&id={{product.id}}">
-                                {{ product.name }}
-                            </a>
-                        <h2>
-                    </li>
-                    <li>
-                        <p>Prix : <span class="prices">{{product.prices }}</span>€</p> 
-                    </li>
-                </ul>
-            </section>
-        {% endfor %}
-        </div>
+            <div class="allShirt">
+            <span class="productLength invisible">{{products|length}}</span>
+            {% for product in products %}
+                <section class="shirtSale">
+                    <figure class="shirtOne" id="{{product.id}}">
+                        <a href="index.php?route=lookProduct&id={{product.id}}">
+                            <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                        </a>
+                    </figure> 
+                    <ul>
+                        <li>
+                            <h2>
+                                <a href="index.php?route=lookProduct&id={{product.id}}">
+                                    {{ product.name }}
+                                </a>
+                            <h2>
+                        </li>
+                        <li>
+                            <p>Prix : <span class="prices">{{product.prices }}</span>€</p> 
+                        </li>
+                    </ul>
+                </section>
+            {% endfor %}
+            </div>
 
-        <section class="bagProductsUser invisible">
-                <h5>Panier</h5>
-                <div class="bagProducts"></div> 
-                <div class="bagProductsTotal"></div>
-                <form action="index.php?route=panier" method="POST">
-                    <button type="submit" class="btn">Valider</button>
-                </form>
+            <section class="bagProductsUser invisible">
+                    <h5>Panier</h5>
+                    <div class="bagProducts"></div> 
+                    <div class="bagProductsTotal"></div>
+                    <form action="index.php?route=panier" method="POST">
+                        <button type="submit" class="btn">Valider</button>
+                    </form>
+            </section>
         </section>
     </main>
 {% endblock %}
