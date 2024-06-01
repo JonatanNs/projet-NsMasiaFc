@@ -80,5 +80,7 @@ composer require phpmyadmin/twig-i18n-extension:^4.1
 
 # Useful Links
 
-- Pour les drapeau : https://flagicons.lipis.dev/
-- Librairie icon : https://css.gg/ ou https://fontawesome.com/
+- Pour les drapeau : https://flagicons.lipis.dev
+- Librairie icon : https://css.gg/ ou https://fontawesome.com
+- Stripe : https://stripe.com
+- Bootstrap : https://getbootstrap.com
