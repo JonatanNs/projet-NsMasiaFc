@@ -1,16 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <main class="container">
+    <main class="main">
         <article class="carts">
             <h2>Mon panier</h2>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
             <p>Total : <span class="cartQuantityValue">0</span></p>
             <ul class="cartsProducts"></ul>
-        </article>
-        <div class="location">
-            <a href="index.php?route=boutique"><button class="btn">Continuer mes achats</button></a>
-            <a href="index.php?route=payement"><button class="btn">Finaliser la commande</button></a>
-        </div>
+       
+            <div class="location">
+                <a href="index.php?route=boutique" class="btn">Continuer mes achats</a>
+                <a href="index.php?route=payement" class="btn">Finaliser la commande</a>
+            </div>
+         </article>
     </main>
 {% endblock %}
 

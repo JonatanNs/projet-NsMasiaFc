@@ -1,16 +1,22 @@
 <?php
-class OrderController extends AbstractController
-{
-    public function panier() {
+class OrderController extends AbstractController {
+    public function panier() : void {
+        $secret = $_ENV["SECRET"];
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
+        unset($_SESSION["error"]);
+        unset($_SESSION["valide"]);
+
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
         $userManager = new UserManager();
         $orderManager = new OrderManager();
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
 
         $user = isset($userId) ? $userManager->getAllUserById($userId) : "";
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
@@ -22,15 +28,24 @@ class OrderController extends AbstractController
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
             'products' => $products,
-            'addresse' => $addresse
+            'addresse' => $addresse,
+            'secret' => $secret,
+            'nsMasia' => $nsMasia
         ]);
     }
-    public function payement() {
+    public function payement() : void{
+        $secret = $_ENV["SECRET"];
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
+        unset($_SESSION["error"]);
+        unset($_SESSION["valide"]);
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
+        
         $merchManager = new MerchManager();
         $products = $merchManager->getAllProducts();
         $userManager = new UserManager();
@@ -38,6 +53,7 @@ class OrderController extends AbstractController
         $user = isset($userId) ? $userManager->getAllUserById($_SESSION["userId"]) : "";
         $orderManager = new OrderManager();
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $this->render("boutique/payement.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
@@ -45,23 +61,32 @@ class OrderController extends AbstractController
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
             'products' => $products,
-            'addresse' => $addresse
+            'addresse' => $addresse,
+            'secret' => $secret,
+            'rolesUser' => $rolesUser,
+            'nsMasia' => $nsMasia
         ]);
     }
 
-    public function succesPay() {
+    public function succesPay() :void {
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userEmail = isset($_SESSION["userEmail"]) ? $_SESSION["userEmail"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
 
         echo $this->render('succes.html.twig', [
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
-            'userEmail' => $userEmail
+            'userEmail' => $userEmail,
+            'rolesUser' => $rolesUser,
+            'nsMasia' => $nsMasia
         ]);
     } 
     
-    public function checkAddress(){
+    public function checkAddress() : void{
         if(isset($_POST["address"]) && 
            isset($_POST["orderZipCode"]) && isset($_POST["orderCity"]) 
            && isset($_POST["pays"]) && isset($_POST["user_id"])) {
@@ -71,8 +96,8 @@ class OrderController extends AbstractController
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
     
                 // Récupérez les données du formulaire
-                $address = htmlspecialchars($_POST["address"]);
-                $complements = htmlspecialchars($_POST["orderComplements"]); 
+                $address = htmlspecialchars_decode($_POST["address"]);
+                $complements = htmlspecialchars_decode($_POST["orderComplements"]); 
                 $postal_code = htmlspecialchars($_POST["orderZipCode"]); 
                 $city = htmlspecialchars($_POST["orderCity"]);
                 $pays = htmlspecialchars($_POST["pays"]);
@@ -103,7 +128,7 @@ class OrderController extends AbstractController
             exit;
         }
     }
-    public function checkSucces() { 
+    public function checkSucces() : void { 
         if(isset($_POST["products"])) {
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
@@ -116,7 +141,7 @@ class OrderController extends AbstractController
 
                 $articles = [];
                 $quantities = [];
-                $sizes = [];;
+                $sizes = [];
                 $totals = [];
     
                 // Parcourir les produits pour collecter les informations
@@ -174,10 +199,15 @@ class OrderController extends AbstractController
                 
                 $numberOrder = $this->generatorNumberOrderTicket();
 
+                $matchManager = new MatchManager(); 
+                $ticket = $matchManager->getTicketsById($ticket_id);
+
+                $matchManager->ChangeStock($ticket->getId(), $ticket->getStock() - 1);
+
                 $orderManager = new OrderManager();
                 $orderManager->createOrderTicket($numberOrder, $users, $ticket_id, $match_id, $quantities, $totalPrices);
                 $name = $users->getFirstName() . ' ' . $users->getLastName();
-                $order = $orderManager->getOrderTicketById($ticket_id);
+                $order = $orderManager->getAllOrderTicketByOrderNumber($users, $numberOrder);
 
                 $this->baseEmailTicket($users->getEmail(), $name, $order);
 
@@ -192,7 +222,7 @@ class OrderController extends AbstractController
         }
     }
     
-    public function generatorNumberOrderBoutique() {
+    public function generatorNumberOrderBoutique() : string{
         // Incrémenter le numéro de commande
         $uniqueNumber = bin2hex(random_bytes(10));
     
@@ -208,8 +238,7 @@ class OrderController extends AbstractController
         return "nsTicket" . $uniqueNumber;
     }
         
-    public function stripePayement() {;
-        var_dump($_POST);
+    public function stripePayement() : void{;
         $products = $_POST['products'];
 
         $api = $_ENV['API_KEY'];
@@ -217,8 +246,8 @@ class OrderController extends AbstractController
         
         header('Content-Type: application/json');
         
-        $YOUR_DOMAIN = 'http://localhost:3000';
-        
+        $YOUR_DOMAIN = 'http://localhost';
+
         $line_items = [];
         
         foreach ($products as $product) {
@@ -246,11 +275,11 @@ class OrderController extends AbstractController
         ]);
         
         header("HTTP/1.1 303 See Other");
-         header("Location: " . $checkout_session->url);     
+        header("Location: " . $checkout_session->url);     
     }  
 
-    public function stripePayTicket() {;
-        var_dump($_POST);
+    public function stripePayTicket() : void{
+
         $tickets = $_POST['arrayTicket'];
 
         $api = $_ENV['API_KEY'];
@@ -258,7 +287,7 @@ class OrderController extends AbstractController
         
         header('Content-Type: application/json');
         
-        $YOUR_DOMAIN = 'http://localhost:3000';
+        $YOUR_DOMAIN = 'http://localhost';
         
         $line_items = [];
         

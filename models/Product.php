@@ -8,11 +8,11 @@ private ?string $other_img_url = null;
 private ?string $other_img_alt = null;
 
 public function __construct(
-    private string $name, 
-    private string $img_url, 
-    private string $img_alt, 
-    private string $prices 
-) {
+                                private string $name, 
+                                private string $img_url, 
+                                private string $img_alt, 
+                                private string $prices 
+                            ) {
     
 }
 

@@ -4,13 +4,13 @@ class Order_product {
 private ?int $id = null;
 
 public function __construct(
-    private string $numberOrder,
-    private int $products,
-    private int $quantity,
-    private string $sizes,
-    private string $date,
-    private int $total_prices
-) {
+                                private string $numberOrder,
+                                private int $products,
+                                private int $quantity,
+                                private string $sizes,
+                                private string $date,
+                                private int $total_prices
+                            ) {
 }
 
 public function getId(): ?int {

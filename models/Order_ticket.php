@@ -3,7 +3,15 @@
 class Order_ticket {
 
     private ? int $id = null;
-    public function __construct(private User $user_id, private string $numberOrder, private array $ticket_id, private array $match_id, private int $quantity, private string $date, private int $total_prices) {
+    public function __construct(
+                                    private User $user_id, 
+                                    private string $numberOrder, 
+                                    private array $ticket_id, 
+                                    private array $match_id, 
+                                    private int $quantity, 
+                                    private string $date, 
+                                    private int $total_prices
+                                ) {
     }
 
     public function getId(): ? int {

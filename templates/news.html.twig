@@ -4,18 +4,24 @@
 <main class="container">
     <article class="blockArticle">
         <h1>Actualité</h1>
+        {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
         <div>
             {% for article in articles %}
             <article class="articleContent">
                 <h2>{{article.title}}</h2>
                 <figure>
                     <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
-                    <figcaption>{{article.img_alt}}</figcaption>
                 </figure>
                 <p>{{article.excerpt}}</p>
-                <p>Date : {{article.date}}</p>
-                <a href="index.php?route=homeArticle&id={{article.id}}">
-                    <button>Lire l'article</button>
+                <p>Date : {{article.date|date("m/d/Y", "Europe/Paris")}}</p>
+                <a href="index.php?route=homeArticle&id={{article.id}}" class="btn">
+                    Lire l'article
                 </a>
             </article>
             {% endfor %}

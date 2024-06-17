@@ -1,75 +1,82 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-<span class="productLength invisible">{{products|length}}</span>
-    {% for product in products %}
-        <div class="searchAndBag">
-            <span class="gg-search search"></span>
-            <span class="gg-shopping-bag bagProduct"><p class="valueBasket"></p></span>
-        </div>
-        <article class="titleBoutique">
-            <figure>
-                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
+<main class="main">
+    <section class="pageLookProduct">
+            <span class="productLength invisible">{{products|length}}</span>
+            <div class="searchAndBag">
+                <span class="gg-search search"></span>
+                <span class="gg-shopping-bag bagProduct"></span>
+            </div>
+            <figure class="logoNs">
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
             </figure>
-            <h1>NsMasia FC</h1>
+            <h1>{{nsMasia.name}}</h1>
             <p>Boutique Officiel</p>
-        </article>
-        <div class="shirts shirts{{ product.id }}">
-            <section class="shirtSale">
-                <div class="frontShirt">
-                    <figure class="shirtOne" id="{{ product.id }}">
-                        <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
-                    </figure> 
-                    <figure class="shirtTwo">
-                        <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
-                    </figure> 
-                </div>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
 
-                <div class="backShirt invisible">
-                    <figure class="shirtOne" id="{{ product.id }}">
-                        <img src="{{ product.other_img_url }}" alt="{{ product.other_img_alt }}"/>
-                    </figure>
-                    <figure class="shirtTwo">
-                        <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
-                    </figure> 
-                </div>
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
+            <div class="shirts shirts{{ products.id }}">
+                <section class="shirtSale">
+                    <div class="frontShirt">
+                        <figure class="shirtOne" id="{{ products.id }}">
+                            <img src="{{ products.imgurl }}" alt="{{ products.imgalt }}"/>
+                        </figure> 
+                        <figure class="shirtTwo">
+                            <img src="{{ products.otherimgurl }}" alt="{{ products.otherimgalt }}"/>
+                        </figure> 
+                    </div>
 
-                <h2>{{ product.name }}</h2> 
-                <p>{{ product.img_alt }}</p>
+                    <div class="backShirt invisible">
+                        <figure class="shirtOne" id="{{ products.id }}">
+                            <img src="{{ products.otherimgurl }}" alt="{{ products.otherimgalt }}"/>
+                        </figure>
+                        <figure class="shirtTwo">
+                            <img src="{{ products.imgurl }}" alt="{{ products.imgalt }}"/>
+                        </figure> 
+                    </div>
 
-                <ul>
-                    <li>
-                        <p>Prix : <span class="prices">{{ product.prices }}</span>€</p>
-                    </li>
-                    <li class="size">
-                        <label for="size">Taille : </label>
-                            <select name="size" id="size">
-                                <option value=""> <i class="fa-solid fa-chevron-down fa-sm"></i> </option>
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
-                    </li>
-                    <li>
-                        <button type='submit' class="addCart btn">Ajouter au pannier</button>
-                    </li>
-                </ul>
-            </section>
-            <article class="description">
-                <h3>Descriptions<i class="fa-solid fa-chevron-down fa-sm"></i></h3>
-                <p class="invisible">{{ product.descriptions }}</p>
-            </article>
-        </div>
-    {% endfor %}
-    <section class="bagProductsUser invisible">
-            <h5>Panier</h5>
-            <div class="bagProducts"></div> 
-            <div class="bagProductsTotal"></div>
-            <form action="index.php?route=panier" method="POST">
-                <button type="submit" class="btn">Valider</button>
-            </form>
+                    <h2>{{ products.name }}</h2>
+                    <p>{{ products.imgalt }}</p>
+
+                    <ul>
+                        <li>
+                            <p>Prix : <span class="prices">{{ products.prices }}</span>€</p>
+                        </li>
+                        <li class="size">
+                            <label for="size">Taille : </label>
+                                <select name="size" id="size">
+                                    <option value="">---</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                        </li>
+                        <li>
+                            <button type='submit' class="addCart btn">Ajouter au pannier</button>
+                        </li>
+                    </ul>
+                </section>
+                <article class="description">
+                    <h3>Descriptions</h3>
+                    <p>{{ products.descriptions }}</p>
+                </article>
+            </div>
+        <section class="bagProductsUser invisible">
+                <h5>Panier</h5>
+                <div class="bagProducts"></div> 
+                <div class="bagProductsTotal"></div>
+                <form action="index.php?route=panier" method="POST">
+                    <button type="submit" class="btn">Valider</button>
+                </form>
+        </section>
     </section>
+</main>
 {% endblock %}

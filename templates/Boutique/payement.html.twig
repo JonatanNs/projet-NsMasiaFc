@@ -1,19 +1,26 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <main class="container">
+    <main class="main">
         <article class="titleBoutiquePayement">
             <figure>
-                <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+                <a href="index.php?route=home"><img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/></a>
             </figure>
-            <h1>NsMasia FC</h1>
+            <h1>{{nsMasia.name}}</h1>
             <p>Boutique Officiel</p>
         </article>
         <div class="payement">
             <div class="orderUser">
                 <article class="orderUser-connexion">
+                {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+                {% endif %}
+
+                {% if valideMessage is not empty %}
+                    <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+                {% endif %}
                 {% if userIsConect is empty %}
-                <h2>Information personels <span class="fa-regular fa-circle-info" style="color: #ffffff;"></span></h2>
+                <h2>Information personels </h2>
                     <form action="index.php?route=check-login" method="POST" class="form formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
@@ -97,9 +104,11 @@
                             <label for="orderCity">Ville</label>
                             <input type="text" id="orderCity" name="orderCity" required/>
                         </fieldset>
-                        <select name="pays">
-                                <option value="FR">France</option>
-                        </select>
+                        <fieldset>
+                            <select name="pays">
+                                    <option value="FR">France</option>
+                            </select>
+                        </fieldset>
                         <fieldset>
                             <button type="submit" class="btn">Valider</button>
                         </fieldset>
@@ -130,7 +139,7 @@
                 <button type="submit" id="checkout-button" class="btn">Passer au payement</button>
             </form>  
             {% else %}
-                <p>Renseignez votre adresse de livraison pour poursuivre le processus d'achat</p>
+                <p>Renseignez votre adresse de livraison pour poursuivre le processus d'achat...</p>
             {% endif %}
         </div>
     </main>

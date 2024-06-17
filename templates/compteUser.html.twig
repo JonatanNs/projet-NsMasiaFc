@@ -1,19 +1,29 @@
 {% extends "base.html.twig" %}
 {% block main %}
-<main class="container">
+<main class="main">
     <section class="myAccount">
         <h1>Mon Compte</h1>
-        <section class="connectionAndSecurity">
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
+
+        {% if rolesUser == "ADMIN" %} 
+            <div class="userIsAdmin">
+                <form action="index.php?route=checkAdmin&secret={{secret}}" method="POST">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <button type="submit" class="btn">ADMIN</button>
+                </form> 
+            </div>
+        {% endif %}     
+        <article class="connectionAndSecurity">
             <h2>Connexion et sécurité  <span class="fa-solid fa-lock" style="color: #FFD43B;"></span></h2> 
             <article class="changeName invisible">
                 <h3>Modifier son nom <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
-                {% if errorMessage is not empty %}
-                    <p>{{ errorMessage }}</p>
-                {% endif %}
-
-                {% if valideMessage is not empty %}
-                    <p>{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
-                {% endif %}
+                
                 <form action="index.php?route=checkChangeName" method="POST" class="form formChangeName invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
@@ -95,7 +105,7 @@
                     </fieldset>
                 </form>
             </article>
-        </section>
+        </article>
         <article class="addressforDelivery">
             <h2>Mon adresse de livraison <span class="fa-solid fa-map" style="color: #ffffff;"></span></h2>
             {% if address is empty %}
@@ -169,7 +179,7 @@
                 </article>
             {% endif %}
         </article>
-        <section class="myOrder">
+        <article class="myOrder">
             <h2>Mes commandes <span class="fa-solid fa-basket-shopping" style="color: #00ff33;"></span></h2>
             <h3 class="yourTickets invisible">Vos Tickets <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
             {% for orderTicket in orderTickets %}
@@ -242,7 +252,7 @@
                 {% endfor %}
             </article> 
         {% endfor %}
-        </section>
+        </article>
 
         <article class="contact">
             <h2>Nous contacter <span class="fa-solid fa-headset" style="color: #005eff;"></span></h2>  
@@ -250,6 +260,10 @@
                 <li>06 55 88 77 99 </li>
             </ul>
         </article>
+
+        <div class="logoutUser">
+            <a href="index.php?route=logout" class="btn">Déconnexion <span class="fa-solid fa-right-from-bracket fa-sm"></span> </a>   
+        </div>
     </section>
-</main
+</main>
 {% endblock  %}

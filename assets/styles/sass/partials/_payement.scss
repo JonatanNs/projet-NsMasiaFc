@@ -1,0 +1,488 @@
+/*************************************************
+                * PAYEMENT  *
+*************************************************/
+    .titleBoutiquePayement, .titleBiletteriePayement{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 5em;
+        figure {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img{
+                width: 20%; 
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .personalInfoUser{
+        p:last-child{
+            margin: 2em 0;
+        }
+    }
+
+    .payement{
+        width: 80%;
+        margin: 0 auto 7em auto;
+        .orderUser{
+            .orderUser-connexion{
+                text-align: center;
+                h2{
+                    border-right: 1px solid $beige;
+                    border-left: 1px solid $beige;
+                    margin: 1em 0;
+                }
+                form{
+                    margin: 2em 0;
+                    input{
+                        width: 100%;
+                        border-radius: 0.5rem;
+                        background-color: $beige;
+                        padding: 0.5em;
+                        margin-bottom: 1em;
+                    }
+                    p{
+                        cursor: pointer;
+                    }
+                    button{
+                        margin-bottom: 1em;
+                        padding: 0.5em 2em;
+                        font-size: 1.3rem;
+                    }
+                }
+                .personalInfo{
+                    margin-top: 2em;
+                    p:nth-of-type(2){
+                        margin-top: 2em;
+                        margin-bottom: 2em;
+                    }
+                    
+                }
+            }
+
+            .orderUser-address{
+                margin-bottom: 2em;
+                h2{
+                    text-align: center;
+                    border-right: 1px solid $beige;
+                    border-left: 1px solid $beige;
+                }
+                form{
+                    margin: 2em 0;
+                    input, select{
+                        width: 100%;
+                        border-radius: 0.5rem;
+                        background-color: $beige;
+                        padding: 0.5em;
+                        margin-bottom: 1em;
+                    }
+                    p{
+                        cursor: pointer;
+                    }
+                    button{
+                        padding: 0.5em 2em;
+                        font-size: 1.3rem;
+                    }
+                }
+                article {
+                    h3{
+                        margin-top: 2em;
+                    }
+                    ul{
+                        text-align: center;
+                        margin: 2em;
+                    }
+
+                    a{
+                        color: $beige;
+                        cursor: pointer;
+                        padding-left: 4em;
+                    
+                        &:hover{
+                            color: $bleu;
+                        }
+                    }
+                }    
+            }
+        }
+
+        .payementCart{
+            border-top: 2px solid $beige;
+            border-bottom: 2px solid $beige;
+            margin-bottom: 2em;
+            h4{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 2rem;
+                padding: 1em;
+            }
+            .recapCartUser{
+                .recapCartUserCol{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    align-items: center;
+                   
+                    h5{
+                        font-size: 1.6rem;
+                        text-align: left;
+                        margin-top: -1em;
+                        margin-left: -2em;
+                        text-wrap: nowrap;
+                    }
+                    figure{
+                        width: 50%;
+                        img{
+                            width: 100%;
+                            border-radius: 1rem;
+                        }
+                    }
+                    .cartPriceQuantity{
+                        text-align: left;
+                        font-size: 2rem;
+                        grid-column: 2/2;
+                        margin-top: -2em;
+                        margin-left: -1em;
+                    }
+                }
+            }
+            #totalPrice{
+                text-align: center;
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .formStripe{
+        margin-bottom: 3em;
+        button{
+            width: 100%;
+            font-size: 1.5rem;
+        }
+    }
+
+
+/*****************************************************
+            * PAYEMENT TICKET *
+*****************************************************/
+
+    .recapCartUser{
+        padding: 1em;
+        border-top: 2px solid $beige;
+        border-bottom: 2px solid $beige;
+        text-align: center;
+        
+        h4{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .formTicketStripe{
+        button{
+            width: 100%;
+            font-size: 1.2rem;
+        }
+    }
+
+/***********************************************************
+            * PAYEMENT SUCCES *
+***********************************************************/
+
+    .payementPassed{
+        margin: 2em;
+        padding-top: 8em;
+        h1{
+            text-align: center;
+        }
+        figure{
+            width: 30%;
+            margin: 2em auto;
+            img{
+                width: 100%;
+            }
+        }
+        p{
+            margin-top: 3em;
+            text-align: center;
+        }
+        form{
+            margin-top: 3em;
+            text-align: center;
+            button{
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .payement{
+            .orderUser{
+                .orderUser-connexion, .orderUser-address{
+                    form{
+                        
+                        fieldset{
+                            input, select{
+                                width: 80%;
+                                margin: 1em auto;
+                            }
+                        }
+                    }
+                } 
+            }
+            .payementCart{
+                .recapCartUser{
+                    .recapCartUserCol{
+                        h5{
+                            font-size: 2rem;
+                        }
+                        figure{
+                            width: 40%;
+                            margin: 0.5em auto;
+                        }
+                        .cartPriceQuantity{
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+                #totalPrice{
+                    padding: 1em;
+                }
+            }
+        }
+        .payementPassed{
+            margin: 1em;
+            padding-top: 6em;
+            h1{
+                text-align: center;
+                font-size: 3rem;
+            }
+            figure{
+                width: 20%;
+                margin: 2em auto;
+                img{
+                    width: 100%;
+                }
+            }
+            p{
+                margin-top: 3em;
+                text-align: center;
+            }
+            form{
+                margin: 3em auto 0 auto;
+                text-align: center;
+                button{
+                    width: 30%;
+                    margin: 0 auto;
+                    padding: 0.5em;
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .payement{
+            .orderUser{
+                .orderUser-connexion, .orderUser-address{
+                    form{
+                        
+                        fieldset{
+                            input, select{
+                                width: 70%;
+                                margin: 1em auto;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .payementCart{
+                .recapCartUser{
+                    .recapCartUserCol{
+                        h5{
+                            font-size: 2rem;
+                        }
+                        figure{
+                            width: 30%;
+                            margin: 0.5em auto;
+                        }
+                        .cartPriceQuantity{
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+                #totalPrice{
+                    padding: 1em;
+                }
+            }
+        }
+        .payementPassed{
+            margin: 1em;
+            padding-top: 4em;
+            h1{
+                text-align: center;
+                font-size: 3rem;
+            }
+            figure{
+                width: 20%;
+                margin: 2em auto;
+                img{
+                    width: 100%;
+                }
+            }
+            p{
+                margin-top: 3em;
+                text-align: center;
+            }
+            form{
+                margin: 3em auto 0 auto;
+                text-align: center;
+                button{
+                    width: 20%;
+                    margin: 0 auto;
+                    padding: 0.5em;
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .payement{
+            .orderUser{
+                .orderUser-connexion, .orderUser-address{
+                    form{
+                        
+                        fieldset{
+                            input, select{
+                                width: 50%;
+                                margin: 1em auto;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .payementCart{
+                .recapCartUser{
+                    .recapCartUserCol{
+                        h5{
+                            font-size: 2rem;
+                        }
+                        figure{
+                            width: 20%;
+                            margin: 0.5em auto;
+                        }
+                        .cartPriceQuantity{
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+                #totalPrice{
+                    padding: 1em;
+                }
+            }
+        }
+        .payementPassed{
+            margin: 1em;
+            padding-top: 2em;
+            h1{
+                text-align: center;
+                font-size: 3rem;
+            }
+            figure{
+                width: 20%;
+                margin: 2em auto;
+                img{
+                    width: 100%;
+                }
+            }
+            p{
+                margin-top: 3em;
+                text-align: center;
+            }
+            form{
+                margin: 3em auto 0 auto;
+                text-align: center;
+                button{
+                    width: 20%;
+                    margin: 0 auto;
+                    padding: 0.5em;
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .payement{
+            .orderUser{
+                .orderUser-connexion, .orderUser-address{
+                    form{
+                        
+                        fieldset{
+                            input, select{
+                                width: 50%;
+                                margin: 1em auto;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .payementCart{
+                .recapCartUser{
+                    .recapCartUserCol{
+                        h5{
+                            font-size: 2rem;
+                        }
+                        figure{
+                            width: 20%;
+                            margin: 0.5em auto;
+                        }
+                        .cartPriceQuantity{
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+                #totalPrice{
+                    padding: 1em;
+                }
+            }
+        }
+
+        .payementPassed{
+            margin: 1em;
+            padding-top: 2em;
+            h1{
+                text-align: center;
+                font-size: 3rem;
+            }
+            figure{
+                width: 20%;
+                margin: 2em auto;
+                img{
+                    width: 100%;
+                }
+            }
+            p{
+                margin-top: 3em;
+                text-align: center;
+            }
+            form{
+                margin: 3em auto 0 auto;
+                text-align: center;
+                button{
+                    width: 20%;
+                    margin: 0 auto;
+                    padding: 0.5em;
+                }
+            }
+        }
+    }

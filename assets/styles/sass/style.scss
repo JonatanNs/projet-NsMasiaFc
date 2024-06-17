@@ -3,6 +3,7 @@
 @import "reset/reset";
 @import "partials/header";
 @import "partials/boutique";
+@import "partials/boutiqueProduct";
 @import "partials/payement";
 @import "partials/biletterie";
 @import "partials/compteUser";
@@ -39,6 +40,11 @@
     .container{
         max-width: 1440px;
         margin: 0;
+        padding: 0;
+        font-family: $font2 !important;
+    }
+    .main{
+        max-width: 1440px;
         font-family: $font2 !important;
     }
 }
@@ -46,6 +52,10 @@
 @media screen and (min-width: 1440px) {
     .container{
         margin: 0;
+        padding: 0;
+        font-family: $font2 !important;
+    }
+    .main{
         font-family: $font2 !important;
     }
 }

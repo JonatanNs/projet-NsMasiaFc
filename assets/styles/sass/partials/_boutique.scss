@@ -1,0 +1,502 @@
+/*********************************
+            * SHOP *
+*********************************/
+
+.pageBoutique{
+    width: 100%;
+    margin: 0 ;
+    padding: 2em 0em;
+    h1, p{
+        text-align: center;
+    }
+    .logoNs {
+        width: 10%;
+        margin: 1em auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 100%; 
+            margin: 0 auto;
+        }
+    }
+    .basketEmpty{
+        background-color: $beige;
+        color: red;
+        padding: 0.5em;
+        border-radius: 0.5rem;
+        font-size: 2rem;
+        
+    }
+    .searchAndBag{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 4em 0 1em 0 ;
+
+        .numberBag{
+            color: $beige;
+            margin-left: 1.5em;
+            margin-top: -1em;  
+        }
+        .bagProduct{
+            cursor: pointer;
+            
+            .valueBasket{
+                background-color: red;
+                border-radius: 1rem;
+                text-align: center;
+                margin-top: 1em;
+            }
+        }
+        .search{
+            cursor: pointer;
+        }
+        
+    }
+
+    .allShirt{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 1em 1em 7em 1em;
+        .shirtSale{
+            display: flex;
+            flex-direction: column;
+            .shirtOne{
+                width: 100%;
+                margin-bottom: 2em;
+                margin-top: 2em;
+                img{
+                    width: 80%;
+                    margin: auto;
+                    gap: 1em;
+                    border-radius: 1rem;
+                    cursor: pointer;
+                    box-shadow: $beige 0px 10px 15px -3px, $beige 0px 4px 6px -2px;
+                }
+            }
+            ul{
+                li{
+                    h2{
+                        cursor: pointer;
+                        text-align: center;
+                        a{
+                            color: $beige;
+                            &:hover{
+                                text-decoration: underline ;
+                            }
+                        }  
+                    }
+                }
+                li{
+                    p{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    
+
+/**********************CART********************/
+    
+
+    .location{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        padding-bottom: 2em;
+        margin-bottom: 7em;
+
+        button{
+            font-size: 2rem;
+        }  
+    }
+}
+
+.bagProductsUser{
+    background-color: $black;
+    color: $beige;
+    border: 5px solid $beige;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 2rem;
+    padding: 1em;
+    position: absolute;
+    top: 8em;
+    left: 4em;
+    .bagProducts{
+        cursor: pointer;
+        .firstLi{
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            align-items: center;
+            width: 100%;
+            margin: 0 auto;
+            figure{
+                width: 30%;
+                img{
+                    width: 100%;
+                    border-radius: 0.5rem;
+                }
+            }
+        }
+    } 
+}
+
+
+.carts{
+    
+    height: auto;
+    padding: 5em 1em;
+    h2{
+        font-size: 2.5rem;
+        margin-left: 1em;
+        margin-bottom: 1em;
+    }
+    p{
+        text-align: center;
+        font-size: 2rem;
+        
+    }
+    
+    .cartsProducts ul{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        margin-bottom: 2em;
+
+        .firstLi{
+            figure{
+                width: 50%;
+                img{
+                    width: 100%;
+                    border-radius: 0.5rem;
+                }
+            }
+        }
+        .secondLi{
+            margin-left: -2.5em;
+            margin-right: 1em;
+            h6{
+                font-size: 1.6rem;
+            }
+            .divCol{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                .btnAdd , .btnLess{
+                    padding: 0.1em 1em;
+                    font-size: 1.5rem;
+                }
+                .cartsPriceQuantity{
+                    font-size: 2rem;
+                }
+                p{
+                    margin-top: 0.7em;
+                }
+            }
+        }
+    }
+    .location{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+
+    }
+}
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .bagProductsUser{ 
+            position: absolute;
+            top: 8em;
+            left: 0;
+            right: 0;
+            height: auto;
+            width: 50%;
+            
+            .bagProducts{
+                width: 100%;
+                margin: 0 auto;
+                .firstLi{
+                    .divCol{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+                    figure{
+                        width: 20%;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+            } 
+        }
+        .carts{
+            height: auto;
+            padding: 4em;
+            h2{
+                font-size: 3rem;
+                margin-left: 1em;
+                margin-bottom: 1em;
+            }
+            p{
+                text-align: center;
+                font-size: 2.5rem;  
+            }
+            .cartsProducts{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                ul{
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    align-items: center;
+                }
+            }
+            .location{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                
+            }
+        }
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .bagProductsUser{ 
+            position: absolute;
+            top: 8em;
+            left: 0;
+            right: 0;
+            height: auto;
+            width: 50%;
+            
+            .bagProducts{
+                width: 100%;
+                margin: 0 auto;
+                .firstLi{
+                    .divCol{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+                    figure{
+                        width: 20%;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+            } 
+        }
+        .carts{
+            height: auto;
+            padding: 7em;
+            h2{
+                font-size: 3rem;
+                margin-left: 1em;
+                margin-bottom: 1em;
+            }
+            p{
+                text-align: center;
+                font-size: 2.5rem;  
+            }
+            .cartsProducts{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                ul{
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    align-items: center;
+                }
+            }
+            .location{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                a{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .pageBoutique{
+            .allShirt{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items: center;
+                section > ul > li > p {
+                    font-size: 2rem;
+                }
+            }
+            .bagProductsUser{ 
+                position: absolute;
+                top: 8em;
+                left: 0;
+                right: 0;
+                height: auto;
+                width: 30%;
+                
+                .bagProducts{
+                    width: 100%;
+                    margin: 0 auto;
+                    .firstLi{
+                        .divCol{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                            margin: 0 auto;
+                        }
+                        figure{
+                            width: 20%;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                    }
+                } 
+            } 
+        }
+        .carts{
+            height: auto;
+            padding: 7em;
+            h2{
+                font-size: 3rem;
+                margin-left: 1em;
+                margin-bottom: 1em;
+            }
+            p{
+                text-align: center;
+                font-size: 2.5rem;  
+            }
+            .cartsProducts{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                ul{
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    align-items: center;
+                }
+            }
+            .location{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                a{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .pageBoutique{
+            .allShirt{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items: center;
+                
+                 section > ul > li > p {
+                    font-size: 2rem;
+                }
+            } 
+            .bagProductsUser{ 
+                position: absolute;
+                top: 8em;
+                left: 0;
+                right: 0;
+                height: auto;
+                width: 30%;
+                
+                .bagProducts{
+                    width: 100%;
+                    margin: 0 auto;
+                    .firstLi{
+                        .divCol{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                            margin: 0 auto;
+                        }
+                        figure{
+                            width: 20%;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+
+        .carts{
+            height: auto;
+            padding: 7em;
+            h2{
+                font-size: 3rem;
+                margin-left: 1em;
+                margin-bottom: 1em;
+            }
+            p{
+                text-align: center;
+                font-size: 2.5rem;  
+            }
+            .cartsProducts{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                ul{
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    align-items: center;
+                }
+            }
+            .location{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+                a{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }

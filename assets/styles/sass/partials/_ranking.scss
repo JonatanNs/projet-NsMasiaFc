@@ -1,0 +1,213 @@
+/*********************************
+            * RANKING *
+*********************************/
+.main{
+    .allRanking{
+        padding-top: 3em;
+        margin: 0 1em 7em 1em;
+        button{
+            margin: 2em;
+        }
+        h1{
+            text-align: center;
+        }
+        table{
+            margin: 2em auto;
+
+            thead{
+                tr{
+                    th{
+                        border-right: 1px solid $beige;
+                        border-bottom: 1px solid $beige;
+                        text-align: center;
+                        background-color: $bleu;
+                        padding: 0.5em;
+                    }
+                }
+            }
+            tbody{
+                tr{
+                    td{
+                        text-align: center;
+                        padding-top: 1em;
+                        padding-bottom: 1em;
+                        border-bottom: 2px solid $beige;
+                        font-size: 1.5rem;
+                    }
+                    .tdTeam{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 0.5em;
+                        padding-left: 1em;
+                        text-transform: uppercase;
+                        img{
+                            width: 30%;
+                            height: auto;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .main{
+            .allRanking{
+                padding-top: 3em;
+                a{
+                    padding: 1em 3em;
+                    margin: 2em;
+                }
+                button{
+                    margin: 2em;
+                }
+                h1{
+                    text-align: center;
+                }
+                table{
+                    width: 100%;
+                    thead{
+                        tr{
+                            th{
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                            }
+                            .tdTeam{
+                                img{
+                                    width: 20%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .main{
+            .allRanking{
+                padding-top: 3em;
+                a{
+                    padding: 1em 3em;
+                    margin: 2em;
+                }
+                button{
+                    margin: 2em;
+                }
+                h1{
+                    text-align: center;
+                }
+                table{
+                    width: 100%;
+                    thead{
+                        tr{
+                            th{
+                                font-size: 2.5rem;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                                font-size: 2.5rem;
+                            }
+                            .tdTeam{
+                                img{
+                                    width: 10%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .main{
+            .allRanking{
+                padding-top: 3em;
+                a{
+                    padding: 1em 3em;
+                    margin: 2em;
+                }
+                button{
+                    margin: 2em;
+                }
+                h1{
+                    text-align: center;
+                }
+                table{
+                    width: 100%;
+                    thead{
+                        tr{
+                            th{
+                                font-size: 2.5rem;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                                font-size: 2.5rem;
+                            }
+                            .tdTeam{
+                                img{
+                                    width: 5%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .main{
+            .allRanking{
+                padding-top: 3em;
+                a{
+                    padding: 1em 3em;
+                    margin: 2em;
+                }
+                button{
+                    margin: 2em;
+                }
+                h1{
+                    text-align: center;
+                }
+                table{
+                    width: 100%;
+                    thead{
+                        tr{
+                            th{
+                                font-size: 2.5rem;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                                font-size: 2.5rem;
+                            }
+                            .tdTeam{
+                                img{
+                                    width: 5%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }

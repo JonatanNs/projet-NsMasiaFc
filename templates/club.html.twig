@@ -1,9 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-<main class="container">
+<main class="main">
     <section class="pageClub">
         <h1>Club</h1> 
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
         <nav>
             <ul>
                 <li class="historyClubNav">Histoire du club</li>
@@ -11,7 +18,7 @@
             </ul>
         </nav>
         <article class="historyClub">
-            <h2>NS MASIA F.C</h2>
+            <h2>{{nsMasia.name}}</h2>
             <article>
                 <h3>Chapitre 1 : Les Origines et la Genèse</h3>
                 <p>L'histoire du NS MASIA FC débute à Rennes, une ville imprégnée de passion pour le football. Inspirés par les grands clubs européens et désireux de créer une institution qui incarne les valeurs de solidarité, d'effort et de jeu collectif, un groupe de jeunes visionnaires se réunit en 2024 pour donner naissance à une nouvelle ère du football rennais.</p>
@@ -29,7 +36,7 @@
                 <p>Aujourd'hui, NS MASIA FC continue de prospérer en tant que pilier du football français. Son académie de formation est reconnue comme l'une des meilleures du pays, produisant régulièrement des talents qui brillent sur la scène nationale et internationale. Le club reste ancré dans ses valeurs fondamentales, servant de phare pour tous ceux qui croient en la puissance du jeu collectif et de la jeunesse.</p>
             </article>
         </article>
-        <acticle class="playersClub invisible">
+        <article class="playersClub invisible">
             <h2>La NS TEAM</h2>
             <article>
                 <h3>Gardiens</h3>
@@ -70,7 +77,7 @@
                     {% endif %}
                 {% endfor %}
             </article>
-        </acticle>
+        </article>
     </section>
 </main>
 {% endblock %}

@@ -3,7 +3,13 @@
 class MatchNs {
 
     private ? int $id = null;
-    public function __construct(private NsMasia $ns_masia_id, private RivalTeam $rivalTeam_id, private string $domicileExerieur, private string $time, private string $date) {
+    public function __construct(
+                                    private NsMasia $ns_masia_id, 
+                                    private RivalTeam $rivalTeam_id, 
+                                    private string $home_outside, 
+                                    private string $time, 
+                                    private string $date
+                                ) {
     }
 
     public function getId(): ? int {
@@ -28,11 +34,11 @@ class MatchNs {
         $this->rivalTeam_id = $rivalTeam_id;
     }
 
-    public function getDomicileExerieur(): string {
-        return $this->domicileExerieur;
+    public function gethome_outside(): string {
+        return $this->home_outside;
     }
-    public function setDomicileExerieur(string $domicileExerieur): void {
-        $this->domicileExerieur = $domicileExerieur;
+    public function sethome_outside(string $home_outside): void {
+        $this->home_outside = $home_outside;
     }
 
     public function getTime(): string {

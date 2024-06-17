@@ -75,6 +75,7 @@ function getTotalPrice(){
 
 document.addEventListener('DOMContentLoaded', function(){  
     function bagBoutique(){
+        const logoNs = document.querySelector(".logoNs");
         const theBag = document.querySelector(".bagProduct");
         if (theBag){
             theBag.addEventListener("click", function() {
@@ -84,9 +85,12 @@ document.addEventListener('DOMContentLoaded', function(){
                     // Le panier est vide, afficher un message approprié
                     const p = document.createElement("p");
                     p.classList.add("basketEmpty");
-                    p.textContent = "Votre panier est vide";
-                    p.style.cssText = "white-space: nowrap; color:red; margin: 1em 0 0 -4em ";
-                    theBag.appendChild(p);   
+                    p.textContent = "Votre panier est vide.";
+
+                    logoNs.parentNode.insertBefore(p, logoNs); 
+                    setTimeout(() => {
+                        p.remove();
+                    }, 1000);  
                 }else{
 
                     const bagProductsUser = document.querySelector(".bagProductsUser");
@@ -191,25 +195,24 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function AddLocalStorageBoutique() {
 
-        const valueBasket = document.querySelector(".valueBasket");
+        //const valueBasket = document.querySelector(".valueBasket");
             const basketData = localStorage.getItem("basket");
             const basket = JSON.parse(basketData);
 
             let arrayProduct = [];
             // Parcourir chaque produit dans le panier
-            basket.forEach(product => {
-                // Ajouter le produit au tableau arrayProduct
-                arrayProduct.push(product);
-            });
-            console.log(arrayProduct.length);
-
-            /*if (valueBasket) {
-                if (basketData) {
-                    const totalItems = basket.length;
-                    valueBasket.textContent = totalItems;
-                } 
-            }*/
-
+            if(basket){
+                basket.forEach(product => {
+                    // Ajouter le produit au tableau arrayProduct
+                    arrayProduct.push(product);
+                });
+            }
+            // if (valueBasket) {
+            //     if (basketData) {
+            //         const totalItems = basket.length;
+            //         valueBasket.textContent = totalItems;
+            //     } 
+            // }
         const productIdElements = document.querySelectorAll(".shirtOne");
         const shirtSale = document.querySelectorAll('.shirtSale');
         const size = document.getElementById("size");
@@ -230,9 +233,10 @@ document.addEventListener('DOMContentLoaded', function(){
             const addCartButtons = element.querySelectorAll(".addCart");
 
             addCartButtons.forEach((button, i) => {
+
                 const productLength = document.querySelector('.productLength');
                 button.addEventListener("click", function(){
-                    
+
                     const shirtsId = "shirts" + (i + 1);
                     const productUrl = productImgUrl;
                     const productAlt = productImgAlt;
@@ -245,6 +249,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
                     for (let j = 0; j < parseInt(productLength.textContent); j++) {
                         if (shirtsId === "shirts" + (j + 1)) {
+                            if(sizeChoice){
+                                const logoNs = document.querySelector(".logoNs");
+                                const p = document.createElement("p");
+                                p.classList.add("productAddInBasket");
+                                p.textContent = "Produit ajouté au panier.";
+                                logoNs.parentNode.insertBefore(p, logoNs); 
+                                setTimeout(() => {
+                                    p.remove();
+                                }, 1000); 
+                            }
+                            bagBoutique();
+
                             addBasket({
                                 id: productId,
                                 name: productName.trim(),
@@ -254,11 +270,13 @@ document.addEventListener('DOMContentLoaded', function(){
                                 prices: productPrice,
                                 quantity: productQuantity
                             });
-                            basket.forEach(product => {
-                                // Ajouter le produit au tableau arrayProduct
-                                arrayProduct.push(product);
-                                valueBasket.textContent = arrayProduct.length;
-                            });
+                            if(basket){
+                                basket.forEach(product => {
+                                    // Ajouter le produit au tableau arrayProduct
+                                    arrayProduct.push(product);
+                                    //valueBasket.textContent = arrayProduct.length;
+                                });
+                            }
                             break; 
                         }
                     }  
@@ -399,5 +417,3 @@ document.addEventListener('DOMContentLoaded', function(){
     cartUser();
 
 });
-
-

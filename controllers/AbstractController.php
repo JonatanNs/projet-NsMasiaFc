@@ -9,6 +9,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 abstract class AbstractController {
     private Environment $twig;
     private PHPMailer $mail;
@@ -67,7 +69,7 @@ abstract class AbstractController {
         }
     }   
     
-    protected function baseEmailSignup(string $addAddress, string $nameUser){
+    protected function baseEmailSignup(string $addAddress, string $nameUser) : void{
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
         $nsName = $nsMasia->getName();
@@ -104,7 +106,7 @@ abstract class AbstractController {
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
     }
 
-    protected function baseEmailPurchases(string $addAddress, string $nameUser,Order_product $order_product){
+    protected function baseEmailPurchases(string $addAddress, string $nameUser,Order_product $order_product) : void{
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
         $nsName = $nsMasia->getName();
@@ -159,7 +161,7 @@ abstract class AbstractController {
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
     }
 
-    protected function baseEmailTicket(string $addAddress, string $nameUser,Order_ticket $order_ticket){
+    protected function baseEmailTicket(string $addAddress, string $nameUser,Order_ticket $order_ticket) : void{
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
         $nsName = $nsMasia->getName();

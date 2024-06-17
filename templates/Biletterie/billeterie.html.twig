@@ -1,48 +1,63 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-<main class="container">
+<main class="main">
     <article class="nextMatch">
         <article class="titleBoutique img-background">
             <figure>
-                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
             </figure>
-            <h1>NsMasia FC</h1>
+            <h1>{{nsMasia.name}}</h1>
             <p>Billeterie Officiel</p>
-        </article>
-        <ul class="matchs">
-        {% for match in matchs %}
-            <ul class="reservation">
-            {% if match.domicileExterieur == "domicile" %}
-                <li>
-                    <h2>NS MASIA FC</h2>
-                    <p>{{ match.team }}</p>
-                    <p>{{ match.domicileExterieur }}</p>
-                </li>
-            {% else %}
-                <li>
-                    <h2>{{ match.team }}</h2>
-                    <p>VS</p>
-                    <p>NS MASIA FC</p>
-                    <p>{{ match.domicileExterieur }}</p>
-                </li>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
-                <li>
-                    <p>{{ match.date |format_datetime( 'short', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
-                </li>
-                <li>
-                    <figure> 
-                        <img src="{{ match.logo_url }}" alt=" {{ match.logo_alt }} "/>
-                    </figure>
-                </li>
-                {% if match.domicileExterieur == "domicile" %}
-                <li>
-                    <a href="index.php?route=reservation&id={{match.match_id}}"><button type="submit" class="btn">Je réserve</button></a>
-                </li>
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
+        </article>
+        {% if matchs is not empty %}
+            <ul class="matchs">
+            {% for match in matchs %}
+                <ul class="reservation">
+                {% if match.home_outside == "domicile" %}
+                    <li>
+                        <h2>{{nsMasia.name}}</h2>
+                        <p>{{ match.team }}</p>
+                        <p>{{ match.home_outside }}</p>
+                    </li>
+                {% else %}
+                    <li>
+                        <h2>{{ match.team }}</h2>
+                        <p>VS</p>
+                        <p>{{nsMasia.name}}</p>
+                        <p>{{ match.home_outside }}</p>
+                    </li>
                 {% endif %}
-            </ul>      
-        {% endfor %}
-        <ul>    
+                    <li>
+                        <p>{{ match.date |format_datetime( 'short', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
+                    </li>
+                    <li>
+                        <figure> 
+                            <img src="{{ match.logo_url }}" alt=" {{ match.logo_alt }} "/>
+                        </figure>
+                    </li>
+                    {% if match.home_outside == "domicile" %}
+                    <li>
+                        <a href="index.php?route=reservation&id={{match.match_id}}" class="btn">Je réserve</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <p>Match à l'extérieur.</p>
+                    </li>
+                    {% endif %}
+                </ul>      
+            {% endfor %}
+            <ul> 
+        {% else %} 
+        <h3>Pas de réservation disponible...</h3> 
+        {% endif %} 
     </article>
 </main>
 {% endblock %}

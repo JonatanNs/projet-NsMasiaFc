@@ -2,7 +2,7 @@
 
 class AuthController extends AbstractController
 {
-    public function home()
+    public function home() :void
     {
         $nsMasiaManager = new NsMasiaManager();
         $matchManager = new MatchManager();
@@ -16,6 +16,26 @@ class AuthController extends AbstractController
 
         $matchs = $matchManager->getAllMatchs();
 
+        if (!empty($matchs)) {
+            // Fonction pour comparer les dates
+            usort($matchs, function($a, $b) {
+                return strtotime($a['date']) - strtotime($b['date']);
+            });
+        
+            // Trouver le premier match qui n'est pas passé
+            $now = time();
+            $next_match = null;
+        
+            foreach ($matchs as $match) {
+                if (strtotime($match['date']) >= $now) {
+                    $next_match = $match;
+                    break;
+                }
+            }
+        } else {
+            $next_match = null;
+        }
+        
         $nsMasia = $nsMasiaManager->getNsMasia();
 
         $articles = $articleManager->getAllArticle();
@@ -26,12 +46,13 @@ class AuthController extends AbstractController
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
         
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+
+        $secret = $_ENV["SECRET"];
         $this->render("home.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage,
@@ -40,17 +61,17 @@ class AuthController extends AbstractController
             'userId' => $userId,
             'rolesUser' => $rolesUser,
             'nsMasia' => $nsMasia,
-            'matchs' => $matchs,
-            'adminRnd7sX23' => $adminRnd7sX23,
+            'next_match' => $next_match,
             'allTeam' => $allTeam,
             'matchPlays' => $matchPlays,
             'resultMatchs' => $resultMatchs,
             'articles' => $articles,
-            'players' => $players
+            'players' => $players,
+            'secret' => $secret
         ]);
     }
 
-    public function allRanking(){
+    public function allRanking() :void{
         $nsMasiaManager = new NsMasiaManager();
         $matchManager = new MatchManager();
         $rivalTeamManager = new RivalTeamManager();
@@ -68,12 +89,14 @@ class AuthController extends AbstractController
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
         
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+
+        $secret = $_ENV["SECRET"];
+
         $this->render("ranking.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage,
@@ -83,40 +106,52 @@ class AuthController extends AbstractController
             'rolesUser' => $rolesUser,
             'nsMasia' => $nsMasia,
             'matchs' => $matchs,
-            'adminRnd7sX23' => $adminRnd7sX23,
             'allTeam' => $allTeam,
             'matchPlays' => $matchPlays,
-            'resultMatchs' => $resultMatchs
+            'resultMatchs' => $resultMatchs,
+            'secret' => $secret
         ]);
     }
 
-    public function form() {
+    public function form() :void {
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
+
+        $secret = $_ENV["SECRET"];
         $this->render("form.html.twig", [
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
             'tokenCSRF' => $tokenCSRF,
-            'rolesUser' => $rolesUser
+            'rolesUser' => $rolesUser,
+            'secret' => $secret,
+            'nsMasia' => $nsMasia
         ]);
     }
 
-    public function checkSignup() {
-        if(isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["emailSignup"]) && 
-        isset($_POST["passwordSignup"]) && isset($_POST["confirmPasswordSignup"])){
+    public function checkSignup() : void{
+        if(
+            isset($_POST["first_name"]) && 
+            isset($_POST["last_name"]) && 
+            isset($_POST["emailSignup"]) && 
+            isset($_POST["passwordSignup"]) && 
+            isset($_POST["confirmPasswordSignup"])
+        ){
 
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){ 
                 
                 $password_condition = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%#%§*?&]{8,}$/';
-                //si le mot de passe et le confirm mot de passe est le meme 
+                //if the password and the confirm password is the same
                 if ($_POST["passwordSignup"] === $_POST["confirmPasswordSignup"]) {
 
-                    //verifie si le mot de passe respect bien les conditions du password_condition
+                    //checks if the password complies with the password_condition conditions
                     if(preg_match($password_condition, $_POST["passwordSignup"])){
                         $userManager = new UserManager();
                         $users = $userManager->getAllUserByEmail($_POST["emailSignup"]);
@@ -126,8 +161,6 @@ class AuthController extends AbstractController
                             $email = htmlspecialchars($_POST["emailSignup"]);
                             $password = password_hash($_POST["passwordSignup"], PASSWORD_BCRYPT); 
                             $user = new User($first_name, $last_name, $email, $password);
-
-                            //insert a la base de donner
 
                             $userManager->SignUpUser($user);
 
@@ -162,20 +195,23 @@ class AuthController extends AbstractController
         }
     }
 
-    public function checkLogin() {
+    public function checkLogin() : void {
         if(isset($_POST["emailLogin"]) && isset($_POST["passwordLogin"])){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){ 
                 
+                $email = htmlspecialchars($_POST["emailLogin"]);
+                $password = htmlspecialchars($_POST["passwordLogin"]);
+
                 $userManager = new UserManager();
-                $users = $userManager->getAllUserByEmail($_POST["emailLogin"]);
+                $users = $userManager->getAllUserByEmail($email);
 
                 if($users === null){
                     $_SESSION["error"] = "Identifiant ou le mot de passe est incorrect.";
                     header("Location: index.php?route=form");
                     exit;
                 } else{
-                    if(password_verify($_POST["passwordLogin"], $users->getPassword())){
+                    if(password_verify($password, $users->getPassword())){
                         unset($_SESSION["error-message"]);
                         $_SESSION["firstAndLastName"] = $users->getFirstName() . ' ' . $users->getLastName();
                         $_SESSION["firstName"] = $users->getFirstName();
@@ -188,7 +224,7 @@ class AuthController extends AbstractController
                         header('Location: index.php?route=home');
                         exit; 
                     } else {
-                        $_SESSION["error"] = "Identifiant mot de passe incorrect.";
+                        $_SESSION["error"] = "Identifiant ou mot de passe incorrect.";
                         header("Location: index.php?route=form");
                     exit;
                     }          

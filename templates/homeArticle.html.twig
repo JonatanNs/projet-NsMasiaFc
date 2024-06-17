@@ -1,16 +1,23 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-<main class="container">
+<main class="main">
     <article class="articleAllContent">
-    <a href="index.php?route=news"><button class="btn">Retour</button></a>
+    <a href="index.php?route=news" class="btn">Retour</a>
         <h1>{{articles.title}}</h1>
+        {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
         <figure>
             <img src="{{articles.imgurl}}" alt="{{articles.img_alt}}"/>
             <figcaption>{{articles.img_alt}}</figcaption>
         </figure>
-        <p>{{articles.content}}</p>
-        <p>Date : {{articles.date}}</p>
+        <p>{{articles.content|raw}}</p>
+        <p>Date : {{articles.date|date("m/d/Y", "Europe/Paris")}}</p>
     </article>
 </main>
 {% endblock %}

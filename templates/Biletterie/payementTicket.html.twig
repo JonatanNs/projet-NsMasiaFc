@@ -1,13 +1,20 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <main class="container">
+    <main class="main">
         <article class="titleBiletteriePayement">
             <figure>
-                <img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
             </figure>
-            <h1>NsMasia FC</h1>
+            <h1>{{nsMasia.name}}</h1>
             <p>Biletterie Officiel</p>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
         </article>
         <div class="payement">
             <div class="orderUser">

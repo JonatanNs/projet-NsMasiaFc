@@ -1,0 +1,290 @@
+/*********************************
+            * USER ACCOUNT *
+*********************************/
+.main{
+    .myAccount{
+        padding-top: 5em;
+        margin: 0 2em;
+        height: auto;
+        .userIsAdmin{
+            form{
+                margin-left: 2em;
+                
+                button{
+                    width: 100%;
+                    margin: 0 auto;
+                    padding: 1em;
+                    font-size: 2rem;
+                
+                }
+                .btn{
+                    background-color: $bleu;
+                }
+            }
+        }
+        .logoutUser{
+            
+            margin: 2em auto;
+            width: 100%;
+            a{
+                color: white;
+                padding: 1em;
+                font-size: 1.5rem;
+                width: 100%;
+                margin-left: 2em;
+                background-color: red;
+            }
+        }
+        form{
+            
+                input, select{
+                    width: 100%;
+                    padding: 0.3em;
+                    border-radius: 1rem;
+                }
+                button{
+                    margin-top: 1em;
+                    width: 50%;
+                }
+            
+        }
+        
+        h2{
+            margin: 2em 0 ;
+            width: 80%;
+            cursor: pointer;
+            &:hover{
+                color: $darkgrey;
+            }
+        }
+        h3{
+            color: $white;
+            width: 80%;
+            cursor: pointer;
+            &:hover{
+                color: $darkgrey;
+            }
+        }
+        h1{
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .connectionAndSecurity{
+            .formChangeName{
+                margin-bottom: 2em;
+            }
+            .formChangerPassword{
+                margin-bottom: 2em;
+            }
+        }
+        .myOrder{
+
+            .yourTickets-order{
+                display: flex;
+                flex-direction: column;
+                article{
+                    padding: 1em;
+                }
+                article+article{
+                    border-top: 2px solid $beige;
+                    width: 100%;
+                    
+                }
+            }
+            .yourTickets-info{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                figure{
+                    width: 50%;
+                    margin-left: 2em;
+                    img{
+                        width: 100%;
+                        border-radius: 1rem;
+                    }
+                }
+                div{
+                    margin-left: -3em;
+                }
+            }
+        
+            .yourProducts-order{
+                    border: 2px solid $darkgrey;
+                    margin-bottom: 2em;
+                article{
+                    padding: 1em;
+                }
+                article+article{
+                    border-top: 2px solid $beige;
+                    width: 100%;
+                }
+                .yourProducts-info{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 3em;
+                    background-color: $darkgrey;
+                    figure{
+                        width: 30%;
+                        padding: 0;
+                        img{
+                            width: 100%;
+                            border-radius: 1rem;
+                        }
+                    }
+                    div{
+                        ul{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 1em;
+                            margin-left: -1em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+    
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .main{
+            .myAccount{
+                padding-top: 5em;
+                margin: 0 20em;
+                height: auto;
+                article{
+                    border: 1px solid $beige;
+                    padding: 1em;
+                    margin: 2em;
+                    border-radius: 1rem;
+                    width: 100%;
+                    article{
+                        width: 50%;
+                        margin: 0 auto;
+                    }
+                }
+                
+                form{
+                    
+                        input, select{
+                            width: 100%;
+                            padding: 0.3em;
+                            border-radius: 1rem;
+                        }
+                        button{
+                            margin-top: 1em;
+                            width: 50%;
+                        }
+                    
+                }
+                
+                h2{
+                    margin: 2em 0 ;
+                    width: 80%;
+                    cursor: pointer;
+                    &:hover{
+                        color: $darkgrey;
+                    }
+                }
+                h3{
+                    color: $white;
+                    width: 80%;
+                    cursor: pointer;
+                    &:hover{
+                        color: $darkgrey;
+                    }
+                }
+                h1{
+                    text-align: center;
+                    margin-bottom: 2em;
+                }
+                .connectionAndSecurity{
+                    .formChangeName{
+                        margin-bottom: 2em;
+                    }
+                    .formChangerPassword{
+                        margin-bottom: 2em;
+                    }
+                }
+                .myOrder{
+        
+                    .yourTickets-order{
+                        display: flex;
+                        flex-direction: column;
+                        article{
+                            padding: 1em;
+                        }
+                        article+article{
+                            border-top: 2px solid $beige;
+                            width: 100%;
+                            
+                        }
+                    }
+                    .yourTickets-info{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        figure{
+                            width: 50%;
+                            margin-left: 2em;
+                            img{
+                                width: 100%;
+                                border-radius: 1rem;
+                            }
+                        }
+                        div{
+                            margin-left: -3em;
+                        }
+                    }
+                
+                    .yourProducts-order{
+                            border: 2px solid $darkgrey;
+                            margin-bottom: 2em;
+                        article{
+                            padding: 1em;
+                        }
+                        article+article{
+                            border-top: 2px solid $beige;
+                            width: 100%;
+                        }
+                        .yourProducts-info{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 3em;
+                            background-color: $darkgrey;
+                            figure{
+                                width: 20%;
+                                padding: 0;
+                                img{
+                                    width: 100%;
+                                    border-radius: 1rem;
+                                }
+                            }
+                            div{
+                                ul{
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    gap: 1em;
+                                    margin-left: -1em;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+

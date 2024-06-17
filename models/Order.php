@@ -3,7 +3,12 @@
 class Order{
 
     private ? int $id = null;
-    public function __construct(private string $numberOrder, private Addresse $addresses,private string $date, private int $totalTtc){
+    public function __construct(
+                                    private string $numberOrder, 
+                                    private Addresse $addresses,
+                                    private string $date, 
+                                    private int $totalTtc
+                                ){
 
     }
 

@@ -1,20 +1,27 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-<main class="container">
+<main class="main">
     <article class="titleBoutique img-background">
         <figure>
-            <a href="index.php?route=home"><img src="assets/img/logo-ns_masia.png" alt="Logo NsMasia"/></a>
+            <a href="index.php?route=home"><img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/></a>
         </figure>
-        <h1>NsMasia FC</h1>
+        <h1>{{nsMasia.name}}</h1>
         <p>Réservation</p>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
     </article>
     {% for match in matchs %}
     <section class="matchPresentation">
         <div>
             <h2>{{match.name ~ ' vs ' ~ match.team }} </h2>
             <p>{{ match.date |format_datetime('full', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
-            <p>Le match sera à {{ match.domicileExterieur }}. <span class="matchId invisible">{{match.match_id}}</span></p> 
+            <p>Le match sera à {{ match.home_outside }}. <span class="matchId invisible">{{match.match_id}}</span></p> 
             <p>Le match se tiendra au stade {{ match.matchIsAtStadium_name }}.</p> 
         </div>
         <figure class="">
@@ -22,20 +29,22 @@
         </figure> 
     </section>
     {% endfor %}
-    <section class="selectPlaceMatch">
-        <h2>Selectionnez votre zone</h2>
-        <figure>
-            <img src="https://live.staticflickr.com/65535/53585656868_223e557554_w.jpg" alt="stades NS Masia Fc"/>
-        </figure> 
-    </section>
-    <article class="allTickets">
-        <h2>Choisissez votre place</h2>
-       {% for ticket in tickets %}
-            <ul class="tickets">
-                <li class="tribune" data-id="{{ ticket.id }}"> {{ ticket.tribune }}</li>
-                <li class="tickets-prices">Prix : <span class="ticketPrice">{{ ticket.prices }}</span> €</li>
-            </ul>
-        {% endfor %}
-    </article> 
+    <div class="blockSelectPlaceMatch">
+        <article class="selectPlaceMatch">
+            <h2>Selectionnez votre zone</h2>
+            <figure>
+                <img src="https://live.staticflickr.com/65535/53585656868_223e557554_w.jpg" alt="stades NS Masia Fc"/>
+            </figure> 
+        </article>
+        <article class="allTickets">
+            <h2>Choisissez votre place</h2>
+            {% for ticket in tickets %}
+                <ul class="tickets">
+                    <li class="tribune" data-id="{{ ticket.id }}"> {{ ticket.tribune }}</li>
+                    <li class="tickets-prices">Prix : <span class="ticketPrice">{{ ticket.prices }}</span> €</li>
+                </ul>
+            {% endfor %}
+        </article>
+    </div> 
 </main>
 {% endblock %}

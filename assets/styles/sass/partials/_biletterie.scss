@@ -1,0 +1,422 @@
+/*********************************
+            * BILETTERIE *
+*********************************/
+    
+    .nextMatch{
+        padding-top: 2em;
+        margin-bottom: 5em;
+        
+        h3{
+            text-align: center;
+            font-size: 4rem;
+            margin-top: 3em;
+        }
+        .titleBoutique{
+            margin-top: -2em;
+            figure{
+                margin: 2em auto 0 auto;
+                width: 10%;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+            p{
+                text-align: center;
+            }
+        }
+        h1{
+            text-align: center;
+        }
+        
+        .matchs{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+            padding: 0;
+            width: 90%;
+            margin: 0 auto;
+            
+            .reservation{ /* ul */
+                background-color: $black;
+                box-shadow: $beige 0px 25px 20px -20px;
+                color:  $beige;
+                border-radius: 1rem;
+                border: 5px solid $beige;
+                text-align: center;
+                padding: 1em;
+                margin-top: -2em;
+                margin-bottom: 5em;
+                li {
+                    text-transform: capitalize;
+                    figure{
+                        width: 90%;
+                        margin: 1em auto;
+                        
+                        img{
+                            width: 100%;
+                            border-radius: 1rem;
+                        }
+                    }
+                }
+            } 
+        }
+    }
+
+
+
+/**************************RESERVATION*************************/
+
+    .img-background{
+        background-image: url(https://live.staticflickr.com/65535/53584464592_e402863481_z.jpg);
+        background-size: cover;
+        background-position: center;
+        padding: 3em;
+        figure{
+            width: 20%;
+            margin: 0 auto;
+            padding-top: 2em;
+            margin-bottom: -2em;
+            img{
+                width: 100%;
+            }
+        }
+        h1{
+            padding-top: 2em;
+            text-align: center;
+        }
+        p{
+            margin-top: -0.5em;
+            text-align: center;
+        }
+    }
+
+    .matchPresentation{
+        margin: 2em;
+        div{
+            text-align: center;
+        }
+        figure{
+            width: 50%;
+            margin: 2em auto;
+            img{
+                width: 100%;
+                border-radius: 1rem;
+                box-shadow: $beige 0px 4px 16px, $beige 0px 8px 32px;
+            }
+        }
+    }
+
+    .selectPlaceMatch{
+        margin: 2em;
+        h2{
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        figure{
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+    }
+
+    .allTickets{
+        text-align: center;
+        margin-bottom: 7em;
+        h2{
+            margin-bottom: 2em;
+        }
+        .tickets{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            align-items: center;
+            margin: 1em;
+            padding: 1em;
+            border: 2px solid $beige;
+            .tribune{
+                grid-column: 1/2;
+            }
+            .tickets-prices{
+                grid-column: 2/2;
+            }
+            &>ul{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-right: -7em;
+                margin-top: 1em;
+                li{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0 1em;
+                    form{
+                        button{
+                            font-size: 1.6rem;
+                        }
+                    }
+                }  
+            }
+        }
+    }
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .nextMatch{
+            height: auto;
+            .matchs{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 90%;
+                .reservation{ /* ul */
+                    li {
+                        figure{
+                            width: 30%;
+                        }
+                        .btn{
+                            font-size: 1.7rem;
+                        }
+                    }
+                } 
+            }
+        }
+    }
+    
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .nextMatch{
+            height: auto;
+            .matchs{
+                display: grid;
+                grid-template-columns: 1fr 1fr ;
+                width: 90%;
+                .reservation{ /* ul */
+                    li {
+                        figure{
+                            width: 30%;
+                        }
+                        .btn{
+                            font-size: 1.7rem;
+                        }
+                    }
+                } 
+            }
+        }
+        .matchPresentation{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 2em auto;
+            figure{
+                width: 20%;
+                margin: 2em auto;
+            }
+        }
+        .blockSelectPlaceMatch{
+            margin-bottom: 8em;
+            .selectPlaceMatch{
+                
+                h2{
+                    margin-bottom: 1em;
+                    text-align: center;
+                }
+                figure{
+                    width: 50%;
+                    margin: 0 auto;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+            .allTickets{
+                text-align: center;
+                margin-bottom: 0;
+                h2{
+                    margin-bottom: 2em;
+                }
+                .tickets{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
+                    align-items: center;
+                    margin: 1em auto 1em auto;
+                    padding: 1em;
+                    border: 2px solid $beige;
+                    width: 70%;
+                    .tribune{
+                        grid-column: 1/2;
+                        padding: 1em;
+                    }
+                    .tickets-prices{
+                        grid-column: 2/2;
+                    }
+                    &>ul{
+                        margin-left: 15em; 
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .nextMatch{
+            height: auto;
+            .matchs{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                width: 90%;
+                .reservation{ /* ul */
+                    li {
+                        figure{
+                            width: 30%;
+                        }
+                        .btn{
+                            font-size: 1.7rem;
+                        }
+                    }
+                } 
+            }
+        }
+        .matchPresentation{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            margin: 2em auto;
+            figure{
+                width: 20%;
+                margin: 2em auto;
+            }
+        }
+        .blockSelectPlaceMatch{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            .selectPlaceMatch{
+                
+                h2{
+                    margin-bottom: 1em;
+                    text-align: center;
+                }
+                figure{
+                    width: 150%;
+                    img{
+                        width: 150%;
+                    }
+                }
+            }
+            .allTickets{
+                text-align: center;
+                margin-bottom: 0;
+                h2{
+                    margin-bottom: 2em;
+                }
+                .tickets{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
+                    align-items: center;
+                    margin: 1em;
+                    padding: 1em;
+                    border: 2px solid $beige;
+                    width: 100%;
+                    .tribune{
+                        grid-column: 1/2;
+                        padding: 2em;
+                    }
+                    .tickets-prices{
+                        grid-column: 2/2;
+                    }
+                    &>ul{
+                        margin-left: 4em; 
+                        margin-top: -1.5em;
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 1440px) {
+        .nextMatch{
+            height: auto;
+            .matchs{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                width: 90%;
+                .reservation{ /* ul */
+                    li {
+                        figure{
+                            width: 30%;
+                        }
+                        .btn{
+                            font-size: 1.7rem;
+                        }
+                    }
+                } 
+            }
+        }
+        .matchPresentation{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            margin: 2em auto;
+            figure{
+                width: 20%;
+                margin: 2em auto;
+            }
+        }
+        .blockSelectPlaceMatch{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            .selectPlaceMatch{
+                
+                h2{
+                    margin-bottom: 1em;
+                    text-align: center;
+                }
+                figure{
+                    width: 150%;
+                    img{
+                        width: 150%;
+                    }
+                }
+            }
+            .allTickets{
+                text-align: center;
+                margin-bottom: 0;
+                h2{
+                    margin-bottom: 2em;
+                }
+                .tickets{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
+                    align-items: center;
+                    margin: 1em;
+                    padding: 1em;
+                    border: 2px solid $beige;
+                    width: 100%;
+                    .tribune{
+                        grid-column: 1/2;
+                        padding: 2em;
+                    }
+                    .tickets-prices{
+                        grid-column: 2/2;
+                    }
+                    &>ul{
+                        margin-left: 4em; 
+                        margin-top: -1.5em;
+                    }
+                }
+            }
+        }
+    }

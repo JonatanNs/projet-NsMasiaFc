@@ -1,7 +1,9 @@
 <?php
 class CompteUserController extends AbstractController{
 
-    public function compteUser() {
+    public function compteUser() :void {
+        $secret = $_ENV["SECRET"];
+
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
@@ -14,6 +16,9 @@ class CompteUserController extends AbstractController{
         $userManager = new UserManager();
         $matchManager = new MatchManager();
         $merchManager = new MerchManager();
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
     
         $user = $userManager->getAllUserById($userId); 
         $address = $orderManager->getAllAddressesByUserId($user);
@@ -35,7 +40,7 @@ class CompteUserController extends AbstractController{
     
             $allProducts = $merchManager->getAllProducts();
         } else {
-            // Si l'adresse est nulle, initialisez les variables à des valeurs par défaut
+            // If the address is null, set the variables to default values
             $allOrdersProducts = [];
             $ordersProducts = [];
             $allProducts = [];
@@ -46,7 +51,7 @@ class CompteUserController extends AbstractController{
         foreach($orderTickets as $orderTicket){
             $matchs[] = $matchManager->getAllMatchsByIdNoPlay($orderTicket['match_id']);
         }
-        
+
         $this->render("compteUser.html.twig", [
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
@@ -59,12 +64,13 @@ class CompteUserController extends AbstractController{
             'ordersProducts' => $ordersProducts,
             'allOrdersProducts' => $allOrdersProducts,
             'allProducts' => $allProducts,
-            'address' => $address
-
+            'address' => $address,
+            'secret' => $secret,
+            'nsMasia' => $nsMasia
         ]);
     }
 
-    public function checkChangeAddress(){
+    public function checkChangeAddress() : void{
         if(isset($_POST["address"]) && isset($_POST["orderZipCode"]) && isset($_POST["orderCity"]) 
            && isset($_POST["pays"]) && isset($_POST["user_id"]) && isset($_POST["address_id"])) {
            
@@ -87,7 +93,7 @@ class CompteUserController extends AbstractController{
                 $idAddress = $orderManager->getAddressesById($addressId, $users);
 
                 $orderManager = new OrderManager();
-                $orderManager->checkChangeAddress($idAddress, $users, $address, $postal_code, $city, $pays, $complements );
+                $orderManager->ChangeAddress($idAddress, $users, $address, $postal_code, $city, $pays, $complements );
                 
                 $newAddresses = new Addresse($users, $address, $postal_code , $city, $pays);
                 $newAddresses->setId($addressId);
@@ -110,7 +116,7 @@ class CompteUserController extends AbstractController{
         }
     }
 
-    public function checkChangeName(){
+    public function checkChangeName() :void{
         if(isset($_POST["changeFirstName"]) && isset($_POST["changeLast_name"]) && isset($_POST["passwordForChangeName"])){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
@@ -147,7 +153,7 @@ class CompteUserController extends AbstractController{
         }
     }
 
-    public function checkChangerPassword(){
+    public function checkChangerPassword() :void{
         if(isset($_POST["emailForChangePassword"]) && isset($_POST["actualPassword"]) && isset($_POST["changePassword"]) && isset($_POST["confirmChangePassword"])){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
@@ -205,7 +211,7 @@ class CompteUserController extends AbstractController{
         }
     }
 
-    public function checkChangerEmail(){
+    public function checkChangerEmail() :void{
         if(isset($_POST["emailForChange"]) && isset($_POST["newEmail"]) && isset($_POST["confirmNewEmail"]) && isset($_POST["passwordForNewEmail"])){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){

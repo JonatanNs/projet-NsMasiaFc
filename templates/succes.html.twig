@@ -8,7 +8,7 @@
     <!--SEO-->
     <meta name="robots" content="index,follow">
     <meta name="description" content="Site officiel du FC NsMasia. Toute l'actualité autour de la Ns, vente de maillots et de places." >
-    <link rel="icon" href="assets/img/logo-ns_masia.png" alt="Logo NsMasiaFC">
+    <link rel="icon" href="{{nsMasia.logourl}}">
     <!--Font POPPIN -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +19,22 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"><!-- Css.gg-->
     <link href="https://css.gg/css" rel="stylesheet" />
     <!-- CSS-->
-    <link rel="stylesheet" href="assets/styles/scss/style.css">
-    <title>Site officiel du NsMasia F.C</title>   
+    <link rel="stylesheet" href="assets/styles/css/style.css">
+    <title>Site officiel du {{nsMasia.name}}</title>   
 </head>
 <body>
     <main class="container">
         <article class="payementPassed">
-            <h1>Payement Réussi <i class="fa-solid fa-square-check fa-lg" style="color: #00ff2a;"></i></h1>  
+            <h1>Payement Réussi <span class="fa-solid fa-square-check fa-lg" style="color: #00ff2a;"></span></h1>  
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
             <figure>
-                <img src="assets/img/logo-ns_masia.png" alt="Logo Ns Masia FC"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
             </figure>
             <p>L'équipe de Ns Masia FC vous remercie pour votre achat.</p>
                 <form action="index.php?route=checkSucces" method="POST" class="formSucces">

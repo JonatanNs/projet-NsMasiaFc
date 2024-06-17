@@ -1,0 +1,89 @@
+.main{
+    .formUser{
+        padding-top: 5em;
+        width: 100%;
+        text-align: center;
+        a{
+            span{
+                padding: 1em;
+            }
+        }
+        .form{
+            border: 5px solid $beige;
+            border-radius: 2rem;
+            width: 80%;
+            margin: 2em auto;
+            fieldset{
+                padding: 0.5em;
+            }
+            .goSignup, .goLogin{
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.form{
+    fieldset{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input{
+            background-color: $beige;
+            border-radius: 0.5rem;
+            border: 1px solid $bleu;
+        }
+        label{
+            font-family: $font2;
+        }
+        input[type=file] {
+            width: 350px;
+            margin: 0 auto;
+            max-width: 100%;
+            color: #222245;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid #222245;
+          }
+          
+          input[type=file]:focus {
+            outline: 2px dashed $bleu;
+            outline-offset: 2px;
+          }
+          
+          input[type=file]::file-selector-button {
+            margin-right: 8px;
+            border: none;
+            background: $bleu;
+            padding: 8px 12px;
+            color: #fff;
+            cursor: pointer;
+          }
+          
+          input[type=file]::file-selector-button:hover {
+            background: $bleu;
+          }
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+}
+
+@media screen and (min-width: 770px) and (max-width: 1440px) {
+    
+}
+
+@media screen and (min-width: 1440px) {
+    
+}
+

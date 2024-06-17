@@ -156,18 +156,19 @@ document.addEventListener('DOMContentLoaded', function(){
         const menu = document.querySelector('.openMenu');
         const closeMenu = document.querySelector('.closeMenu');
         const navMobile = document.querySelector('.navMobile');
-        
+        const headerUserConnect = document.querySelector(".header-userConnect a"); 
         // Vérifiez si les éléments existent
         if (menu) {
             menu.addEventListener("click", function() {
                 navMobile.style.display = "block";
                 document.body.classList.add('no-scroll'); // Ajoute la classe pour désactiver le scroll
     
-                const links = document.querySelectorAll("body > header > div.menu > nav > div > ul:nth-child(1) > li > a");
-                document.querySelector("body > header > figure img").style.display = "block";
+                const links = document.querySelectorAll("header > div > nav > div > ul > li > a");
+                // document.querySelector("body > header > figure img").style.display = "block";
                 links.forEach(link => {
                     link.style.color = "black";
                 });
+                headerUserConnect.style.color="white";
             });
     
             closeMenu.addEventListener("click", function() {
@@ -199,31 +200,30 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }
     }
-
+    
     function handleScroll() {
         const scrollPosition = window.scrollY; // Position actuelle de défilement
-
         const header = document.querySelector('.header');
-        const links = document.querySelectorAll("body > header > div.menu > nav > div > ul:nth-child(1) > li > a");
-        const user = document.getElementById("toggleForm"); 
-        const openMenu = document.querySelector('.openMenu');
+        
+        const links = document.querySelectorAll("header > div > nav > div > ul > li > a")
+        const headerUserConnect = document.querySelector(".header-userConnect a"); 
+
         if (scrollPosition > 90) { // 90px du haut
-            document.querySelector("body > header > figure img").style.display="block";
+            
             header.style.backgroundColor="rgb(255, 249, 237)";
             header.style.transition="all 0.5s ease";
             links.forEach(link =>{
                 link.style.color="black";
             });
-            user.style.color="black";
-            openMenu.style.color="black";
+            headerUserConnect.style.color="white";
+            
         } else if(scrollPosition > 10) {
-            document.querySelector("body > header > figure img").style.display="none";
+            
             header.style.backgroundColor="transparent";
             links.forEach(link =>{
                 link.style.color="white";
             });
-            user.style.color="white";
-            openMenu.style.color="white";
+            headerUserConnect.style.color="white";
         } 
     }
 
@@ -231,17 +231,17 @@ document.addEventListener('DOMContentLoaded', function(){
         const nextMatchButton = document.querySelector('.btnProchainMatch button');
         const targetElement = document.querySelector('.buttonNextPrevious');
     
-        if (nextMatchButton && targetElement) {
+        if(nextMatchButton && targetElement) {
             nextMatchButton.addEventListener("click", function() {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
             });
         }
     }
     
+    
     handleNextMatch()
     pageClub();
     form();
     menuMobile();
-
     
 });

@@ -11,22 +11,35 @@
     position: relative;
     position:fixed;
     z-index: 100;
-    div{
-        p{
-            color: $black ;
+    .header-userConnect {
+        background-color: $bleu;
+        padding: 0.5em 1em 0 1em;
+        border-radius: 2rem;
+        margin-right: 3.5em;
+       
+        cursor: pointer;
+        a{
+            text-align: center;
+            color: $beige;
+            padding: 0.5em;
+            &:hover{
+                background-color: $black;
+            }
         }
+        
     }
     figure{
         position: absolute;
         top: -0.2em;
-        right: 48.5%;
-        width: 7%;
-        padding-top: 0.5em;
-        margin-left: -6em;
-        img{
-            width: 100%;
-            display: none;
-        }
+        width: 100%;
+        text-align: center;
+        padding-top: 2.5em;
+            img{
+                width: 10%;
+                display: none;
+                cursor: pointer;
+            }
+        
     }
 }
 
@@ -60,7 +73,12 @@
             align-items: center;
             li{
                 text-transform: uppercase;
-                padding: 1em 0;  
+                padding: 0.5em 0; 
+                margin: 0;
+                .btn{
+                    background-color: $darkgrey;
+                    font-size: 2rem;
+                }
             }
         } 
     }
@@ -77,7 +95,7 @@
         flex-direction: row;
         align-items: center;
         background-color: transparent;
-        figure{
+        a{
             width: 4%;
             
             img{
@@ -85,6 +103,9 @@
                 left: 50%;
                 margin: 0 auto;
             }
+        }
+        .userConnect{
+            display: none;
         }
     }
 }
@@ -96,32 +117,25 @@
         align-items: center;
         background-color: transparent;
         figure{
-            width: 4%;
-            
+            padding-top: 2em;
             img{
-                width: 100%;
-                left: 50%;
-                margin: 0 auto;
+                width: 8%;
             }
         }
+        
     }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1440px) {
+@media screen and (min-width: 1024px) and (max-width: 1350px) {
     .header{
-        padding: 1em;
+        padding: 2em;
         flex-direction: row-reverse;
         align-items: center;
         background-color: transparent;
-        figure{
-            width: 4%;
-            
-            img{
-                width: 100%;
-                left: 50%;
-                margin: 0 auto;
-            }
+        .header-userConnect {
+            margin-right: -1em;
         }
+        
         .openMenu {
             display: none;
         }
@@ -135,23 +149,21 @@
                 display: none;
             }
             .nav-links{
-                ul{
+                .links{
                     width: 100%;
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    gap: 3em;
+                    gap: 2em;
                     padding: 0;
-                    li:nth-of-type(2){
-                        margin-right: 6em;
-                    }
-                    li:nth-of-type(3){
-                        margin-left: 6em;
+                    
+                    li{
+                        margin-top: 0.5em;
                     }
                     a{
                         color: white;
-                        font-size: 2.5rem;
-                        font-weight: 900;
+                        font-size: 2rem;
+                        font-weight: 800;
                         text-align: center;
                         font-family: $font;
                     }
@@ -159,24 +171,42 @@
                         display: none;
                     }
                 } 
+                
+                .userConnect{
+                    
+
+                    li{
+                        font-size: 1.6rem;
+                        form{
+                            button{
+                                padding: 1em 5em;
+                            }
+                        }
+                    }
+                    a{
+                        color: $black;
+                    }
+                }
             } 
         }
     }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1351px) {
     .header{
-        padding: 1em;
+        padding: 2em;
         flex-direction: row-reverse;
         align-items: center;
         background-color: transparent;
-        figure{
-            width: 4%;
-            
-            img{
-                width: 100%;
-                left: 50%;
-                margin: 0 auto;
+        .header-userConnect {
+             margin-right: -1em;
+        }
+       
+        div{
+            p{
+
+                font-family: $font;
+                font-size: 1.8rem;
             }
         }
         .openMenu {
@@ -184,30 +214,46 @@
         }
     /***********************  NAVIGATION  ***********************/
         .navMobile{
-            display: block;
+            display: flex;
+            justify-content: center;
             top: 3em;
             left: 0;
             height: 0vh;
+            
             .closeMenu{
                 display: none;
             }
             .nav-links{
-                ul{
+                .userConnect{
+                    
+                    a{
+                        color: black;
+                    }
+                    li{
+                        form{
+                            button{
+                                padding: 1em 5em;
+                            }
+                        }
+                    }
+                }
+                .links{
                     width: 100%;
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
                     gap: 3em;
-                    padding: 0;
-                    li:nth-of-type(2){
-                        margin-right: 6em;
-                    }
-                    li:nth-of-type(3){
-                        margin-left: 6em;
-                    }
+                    
+                    padding:  0;
+                    
+                        li{
+                            margin-top: 0.5em;
+                        }
+                    
+                
                     a{
                         color: white;
-                        font-size: 2.5rem;
+                        font-size: 2rem;
                         font-weight: 900;
                         text-align: center;
                         font-family: $font;

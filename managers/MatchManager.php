@@ -5,24 +5,46 @@ class MatchManager extends AbstractManager{
     /**********************************************************
                              * CREATE *
     **********************************************************/
-    public function createMatch(NsMasia $nsMasia, int $rivalTeam, string $domicileExterieur, string $time, string $date) : void {  
-        // Insérer le nouveau match
-        $query = $this->db->prepare("INSERT INTO matchs (id, ns_masia_id, rivalTeam_id, domicileExterieur, time, date) 
-                                            VALUES (null, :ns_masia_id, :rivalTeam_id, :domicileExterieur, :time, :date)");
-        $parameters = [ 
-            'ns_masia_id' => $nsMasia->getId(),
-            'rivalTeam_id' => $rivalTeam, 
-            'domicileExterieur' => $domicileExterieur, 
-            'time' => $time, 
-            'date' => $date
-        ];
-        $query->execute($parameters);
+    public function createMatch(
+                                    NsMasia $nsMasia, 
+                                    int $rivalTeam, 
+                                    string $home_outside, 
+                                    string $time, 
+                                    string $date
+                               ) : void {  
+        try{ 
+            $query = $this->db->prepare("INSERT INTO matchs (
+                                                                id, 
+                                                                ns_masia_id, 
+                                                                rivalTeam_id, 
+                                                                home_outside, 
+                                                                time, 
+                                                                date
+                                                            ) 
+                                                VALUES (null, 
+                                                        :ns_masia_id, 
+                                                        :rivalTeam_id, 
+                                                        :home_outside, 
+                                                        :time, 
+                                                        :date)");
+            $parameters = [ 
+                'ns_masia_id' => $nsMasia->getId(),
+                'rivalTeam_id' => $rivalTeam, 
+                'home_outside' => $home_outside, 
+                'time' => $time, 
+                'date' => $date
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to create match.");
+        }
     
-        // Récupérer l'ID du match nouvellement inséré
+        // Retrieve the newly inserted match ID
         $matchId = $this->db->lastInsertId();
     
-        if ($domicileExterieur === "exterieur") {
-            // Sélectionner l'ID de l'emplacement correspondant à l'équipe rivale
+        if ($home_outside === "exterieur") {
+            // Select the ID of the location corresponding to the rival team
             $query = $this->db->prepare("SELECT id FROM locations WHERE rivalTeam_id = :rivalTeam_id");
             $parameters = [
                 'rivalTeam_id' => $rivalTeam
@@ -30,29 +52,40 @@ class MatchManager extends AbstractManager{
             $query->execute($parameters);
             $locationId = $query->fetchColumn();
             
-            // Insérer la relation dans match_location
-            $query = $this->db->prepare("INSERT INTO match_location (match_id, location_id) VALUES (:match_id, :location_id)");
-            $parameters = [
-                'match_id' => $matchId,
-                'location_id' => $locationId
-            ];
-            $query->execute($parameters);
+            // Insert the relationship in match_location
+            try{
+                $query = $this->db->prepare("INSERT INTO match_location (match_id, location_id) 
+                                            VALUES (:match_id, :location_id)");
+                $parameters = [
+                    'match_id' => $matchId,
+                    'location_id' => $locationId
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to insert match location.");
+            }
         }  
     }
 
-    public function addResulteMatch(/*array $matchNs,*/MatchNs $matchNs, int $matchId, int $score_nsMasia, int $score_rivalTeam) : void{  
-        /*foreach($matchNs as $match){
-           $matchId = $match["match_id"];
-        }*/
-        $query = $this->db->prepare("INSERT INTO result_match (id, match_id, score_nsMasia, score_rivalTeam) 
-                                        VALUES (null, :match_id, :score_nsMasia, :score_rivalTeam)");
-        $parameters = [
-            'match_id' => $matchId, 
-            'score_nsMasia' => $score_nsMasia, 
-            'score_rivalTeam' => $score_rivalTeam
-        ];
-        $query->execute($parameters);
-
+    public function addResulteMatch(MatchNs $matchNs, 
+                                    int $matchId, 
+                                    int $score_nsMasia, 
+                                    int $score_rivalTeam
+                                ) : void{  
+        try{ 
+            $query = $this->db->prepare("INSERT INTO result_match (id, match_id, score_nsMasia, score_rivalTeam) 
+                                            VALUES (null, :match_id, :score_nsMasia, :score_rivalTeam)");
+            $parameters = [
+                'match_id' => $matchId, 
+                'score_nsMasia' => $score_nsMasia, 
+                'score_rivalTeam' => $score_rivalTeam
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to add result match.");
+        }
         $rivalTeam = $matchNs->getRivalTeamId();
         $nsMasia = $matchNs->getNsMasiaId();
 
@@ -68,63 +101,107 @@ class MatchManager extends AbstractManager{
         $matchPlayNs = $nsMasia->getMatchsPlay();
         $rankingPointNs = $nsMasia->getRankingPoints();
 
-        if($score_nsMasia === $score_rivalTeam){ /*************** SI NS MASIA match nul **************/
+        if($score_nsMasia === $score_rivalTeam){ /*************** SI NS MASIA draw **************/
+            try{
+                $query = $this->db->prepare("UPDATE rivalsTeam 
+                                            SET ranking_points = :ranking_points,
+                                                match_play = :match_play, 
+                                                match_nul = :match_nul 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $rivalTeam->getId(),
+                    'ranking_points' => $rankingPoint + 1,
+                    'match_play' => $matchPlay + 1,
+                    'match_nul' => $matchNul + 1,
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match nul for rival team.");
+            }
+            try{
+                $query = $this->db->prepare("UPDATE nsMasia 
+                                            SET ranking_points = :ranking_points, 
+                                                match_play = :match_play, 
+                                                match_nul = :match_nul 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $nsMasia->getId(),
+                    'ranking_points' => $rankingPointNs + 1,
+                    'match_play' => $matchPlayNs + 1,
+                    'match_nul' => $matchNulNs + 1
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match lose.");
+            }
 
-            $query = $this->db->prepare("UPDATE rivalsTeam SET ranking_points = :ranking_points, match_play = :match_play, match_nul = :match_nul WHERE id = :id");
-            $parameters = [
-                'id' => $rivalTeam->getId(),
-                'ranking_points' => $rankingPoint + 1,
-                'match_play' => $matchPlay + 1,
-                'match_nul' => $matchNul + 1,
-            ];
-            $query->execute($parameters);
+        } else if($score_nsMasia > $score_rivalTeam){ /*************** IF NS MASIA Win the match **************/
+            try{
+                $query = $this->db->prepare("UPDATE rivalsTeam 
+                                            SET match_play = :match_play, match_lose = :match_lose 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $rivalTeam->getId(),
+                    'match_play' => $matchPlay + 1,
+                    'match_lose' => $matchLose + 1
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match win for rival team.");
+            }
+            try{
+                $query = $this->db->prepare("UPDATE nsMasia 
+                                            SET ranking_points = :ranking_points, 
+                                                match_play = :match_play, 
+                                                match_win = :match_win 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $nsMasia->getId(),
+                    'ranking_points' => $rankingPointNs + 3,
+                    'match_play' => $matchPlayNs + 1,
+                    'match_win' => $matchWinNs + 1
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match nul for Ns Masia.");
+            }
 
-            $query = $this->db->prepare("UPDATE nsMasia SET ranking_points = :ranking_points, match_play = :match_play, match_nul = :match_nul WHERE id = :id");
-            $parameters = [
-                'id' => $nsMasia->getId(),
-                'ranking_points' => $rankingPointNs + 1,
-                'match_play' => $matchPlayNs + 1,
-                'match_nul' => $matchNulNs + 1
-            ];
-            $query->execute($parameters);
-
-        } else if($score_nsMasia > $score_rivalTeam){ /*************** SI NS MASIA Gagne le match **************/
-
-            $query = $this->db->prepare("UPDATE rivalsTeam SET match_play = :match_play, match_lose = :match_lose WHERE id = :id");
-            $parameters = [
-                'id' => $rivalTeam->getId(),
-                'match_play' => $matchPlay + 1,
-                'match_lose' => $matchLose + 1
-            ];
-            $query->execute($parameters);
-
-            $query = $this->db->prepare("UPDATE nsMasia SET ranking_points = :ranking_points, match_play = :match_play, match_win = :match_win WHERE id = :id");
-            $parameters = [
-                'id' => $nsMasia->getId(),
-                'ranking_points' => $rankingPointNs + 3,
-                'match_play' => $matchPlayNs + 1,
-                'match_win' => $matchWinNs + 1
-            ];
-            $query->execute($parameters);
-
-        } else if($score_nsMasia < $score_rivalTeam){ /*************** SI NS MASIA Perd le match **************/
-            
-            $query = $this->db->prepare("UPDATE rivalsTeam SET ranking_points = :ranking_points, match_play = :match_play, match_win = :match_win WHERE id = :id");
-            $parameters = [
-                'id' => $rivalTeam->getId(),
-                'ranking_points' => $rankingPoint + 3,
-                'match_play' => $matchPlay + 1,
-                'match_win' => $matchWin + 1
-            ];
-            $query->execute($parameters);
-
-            $query = $this->db->prepare("UPDATE nsMasia SET match_play = :match_play, match_lose = :match_lose WHERE id = :id");
-            $parameters = [
-                'id' => $nsMasia->getId(),
-                'match_play' => $matchPlayNs + 1,
-                'match_lose' => $matchLoseNs + 1
-            ];
-            $query->execute($parameters);
+        } else if($score_nsMasia < $score_rivalTeam){ /*************** IF NS MASIA Loses the match **************/
+            try{
+                $query = $this->db->prepare("UPDATE rivalsTeam 
+                                            SET ranking_points = :ranking_points, 
+                                                match_play = :match_play, 
+                                                match_win = :match_win 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $rivalTeam->getId(),
+                    'ranking_points' => $rankingPoint + 3,
+                    'match_play' => $matchPlay + 1,
+                    'match_win' => $matchWin + 1
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match lose for rival team.");
+            }
+            try{
+                $query = $this->db->prepare("UPDATE nsMasia 
+                                            SET match_play = :match_play, match_lose = :match_lose 
+                                            WHERE id = :id");
+                $parameters = [
+                    'id' => $nsMasia->getId(),
+                    'match_play' => $matchPlayNs + 1,
+                    'match_lose' => $matchLoseNs + 1
+                ];
+                $query->execute($parameters);
+            } catch (PDOException $e){
+                error_log("Database error : " . $e->getMessage());
+                throw new Exception("Failed to update match lose for Ns Masia.");
+            }
         }
     }  
 
@@ -135,8 +212,8 @@ class MatchManager extends AbstractManager{
     public function getAllMatchs() : array {  
         $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
                                     CASE 
-                                        WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
-                                        WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
+                                        WHEN matchs.home_outside = 'domicile' THEN nsMasia.stadium
+                                        WHEN matchs.home_outside = 'exterieur' THEN locations.stadium
                                     END AS matchIsAtStadium_name
                                         FROM matchs 
                                         JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
@@ -156,7 +233,12 @@ class MatchManager extends AbstractManager{
             $nsMasia = $nsMasiaMasia->getNsMasia();
             $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
     
-            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
+            $match = new MatchNs($nsMasia, 
+                                $rivalTeam, 
+                                $result["home_outside"], 
+                                $result["time"],  
+                                $result["date"]
+                            );
             $match->setId($result["id"]);
             $matchs[] = $result;
         }
@@ -164,173 +246,254 @@ class MatchManager extends AbstractManager{
         return $matchs; 
     }
 
-    public function getAllMatchsByIdNoPlay(int $id) : array {  
-        $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
-                                    CASE 
-                                        WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
-                                        WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
-                                    END AS matchIsAtStadium_name
-                                        FROM matchs 
-                                        JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
-                                        JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
-                                        LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
-                                        LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
-                                        WHERE matchs.date >= CURRENT_DATE AND matchs.id = :id 
-                                        ORDER BY matchs.date ASC ");
-        $parameters = [
-            'id' => $id
-        ];
-        $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-    
-        $matchs = [];
-        $nsMasiaMasia = new NsMasiaManager();
-        $rivalTeamManager = new RivalTeamManager();
+    public function getAllMatchsByIdNoPlay(int $id) : array { 
+        try{ 
+            $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
+                                        CASE 
+                                            WHEN matchs.home_outside = 'domicile' THEN nsMasia.stadium
+                                            WHEN matchs.home_outside = 'exterieur' THEN locations.stadium
+                                        END AS matchIsAtStadium_name
+                                            FROM matchs 
+                                            JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
+                                            JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
+                                            LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
+                                            LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
+                                            WHERE matchs.date >= CURRENT_DATE AND matchs.id = :id 
+                                            ORDER BY matchs.date ASC ");
+            $parameters = [
+                'id' => $id
+            ];
+            $query->execute($parameters);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
         
-        if($result) {
-            $nsMasia = $nsMasiaMasia->getNsMasia();
-            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
-    
-            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
-            $match->setId($result["id"]);
-            $matchs[] = $result;
+            $matchs = [];
+            $nsMasiaMasia = new NsMasiaManager();
+            $rivalTeamManager = new RivalTeamManager();
+            
+            if($result) {
+                $nsMasia = $nsMasiaMasia->getNsMasia();
+                $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+        
+                $match = new MatchNs($nsMasia, 
+                                    $rivalTeam, 
+                                    $result["home_outside"], 
+                                    $result["time"],  
+                                    $result["date"]
+                                );
+                $match->setId($result["id"]);
+                $matchs[] = $result;
+            }
+            
+            return $matchs; 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all matchs by id no play.");
         }
-        
-        return $matchs; 
     }
 
     public function getMatchsByIdPlay(int $id) : ? MatchNs {  
-        $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
-                                    CASE 
-                                        WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
-                                        WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
-                                    END AS matchIsAtStadium_name
+        try{
+            $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
+                                        CASE 
+                                            WHEN matchs.home_outside = 'domicile' THEN nsMasia.stadium
+                                            WHEN matchs.home_outside = 'exterieur' THEN locations.stadium
+                                        END AS matchIsAtStadium_name
+                                            FROM matchs 
+                                            JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
+                                            JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
+                                            LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
+                                            LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
+                                            WHERE matchs.id = :id 
+                                            ORDER BY matchs.date ASC");
+            $parameters = [
+                'id' => $id
+            ];
+            $query->execute($parameters);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+            $nsMasiaMasia = new NsMasiaManager();
+            $rivalTeamManager = new RivalTeamManager();
+            
+            if($result) {
+                $nsMasia = $nsMasiaMasia->getNsMasia();
+                $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+        
+                $match = new MatchNs($nsMasia, 
+                                    $rivalTeam, 
+                                    $result["home_outside"], 
+                                    $result["time"],  
+                                    $result["date"]
+                                );
+                $match->setId($result["id"]);
+                return $match;
+            }
+            
+            return null; 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch match by id play.");
+        }
+    }
+    //returns the last game play
+    public function getMatchsPlay() : array {  
+        try{
+            $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
+                                            CASE 
+                                                WHEN matchs.home_outside = 'domicile' THEN nsMasia.stadium
+                                                WHEN matchs.home_outside = 'exterieur' THEN locations.stadium
+                                            END AS matchIsAtStadium_name
                                         FROM matchs 
                                         JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
                                         JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
                                         LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
                                         LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
-                                        WHERE matchs.id = :id 
-                                        ORDER BY matchs.date ASC ");
-        $parameters = [
-            'id' => $id
-        ];
-        $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-    
-        $nsMasiaMasia = new NsMasiaManager();
-        $rivalTeamManager = new RivalTeamManager();
-        
-        if($result) {
-            $nsMasia = $nsMasiaMasia->getNsMasia();
-            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
-    
-            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
-            $match->setId($result["id"]);
-            return $match;
-        }
-        
-        return null; 
-    }
-    //retourne le dernier match jouer
-    public function getMatchsPlay() : array {  
-        $query = $this->db->prepare("SELECT matchs.id AS match_id, matchs.*, nsMasia.*, rivalsTeam.*, 
-                                        CASE 
-                                            WHEN matchs.domicileExterieur = 'domicile' THEN nsMasia.stadium
-                                            WHEN matchs.domicileExterieur = 'exterieur' THEN locations.stadium
-                                        END AS matchIsAtStadium_name
-                                    FROM matchs 
-                                    JOIN nsMasia ON nsMasia.id = matchs.ns_masia_id 
-                                    JOIN rivalsTeam ON rivalsTeam.id = matchs.rivalTeam_id 
-                                    LEFT JOIN locations ON locations.rivalTeam_id = rivalsTeam.id
-                                    LEFT JOIN match_location ON match_location.location_id = locations.id AND match_location.match_id = matchs.id
-                                    WHERE matchs.date <= CURRENT_DATE()
-                                    ORDER BY matchs.date DESC
-                                    ");
+                                        WHERE matchs.date <= CURRENT_DATE()
+                                        ORDER BY matchs.date DESC
+                                        ");
 
-        $query->execute();
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-    
-        $matchs = [];
-        $nsMasiaMasia = new NsMasiaManager();
-        $rivalTeamManager = new RivalTeamManager();
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
         
-        if($result) {
-            $nsMasia = $nsMasiaMasia->getNsMasia();
-            $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
-    
-            $match = new MatchNs($nsMasia, $rivalTeam, $result["domicileExterieur"], $result["time"],  $result["date"]);
-            $match->setId($result["id"]);
-            $matchs[] = $result;
+            $matchs = [];
+            $nsMasiaMasia = new NsMasiaManager();
+            $rivalTeamManager = new RivalTeamManager();
+            
+            if($result) {
+                $nsMasia = $nsMasiaMasia->getNsMasia();
+                $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($result["rivalTeam_id"]);
+        
+                $match = new MatchNs($nsMasia, 
+                                    $rivalTeam, 
+                                    $result["home_outside"], 
+                                    $result["time"],  
+                                    $result["date"]
+                                );
+                $match->setId($result["id"]);
+                $matchs[] = $result;
+            }
+            
+            return $matchs; 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch match play.");
         }
-        
-        return $matchs; 
     }
 
     /***************************************
             * TICKET MATCH *
     **************************************/
 
-    public function getAllTickets() : array {  
-
-        $query = $this->db->prepare("SELECT * FROM tickets");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        $tickets = [];
-        foreach($result as $item){
-            $user = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
-            $user->setId($item["id"]);
-            $tickets[] = $item;
+    public function ChangeStock( int $id, int $number ) : void{
+        try{
+            $query = $this->db->prepare("UPDATE tickets 
+                                        SET stock = :stock
+                                        WHERE id = :id ");
+            $parameters = [
+                'id' => $id,
+                'stock' => $number
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to change stock.");
         }
-        return $tickets;
-        
     }
 
-    public function getAllTicketsById(int $id) {  
+    public function getAllTickets() : array {  
+        try{
+            $query = $this->db->prepare("SELECT * FROM tickets");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC); 
 
-        $query = $this->db->prepare("SELECT * FROM tickets WHERE id = :id");
-        $parameters = [
-            'id' => $id
-        ];
-        $query->execute($parameters);
-        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        $tickets = [];
-
-        foreach($result as $item){
-            $ticket = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
-            $ticket->setId($item["id"]);
-            $tickets[] = $item;
+            $tickets = [];
+            foreach($result as $item){
+                $user = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
+                $user->setId($item["id"]);
+                $tickets[] = $item;
+            }
+            return $tickets;
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all tickets.");
         }
-        return $tickets;  
+    }
+
+    public function getAllTicketsById(int $id) : array{  
+        try{
+            $query = $this->db->prepare("SELECT * FROM tickets WHERE id = :id");
+            $parameters = [
+                'id' => $id
+            ];
+            $query->execute($parameters);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC); 
+
+            $tickets = [];
+
+            foreach($result as $item){
+                $ticket = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
+                $ticket->setId($item["id"]);
+                $tickets[] = $item;
+            }
+            return $tickets;  
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all tickets by id.");
+        }
     } 
+
+    public function getTicketsById(int $id) : ? Ticket{  
+        try{
+            $query = $this->db->prepare("SELECT * FROM tickets WHERE id = :id");
+            $parameters = [
+                'id' => $id
+            ];
+            $query->execute($parameters);
+            $item = $query->fetch(PDO::FETCH_ASSOC); 
+
+            if($item){
+                $newTicket = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
+                $newTicket->setId($item["id"]);
+                return $newTicket; 
+            }
+             return null;
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all tickets by id.");
+        }
+    }
 
 /***************************************
         * RESULT MATCH *
  **************************************/
 
     public function getAllResultMatch() : array {  
-
-        $query = $this->db->prepare("SELECT * FROM result_match");
-        $query->execute();
-        $resultMatch = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        return $resultMatch; 
+        try{
+            $query = $this->db->prepare("SELECT * FROM result_match");
+            $query->execute();
+            $resultMatch = $query->fetchAll(PDO::FETCH_ASSOC); 
+            return $resultMatch; 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all result match.");
+        }
     }
 
     public function getAllResultMatchByMatch(array $match) : array {  
+        try{
+            $query = $this->db->prepare("SELECT * FROM result_match");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC); 
 
-        $query = $this->db->prepare("SELECT * FROM result_match");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC); 
-
-        $resultMatch = [];
-        foreach($result as $item){
-            $user = new ResultMatch( $match , $item["score_nsMasia"], $item["score_rivalTeam"]);
-            $user->setId($item["id"]);
-            $resultMatch[] = $item;
+            $resultMatch = [];
+            foreach($result as $item){
+                $user = new ResultMatch($match, $item["score_nsMasia"], $item["score_rivalTeam"]);
+                $user->setId($item["id"]);
+                $resultMatch[] = $item;
+            }
+            return $resultMatch; 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all result match by match.");
         }
-        return $resultMatch; 
     }
 }

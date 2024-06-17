@@ -2,24 +2,36 @@
 
 class ArticleController extends AbstractController
 {
-    public function news()
+    public function news() : void
     {
         $articleManager = new ArticleManager();
 
         $articles = $articleManager->getAllArticle();
 
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
+        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+
+        $secret = $_ENV["SECRET"];
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
+        
         $this->render("news.html.twig", [
             'articles' => $articles,
+            'errorMessage' => $errorMessage,
+            'valideMessage' => $valideMessage,
             'userIsConect' => $userIsConect,
+            'secret' => $secret,
+            'rolesUser' => $rolesUser,
+            'nsMasia' => $nsMasia
         ]);
     }
 
-    public function homeArticle($id)
+    public function homeArticle($id) : void
     {
         $articleManager = new ArticleManager();
 
@@ -29,12 +41,16 @@ class ArticleController extends AbstractController
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        $adminRnd7sX23 =  isset($_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R']) ? $_ENV['ConnexionAdmin_35as3ENm7LV3nz3Nej4R'] : null;
         
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
+
+        $nsMasiaManager = new NsMasiaManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
+
+        $secret = $_ENV["SECRET"];
 
         $this->render("homeArticle.html.twig", [
             'userIsConect' => $userIsConect,
@@ -43,17 +59,9 @@ class ArticleController extends AbstractController
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
             'rolesUser' => $rolesUser,
-            'adminRnd7sX23' => $adminRnd7sX23,
-            'articles' => $articles
-        ]);
-    }
-
-    public function club()
-    {
-        
-
-        $this->render("club.html.twig", [
-            
+            'articles' => $articles,
+            'secret' => $secret,
+            'nsMasia' => $nsMasia
         ]);
     }
 }

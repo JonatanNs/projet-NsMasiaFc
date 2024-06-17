@@ -5,8 +5,8 @@
     <section class="pageHome">
         <div class="home" style="background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);">
             <figure>
-                <img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/>
-                <img src="assets/img/logo adidad nsmasia.png" alt="{{nsMasia.logoalt}}"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
+                <img src="assets/img/logo_adidad_nsmasia.png" alt="{{nsMasia.logoalt}}"/>
             </figure>
             <h1>NS<br>Masia FC</h1>
             <div class="btnProchainMatch">
@@ -21,8 +21,8 @@
                 {% for article in articles|slice(0, 3) %}
                     <article class="article">
                             <h3>{{ article.title }}</h3>
-                        <a href="index.php?route=homeArticle&id={{article.id}}">
-                            <button>Lire</button>
+                        <a href="index.php?route=homeArticle&id={{article.id}}" class="btn">
+                            Lire
                         </a>
                             <figure>
                                 <img src="{{ article.img_url }}" alt="{{ article.img_alt }}" />
@@ -64,48 +64,37 @@
                     </div>
                 {% endfor %}
             </article>
-
-            <article class="prochainMatch">
-                <h3>Prochaine rencontre</h3>
-                {% set prochainMatch = null %}
-                {% set dateActuelle = "now"|date("d-m-Y") %} 
-                {% for match in matchs %}
-                    {% if match.date >= dateActuelle %}
-                        {% if prochainMatch is null or match.date < prochainMatch.date %}
-                            {% set prochainMatch = match %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-                {% if prochainMatch is not null %}
-                    {% if prochainMatch.domicileExterieur == 'domicile' %}
-                        <p class="prochainMatchDom">{{prochainMatch.name}}</p>
-                        <p class="prochainMatchEx">{{prochainMatch.team}}</p>
+            {% if next_match is not empty %}
+                <article class="prochainMatch">
+                    <h3>Prochaine rencontre</h3>
+                    {% if next_match.domicileExterieur == 'domicile' %}
+                        <p class="prochainMatchDom">{{ next_match.name }}</p>
+                        <p class="prochainMatchEx">{{ next_match.team }}</p>
                     {% else %}
-                        <p class="prochainMatchDom">{{prochainMatch.team}}</p>
-                        <p class="prochainMatchEx">{{prochainMatch.name}}</p>
+                        <p class="prochainMatchDom">{{ next_match.team }}</p>
+                        <p class="prochainMatchEx">{{ next_match.name }}</p>
                     {% endif %}
-                    <p class="prochainMatchDate">{{ prochainMatch.date|format_datetime('full', 'none', locale='fr') }}</p>
+                    <p class="prochainMatchDate">{{ next_match.date|format_datetime('full', 'none', locale='fr') }}</p>
 
                     <div class="teamForMatch">
                         <figure>
-                            <img src="assets/img/logo-ns_masia.png" alt="{{nsMasia.logoalt}}"/>
-                            <figcaption></figcaption>
-                        </figure> 
-                        <p>{{ prochainMatch.time |date("H:i", "Europe/Paris") }}</p>
-                        <figure>  
-                            <img src="{{ prochainMatch.logo_url }}" alt="{{prochainMatch.logo_alt}}" />
-                            <figcaption></figcaption>
+                            <img src="{{nsMasia.logourl}}" alt="{{ nsMasia.logoalt }}"/>
+                        </figure>
+                        <p>{{ next_match.time|date("H:i", "Europe/Paris") }}</p>
+                        <figure>
+                            <img src="{{ next_match.logo_url }}" alt="{{ next_match.logo_alt }}" />
                         </figure>
                     </div>
-                    {% if prochainMatch.domicileExterieur == 'domicile' %}
-                    <a href="index.php?route=billeterie"><button class="btn">Billetterie <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span></button></a>
+                    {% if next_match.domicileExterieur == 'domicile' %}
+                        <a href="index.php?route=billeterie" class="btn">
+                            Billetterie 
+                            <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span>
+                        </a>
                     {% else %}
-                    <p>Match à l'exterieur.</p>
+                        <p>Match à l'exterieur.</p>
                     {% endif %}
-                {% else %}
-                    <p>Aucun match à venir.</p>
-                {% endif %}
-            </article>
+                </article>
+            {% endif %}
 
             <article class="ranking">
                 <h3>Classement</h3>
@@ -152,7 +141,10 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="index.php?route=allRanking"><button class="btn">Classement complet <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span></button></a>
+                <a href="index.php?route=allRanking" class="btn">
+                    Classement complet 
+                    <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span>
+                </a>
             </article>
         </div>
 
@@ -160,20 +152,20 @@
             <h4>Club</h4>
             <article class="homeClubHistoire">
                 <a href="index.php?route=club">
-                <h5>Histoire du club</h5>
-                <p>NS MASIA F.C. 2024</p>
-                <figure>
-                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
-                </figure>
+                    <h5>Histoire du club</h5>
+                    <p>NS MASIA F.C. 2024</p>
+                    <figure>
+                        <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
+                    </figure>
                 </a>
             </article>
             <article class="homeClubPlayers">
                 <a href="index.php?route=club">
-                <h5>Joueur du club</h5>
-                <p>NS MASIA F.C. 2024</p>
-                <figure>
-                    <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
-                </figure>
+                    <h5>Joueur du club</h5>
+                    <p>NS MASIA F.C. 2024</p>
+                    <figure>
+                        <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
+                    </figure>
                 </a>
             </article>
             <div class="diapoClub">
@@ -196,7 +188,7 @@
                 <div class="homeClubBtn">
                     <button class="homeClubBtnPrevious"><span class="fa-solid fa-angle-left"></span></button>
                     <button class="homeClubBtnNext"> <span class="fa-solid fa-angle-left fa-flip-horizontal"></span></button>
-            </div>
+                </div>
         </section>
     </section>
 </main>

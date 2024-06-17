@@ -4,7 +4,12 @@ class User {
 
     private ? int $id = null;
     private string $roles = "USER";
-    public function __construct(private string $first_name, private string $last_name, private string $email, private string $password) {
+    public function __construct(
+                                private string $first_name, 
+                                private string $last_name, 
+                                private string $email, 
+                                private string $password
+                                ) {
     }
 
     public function getId(): ? int {

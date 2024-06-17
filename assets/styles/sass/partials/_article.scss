@@ -19,6 +19,8 @@
             border: 3px solid $beige;
             margin: 1em;
             box-shadow: $beige 0px 3px 20px -5px, $beige 0px 5px 5px -5px;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
             h2{
                 text-align: center;
             }
@@ -43,21 +45,21 @@
                     -webkit-box-orient: vertical;
             }
             a{
-                button{
+                
                     margin: 0 auto;
                     width: 100%;
                     background-color: $bleu;
                     color: $beige;
                     font-size: 2rem;
-                }
+                    border-radius: none;
             }
         }
     }
 }
 
 .articleAllContent {
-    margin-bottom: 7em;
-    padding-top: 4em;
+    margin-bottom: 10em;
+    padding: 5em 0 0 0;
     button{
         margin: 1em;
     }
@@ -66,6 +68,12 @@
         padding-bottom: 1em;
     }
     figure{
+        width: 100%;
+        margin: 0 auto;
+        img{
+            width: 100%;
+            box-shadow: white 0px 2px 8px 0px;
+        }
         figcaption{
             text-align: center;
         }
@@ -87,7 +95,7 @@
 @media screen and (min-width: 1440px) {
     .blockArticle{
         padding-top: 8em;
-        margin: 0 20% 10em 20%;
+        margin: 0 5em 10em 5em;
         width: 100%;
     }
 }
