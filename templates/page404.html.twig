@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="main">
+    <section class="page404">
+        <h1>Oups !</h1>
+        {% if errorMessage is not empty %}
+            <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+        {% endif %}
+
+        {% if valideMessage is not empty %}
+            <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+        {% endif %}
+        <ul>
+            <li>Page introuvable !</li>
+            <li>La page que vous recherchez est introuvable.</li>
+        </ul>
+    </section>
+</main>
+{% endblock %}

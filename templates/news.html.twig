@@ -11,21 +11,26 @@
             {% if valideMessage is not empty %}
                 <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
             {% endif %}
-        <div>
+        <div id="articles-container">
             {% for article in articles %}
-            <article class="articleContent">
+            <article class="articleContent" >
                 <h2>{{article.title}}</h2>
                 <figure>
                     <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
                 </figure>
                 <p>{{article.excerpt}}</p>
-                <p>Date : {{article.date|date("m/d/Y", "Europe/Paris")}}</p>
+                <p>Date : {{article.date|date("d/m/Y", "Europe/Paris")}}</p>
                 <a href="index.php?route=homeArticle&id={{article.id}}" class="btn">
                     Lire l'article
                 </a>
             </article>
             {% endfor %}
-        </div>
+        </div>  
     </article>
+    <div class="pagination" id="pagination-container"></div>
 </main>
+{% endblock %}
+
+{% block js %}
+<script src="js/news.js"></script>
 {% endblock %}

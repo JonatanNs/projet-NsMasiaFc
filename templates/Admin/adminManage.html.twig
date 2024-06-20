@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+<main class="main">
+    <section class="admin">
+        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <h1>Page Admin</h1>
+        {% if errorMessage is not empty %}
+            <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+        {% endif %}
+
+        {% if valideMessage is not empty %}
+            <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+        {% endif %}
+        <article>
+            <h2>Mettre un utilisateur admin</h2>
+            <form action="check-changer-role&{{ secret }}" method="POST" class="form formChangeRole" >
+            <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
+                <fieldset>
+                    <label for="emailUser">Email</label>
+                    <input type="email" id="emailUser" name="emailUser" required>
+                </fieldset>
+                <fieldset>
+                    <label for="choiceRole">Changer le role </label>
+                    <select name="choiceRole" id="choiceRole" required>
+                        <option value="">--Choisir le role--</option>
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" class="btn">Valider</button>
+                </fieldset>
+            </form>
+        </article>
+    </section>
+</main>
+{% endblock %}

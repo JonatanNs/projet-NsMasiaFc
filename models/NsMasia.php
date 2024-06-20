@@ -3,6 +3,8 @@
 class NsMasia {
 
     private ? int $id = null;
+
+    private ? string $bannerEmail = null;
     private ? int $ranking_points = 0;
     private ? int $matchs_play = 0;
     private ? int $matchs_win = 0; 
@@ -13,6 +15,7 @@ class NsMasia {
                                     private string $logo_url, 
                                     private string $logo_alt, 
                                     private string $email,
+                                    private string $passwordEmail,
                                     private string $stadium
                                 ) {
     }
@@ -52,10 +55,17 @@ class NsMasia {
         $this->email = $email;
     }
 
-    public function getLogoStadium(): string {
+    public function getPasswordEmail(): string {
+        return $this->passwordEmail;
+    }
+    public function setPasswordEmail(string $passwordEmail): void {
+        $this->passwordEmail = $passwordEmail;
+    }
+
+    public function getStadium(): string {
         return $this->stadium;
     }
-    public function setLogoStadium(string $stadium): void {
+    public function setStadium(string $stadium): void {
         $this->stadium = $stadium;
     }
 
@@ -93,5 +103,12 @@ class NsMasia {
     }
     public function setMatchsNul(? int $matchs_nul): void {
         $this->matchs_nul = $matchs_nul;
+    }
+
+    public function getBannerEmail(): ? string {
+        return $this->bannerEmail;
+    }
+    public function setBannerEmail( ? string $bannerEmail): void {
+        $this->bannerEmail = $bannerEmail;
     }
 }

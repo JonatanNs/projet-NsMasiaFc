@@ -5,13 +5,7 @@ class MatchManager extends AbstractManager{
     /**********************************************************
                              * CREATE *
     **********************************************************/
-    public function createMatch(
-                                    NsMasia $nsMasia, 
-                                    int $rivalTeam, 
-                                    string $home_outside, 
-                                    string $time, 
-                                    string $date
-                               ) : void {  
+    public function createMatch( MatchNs $match ) : void {  
         try{ 
             $query = $this->db->prepare("INSERT INTO matchs (
                                                                 id, 
@@ -28,11 +22,11 @@ class MatchManager extends AbstractManager{
                                                         :time, 
                                                         :date)");
             $parameters = [ 
-                'ns_masia_id' => $nsMasia->getId(),
-                'rivalTeam_id' => $rivalTeam, 
-                'home_outside' => $home_outside, 
-                'time' => $time, 
-                'date' => $date
+                'ns_masia_id' => $match->getNsMasiaId()->getId(),
+                'rivalTeam_id' => $match->getRivalTeamId()->getId(), 
+                'home_outside' => $match->gethome_outside(), 
+                'time' => $match->getTime(), 
+                'date' => $match->getDate()
             ];
             $query->execute($parameters);
         } catch (PDOException $e){
@@ -43,11 +37,11 @@ class MatchManager extends AbstractManager{
         // Retrieve the newly inserted match ID
         $matchId = $this->db->lastInsertId();
     
-        if ($home_outside === "exterieur") {
+        if ($match->gethome_outside() === "exterieur") {
             // Select the ID of the location corresponding to the rival team
             $query = $this->db->prepare("SELECT id FROM locations WHERE rivalTeam_id = :rivalTeam_id");
             $parameters = [
-                'rivalTeam_id' => $rivalTeam
+                'rivalTeam_id' => $match->getRivalTeamId()->getId()
             ];
             $query->execute($parameters);
             $locationId = $query->fetchColumn();
@@ -68,145 +62,61 @@ class MatchManager extends AbstractManager{
         }  
     }
 
-    public function addResulteMatch(MatchNs $matchNs, 
-                                    int $matchId, 
-                                    int $score_nsMasia, 
-                                    int $score_rivalTeam
-                                ) : void{  
-        try{ 
-            $query = $this->db->prepare("INSERT INTO result_match (id, match_id, score_nsMasia, score_rivalTeam) 
-                                            VALUES (null, :match_id, :score_nsMasia, :score_rivalTeam)");
+    /**********************************************************
+                             * Update Match *
+    **********************************************************/
+
+    public function changeMatch(    
+                                    int $id,
+                                    NsMasia $nsMasia, 
+                                    RivalTeam $rivalTeam, 
+                                    string $home_outside, 
+                                    string $time, 
+                                    string $date
+
+                                ) : void {
+        try{
+            $query = $this->db->prepare("UPDATE matchs 
+                                        SET ns_masia_id = :ns_masia_id, 
+                                            rivalTeam_id = :rivalTeam_id, 
+                                            home_outside = :home_outside, 
+                                            time = :time,  
+                                            date = :date
+                                        WHERE id = :id");
+            
             $parameters = [
-                'match_id' => $matchId, 
-                'score_nsMasia' => $score_nsMasia, 
-                'score_rivalTeam' => $score_rivalTeam
+                'id' => $id,
+                'ns_masia_id' => $nsMasia->getId(),
+                'rivalTeam_id' => $rivalTeam->getId(),
+                'home_outside' => $home_outside,
+                'time' => $time,
+                'date' =>  $date
+            ];
+            $query->execute($parameters); 
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to change match.");
+        }
+    }
+    
+    /**********************************************************
+                             * REMOVE Match *
+    **********************************************************/
+    public function removeMatch(int $id) : void {
+        try{
+            $query = $this->db->prepare("DELETE FROM matchs WHERE id = :id");
+            $parameters = [
+                'id' =>  $id, 
             ];
             $query->execute($parameters);
         } catch (PDOException $e){
             error_log("Database error : " . $e->getMessage());
-            throw new Exception("Failed to add result match.");
-        }
-        $rivalTeam = $matchNs->getRivalTeamId();
-        $nsMasia = $matchNs->getNsMasiaId();
-
-        $rankingPoint = $rivalTeam->getRankingPoints();
-        $matchNul = $rivalTeam->getMatchsNul();
-        $matchPlay = $rivalTeam->getMatchsPlay();
-        $matchWin = $rivalTeam->getMatchsWin();
-        $matchLose = $rivalTeam->getMatchsLose();
-
-        $matchLoseNs = $nsMasia->getMatchsLose();
-        $matchWinNs = $nsMasia->getMatchsWin();
-        $matchNulNs = $nsMasia->getMatchsNul();
-        $matchPlayNs = $nsMasia->getMatchsPlay();
-        $rankingPointNs = $nsMasia->getRankingPoints();
-
-        if($score_nsMasia === $score_rivalTeam){ /*************** SI NS MASIA draw **************/
-            try{
-                $query = $this->db->prepare("UPDATE rivalsTeam 
-                                            SET ranking_points = :ranking_points,
-                                                match_play = :match_play, 
-                                                match_nul = :match_nul 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $rivalTeam->getId(),
-                    'ranking_points' => $rankingPoint + 1,
-                    'match_play' => $matchPlay + 1,
-                    'match_nul' => $matchNul + 1,
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match nul for rival team.");
-            }
-            try{
-                $query = $this->db->prepare("UPDATE nsMasia 
-                                            SET ranking_points = :ranking_points, 
-                                                match_play = :match_play, 
-                                                match_nul = :match_nul 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $nsMasia->getId(),
-                    'ranking_points' => $rankingPointNs + 1,
-                    'match_play' => $matchPlayNs + 1,
-                    'match_nul' => $matchNulNs + 1
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match lose.");
-            }
-
-        } else if($score_nsMasia > $score_rivalTeam){ /*************** IF NS MASIA Win the match **************/
-            try{
-                $query = $this->db->prepare("UPDATE rivalsTeam 
-                                            SET match_play = :match_play, match_lose = :match_lose 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $rivalTeam->getId(),
-                    'match_play' => $matchPlay + 1,
-                    'match_lose' => $matchLose + 1
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match win for rival team.");
-            }
-            try{
-                $query = $this->db->prepare("UPDATE nsMasia 
-                                            SET ranking_points = :ranking_points, 
-                                                match_play = :match_play, 
-                                                match_win = :match_win 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $nsMasia->getId(),
-                    'ranking_points' => $rankingPointNs + 3,
-                    'match_play' => $matchPlayNs + 1,
-                    'match_win' => $matchWinNs + 1
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match nul for Ns Masia.");
-            }
-
-        } else if($score_nsMasia < $score_rivalTeam){ /*************** IF NS MASIA Loses the match **************/
-            try{
-                $query = $this->db->prepare("UPDATE rivalsTeam 
-                                            SET ranking_points = :ranking_points, 
-                                                match_play = :match_play, 
-                                                match_win = :match_win 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $rivalTeam->getId(),
-                    'ranking_points' => $rankingPoint + 3,
-                    'match_play' => $matchPlay + 1,
-                    'match_win' => $matchWin + 1
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match lose for rival team.");
-            }
-            try{
-                $query = $this->db->prepare("UPDATE nsMasia 
-                                            SET match_play = :match_play, match_lose = :match_lose 
-                                            WHERE id = :id");
-                $parameters = [
-                    'id' => $nsMasia->getId(),
-                    'match_play' => $matchPlayNs + 1,
-                    'match_lose' => $matchLoseNs + 1
-                ];
-                $query->execute($parameters);
-            } catch (PDOException $e){
-                error_log("Database error : " . $e->getMessage());
-                throw new Exception("Failed to update match lose for Ns Masia.");
-            }
-        }
-    }  
+            throw new Exception("Failed to remove match.");
+        } 
+    }
 
     /**********************************************************
-                             * FETCH *
+                             * FETCH Match*
     **********************************************************/
     
     public function getAllMatchs() : array {  
@@ -466,11 +376,184 @@ class MatchManager extends AbstractManager{
         * RESULT MATCH *
  **************************************/
 
+    public function addResulteMatch(
+                                    MatchNs $matchNs, 
+                                    int $matchId, 
+                                    int $score_nsMasia, 
+                                    int $score_rivalTeam
+                                ) : void{  
+        try{ 
+            $query = $this->db->prepare("INSERT INTO result_match (id, match_id, score_nsMasia, score_rivalTeam) 
+                    VALUES (null, :match_id, :score_nsMasia, :score_rivalTeam)");
+            $parameters = [
+                'match_id' => $matchId, 
+                'score_nsMasia' => $score_nsMasia, 
+                'score_rivalTeam' => $score_rivalTeam
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to add result match.");
+        }
+            $rivalTeam = $matchNs->getRivalTeamId();
+            $nsMasia = $matchNs->getNsMasiaId();
+
+            $rankingPoint = $rivalTeam->getRankingPoints();
+            $matchNul = $rivalTeam->getMatchsNul();
+            $matchPlay = $rivalTeam->getMatchsPlay();
+            $matchWin = $rivalTeam->getMatchsWin();
+            $matchLose = $rivalTeam->getMatchsLose();
+
+            $matchLoseNs = $nsMasia->getMatchsLose();
+            $matchWinNs = $nsMasia->getMatchsWin();
+            $matchNulNs = $nsMasia->getMatchsNul();
+            $matchPlayNs = $nsMasia->getMatchsPlay();
+            $rankingPointNs = $nsMasia->getRankingPoints();
+
+        if($score_nsMasia === $score_rivalTeam){ /*************** SI NS MASIA draw **************/
+        try{
+            $query = $this->db->prepare("UPDATE rivalsTeam 
+                                        SET ranking_points = :ranking_points,
+                                            match_play = :match_play, 
+                                            match_nul = :match_nul 
+                                        WHERE id = :id");
+            $parameters = [
+                'id' => $rivalTeam->getId(),
+                'ranking_points' => $rankingPoint + 1,
+                'match_play' => $matchPlay + 1,
+                'match_nul' => $matchNul + 1,
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update match nul for rival team.");
+        }
+        try{
+            $query = $this->db->prepare("UPDATE nsMasia 
+                                        SET ranking_points = :ranking_points, 
+                                            match_play = :match_play, 
+                                            match_nul = :match_nul 
+                                        WHERE id = :id");
+            $parameters = [
+                'id' => $nsMasia->getId(),
+                'ranking_points' => $rankingPointNs + 1,
+                'match_play' => $matchPlayNs + 1,
+                'match_nul' => $matchNulNs + 1
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update match lose.");
+        }
+
+        } else if($score_nsMasia > $score_rivalTeam){ /*************** IF NS MASIA Win the match **************/
+        try{
+            $query = $this->db->prepare("UPDATE rivalsTeam 
+                                        SET match_play = :match_play, match_lose = :match_lose 
+                                        WHERE id = :id");
+            $parameters = [
+                'id' => $rivalTeam->getId(),
+                'match_play' => $matchPlay + 1,
+                'match_lose' => $matchLose + 1
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update match win for rival team.");
+        }
+        try{
+            $query = $this->db->prepare("UPDATE nsMasia 
+                                        SET ranking_points = :ranking_points, 
+                                            match_play = :match_play, 
+                                            match_win = :match_win 
+                                        WHERE id = :id");
+            $parameters = [
+                'id' => $nsMasia->getId(),
+                'ranking_points' => $rankingPointNs + 3,
+                'match_play' => $matchPlayNs + 1,
+                'match_win' => $matchWinNs + 1
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+        error_log("Database error : " . $e->getMessage());
+        throw new Exception("Failed to update match nul for Ns Masia.");
+        }
+
+        } else if($score_nsMasia < $score_rivalTeam){ /*************** IF NS MASIA Loses the match **************/
+        try{
+            $query = $this->db->prepare("UPDATE rivalsTeam 
+                                        SET ranking_points = :ranking_points, 
+                                            match_play = :match_play, 
+                                            match_win = :match_win 
+                                        WHERE id = :id");
+            $parameters = [
+                'id' => $rivalTeam->getId(),
+                'ranking_points' => $rankingPoint + 3,
+                'match_play' => $matchPlay + 1,
+                'match_win' => $matchWin + 1
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update match lose for rival team.");
+        }
+        try{
+            $query = $this->db->prepare("UPDATE nsMasia 
+                    SET match_play = :match_play, match_lose = :match_lose 
+                    WHERE id = :id");
+            $parameters = [
+                'id' => $nsMasia->getId(),
+                'match_play' => $matchPlayNs + 1,
+                'match_lose' => $matchLoseNs + 1
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update match lose for Ns Masia.");
+        }
+        }
+    }
+
+    public function changeResult(    
+                                int $id,
+                                int $score_nsMasia,
+                                int $score_rivalTeam
+
+                            ) : void {
+    try{
+        $query = $this->db->prepare("UPDATE result_match 
+                                    SET score_nsMasia = :score_nsMasia, 
+                                        score_rivalTeam = :score_rivalTeam 
+                                    WHERE id = :id");
+
+        $parameters = [
+                        'id' => $id,
+                        'score_nsMasia' => $score_nsMasia,
+                        'score_rivalTeam' => $score_rivalTeam,
+        ];
+        $query->execute($parameters); 
+        } catch (PDOException $e){
+           error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to change result match.");
+        }
+    }
+
     public function getAllResultMatch() : array {  
         try{
             $query = $this->db->prepare("SELECT * FROM result_match");
             $query->execute();
-            $resultMatch = $query->fetchAll(PDO::FETCH_ASSOC); 
+            $result = $query->fetchAll(PDO::FETCH_ASSOC); 
+            
+            $resultMatch = [];
+            $matchManager = new MatchManager();
+
+            foreach($result as $item){
+                $match = $matchManager->getMatchsByIdPlay($item["match_id"]);
+
+                $newResultMatch = new ResultMatch( $match, $item["score_nsMasia"], $item["score_rivalTeam"]);
+                $newResultMatch->setId($item["id"]);
+                $resultMatch[] = $item;
+            }
             return $resultMatch; 
         } catch (PDOException $e){
             error_log("Database error : " . $e->getMessage());
@@ -486,8 +569,8 @@ class MatchManager extends AbstractManager{
 
             $resultMatch = [];
             foreach($result as $item){
-                $user = new ResultMatch($match, $item["score_nsMasia"], $item["score_rivalTeam"]);
-                $user->setId($item["id"]);
+                $newResultMatch = new ResultMatch($match, $item["score_nsMasia"], $item["score_rivalTeam"]);
+                $newResultMatch->setId($item["id"]);
                 $resultMatch[] = $item;
             }
             return $resultMatch; 

@@ -3,7 +3,6 @@
 class Product {
 
 private ?int $id = null;
-private ?string $descriptions = null;
 private ?string $other_img_url = null;
 private ?string $other_img_alt = null;
 
@@ -11,7 +10,8 @@ public function __construct(
                                 private string $name, 
                                 private string $img_url, 
                                 private string $img_alt, 
-                                private string $prices 
+                                private string $descriptions,
+                                private string $prices
                             ) {
     
 }
@@ -64,19 +64,19 @@ public function setPrices(string $prices): void {
     $this->prices = $prices;
 }
 
-public function getOtherImgUrl(): ?string {
+public function getOtherImgUrl(): ? string {
     return $this->other_img_url;
 }
 
-public function setOtherImgUrl(?string $other_img_url): void {
+public function setOtherImgUrl( ? string $other_img_url): void {
     $this->other_img_url = $other_img_url;
 }
 
-public function getOtherImgAlt(): ?string {
+public function getOtherImgAlt(): ? string {
     return $this->other_img_alt;
 }
 
-public function setOtherImgAlt(?string $other_img_alt): void {
+public function setOtherImgAlt( ? string $other_img_alt): void {
     $this->other_img_alt = $other_img_alt;
 }
 

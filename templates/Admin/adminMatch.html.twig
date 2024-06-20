@@ -1,0 +1,141 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main class="main">
+        <section class="admin">
+        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <h1>Résultat des matchs</h1>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
+            <article class="add">
+                <h2>Vous avez un résultat à ajouter <span class="fa-solid fa-futbol" style="color: #fbff00;"></span></h2>  
+                {% set resultFound = false %}
+                {% for matchPlay in matchPlays %}
+                    {% set matchFound = false %}
+                    {% for resultMatch in resultMatchs %}
+                        {% if matchPlay.match_id == resultMatch.match_id %}
+                            {% set matchFound = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not matchFound %}
+                        {% set resultFound = true %}
+                        <form action="index.php?route=checkAddResult&secret={{secret}}" method="POST" class="form">
+                            <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
+                            <input type="hidden" name="matchId" value="{{ matchPlay.match_id }}">
+                            <fieldset>
+                                <legend>Match joué le {{ matchPlay.date }}</legend>
+                                <label for="resultTeamNsMasia">{{ matchPlay.name }}*</label>
+                                <input type="number" name="resultTeamNsMasia" min="0" required>
+                            </fieldset>
+                            <fieldset class="resultTeamRival">
+                                <label for="resultTeamRival">{{ matchPlay.team }}*</label>
+                                <input type="number" name="resultTeamRival" min="0" required>
+                            </fieldset>
+                    {# Equipe rival #}
+                            {% for team in teamRival %}
+                                {% if matchPlay.team != team.team %}
+                                <fieldset>
+                                    <label for="resultOtherRivalTeam">Quel a été le résultat du match de {{team.team}} ?</label>
+                                    <select name="resultOtherRivalTeam[]" id="resultOtherRivalTeam" required>
+                                        <option value="">Sélectionner une option</option>
+                                        <option value=" Win,{{team.id}}">Gagné</option>    
+                                        <option value="Lose,{{team.id}}">Perdu</option> 
+                                        <option value="Nul,{{team.id}}">Nul</option> 
+                                        <option value="Stand-By,{{team.id}}">Pas encore joué</option>         
+                                    </select>
+                                </fieldset>
+                                {% endif %}
+                            {% endfor %}
+                    {# end Equipe rival #}
+                            <fieldset>
+                                <button type="submit" class="btn">Ajouter</button>
+                            </fieldset>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+                {% if resultFound == false %}
+                    <p>Pas de résultat à ajouter.</p>
+                {% endif %}
+            </article>
+            <article>
+                <h2>Modifier le resultat <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
+                <form action="check-changer-résultat&{{secret}}" method="POST" class="form">
+                    <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>  
+                    <fieldset>
+                        <label for="resultMatchId">Choisissez le match à modifier : </label>
+                        <select name="resultMatchId" id="resultMatchId" required>
+                            <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span></option>
+                            {% for matchPlay in matchPlays %}
+                                {% for resultMatch in resultMatchs %}
+                                    {% if matchPlay.match_id == resultMatch.match_id %}
+                                        <option value="{{ resultMatch.id }}">{{ matchPlay.team ~ ' le ' ~ matchPlay.date|date("d/m/Y", "Europe/Paris") }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="resultTeamNsMasia">Ns Masia</label>
+                        <input type="number" name="resultTeamNsMasia" min="0" required>
+                    </fieldset>
+                    <fieldset>
+                        <label for="resultTeamRival">Equipe rival</label>
+                        <input type="number" name="resultTeamRival" min="0" required>
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit" class="btn">Modifier</button>
+                    </fieldset>
+                </form>
+            </article>
+
+            <article class="add">
+                <h2>Modifier le nombre de point <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span> </h2>
+                <form action="index.php?route=checkChangePointRivalTeam&secret={{secret}}" 
+                      method="POST" 
+                      class="form">
+                <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="rivalTeamId">Choisissez l'équipe à modifier : </label>
+                        <select name="rivalTeamId" id="rivalTeamId" required>
+                            <option value="">Sélectionner une équipe</span></option>
+                            {% for team in rivalTeam %}
+                                <option value="{{ team.id }}">{{ team.team }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="rankingPoint">Point au classement</label>
+                        <input type="number" id="rankingPoint" name="rankingPoint"  min="0" required>
+                    </fieldset>
+
+                     <fieldset>
+                        <label for="matchPlay">Match joué</label>
+                        <input type="number" id="matchPlay" name="matchPlay"  min="0" required>
+                    </fieldset>
+
+                     <fieldset>
+                        <label for="matchWin">Match gagné</label>
+                        <input type="number" id="matchWin" name="matchWin"  min="0" required>
+                    </fieldset>
+                     <fieldset>
+                        <label for="matchLose">Match perdu</label>
+                        <input type="number" id="matchLose" name="matchLose" min="0" required>
+                    </fieldset>
+                     <fieldset>
+                        <label for="matchNul">Match nul</label>
+                        <input type="number" id="matchNul" name="matchNul"  min="0" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <button type="submit" class="btn">Ajouter</button>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
+    </main>
+{% endblock %}

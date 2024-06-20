@@ -5,8 +5,6 @@ class UserManager extends AbstractManager{
     /**********************************************************
                              * CREATE *
     **********************************************************/
-
-
     public function SignUpUser(User $users) : void {
         try{
             $query = $this->db->prepare("INSERT INTO users (id, first_name, last_name, email, password) 
@@ -27,6 +25,23 @@ class UserManager extends AbstractManager{
     /**********************************************************
                     * CHANGE USER INFORMATION *
     **********************************************************/
+
+    public function changeRoles(int $id, string $roles) : void {
+        try{
+            $query = $this->db->prepare("UPDATE users
+                                        SET roles = :roles 
+                                        WHERE id = :id");
+            $parameters = [
+            'id' => $id,
+            'roles' => $roles, 
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+            // Log the error or handle it as necessary
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to change roles in the database.");
+        }
+    }
 
     public function changeName(
                                 int $id, 

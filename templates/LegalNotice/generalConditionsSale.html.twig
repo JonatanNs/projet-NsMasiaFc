@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="main">
+    <section class="pageLegal">
+        <h1>Conditions Générales de Vente</h1>
+        <p><strong>Dernière mise à jour :</strong> 20/06/2024</p>
+
+        <article>
+            <h2>Préambule</h2>
+            <p>Les présentes conditions générales de vente (CGV) s'appliquent à toutes les commandes passées sur le site NS MASIA FC. En passant commande, le client accepte sans réserve les présentes conditions.</p>
+        </article>
+
+        <article>
+            <h2>Identité de la société</h2>
+            <p>Le site NS MASIA FC est édité par :</p>
+            <ul>
+                <li><strong>Nom :</strong> NSUALU Jonatan</li>
+                <li><strong>Adresse :</strong>12 Bd Albert 1er, 35200 Rennes</li>
+                <li><strong>Email :</strong> <a href="mailto:{{nsMasia.email}}">{{nsMasia.email}}</a></li>
+                <li><strong>Téléphone :</strong>xx xx xx xx xx</li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Produits</h2>
+            <p>Les produits proposés sont ceux qui figurent sur le site NS MASIA FC, dans la limite des stocks disponibles. Chaque produit est accompagné d’un descriptif établi par NS MASIA FC.</p>
+        </article>
+
+        <article>
+            <h2>Prix</h2>
+            <p>Les prix des produits sont indiqués en euros toutes taxes comprises (TTC) hors participation aux frais de traitement et d'expédition. NS MASIA FC se réserve le droit de modifier ses prix à tout moment, étant entendu que le prix figurant au catalogue le jour de la commande sera le seul applicable au client.</p>
+        </article>
+
+        <article>
+            <h2>Commande</h2>
+            <p>Le client passe commande sur le site NS MASIA FC en suivant le processus de commande en ligne. La validation de la commande vaut acceptation des présentes CGV.</p>
+        </article>
+
+        <article>
+            <h2>Paiement</h2>
+            <p>Le paiement est exigible immédiatement à la commande. Le client peut régler sa commande par carte bancaire ou tout autre moyen de paiement proposé sur le site.</p>
+        </article>
+
+        <article>
+            <h2>Livraison</h2>
+            <p>Les produits sont livrés à l'adresse de livraison indiquée au cours du processus de commande, dans le délai indiqué sur la page de validation de la commande. En cas de retard de livraison, un email sera envoyé au client pour l'informer.</p>
+        </article>
+
+        <article>
+            <h2>Droit de rétractation</h2>
+            <p>Conformément à la loi, le client dispose d'un délai de 14 jours à compter de la réception de ses produits pour exercer son droit de rétractation sans avoir à justifier de motifs ni à payer de pénalité.</p>
+        </article>
+
+        <article>
+            <h2>Retour des produits</h2>
+            <p>Les produits doivent être retournés dans leur état d'origine et complets (emballage, accessoires, notice...), permettant leur recommercialisation à l'état neuf, accompagnés de la facture d'achat.</p>
+        </article>
+
+        <article>
+            <h2>Garantie</h2>
+            <p>Les produits bénéficient de la garantie légale de conformité et de la garantie contre les vices cachés, conformément à la loi.</p>
+        </article>
+
+        <article>
+            <h2>Responsabilité</h2>
+            <p>NS MASIA FC ne saurait être tenu pour responsable de l'inexécution du contrat conclu en cas de rupture de stock ou d'indisponibilité du produit, de force majeure, de perturbation ou grève totale ou partielle des services postaux et moyens de transport et/ou communications, inondation, incendie.</p>
+        </article>
+
+        <article>
+            <h2>Droit applicable</h2>
+            <p>Les présentes conditions générales de vente sont soumises à la loi française. En cas de litige, compétence est attribuée aux tribunaux compétents de Rennes, nonobstant pluralité de défendeurs ou appel en garantie.</p>
+        </article>
+
+        <article>
+            <h2>Contact</h2>
+            <p>Pour toute question ou demande d'information concernant ces conditions générales de vente, vous pouvez nous contacter par email à <a href="mailto:{{nsMasia.email}}">{{nsMasia.email}}</a> ou par courrier à l'adresse mentionnée ci-dessus.</p>
+        </article>
+    </section>
+</main>
+{% endblock %}

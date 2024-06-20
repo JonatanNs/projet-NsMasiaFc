@@ -24,9 +24,9 @@
                         <a href="index.php?route=homeArticle&id={{article.id}}" class="btn">
                             Lire
                         </a>
-                            <figure>
-                                <img src="{{ article.img_url }}" alt="{{ article.img_alt }}" />
-                            </figure>
+                        <figure>
+                            <img src="{{ article.img_url }}" alt="{{ article.img_alt }}" />  
+                        </figure>
                     </article>
                 {% endfor %}
                 </div>
@@ -42,7 +42,7 @@
                 <h3>Dernier résultat</h3>
                 {% for match in matchPlays %}
                     <p class="lastResultDate">{{ match.date|format_datetime('full', 'none', locale='fr') }}</p>
-                    {% if match.domicileExterieur == 'domicile' %}
+                    {% if match.home_outside == 'domicile' %}
                         <p class="lastResultDom">{{ match.name }}</p>
                         <p class="lastResultEx">{{ match.team }}</p>
                     {% else %}
@@ -67,7 +67,7 @@
             {% if next_match is not empty %}
                 <article class="prochainMatch">
                     <h3>Prochaine rencontre</h3>
-                    {% if next_match.domicileExterieur == 'domicile' %}
+                    {% if next_match.home_outside == 'domicile' %}
                         <p class="prochainMatchDom">{{ next_match.name }}</p>
                         <p class="prochainMatchEx">{{ next_match.team }}</p>
                     {% else %}
@@ -85,7 +85,7 @@
                             <img src="{{ next_match.logo_url }}" alt="{{ next_match.logo_alt }}" />
                         </figure>
                     </div>
-                    {% if next_match.domicileExterieur == 'domicile' %}
+                    {% if next_match.home_outside == 'domicile' %}
                         <a href="index.php?route=billeterie" class="btn">
                             Billetterie 
                             <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span>

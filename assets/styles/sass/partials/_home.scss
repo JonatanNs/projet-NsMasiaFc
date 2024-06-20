@@ -70,13 +70,14 @@
                     margin-bottom: 2em;
                     a{
                         
-                            position: absolute;
-                            bottom: 9%;
-                            left: 10%;
-                            background-color: $beige;
-                            border: 3px solid $black;
-                            border-radius: 1rem;
-                            color: $black;
+                        position: absolute;
+                        bottom: 9%;
+                        left: 10%;
+                        background-color: $beige;
+                        border: 3px solid $black;
+                        border-radius: 1rem;
+                        color: $black;
+                        font-size: 1.5rem;
                         
                     }
                         h3{
@@ -755,7 +756,7 @@
             align-items: center;
             article{
                 width: 50%;
-                height: 35vh;
+                height: auto;
             }
         }
         /*********************************

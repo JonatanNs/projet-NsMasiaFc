@@ -28,6 +28,84 @@ class NsMasiaManager extends AbstractManager{
             throw new Exception("Failed to create player.");
         }
     }
+
+    /**********************************************************
+                             * UPDATE NS MASIA FC *
+    **********************************************************/
+
+    public function updateNsMasiaName(int $id, string $name) : void {
+        try {
+            $query = $this->db->prepare("UPDATE nsMasia SET name = :name WHERE id = :id");
+            $parameters = [
+                'id' => $id, 
+                'name' => $name, 
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update name.");
+        }
+    }
+
+    public function updateNsMasiaLogo( 
+                                            int $id, 
+                                            string $logo_url,
+                                            string $logo_alt
+                                        ) : void{
+        try {
+            $query = $this->db->prepare("   UPDATE nsMasia 
+                                            SET logo_url = :logo_url,
+                                                logo_alt = :logo_alt
+                                            WHERE id = :id");
+
+            $parameters = [
+                'id' => $id,  
+                'logo_url' => $logo_url,
+                'logo_alt' => $logo_alt
+            ];
+            $query->execute($parameters);
+
+        } catch (PDOException $e) {
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update logo.");
+        }
+    }
+
+    public function updateNsMasiaEmail(int $id, string $email, string $passwordEmail) : void {
+        try {
+            $query = $this->db->prepare("UPDATE nsMasia 
+                                         SET email = :email, 
+                                         passwordEmail = :passwordEmail 
+                                         WHERE id = :id");
+            $parameters = [
+                'id' => $id, 
+                'email' => $email, 
+                'passwordEmail' => $passwordEmail
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update NsMasia email and password.");
+        }
+    }
+
+    public function updatebannerEmail(int $id, string $bannerEmail) : void {
+        try {
+            $query = $this->db->prepare("UPDATE nsMasia 
+                        SET bannerEmail = :bannerEmail
+                        WHERE id = :id"
+            );
+            $parameters = [
+                'id' => $id,  
+                'bannerEmail' => $bannerEmail
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to update banner email.");
+        }
+    }
     
     /**********************************************************
                              * CHANGE PLAYER *
@@ -160,9 +238,11 @@ class NsMasiaManager extends AbstractManager{
                                             $item["logo_url"], 
                                             $item["logo_alt"], 
                                             $item["email"], 
+                                            $item["passwordEmail"], 
                                             $item["stadium"] 
                                         );
                 $newMatch->setId($item["id"]);
+                $newMatch->setBannerEmail($item["bannerEmail"] ?? null);
                 $newMatch->setRankingPoints($item["ranking_points"] ?? null);
                 $newMatch->setMatchsPlay($item["match_play"] ?? null);
                 $newMatch->setMatchsWin($item["match_win"] ?? null);
@@ -192,9 +272,11 @@ class NsMasiaManager extends AbstractManager{
                                             $item["logo_url"], 
                                             $item["logo_alt"], 
                                             $item["email"], 
+                                            $item["passwordEmail"], 
                                             $item["stadium"] 
                                         );
                 $newMatch->setId($item["id"]);
+                $newMatch->setBannerEmail($item["bannerEmail"] ?? null);
                 $newMatch->setRankingPoints($item["ranking_points"] ?? null);
                 $newMatch->setMatchsPlay($item["match_play"] ?? null);
                 $newMatch->setMatchsWin($item["match_win"] ?? null);

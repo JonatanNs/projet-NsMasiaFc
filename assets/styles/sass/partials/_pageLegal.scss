@@ -1,0 +1,86 @@
+.pageLegal{
+    padding: 3em 1em;
+    h1{
+        text-align: center;
+    }
+    article{
+        h2{
+            margin: 1em 0;
+            text-align: center;
+        }
+        a{
+            color: $darkgrey;
+        }
+        p{
+            text-align: justify;
+        }
+    }
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .pageLegal{
+        padding: 5em 1em;
+        h1{
+            text-align: center;
+        }
+        article{
+            h2{
+                margin: 1em 0;
+                text-align: center;
+            }
+            a{
+                color: $darkgrey;
+            }
+            p{
+                text-align: justify;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 770px) and (max-width: 1440px) {
+    .pageLegal{
+        padding: 5em 10em;
+        h1{
+            text-align: center;
+        }
+        article{
+            h2{
+                margin: 1em 0;
+                text-align: center;
+            }
+            a{
+                color: $darkgrey;
+            }
+            p{
+                text-align: justify;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .pageLegal{
+        padding: 5em 15em;
+        h1{
+            text-align: center;
+        }
+        article{
+            h2{
+                margin: 1em 0;
+                text-align: center;
+            }
+            a{
+                color: $darkgrey;
+            }
+            p{
+                text-align: justify;
+            }
+        }
+    }
+}

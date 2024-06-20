@@ -1,5 +1,10 @@
-# Projet-NsMasiaFc
-Fictitious football club named NS MASIA FC
+# Projet Ns Masia Fc
+
+My project is to create the website of a fictional football club named NS MASIA Football Club.
+
+This project will aim to increase the visibility of the club and its revenues. This site will allow the club to publish all the information and news about the club, to sell its equipment and match tickets.
+
+The NS MASIA FC website will allow users to discover the club and its history. In addition, it will offer them the opportunity to follow the news of the club and attend sporting events.
 
 Languages used:
 * HTML/SAAS(CSS)
@@ -24,8 +29,8 @@ Languages used:
 
 - For flags 
 - Icon library 
-- Calendar
 - Sort by category
+- Php Mailler
 
 ## Start the project
 
@@ -80,7 +85,7 @@ composer require phpmyadmin/twig-i18n-extension:^4.1
 
 # Useful Links
 
-- Pour les drapeau : https://flagicons.lipis.dev
-- Librairie icon : https://css.gg/ ou https://fontawesome.com
+- Icon : https://css.gg/ ou https://fontawesome.com
 - Stripe : https://stripe.com
 - Bootstrap : https://getbootstrap.com
+- Php Mailler : https://github.com/PHPMailer/PHPMailer

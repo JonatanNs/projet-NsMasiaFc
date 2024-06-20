@@ -8,7 +8,11 @@ class RivalTeam {
     private ? int $matchs_win = 0; 
     private ? int $matchs_lose = 0; 
     private ? int $matchs_nul = 0;
-    public function __construct(private string $team, private string $logo_url, private string $logo_alt) {
+    public function __construct(
+                                    private string $team, 
+                                    private string $logo_url, 
+                                    private string $logo_alt,
+                                    private string $status = 'ACTIF') {
     }
 
     public function getId(): ? int {
@@ -73,5 +77,11 @@ class RivalTeam {
     }
     public function setMatchsNul(? int $matchs_nul): void {
         $this->matchs_nul = $matchs_nul;
+    }
+    public function getStatus(): string {
+        return $this->status;
+    }
+    public function setStatus( string $status ): void {
+        $this->status = $status;
     }
 }

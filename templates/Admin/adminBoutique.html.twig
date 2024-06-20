@@ -8,11 +8,6 @@
         <h1>Page Boutique</h1>
         <article class="handle">
             <h2>Boutique</h2>
-            <ul>
-                <li><span class="fa-solid fa-square-plus fa-2xl" style="color: #00ff62;"></span></li>
-                <li><span class="fa-solid fa-repeat fa-2xl" style="color: #0534f0;"></span></li>
-                <li><span class="fa-solid fa-trash-can fa-2xl" style="color: #ff0000;"></span></li>
-            </ul>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
@@ -22,7 +17,10 @@
             {% endif %}
             <article class="add">
                 <h3>Ajouter un produit <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
-                <form action="index.php?route=checkAddproduct&secret={{secret}}" method="POST" class="form">
+                <form action="index.php?route=checkAddproduct&secret={{secret}}" 
+                      method="POST" 
+                      enctype="multipart/form-data"
+                      class="form">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="nameProduct">Name</label>
@@ -30,28 +28,28 @@
                     </fieldset>
 
                     <fieldset>
-                        <label for="imgUrl">Url 1</label>
-                        <input type="url" id="imgUrl" name="imgUrl" placeholder="https://example.com" required>
-                    </fieldset>
+                        <legend>Image principale</legend>
+                        <label for="addMediaFile">Url 1</label>
+                        <input type="file" id="addMediaFile" name="addMediaFile" required>
+                        <input type="hidden" id="addMediaFile" name="addMediaFile">
 
-                    <fieldset>
                         <label for="imgUrl">Image Alt 1</label>
-                        <input type="url" id="imgAlt" name="imgAlt" placeholder="Description de l'image" required>
+                        <input type="text" id="imgAlt" name="imgAlt" placeholder="Description de l'image" required>
                     </fieldset>
 
                     <fieldset>
-                        <label for="ortherImgUrl">Url 2 </label>
-                        <input type="url" id="ortherImgUrl" name="ortherImgUrl" placeholder="https://example.com">
-                    </fieldset>
+                        <legend>Image secondaire</legend>
+                        <label for="addMediaFile2">Url 2 </label>
+                        <input type="file" id="addMediaFile2" name="addMediaFile2" >
+                        <input type="hidden" id="addMediaFile2" name="addMediaFile2">
 
-                    <fieldset>
                         <label for="ortherImgUrl">Image Alt 2</label>
-                        <input type="url" id="ortherImgAlt" name="ortherImgAlt" placeholder="Description de l'image">
+                        <input type="text" id="ortherImgAlt" name="ortherImgAlt" placeholder="Description de l'image">
                     </fieldset>
 
                     <fieldset>
                         <label for="description">Description</label>
-                        <input type="text" id="description" name="description" placeholder="Description du produit" required>
+                        <textarea id="description" name="description" rows="5" required></textarea>
                     </fieldset>
 
                     <fieldset>
@@ -73,7 +71,9 @@
                         <label for="selectProduct">Choisissez le produit à modifier : </label>
                         <select name="selectProduct" id="selectProduct" required>
                             <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
-                            <option value="">XS</option>
+                            {% for product in products %}
+                                <option value="{{product.id}}">{{product.name}}</option>
+                            {% endfor %}
                         </select>
                     </fieldset>
 

@@ -5,7 +5,7 @@ abstract class AbstractManager{
 
     public function __construct()
     {
-        try {
+         try {
             $connexion = "mysql:host=".$_ENV["DB_HOST"].";port=3306;charset=".$_ENV["DB_CHARSET"].";dbname=".$_ENV["DB_NAME"];
             $this->db = new PDO(
                 $connexion,

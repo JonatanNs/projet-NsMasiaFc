@@ -2,7 +2,7 @@
 
 class ResultMatch {
     private ? int $id = null;
-    public function __construct(private array $match_id,private int $score_nsMasia,private int $score_rivalTeam) {
+    public function __construct(private array|MatchNs $match_id,private int $score_nsMasia, private int $score_rivalTeam) {
     }
 
     public function getId(): ? int {
@@ -12,11 +12,11 @@ class ResultMatch {
         $this->id = $id;
     }
 
-    public function getMatchId(): array {
+    public function getMatchId(): array|MatchNs {
         return $this->match_id;
     }
 
-    public function setMatchId(array $match_id): void {
+    public function setMatchId( array|MatchNs $match_id): void {
         $this->match_id = $match_id;
     }
 

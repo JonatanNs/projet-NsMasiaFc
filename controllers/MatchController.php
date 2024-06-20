@@ -80,31 +80,123 @@ class MatchController extends AbstractController
                 $score_nsMasia = htmlspecialchars($_POST["resultTeamNsMasia"]);
                 $score_rivalTeam = htmlspecialchars($_POST["resultTeamRival"]);
 
-                $matchManager->addResulteMatch($match, $_POST["matchId"], $score_nsMasia, $score_rivalTeam);
-                
+                $newResultMatch = new ResultMatch(  
+                                                    $match, 
+                                                    $score_nsMasia, 
+                                                    $score_rivalTeam
+                                                );
+
+                $matchManager->addResulteMatch(
+                                                $match, 
+                                                $_POST["matchId"],
+                                                $newResultMatch->getScoreNsMasia(), 
+                                                $newResultMatch->getScoreRivalTeam()
+                                            );
+
+                if (isset($_POST['resultOtherRivalTeam']) && is_array($_POST['resultOtherRivalTeam'])) {
+                    $results = [];
+                                            
+                    foreach ($_POST['resultOtherRivalTeam'] as $result) {
+                        // Sépare le type de résultat et l'ID de l'équipe
+                        list($resultType, $teamId) = explode(',', $result);
+                                            
+                        // Stocke le résultat dans un tableau associatif
+                        $results[] = [
+                            'team_id' => $teamId,
+                            'result_type' => $resultType
+                        ];
+                        $rivalTeamManager = new RivalTeamManager();     
+                        $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($teamId);           
+                        // Vérifie le type de résultat
+                        if ($resultType === "Win") {
+                            // Traitez ici le cas où le résultat est "Win"
+                                          
+                            $rivalTeamManager->checkChangePointRivalTeam(
+                                $teamId,
+                                $rivalTeam->getRankingPoints() + 3,
+                                $rivalTeam->getMatchsPlay() + 1,
+                                $rivalTeam->getMatchsWin() + 1,
+                                $rivalTeam->getMatchsLose(),
+                                $rivalTeam->getMatchsNul()
+                            );                
+                                                        
+                        } else if($resultType === "Lose"){
+                            $rivalTeamManager->checkChangePointRivalTeam(
+                                $teamId,
+                                $rivalTeam->getRankingPoints(),
+                                $rivalTeam->getMatchsPlay() + 1,
+                                $rivalTeam->getMatchsWin(),
+                                $rivalTeam->getMatchsLose() + 1,
+                                $rivalTeam->getMatchsNul()
+                            );  
+                        } else if($resultType === "Nul"){
+                            $rivalTeamManager->checkChangePointRivalTeam(
+                                $teamId,
+                                $rivalTeam->getRankingPoints() + 1,
+                                $rivalTeam->getMatchsPlay() + 1,
+                                $rivalTeam->getMatchsWin(),
+                                $rivalTeam->getMatchsLose(),
+                                $rivalTeam->getMatchsNul() +1
+                            );
+                        } else {
+                            $rivalTeamManager->checkChangePointRivalTeam(
+                                $teamId,
+                                $rivalTeam->getRankingPoints(),
+                                $rivalTeam->getMatchsPlay() ,
+                                $rivalTeam->getMatchsWin(),
+                                $rivalTeam->getMatchsLose(),
+                                $rivalTeam->getMatchsNul()
+                            );
+                        }
+                    }
+                }
+                                            
                 $_SESSION["valide"] = "Resultat match Ajouter.";
-                header("Location: index.php?route=checkAdmin&secret=$secret");
+                header("Location: index.php?route=adminMatch&secret=$secret");
                 exit;
 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=checkAdmin&secret=$secret");
+                header("Location: index.php?route=adminMatch&secret=$secret");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Veuillez remplir tous les champs.";
-            header("Location: index.php?route=checkAdmin&secret=$secret");
+            header("Location: index.php?route=adminMatch&secret=$secret");
             exit;
         }
     }
 
     public function checkChangeResult() : void {
         $secret = $_ENV["SECRET"];
-        
-    }
+        if(isset($_POST["resultMatchId"]) && 
+            isset($_POST["resultTeamRival"]) && 
+            isset($_POST["resultTeamNsMasia"])
+        ){
 
-    public function checkRemoveResult() : void {
-        $secret = $_ENV["SECRET"];
-        
+            $tokenManager = new CSRFTokenManager(); 
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+                $matchManager = new MatchManager();
+
+                $resultId = htmlspecialchars($_POST["resultMatchId"]);
+                $score_nsMasia = htmlspecialchars($_POST["resultTeamNsMasia"]);
+                $score_rivalTeam = htmlspecialchars($_POST["resultTeamRival"]);
+
+                $matchManager->changeResult($resultId, $score_nsMasia, $score_rivalTeam);
+                
+                $_SESSION["valide"] = "Resultat match modifier.";
+                header("Location: index.php?route=adminMatch&secret=$secret");
+                exit;
+
+            } else {
+                $_SESSION["error"] = "Une erreur est survenue.";
+                header("Location: index.php?route=adminMatch&secret=$secret");
+                exit;
+            }
+        } else {
+            $_SESSION["error"] = "Une erreur est survenu.";
+            header("Location: index.php?route=page404");
+            exit;
+        } 
     }
 }

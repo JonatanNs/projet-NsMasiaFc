@@ -87,7 +87,7 @@ class AdminNewsController extends AbstractController{
                     }
     
                     $media = 'assets/img/uploadsNews/' . htmlspecialchars($sanitizedFileName);
-                    var_dump($media);
+                    
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
@@ -99,7 +99,7 @@ class AdminNewsController extends AbstractController{
                 $title = htmlspecialchars_decode($_POST["titleArticle"]);
                 $excerpt = htmlspecialchars_decode($_POST["excerptArticle"]);
                 $content = nl2br(htmlspecialchars_decode($_POST["contentArticle"]));
-                $imgAlt = htmlspecialchars($_POST["imgAltArticle"]);
+                $imgAlt = htmlspecialchars_decode($_POST["imgAltArticle"]);
     
                 $date = new DateTime();
                 $formattedDate = $date->format('Y-m-d');
@@ -229,8 +229,6 @@ class AdminNewsController extends AbstractController{
     }
 
     public function checkChangeImgArticle() : void {
-        var_dump($_POST);
-        var_dump($_FILES);
         $secret = $_ENV["SECRET"];
         if(isset($_POST["changeImgAltArticle"]) && isset($_POST["articleId"])){
             $tokenManager = new CSRFTokenManager(); 
@@ -326,10 +324,24 @@ class AdminNewsController extends AbstractController{
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
 
-                $articleManager = new ArticleManager();
-                $articleManager->removeArticle($_POST["articleId"]);
+                $articleId = htmlspecialchars($_POST["articleId"]);
 
-                $_SESSION["valide"] = "Article retirer.";
+                $articleManager = new ArticleManager();
+                $article = $articleManager->getAllArticleById($articleId);
+
+                // Remove file from uploads directory
+                $filePath = $article->getImgUrl();
+
+                if(file_exists($filePath)) {
+                    if(unlink($filePath)) {
+                        $articleManager->removeArticle($articleId);
+                        $_SESSION["valide"] = "Suppression réussie.";
+                    } else {
+                        $_SESSION["error"] = "Une erreur est survenue lors de la suppression du fichier.";
+                    }
+                } else {
+                    $_SESSION["error"] = "Fichier non trouvé.";
+                }
                 header("Location: index.php?route=adminActualite&secret=$secret");
                 exit;
 

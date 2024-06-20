@@ -1739,6 +1739,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .img-background figure {
+    width: 10%;
+  }
   .nextMatch {
     height: auto;
   }
@@ -1812,6 +1815,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1440px) {
+  .img-background figure {
+    width: 10%;
+  }
   .nextMatch {
     height: auto;
   }
@@ -2010,6 +2016,9 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1em;
   margin-left: -1em;
 }
+.main .myAccount .contact a {
+  color: white;
+}
 
 @media screen and (min-width: 1440px) {
   .main .myAccount {
@@ -2204,6 +2213,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 3px solid rgb(0, 0, 0);
   border-radius: 1rem;
   color: rgb(0, 0, 0);
+  font-size: 1.5rem;
 }
 .pageHome .homeActualite .allArticle .article h3 {
   margin-left: 10%;
@@ -2803,7 +2813,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .pageHome .container-prochainMatch article {
     width: 50%;
-    height: 35vh;
+    height: auto;
   }
   .pageHome .homeClub {
     display: grid;
@@ -3081,7 +3091,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blockArticle div {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: 1fr;
   align-items: center;
 }
 .blockArticle div .articleContent {
@@ -3098,6 +3108,10 @@ h1, h2, h3, h4, h5, h6 {
 .blockArticle div .articleContent figure {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+.blockArticle div .articleContent figure img {
+  width: 100%;
+  object-fit: cover;
 }
 .blockArticle div .articleContent figure figcaption {
   text-align: center;
@@ -3122,6 +3136,36 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(255, 249, 237);
   font-size: 2rem;
   border-radius: none;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin: 20px auto 2em auto;
+  overflow: scroll;
+}
+.pagination button {
+  margin: 0 5px;
+  padding: 10px 20px;
+  border-radius: 1rem;
+  text-align: center;
+  border: none;
+  background-color: rgb(25, 30, 59);
+  color: white;
+  cursor: pointer;
+}
+.pagination button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.pagination button:first-of-type {
+  position: absolute;
+  left: 0;
+}
+.pagination button:last-of-type {
+  position: absolute;
+  right: 0;
 }
 
 .articleAllContent {
@@ -3151,11 +3195,108 @@ h1, h2, h3, h4, h5, h6 {
   text-align: justify;
 }
 
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .blockArticle div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 2em;
+    overflow: hidden;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    color: white;
+    cursor: pointer;
+  }
+  .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination button:first-of-type {
+    position: unset;
+  }
+  .pagination button:last-of-type {
+    position: unset;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .blockArticle div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 2em;
+    overflow: hidden;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    color: white;
+    cursor: pointer;
+  }
+  .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination button:first-of-type {
+    position: unset;
+  }
+  .pagination button:last-of-type {
+    position: unset;
+  }
+}
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
   .blockArticle {
     padding-top: 8em;
-    margin: 0 20% 10em 10%;
+    margin: 0 5% 10em 5%;
     width: 100%;
+  }
+  .blockArticle div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 2em;
+    overflow: hidden;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    color: white;
+    cursor: pointer;
+  }
+  .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination button:first-of-type {
+    position: unset;
+  }
+  .pagination button:last-of-type {
+    position: unset;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -3163,6 +3304,37 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 8em;
     margin: 0 5em 10em 5em;
     width: 100%;
+  }
+  .blockArticle div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 2em;
+    overflow: hidden;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(25, 30, 59);
+    color: white;
+    cursor: pointer;
+  }
+  .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination button:first-of-type {
+    position: unset;
+  }
+  .pagination button:last-of-type {
+    position: unset;
   }
 }
 /*********************************
@@ -3451,6 +3623,11 @@ h1, h2, h3, h4, h5, h6 {
 .infoClub ul li {
   text-align: center;
 }
+.infoClub div {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: -2em;
+}
 
 .footer {
   padding-bottom: 0.5em;
@@ -3604,13 +3781,22 @@ h1, h2, h3, h4, h5, h6 {
   .infoClub {
     margin: 2em;
   }
-  .infoClub ul {
+  .infoClub article address {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5em;
+  }
+  .infoClub article ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
   }
-  .infoClub ul li {
+  .infoClub article ul li {
+    text-align: center;
+  }
+  .infoClub div {
     text-align: center;
   }
 }
@@ -3658,18 +3844,49 @@ h1, h2, h3, h4, h5, h6 {
 *********************************/
 .admin {
   padding-top: 5em;
+  padding-bottom: 3em;
+  text-align: center;
 }
-.admin a {
-  margin: 2em;
+.admin figure {
+  margin: 1em auto;
+  width: 20%;
 }
-.admin h1 {
+.admin figure img {
+  width: 100%;
+}
+.admin .infoAltImg figure {
+  width: 90%;
+  margin: 1em auto;
+}
+.admin .infoAltImg figure img {
+  width: 100%;
+}
+.admin .resultTeamRival {
+  margin-bottom: 2em;
+}
+.admin .btn {
+  font-size: 1.8rem;
+}
+.admin h1, .admin h2, .admin h3 {
   margin: 1.5em;
+}
+.admin form {
+  border: 2px solid rgb(255, 249, 237);
+  padding: 1em;
+  border-radius: 2rem;
+}
+.admin form fieldset input, .admin form fieldset select, .admin form fieldset textarea {
+  width: 80%;
+  padding: 0.3em;
+  border-radius: 1rem;
+}
+.admin form fieldset button {
+  margin: 2em;
+  width: 50%;
+  font-size: 1.4rem;
 }
 .admin .handle {
   margin: 2em;
-}
-.admin .handle h2 {
-  text-align: center;
 }
 .admin .handle ul {
   display: flex;
@@ -3685,49 +3902,123 @@ h1, h2, h3, h4, h5, h6 {
 .admin .handle .add h3, .admin .handle .change h3, .admin .handle .remove h3 {
   margin: 2em 0;
 }
-.admin .handle .add form fieldset input, .admin .handle .add form fieldset select, .admin .handle .add form fieldset textarea, .admin .handle .change form fieldset input, .admin .handle .change form fieldset select, .admin .handle .change form fieldset textarea, .admin .handle .remove form fieldset input, .admin .handle .remove form fieldset select, .admin .handle .remove form fieldset textarea {
-  width: 100%;
-  padding: 0.3em;
-  border-radius: 0.5rem;
-}
-.admin .handle .add form fieldset button, .admin .handle .change form fieldset button, .admin .handle .remove form fieldset button {
-  margin: 2em;
-  width: 50%;
-  font-size: 1.4rem;
-}
 
 @media screen and (min-width: 1440px) {
   .admin {
     margin: 0 20em;
   }
-  .admin .espaceAdmin {
+  .admin form {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .espaceAdmin {
     padding-top: 2em;
     text-align: center;
     padding-bottom: 2em;
     width: 70%;
     margin: 0 auto;
   }
-  .admin .espaceAdmin h1 {
+  .espaceAdmin h1 {
     padding: 2em;
   }
-  .admin .espaceAdmin ul {
+  .espaceAdmin ul {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1em;
     padding: 0;
   }
-  .admin .espaceAdmin ul li {
+  .espaceAdmin ul li {
     border: 3px solid rgb(255, 249, 237);
     border-radius: 1rem;
-    padding: 1em;
+    padding: 5em;
     width: 100%;
   }
-  .admin .espaceAdmin ul li a {
+  .espaceAdmin ul li a {
     color: rgb(255, 249, 237);
   }
-  .admin form {
-    width: 80%;
-    margin: 0 auto;
+}
+/***** PAGE 404 ****/
+.page404 {
+  padding: 10em 2em;
+}
+.page404 h1 {
+  font-size: 8rem;
+  text-align: center;
+}
+.page404 ul, .page404 p {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.pageLegal {
+  padding: 3em 1em;
+}
+.pageLegal h1 {
+  text-align: center;
+}
+.pageLegal article h2 {
+  margin: 1em 0;
+  text-align: center;
+}
+.pageLegal article a {
+  color: rgb(137, 137, 137);
+}
+.pageLegal article p {
+  text-align: justify;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .pageLegal {
+    padding: 5em 1em;
+  }
+  .pageLegal h1 {
+    text-align: center;
+  }
+  .pageLegal article h2 {
+    margin: 1em 0;
+    text-align: center;
+  }
+  .pageLegal article a {
+    color: rgb(137, 137, 137);
+  }
+  .pageLegal article p {
+    text-align: justify;
+  }
+}
+@media screen and (min-width: 770px) and (max-width: 1440px) {
+  .pageLegal {
+    padding: 5em 10em;
+  }
+  .pageLegal h1 {
+    text-align: center;
+  }
+  .pageLegal article h2 {
+    margin: 1em 0;
+    text-align: center;
+  }
+  .pageLegal article a {
+    color: rgb(137, 137, 137);
+  }
+  .pageLegal article p {
+    text-align: justify;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .pageLegal {
+    padding: 5em 15em;
+  }
+  .pageLegal h1 {
+    text-align: center;
+  }
+  .pageLegal article h2 {
+    margin: 1em 0;
+    text-align: center;
+  }
+  .pageLegal article a {
+    color: rgb(137, 137, 137);
+  }
+  .pageLegal article p {
+    text-align: justify;
   }
 }
 @media screen and (max-width: 480px) {

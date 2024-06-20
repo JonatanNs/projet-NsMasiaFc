@@ -13,12 +13,16 @@ class AdminController extends AbstractController{
         $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         
-        $rivalTeam = new RivalTeamManager();
-        $teamRival = $rivalTeam->getAllRivalTeams();
-            
-        $rivalTeamManager = new RivalTeamManager();
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
+
+        $rivalTeamManager = new RivalTeamManager();
+        $teamRival = $rivalTeamManager->getAllRivalTeams();
+
+        $matchManager = new MatchManager();
+        $matchPlay = $matchManager->getMatchsPlay();
+        $resultMatchs = $matchManager->getAllResultMatch();
+
     
         $this->render("Admin/admin.html.twig", [
             'userIsConect' => $userIsConect,
@@ -27,12 +31,14 @@ class AdminController extends AbstractController{
             'tokenCSRF' => $tokenCSRF,
             'rolesUser' => $rolesUser,
             'teamRival' => $teamRival,
+            'matchPlays' => $matchPlay,
+            'resultMatchs' => $resultMatchs,
             'secret' => $secret,
             'nsMasia' => $nsMasia
         ]);
     }
 
-    public function adminHome() : void {
+    public function adminMatch() : void {
         $secret = $_ENV["SECRET"];
         $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
@@ -41,17 +47,20 @@ class AdminController extends AbstractController{
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
-        $rivalTeam = new RivalTeamManager();
-        $teamRival = $rivalTeam->getAllRivalTeams();
+        $rivalTeamManager = new RivalTeamManager();
+        $teamRival = $rivalTeamManager->getAllRivalTeams();
 
         $matchManager = new MatchManager();
         $matchPlay = $matchManager->getMatchsPlay();
+
+
         $resultMatchs = $matchManager->getAllResultMatch();
+
 
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
 
-        $this->render("Admin/adminHome.html.twig", [
+        $this->render("Admin/adminMatch.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,

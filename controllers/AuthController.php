@@ -2,76 +2,9 @@
 
 class AuthController extends AbstractController
 {
-    public function home() :void
-    {
-        $nsMasiaManager = new NsMasiaManager();
-        $matchManager = new MatchManager();
-        $rivalTeamManager = new RivalTeamManager();
-        $articleManager = new ArticleManager();
+    
 
-        $matchPlays = $matchManager->getMatchsPlay();
-        $resultMatchs = $matchManager->getAllResultMatch();
-
-        $allTeam = $rivalTeamManager->getAllTeams();
-
-        $matchs = $matchManager->getAllMatchs();
-
-        if (!empty($matchs)) {
-            // Fonction pour comparer les dates
-            usort($matchs, function($a, $b) {
-                return strtotime($a['date']) - strtotime($b['date']);
-            });
-        
-            // Trouver le premier match qui n'est pas passé
-            $now = time();
-            $next_match = null;
-        
-            foreach ($matchs as $match) {
-                if (strtotime($match['date']) >= $now) {
-                    $next_match = $match;
-                    break;
-                }
-            }
-        } else {
-            $next_match = null;
-        }
-        
-        $nsMasia = $nsMasiaManager->getNsMasia();
-
-        $articles = $articleManager->getAllArticle();
-
-        $players = $nsMasiaManager->getPlayerNsMasia();
-
-        $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-        $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
-        $tokenCSRF = isset($_SESSION["csrf-token"]) ? $_SESSION["csrf-token"] : null;
-        $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        
-        $errorMessage = isset($_SESSION["error"]) ? $_SESSION["error"] : null;
-        $valideMessage = isset($_SESSION["valide"]) ? $_SESSION["valide"] : null;
-        unset($_SESSION["error"]);
-        unset($_SESSION["valide"]);
-
-        $secret = $_ENV["SECRET"];
-        $this->render("home.html.twig", [
-            'userIsConect' => $userIsConect,
-            'errorMessage' => $errorMessage,
-            'valideMessage' => $valideMessage,
-            'tokenCSRF' => $tokenCSRF,
-            'userId' => $userId,
-            'rolesUser' => $rolesUser,
-            'nsMasia' => $nsMasia,
-            'next_match' => $next_match,
-            'allTeam' => $allTeam,
-            'matchPlays' => $matchPlays,
-            'resultMatchs' => $resultMatchs,
-            'articles' => $articles,
-            'players' => $players,
-            'secret' => $secret
-        ]);
-    }
-
-    public function allRanking() :void{
+    public function page404() :void{
         $nsMasiaManager = new NsMasiaManager();
         $matchManager = new MatchManager();
         $rivalTeamManager = new RivalTeamManager();
@@ -97,7 +30,7 @@ class AuthController extends AbstractController
 
         $secret = $_ENV["SECRET"];
 
-        $this->render("ranking.html.twig", [
+        $this->render("page404.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage,
             'valideMessage' => $valideMessage,
@@ -192,6 +125,10 @@ class AuthController extends AbstractController
                 header("Location: index.php?route=form");
                 exit;
             }
+        } else{
+            $_SESSION["error"] = "Une erreur est survenue.";
+            header("Location: index.php?route=page404");
+            exit;
         }
     }
 
@@ -212,7 +149,7 @@ class AuthController extends AbstractController
                     exit;
                 } else{
                     if(password_verify($password, $users->getPassword())){
-                        unset($_SESSION["error-message"]);
+                        unset($_SESSION["error"]);
                         $_SESSION["firstAndLastName"] = $users->getFirstName() . ' ' . $users->getLastName();
                         $_SESSION["firstName"] = $users->getFirstName();
                         $_SESSION["lastName"] = $users->getLastName();

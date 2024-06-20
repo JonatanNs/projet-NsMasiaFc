@@ -5,15 +5,7 @@ class MerchManager extends AbstractManager{
     /**********************************************************
                              * CREATE PRODUCT *
     **********************************************************/
-    public function createProduct(
-                                    string $name, 
-                                    string $img_url, 
-                                    string $img_alt, 
-                                    string $other_img_url, 
-                                    string $other_img_alt,
-                                    string $descriptions, 
-                                    int $prices
-                                ) : void {
+    public function createProduct( Product $product ) : void {
         try{
             $query = $this->db->prepare("INSERT INTO products (
                                                                 id, 
@@ -35,13 +27,13 @@ class MerchManager extends AbstractManager{
                                         :prices)"
                                         );
             $parameters = [
-                'name' => $name, 
-                'img_url' => $img_url, 
-                'img_alt' => $img_alt, 
-                'other_img_url' => isset($other_img_url) ? $other_img_url : "", 
-                'other_img_alt' => isset($other_img_alt) ? $other_img_alt : "", 
-                'descriptions' => isset($descriptions) ? $descriptions : "", 
-                'prices' => $prices
+                'name' => $product->getName(), 
+                'img_url' => $product->getImgUrl(), 
+                'img_alt' => $product->getImgAlt(), 
+                'other_img_url' => $product->getOtherImgUrl(), 
+                'other_img_alt' => $product->getOtherImgAlt(), 
+                'descriptions' =>  $product->getDescriptions(),
+                'prices' => $product->getPrices()
             ];
             $query->execute($parameters);
         } catch (PDOException $e){
@@ -70,15 +62,15 @@ class MerchManager extends AbstractManager{
             WHERE id = :id");
 
             $parameters = [
-                'id' => $id,
-                'name' => $name, 
-                'img_url' => $img_url, 
-                'img_alt' => $img_alt, 
-                'other_img_url' => $other_img_url, 
-                'other_img_alt' => $other_img_alt, 
-                'descriptions' => $descriptions, 
-                'prices' => $prices
-            ];
+                            'id' => $id,
+                            'name' => $name, 
+                            'img_url' => $img_url, 
+                            'img_alt' => $img_alt, 
+                            'other_img_url' => $other_img_url, 
+                            'other_img_alt' => $other_img_alt, 
+                            'descriptions' => $descriptions, 
+                            'prices' => $prices
+                        ];
             $query->execute($parameters); 
         } catch (PDOException $e){
             error_log("Database error : " . $e->getMessage());
@@ -119,10 +111,10 @@ class MerchManager extends AbstractManager{
                     $item["name"], 
                     $item["img_url"], 
                     $item["img_alt"], 
+                    $item["descriptions"],
                     $item["prices"]
                 );
                 $newProduct->setId($item["id"]);
-                $newProduct->setDescriptions($item["descriptions"] ?? '');
                 $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
                 $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
                 $products[] = $item;
@@ -147,11 +139,11 @@ class MerchManager extends AbstractManager{
                 $newProduct = new Product(
                     $item["name"], 
                     $item["img_url"], 
-                    $item["img_alt"], 
+                    $item["img_alt"],
+                    $item["descriptions"],
                     $item["prices"]
                 );
                 $newProduct->setId($item["id"]);
-                $newProduct->setDescriptions($item["descriptions"] ?? '');
                 $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
                 $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
                 return $newProduct;
@@ -180,10 +172,10 @@ class MerchManager extends AbstractManager{
                     $item["name"], 
                     $item["img_url"], 
                     $item["img_alt"], 
+                    $item["descriptions"],
                     $item["prices"]
                 );
                 $newProduct->setId($item["id"]);
-                $newProduct->setDescriptions($item["descriptions"] ?? '');
                 $newProduct->setOtherImgUrl($item["other_img_url"] ?? '');
                 $newProduct->setOtherImgAlt($item["other_img_alt"] ?? '');
                 $products[] = $item;

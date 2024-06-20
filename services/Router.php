@@ -5,6 +5,7 @@ class Router
     public function handleRequest(array $get) : void
     {
         $authc = new AuthController();
+        $homeC = new HomeController();
         $ac = new ArticleController();
         $merchController = new MerchController();
         $oc = new OrderController();
@@ -13,24 +14,26 @@ class Router
         $pc = new PlayerNsMasiaController();
 
         $adm = new AdminController();
-        $adminClub = new AdminClubController();
-        $adminBoutique = new AdminBoutiqueController();
-        $adminBilletterie = new AdminBilleterieController();
-        $adminNews = new AdminNewsController();
+        $adminBoutiqueC = new AdminBoutiqueController();
+        $adminBilletterieC = new AdminBilleterieController();
+        $adminNewsC = new AdminNewsController();
+        $adminManageC = new AdminManageController();
+        $adminRivalTeamC = new AdminRivalTeamController();
+        $adminNsMasiaC = new AdminNsMasiaController();
 
         $id = isset($get["id"]) ? (int)$get["id"] : 0;
 
         if(!isset($get["route"]))
         {
             
-            $authc->home();
+            $homeC->home();
         }
         /*********************************************************
                             * HOME PAGE *
         *********************************************************/
         else if(isset($get["route"]) && $get["route"] === "home")
         {
-            $authc->home();
+            $homeC->home();
         }
         else if(isset($get["route"]) && $get["route"] === "homeArticle" && isset($get["id"]))
         {
@@ -38,7 +41,19 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "allRanking")
         {
-            $authc->allRanking();
+            $homeC->allRanking();
+        }
+        else if(isset($get["route"]) && $get["route"] === "legalNotice")
+        {
+            $homeC->legalNotice();
+        }
+        else if(isset($get["route"]) && $get["route"] === "generalConditionsSale")
+        {
+            $homeC->generalConditionsSale();
+        }
+        else if(isset($get["route"]) && $get["route"] === "cookies")
+        {
+            $homeC->cookies();
         }
         /*********************************************************
                             * FORM *
@@ -162,95 +177,167 @@ class Router
             $adm->checkAdmin();
         }
         
-        else if(isset($get["route"]) && $get["route"] === "adminHome" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        else if(isset($get["route"]) && $get["route"] === "adminMatch" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adm->adminHome();
+            $adm->adminMatch();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->adminRivalTeam();
         }
         else if(isset($get["route"]) && $get["route"] === "adminClub" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminClub->adminClub();
+            $pc->adminClub();
         }
         else if(isset($get["route"]) && $get["route"] === "adminActualite" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->adminActualite();
+            $adminNewsC->adminActualite();
         }
         else if(isset($get["route"]) && $get["route"] === "adminBiletterie" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminBilletterie->adminBiletterie();
+            $adminBilletterieC->adminBiletterie();
         }
         else if(isset($get["route"]) && $get["route"] === "adminBoutique" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminBoutique->adminBoutique();
+            $adminBoutiqueC->adminBoutique();
+        }
+        else if(isset($get["route"]) && $get["route"] === "manageAdmin" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminManageC->adminManage();
+        }
+        else if(isset($get["route"]) && $get["route"] === "adminNsMasia" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminManageC->adminNsMasia();
         }
         /*****************************
-            * Check Home *
+            * Check Admin *
         *****************************/
+        else if(isset($get["route"]) && $get["route"] === "checkChangeRole" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminManageC->checkChangeRole();
+        }
 
         /*****************************
-            * Check Club *
+            * Check Admin NS MASIA *
+        *****************************/
+        else if(isset($get["route"]) && $get["route"] === "checkUpdateName" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminNsMasiaC->checkUpdateName();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkUpdateLogo" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminNsMasiaC->checkUpdateLogo();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkUpdateEmail" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminNsMasiaC->checkUpdateEmail();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkUpdateBannerEmail" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminNsMasiaC->checkUpdateBannerEmail();
+        }
+
+        /*****************************
+            * Check Admin Club *
         *****************************/
         else if(isset($get["route"]) && $get["route"] === "checkaddPlayer" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminClub->checkaddPlayer();
-        }
-
-        else if(isset($get["route"]) && $get["route"] === "checkChangePlayer" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
-        {
-            $adminClub->checkChangePlayer();
-        }
-
-        else if(isset($get["route"]) && $get["route"] === "checkChangeNamePlayer" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
-        {
-            $adminClub->checkChangeNamePlayer();
+            $pc->checkaddPlayer();
         }
 
         else if(isset($get["route"]) && $get["route"] === "checkRemovePlayer" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminClub->checkRemovePlayer();
+            $pc->checkRemovePlayer();
         }
 
         /*****************************
-            * Check Actuality *
+            * Check Admin Actuality *
         *****************************/
         else if(isset($get["route"]) && $get["route"] === "checkAddArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->checkAddArticle();
+            $adminNewsC->checkAddArticle();
         }
 
         else if(isset($get["route"]) && $get["route"] === "checkChangeTitleArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->checkChangeTitleArticle();
+            $adminNewsC->checkChangeTitleArticle();
         }
 
         else if(isset($get["route"]) && $get["route"] === "checkChangeContentArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->checkChangeContentArticle();
+            $adminNewsC->checkChangeContentArticle();
         }
 
         else if(isset($get["route"]) && $get["route"] === "checkChangeImgArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->checkChangeImgArticle();
+            $adminNewsC->checkChangeImgArticle();
         }
 
         else if(isset($get["route"]) && $get["route"] === "checkRemoveArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminNews->checkRemoveArticle();
+            $adminNewsC->checkRemoveArticle();
         }
         /*****************************
-            * Check Biletterie *
+            * Check Admin Biletterie *
         *****************************/
         
         else if(isset($get["route"]) && $get["route"] === "checkAddMatchs" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
-            $adminBilletterie->checkAddMatchs();
+            $adminBilletterieC->checkAddMatchs();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeMatch" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminBilletterieC->checkChangeMatch();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkRemoveMatch" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminBilletterieC->checkRemoveMatch();
         }
         else if(isset($get["route"]) && $get["route"] === "checkAddResult" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $MatchController->checkAddResult();
         }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeResult" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $MatchController->checkChangeResult();
+        }
+
+        else if(isset($get["route"]) && $get["route"] === "checkChangePointRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkChangePointRivalTeam();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkAddRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkAddRivalTeam();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeLogoRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkChangeLogoRivalTeam();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkChangeNameRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkChangeNameRivalTeam();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkRemoveRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkRemoveRivalTeam();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkPassivRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminRivalTeamC->checkPassivRivalTeam();
+        }
         /*****************************
-            * Check Boutique *
+            * Check Admin Boutique *
         *****************************/
+
+        else if(isset($get["route"]) && $get["route"] === "checkAddproduct" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminBoutiqueC->checkAddproduct();
+        }
+        else if(isset($get["route"]) && $get["route"] === "checkRemoveproduct" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        {
+            $adminBoutiqueC->checkRemoveproduct();
+        }
 
         /*********************************************************
                             * LOGOUT *
@@ -259,6 +346,14 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "logout")
         {
             $authc->logout();
+        } 
+        else if(isset($get["route"]) && $get["route"] === "page404")
+        {
+            $authc->page404();
+
+        } else{
+            
+            $authc->page404();
         }
     }
 }

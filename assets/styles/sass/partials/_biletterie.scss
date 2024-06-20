@@ -262,6 +262,11 @@
     }
     
     @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .img-background{
+            figure{
+                width: 10%;
+            }
+        }
         .nextMatch{
             height: auto;
             .matchs{
@@ -342,8 +347,14 @@
     }
     
     @media screen and (min-width: 1440px) {
+        .img-background{
+            figure{
+                width: 10%;
+            }
+        }
         .nextMatch{
             height: auto;
+            
             .matchs{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;

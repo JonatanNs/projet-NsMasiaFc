@@ -11,8 +11,34 @@
                 <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
             {% endif %}
         <ul>
+            {% set resultFound = false %}
+                {% for matchPlay in matchPlays %}
+                    {% set matchFound = false %}
+                    {% for resultMatch in resultMatchs %}
+                        {% if matchPlay.match_id == resultMatch.match_id %}
+                            {% set matchFound = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not matchFound %}
+                        {% set resultFound = true %}
+                        <li>
+                            <a href="index.php?route=adminMatch&secret={{secret}}">Résultat des matchs <span class="fa-solid fa-bell" style="color: #e60000;"></span></a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if resultFound == false %}
+                    <li>
+                        <a href="index.php?route=adminMatch&secret={{secret}}">Résultat des matchs</a>
+                    </li>
+                {% endif %}
             <li>
-                <a href="index.php?route=adminHome&secret={{secret}}">Accueil <span class="fa-solid fa-house" style="color: #ffffff;"></span></a>
+                <a href="index.php?route=adminRivalTeam&secret={{secret}}">Equipe rival</a>
+            </li>
+            <li>
+                <a href="index.php?route=manageAdmin&secret={{secret}}">Nos Admins </a>
+            </li>
+            <li>
+                <a href="Admin-NsMasiaFC-{{secret}}">{{nsMasia.name}}</a>
             </li>
             <li>
                 <a href="index.php?route=adminActualite&secret={{secret}}">Actualité <span class="fa-solid fa-newspaper" style="color: #ffffff;"></span></a>
@@ -24,7 +50,7 @@
                 <a href="index.php?route=adminBoutique&secret={{secret}}">Boutique <span class="fa-solid fa-shop" style="color: #ffffff;"></span></a>
             </li>
             <li>
-                <a href="index.php?route=adminBiletterie&secret={{secret}}">Billeterie <span class="fa-solid fa-ticket" style="color: #ffffff;"></span></a>
+                <a href="index.php?route=adminBiletterie&secret={{secret}}">Billeterie<span class="fa-solid fa-ticket" style="color: #ffffff;"></span></a>
             </li>
         </ul>
     </article>

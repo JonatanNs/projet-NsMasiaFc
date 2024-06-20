@@ -9,8 +9,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
-
 abstract class AbstractController {
     private Environment $twig;
     private PHPMailer $mail;
@@ -42,7 +40,7 @@ abstract class AbstractController {
             $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $this->mail->Username   = $nsMasia->getEmail();                     //SMTP username
-            $this->mail->Password   = $_ENV['passwordEmail']; 
+            $this->mail->Password   = $nsMasia->getPasswordEmail(); 
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $this->mail->CharSet       = "utf-8";                                   
             
@@ -54,7 +52,7 @@ abstract class AbstractController {
             //$this->mail->addBCC('bcc@example.com');
             
             //Attachments
-            //$this->mail->addAttachment();         //Add attachments
+            $this->mail->addAttachment($nsMasia->getBannerEmail());         //Add attachments
             
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
@@ -115,7 +113,7 @@ abstract class AbstractController {
         $order = $orderManager->getAllOrdersProductById($order_product->getId());
         $numberOrder = $order->getNumberOrder();
         $dateObj = DateTime::createFromFormat('Y-m-d', $order->getDate());
-        // Formater la date en français
+        // Format the date in French
         $dateFormatee = $dateObj->format('d/m/Y');
 
         $totalPrices = $order->getTotalPrices();
@@ -214,7 +212,6 @@ abstract class AbstractController {
                     </div>
                 </body>
                 </html>
-
         ";
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
     }

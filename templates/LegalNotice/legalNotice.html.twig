@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="main">
+    <section class="pageLegal">
+        <h1>Mentions légales</h1>
+        <p><strong>Dernière mise à jour : </strong>20/06/2024</p>
+
+        <article>
+            <h2>Éditeur du site</h2>
+            <p>Le site NS MASIA FC est édité par :</p>
+            <ul>
+                <li><strong>Nom :</strong> NSUALU Jonatan</li>
+                <li><strong>Adresse :</strong>12 Bd Albert 1er, 35200 Rennes</li>
+                <li><strong>Email :</strong> <a href="mailto:{{nsMasia.email}}">{{nsMasia.email}}</a></li>
+                <li><strong>Téléphone :</strong>xx xx xx xx xx</li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Hébergeur du site</h2>
+            <p>Le site NS MASIA FC est hébergé par :</p>
+            <ul>
+                <li><strong>Nom de l'hébergeur :</strong> PLANETHOSTER </li>
+                <li><strong>Adresse de l'hébergeur :</strong> 4416 Louis B. Mayer, Laval (Québec) H7P 0G1, Canada</li>
+                <li><strong>Téléphone de l'hébergeur :</strong> 
+                    <ul>
+                        <li>FR (Nº Vert): 0 805 080 426</li>
+                        <li>FR: +33 1 76 60 41 43</li>
+                        <li>BE: +32 28 08 13 21</li>
+                        <li>CH: +41 31 528 01 41</li>
+                        <li>UK: +44 (0)808 189 0423</li>
+                        <li>AU: +61 18 0035 1172</li>
+                        <li>US: +1 855 774 4678</li>
+                        <li>CA: +1 855 774 4678</li>
+                        <li>QC: +1 514 802 1644.</li>
+                    <ul>
+                </li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Propriété intellectuelle</h2>
+            <p>Le contenu du site NS MASIA FC, incluant mais ne se limitant pas aux textes, images, graphismes, logos et vidéos, est la propriété exclusive de NSUALU Jonatan, sauf mention contraire. Toute reproduction, distribution, modification, adaptation, retransmission ou publication de ces différents éléments est strictement interdite sans l'accord préalable écrit de NSUALU Jonatan.</p>
+        </article>
+        <article>
+            <h2>Collecte des données personnelles</h2>
+            <p>Les informations recueillies sur le site NS MASIA FC font l’objet d’un traitement destiné à :</p>
+            <ul>
+                <li>La gestion des commandes de maillots et de places de match.</li>
+                <li>L'envoi d'informations et d'offres promotionnelles lorsque vous avez donné votre consentement.</li>
+            </ul>
+            <p>Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à NSUALU Jonatan à l'adresse email mentionnée ci-dessus. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.</p>
+        </article>
+        <article>
+        <h2>Cookies</h2>
+        <p>
+            Le site NS MASIA FC utilise des cookies pour améliorer l'expérience utilisateur et 
+            pour des mesures statistiques. En continuant à naviguer sur ce site, vous acceptez 
+            l'utilisation des cookies.
+        </p>
+        </article>
+
+        <article>
+            <h2>Liens hypertextes</h2>
+            <p>
+                Le site NS MASIA FC peut contenir des liens hypertextes vers d'autres sites. 
+                NSUALU Jonatan n'assume aucune responsabilité quant au contenu de ces sites et à 
+                l'utilisation qui en est faite par l'utilisateur.
+            </p>
+        </article>
+
+        <article>
+            <h2>Responsabilité</h2>
+            <p>
+                NSUALU Jonatan ne saurait être tenu pour responsable des dommages directs ou 
+                indirects résultant de l'utilisation du site NS MASIA FC, incluant l'accès à des parties du site, 
+                l'utilisation des services proposés, ou tout dommage causé par un virus ou toute autre technologie 
+                nuisible.
+            </p>
+        </article>
+
+        <article>
+            <h2>Droit applicable</h2>
+            <p>
+                Les présentes mentions légales sont régies par la loi française. 
+                En cas de litige, et après une tentative de recherche d'une solution amiable, 
+                compétence expresse est attribuée aux tribunaux compétents de Rennes.
+            </p>
+        </article>
+        <article>
+            <h2>Contact</h2>
+            <p>
+                Pour toute question concernant ces mentions légales, vous pouvez nous contacter par email à 
+                <a href="mailto:{{nsMasia.email}}">{{nsMasia.email}}</a> .
+            </p>
+        </article>
+    </section>
+</main>
+{% endblock %}

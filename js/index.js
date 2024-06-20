@@ -215,7 +215,10 @@ document.addEventListener('DOMContentLoaded', function(){
             links.forEach(link =>{
                 link.style.color="black";
             });
-            headerUserConnect.style.color="white";
+            if(headerUserConnect){
+                headerUserConnect.style.color="white";
+            }
+           
             
         } else if(scrollPosition > 10) {
             
@@ -223,7 +226,9 @@ document.addEventListener('DOMContentLoaded', function(){
             links.forEach(link =>{
                 link.style.color="white";
             });
-            headerUserConnect.style.color="white";
+            if(headerUserConnect){
+                headerUserConnect.style.color="white";
+            }
         } 
     }
 
@@ -237,11 +242,22 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }
     }
+
+    function sliderSlick(){
+        $('.fade').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            cssEase: 'linear'
+            });
+    }
     
     
     handleNextMatch()
     pageClub();
     form();
     menuMobile();
+    sliderSlick();
     
 });

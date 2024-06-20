@@ -8,11 +8,6 @@
         <h1>Page Biletterie</h1>
         <article class="handle">
             <h2>Biletterie</h2>
-            <ul>
-                <li><span class="fa-solid fa-square-plus fa-2xl" style="color: #00ff62;"></span></li>
-                <li><span class="fa-solid fa-repeat fa-2xl" style="color: #0534f0;"></span></li>
-                <li><span class="fa-solid fa-trash-can fa-2xl" style="color: #ff0000;"></span></li>
-            </ul>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
@@ -63,7 +58,9 @@
                         <label for="selectMatch">Choisissez le match à modifier : </label>
                         <select name="selectMatch" id="selectMatch" required>
                             <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
-                            <option value="">XS</option>
+                            {% for match in matchs %}
+                                <option value="{{match.match_id}}">{{match.team ~ ' le ' ~ match.date|date("d/m/Y", "Europe/Paris")}}</option>
+                            {% endfor %}
                         </select>
                     </fieldset>
                     <fieldset>
@@ -105,7 +102,9 @@
                         <label for="selectMatch">Choisissez le match à modifier : </label>
                         <select name="selectMatch" id="selectMatch" required>
                             <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
-                            <option value="">XS</option>
+                            {% for match in matchs %}
+                                <option value="{{match.match_id}}">{{match.team ~ ' le ' ~ match.date|date("d/m/Y", "Europe/Paris")}}</option>
+                            {% endfor %}
                         </select>
                     </fieldset>
                     <fieldset>

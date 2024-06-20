@@ -1,0 +1,122 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+<main class="main">
+    <section class="admin">
+        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <h1>Page Rival Team</h1>
+            {% if errorMessage is not empty %}
+                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+            {% endif %}
+
+            {% if valideMessage is not empty %}
+                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+            {% endif %}
+            <article class="add">
+                <h2>Ajouter une équipe Rival <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h2>
+                <form action="index.php?route=checkAddRivalTeam&secret={{secret}}" 
+                      method="POST" 
+                      enctype="multipart/form-data"
+                      class="form">
+                <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="nameTeam">Nom de l'équipe</label>
+                        <input type="text" id="nameTeam" name="nameTeam" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <label for="addMediaFile">Logo Club</label>
+                        <input type="file" id="addMediaFile" name="addMediaFile" required>
+                        <input type="hidden" id="addMediaFile" name="addMediaFile">
+
+                        <label for="imgUrl">Image Alt (Description de l'image)</label>
+                        <input type="text" id="imgAlt" name="imgAlt" placeholder="Description de l'image" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <button type="submit" class="btn">Ajouter</button>
+                    </fieldset>
+                </form>
+            </article> 
+
+            <article class="change">
+                <h2>Modifier le nom d'une équipe Rival <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
+                <form action="index.php?route=checkChangeNameRivalTeam&secret={{secret}}" 
+                      method="POST" 
+                      enctype="multipart/form-data"
+                      class="form">
+                <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="selectTeam">Choisissez le produit à modifier : </label>
+                        <select name="selectTeam" id="selectTeam" required>
+                            <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
+                            {% for team in rivalTeam %}
+                                <option value="{{ team.id }}">{{ team.team }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="nameTeam">Nom de l'équipe</label>
+                        <input type="text" id="nameTeam" name="nameTeam" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <button type="submit" class="btn">Modifier</button>
+                    </fieldset>
+                </form>
+            </article>
+
+            <article class="change">
+                <h2>Modifier le logo d'une équipe Rival <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
+                <form action="index.php?route=checkChangeLogoRivalTeam&secret={{secret}}" 
+                      method="POST" 
+                      enctype="multipart/form-data"
+                      class="form">
+                <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="selectTeam">Choisissez le produit à modifier : </label>
+                        <select name="selectTeam" id="selectTeam" required>
+                            <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
+                            {% for team in rivalTeam %}
+                                <option value="{{ team.id }}">{{ team.team }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="addMediaFile">Logo Club</label>
+                        <input type="file" id="addMediaFile" name="addMediaFile" required>
+                        <input type="hidden" id="addMediaFile" name="addMediaFile">
+
+                        <label for="imgUrl">Image Alt 1</label>
+                        <input type="text" id="imgAlt" name="imgAlt" placeholder="Description de l'image" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <button type="submit" class="btn">Modifier</button>
+                    </fieldset>
+                </form>
+            </article>
+
+            <article class="remove">
+                <h2>Retirer une équipe rival <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h2>
+                <form action="index.php?route=checkRemoveRivalTeam&secret={{secret}}" method="POST" class="form">
+                <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="selectTeam">Choisissez le produit à modifier : </label>
+                        <select name="selectTeam" id="selectTeam" required>
+                            <option value=""> <span class="fa-solid fa-chevron-down fa-sm"></span> </option>
+                            {% for team in rivalTeam %}
+                                <option value="{{ team.id }}">{{ team.team }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <button type="submit" class="btn">Supprimer</button>
+                    </fieldset>
+                </form>
+            </article>
+    </section>
+</main>
+{% endblock %}

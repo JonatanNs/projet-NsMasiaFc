@@ -1,0 +1,21 @@
+RewriteEngine On
+
+RewriteRule ^article&([0-9]+)$ index.php?route=article&id=$1 [L]
+
+
+RewriteRule ^check-changer-role&([a-zA-Z0-9]+)$ index.php?route=checkChangeRole&secret=$1 [L]
+RewriteRule ^check-changer-résultat&([a-zA-Z0-9]+)$ index.php?route=checkChangeResult&secret=$1 [L]
+
+
+RewriteRule ^Admin-NsMasiaFC-([a-zA-Z0-9]+)$ index.php?route=adminNsMasia&secret=$1 [L]
+
+RewriteRule ^Check-changer-nom-site-([a-zA-Z0-9]+)$ index.php?route=checkUpdateName&secret=$1 [L]
+RewriteRule ^Check-changer-logo-([a-zA-Z0-9]+)$ index.php?route=checkUpdateLogo&secret=$1 [L]
+RewriteRule ^Check-changer-email-([a-zA-Z0-9]+)$ index.php?route=checkUpdateEmail&secret=$1 [L]
+RewriteRule ^Check-ajouter-banner-([a-zA-Z0-9]+)$ index.php?route=checkUpdateBannerEmail&secret=$1 [L]
+
+RewriteRule ^Mentions-légales$ index.php?route=legalNotice [L]
+RewriteRule ^Gestion-des-cookies$ index.php?route=cookies [L]
+RewriteRule ^Conditions-générales-de-ventes$ index.php?route=generalConditionsSale [L]
+
+RewriteRule ^Page404$ index.php?route=page404 [L]

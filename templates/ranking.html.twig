@@ -26,15 +26,17 @@
             </thead>
             <tbody>
                 {% for team in allTeam %}
-                <tr>
-                    <td class="td">{{ loop.index }}</td> 
-                    <td class="tdTeam"> <img src="{{ team.logo_url }}" alt="{{ team.logo_alt }}"/> {{ team.team }}</td>
-                    <td class="td">{{ team.match_play }}</td>
-                    <td class="td">{{ team.match_win }}</td>
-                    <td class="td">{{ team.match_nul }}</td>
-                    <td class="td">{{ team.match_lose }}</td>
-                    <td class="td">{{ team.ranking_points }}</td>
-                </tr>
+                    {% if team.status == 'ACTIF' %}
+                        <tr>
+                            <td class="td">{{ loop.index }}</td> 
+                            <td class="tdTeam"> <img src="{{ team.logo_url }}" alt="{{ team.logo_alt }}"/> {{ team.team }}</td>
+                            <td class="td">{{ team.match_play }}</td>
+                            <td class="td">{{ team.match_win }}</td>
+                            <td class="td">{{ team.match_nul }}</td>
+                            <td class="td">{{ team.match_lose }}</td>
+                            <td class="td">{{ team.ranking_points }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

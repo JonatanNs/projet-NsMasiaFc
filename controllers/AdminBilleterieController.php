@@ -10,8 +10,11 @@ class AdminBilleterieController extends AbstractController{
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         unset($_SESSION["error"]);
         unset($_SESSION["valide"]);
-        $rivalTeam = new RivalTeamManager();
-        $teamRival = $rivalTeam->getAllRivalTeams();
+        $rivalTeamManager = new RivalTeamManager();
+        $teamRival = $rivalTeamManager->getAllRivalTeams();
+
+        $matchNsManager = new MatchManager();
+        $matchs = $matchNsManager->getAllMatchs();
 
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
@@ -24,14 +27,20 @@ class AdminBilleterieController extends AbstractController{
             'rolesUser' => $rolesUser,
             'teamRival' => $teamRival,
             'secret' => $secret,
-            'nsMasia' => $nsMasia
+            'nsMasia' => $nsMasia,
+            'matchs' => $matchs
         ]);
     }
 
      /***************************** Admin Billeterie ***************************/
      public function checkAddMatchs() : void {
         $secret = $_ENV["SECRET"];
-        if(isset($_POST["location"]) && isset($_POST["rivalTeam"]) && isset($_POST["date"]) && isset($_POST["time"])){
+        if(
+            isset($_POST["location"]) && 
+            isset($_POST["rivalTeam"]) && 
+            isset($_POST["date"]) && 
+            isset($_POST["time"])
+            ){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
                 $location = htmlspecialchars($_POST["location"]);
@@ -48,30 +57,98 @@ class AdminBilleterieController extends AbstractController{
 
                 $nsMasia = $nsManager->getNsMasia();
                 $team = $rivalTeamManager->getAllRivalTeamsByName($rivalTeam);
-                $matchManager->createMatch($nsMasia, $team->getId(), $location, $heures_input, $formatted_date);
+                $newMatch = new MatchNs(
+                                            $nsMasia, 
+                                            $team, 
+                                            $location, 
+                                            $heures_input, 
+                                            $formatted_date
+                                        );
+                $matchManager->createMatch($newMatch);
 
                 $_SESSION["valide"] = "Nouveau match Ajouter.";
-                header("Location: index.php?route=checkAdmin&secret=$secret");
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
                 exit;
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header('Location: index.php?route=checkAdmin');
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header('Location: index.php?route=checkAdmin');
+            header("Location: index.php?route=adminBiletterie&secret=$secret");
             exit;
         } 
     }
 
     public function checkChangeMatch() : void {
         $secret = $_ENV["SECRET"];
-        
+        if(
+            isset($_POST["location"]) && 
+            isset($_POST["rivalTeam"]) && 
+            isset($_POST["date"]) && 
+            isset($_POST["time"]) &&
+            isset($_POST["selectMatch"])
+            ){
+            $tokenManager = new CSRFTokenManager(); 
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+                $location = htmlspecialchars_decode($_POST["location"]);
+                $rivalTeam = htmlspecialchars($_POST["rivalTeam"]);
+                $heures_input = htmlspecialchars($_POST["time"]);
+                $date_input = htmlspecialchars($_POST["date"]);
+                $matchId = htmlspecialchars($_POST["selectMatch"]);
+
+                $date = new DateTime($date_input);
+                $formatted_date = $date->format('Y-m-d');
+                
+                $matchManager = new MatchManager();
+                $nsManager = new NsMasiaManager();
+                $rivalTeamManager = new RivalTeamManager();
+
+                $nsMasia = $nsManager->getNsMasia();
+                $team = $rivalTeamManager->getAllRivalTeamsByName($rivalTeam);
+                $matchManager->changeMatch($matchId, $nsMasia, $team, $location, $heures_input, $formatted_date);
+
+                $_SESSION["valide"] = "Match modifier.";
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                exit;
+            } else{
+                $_SESSION["error"] = "Une erreur est survenue.";
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                exit;
+            }
+        } else{
+            $_SESSION["error"] = "Une erreur est survenue.";
+            header("Location: index.php?route=adminBiletterie&secret=$secret");
+            exit;
+        } 
     }
 
     public function checkRemoveMatch() : void {
         $secret = $_ENV["SECRET"];
-        
+        if(
+            isset($_POST["selectMatch"]) 
+            ){
+            $tokenManager = new CSRFTokenManager(); 
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+
+                $matchId = htmlspecialchars($_POST["selectMatch"]);
+                
+                $matchManager = new MatchManager();
+                $matchManager->removeMatch($matchId);
+
+                $_SESSION["valide"] = "Match retirer.";
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                exit;
+            } else{
+                $_SESSION["error"] = "Une erreur est survenue.";
+                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                exit;
+            }
+        } else{
+            $_SESSION["error"] = "Une erreur est survenue.";
+            header("Location: index.php?route=adminBiletterie&secret=$secret");
+            exit;
+        } 
     }
 }

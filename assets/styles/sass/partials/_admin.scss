@@ -51,17 +51,53 @@
 
     .admin{
         padding-top: 5em;
-        a{
-            margin: 2em;
+        padding-bottom: 3em;
+        text-align: center;
+        figure{
+            margin: 1em auto ;
+            width: 20%;
+            img{
+                width: 100%;
+            }
         }
-        h1{
-            margin: 1.5em;
+        .infoAltImg{
+            figure{
+                width: 90%;
+                margin: 1em auto;
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .resultTeamRival{
+            margin-bottom: 2em;
+        }
+        .btn{
+            font-size: 1.8rem;
+        }
+        h1, h2, h3{
+            margin: 1.5em; 
+        }
+        form{
+            border: 2px solid $beige;
+            padding: 1em;
+            border-radius: 2rem;
+            fieldset{
+                input, select, textarea{
+                    width: 80%;
+                    padding: 0.3em;
+                    border-radius: 1rem;
+                }
+                button{
+                    margin: 2em ;
+                    width: 50%;
+                    font-size: 1.4rem;
+                }
+            }
         }
         .handle{
             margin: 2em;
-            h2{
-                text-align: center;
-            }
+            
             
             ul{
                 display: flex;
@@ -75,20 +111,6 @@
                 margin: 3em 0;
                 h3{
                     margin: 2em 0;
-                }
-                form{
-                    fieldset{
-                        input, select, textarea{
-                            width: 100%;
-                            padding: 0.3em;
-                            border-radius: 0.5rem;
-                        }
-                        button{
-                            margin: 2em ;
-                            width: 50%;
-                            font-size: 1.4rem;
-                        }
-                    }
                 }
             }
         }
@@ -110,35 +132,36 @@
         .admin{
             margin: 0 20em;
             
-            .espaceAdmin{
-                padding-top: 2em;
-                text-align: center;
-                padding-bottom: 2em;
-                width: 70%;
-                margin: 0 auto;
-                h1{
-                    padding: 2em;
-                }
-                ul{
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    gap: 1em;
-                    padding: 0;
-                    li{
-                        border: 3px solid $beige;
-                        border-radius: 1rem;
-                        padding: 1em;
-                        width: 100%;
-                        a{
-                            color: $beige;
-                        }
-                    }
-                } 
-            }
+            
             form{
                 width: 80%;
                 margin: 0 auto;
             }
+        }
+        .espaceAdmin{
+            padding-top: 2em;
+            text-align: center;
+            padding-bottom: 2em;
+            width: 70%;
+            margin: 0 auto;
+            h1{
+                padding: 2em;
+            }
+            ul{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1em;
+                padding: 0;
+                li{
+                    border: 3px solid $beige;
+                    border-radius: 1rem;
+                    padding: 5em;
+                    width: 100%;
+                    a{
+                        color: $beige;
+                    }
+                }
+            } 
         }
             
     }

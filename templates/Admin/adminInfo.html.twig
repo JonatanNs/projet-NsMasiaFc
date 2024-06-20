@@ -1,0 +1,101 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<main class="main">
+    <section class="admin">
+        <h1>Information {{nsMasia.name}}</h1>
+        {% if errorMessage is not empty %}
+            <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+        {% endif %}
+
+        {% if valideMessage is not empty %}
+            <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+        {% endif %}
+        <article class="updateName">
+            <h2>Mettre à jour le nom du site</h2>
+            <form action="Check-changer-nom-site-{{secret}}" method="POST" class="form">
+                <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
+                <fieldset>
+                    <label for="updateName">Nouveau nom du site</label>
+                    <input type="text" id="updateName" name="updateName" placeholder="{{nsMasia.name}}" required>
+                </fieldset>
+                <fieldset>
+                    <label for="updateConfirmName">Confirmation Nom</label>
+                    <input type="text" id="updateConfirmName" name="updateConfirmName" required>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" class="btn">Valider</button>
+                </fieldset>
+             </form>
+        <article class="updateLogo">
+            <h2>Mettre à jour le logo</h2> 
+            <figure>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}" />
+            </figure>
+                    
+            <form action="Check-changer-logo-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
+                <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
+                <fieldset>
+                    <label for="imgUrl">Logo</label>
+                    <input type="file" id="addMediaFile" name="addMediaFile" accept="image/*" required>
+                    <input type="hidden" id="addMediaFile" name="addMediaFile">
+                </fieldset>
+                <fieldset>
+                    <label for="logoAlt">Image Alt</label>
+                    <input type="text" id="logoAlt" name="logoAlt" placeholder="Description de l'image" required>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" class="btn">Valider</button>
+                </fieldset>
+            </form>
+        </article>
+                    
+        <article class="updateEmail">
+            <h2>Mettre à jour l'email</h2>
+                <form action="Check-changer-email-{{secret}}" method="POST" class="form">
+                    <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="actualEmail">Actual Email *</label>
+                        <input type="email" id="actualEmail" name="actualEmail" placeholder="{{nsMasia.email}}" required>
+                    </fieldset>
+                    <fieldset>
+                        <label for="updateNewEmail">Nouvel email *</label>
+                        <input type="email" id="updateNewEmail" name="updateNewEmail"  required>
+                    </fieldset>
+                    <fieldset>
+                        <label for="updateConfirmNewEmail">Confirmer le nouvel email *</label>
+                        <input type="email" id="updateConfirmNewEmail" name="updateConfirmNewEmail" required>
+                    </fieldset>
+                    <fieldset>
+                        <label for="updateNewPasswordEmail">Mot de passe des applications*<span class="fa-solid fa-circle-info" style="color: #FFD43B;"></span></label>
+                        <input type="password" id="updateNewPasswordEmail" name="updateNewPasswordEmail"  required>
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit" class="btn">Valider</button>
+                    </fieldset>
+                </form>
+                <article class="updateBannerEmail">
+                    <h2>Mettre à jour la banner email</h2> 
+                <article class="infoAltImg">
+                    <h3 class="invisible">Information</h3>
+                    <figure>
+                        <img src="{{ nsMasia.bannerEmail }}" alt="banner Email {{nsMasia.name}}" />
+                    </figure>
+                </article>
+                
+                <form action="Check-ajouter-banner-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <fieldset>
+                        <label for="imgUrl">Banniere Email</label>
+                        <input type="file" id="addMediaFile" name="addMediaFile" accept="image/*" required>
+                        <input type="hidden" id="addMediaFile" name="addMediaFile">
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit" class="btn">Valider</button>
+                    </fieldset>
+                </form>
+            </article>
+        </article>
+    </section>
+</main>
+{% endblock %}
