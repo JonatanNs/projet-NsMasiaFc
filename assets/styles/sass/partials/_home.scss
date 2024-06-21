@@ -1,7 +1,8 @@
      /*********************************
                 * HOME *
     *********************************/
-    .pageHome{
+    
+     .pageHome{
         .home{
             background-repeat: no-repeat;
             background-position: center;
@@ -78,7 +79,7 @@
                         border-radius: 1rem;
                         color: $black;
                         font-size: 1.5rem;
-                        
+                        padding: 0.5em 1em;
                     }
                         h3{
                             margin-left: 10%;
@@ -93,8 +94,10 @@
                             width: 70%;
                         }   
                         figure{
+                            width: 100%;
                             img{
                                 height: 95vh;
+                                width: 100%;
                                 object-fit: cover;
                             }
                         }
@@ -231,7 +234,7 @@
             .ranking{
                 text-align: center;
                 background-color: $darkgrey;
-                padding: 2em;
+                padding: 1em;
                 h3{
                     color: $black;
                 }
@@ -251,11 +254,11 @@
                         width: 15%;
                     }
                 }
-                button{
+                a{
                     width: 100%;
                     padding: 0.3em;
                     margin-top: 1em;
-                    font-size: 1.3rem;
+                    font-size: 2rem;
                 }
             }
         }
@@ -263,7 +266,7 @@
         /*********************************
                     * HOME CLUB *
         ********************************/
-
+    
         .homeClub { 
             position: relative;
             margin-bottom: 5em;
@@ -273,7 +276,6 @@
                 margin: 2em;
                 position: relative;
                 overflow: hidden;
-    
                     &::after { 
                         content: ""; 
                         flex: 1 1; 
@@ -281,7 +283,7 @@
                         margin: auto; 
                         position: absolute;
                         top: 50%; 
-                        width: 100%; 
+                        width: 75%; 
                     }
             
                     &::after { 
@@ -319,14 +321,14 @@
                     h5{
                         position: absolute;
                         z-index: 96;
-                        bottom: 22%;
+                        bottom: 0;
                         left: 5%;
                         font-size: 2.5rem;
                     }
                     p{
                         position: absolute;
                         z-index: 96;
-                        bottom: 0;
+                        bottom: 20px;
                         left: 5%;
                         font-weight: 500;
                     }
@@ -363,125 +365,121 @@
                     h5{
                         position: absolute;
                         z-index: 96;
-                        bottom: 22%;
+                        bottom: 0;
                         left: 5%;
                         font-size: 2.5rem;
                     }
                     p{
                         position: absolute;
                         z-index: 96;
-                        bottom: 0;
+                        bottom: 20px;
                         left: 5%;
                         font-weight: 500;
                     }
                 }
             }
-            .diapoClub{
-                display: none;
-                margin-top: -4em;
-                .slideHomeClub { 
-                    position: relative;
-                    display: flex;
-                    overflow: hidden;
-                    margin: 5em;
-        
-                    .playersNsMasia { 
-                        flex: 1 0 100%;
-                        text-align: left;
+            .multiple-items {
+                width: 80%;
+                margin: 5em auto;
+                article{
+                    padding: 1em;
+                    figure {
+                        position: relative;
+                        width: 100%;
+                        margin: 0 auto;
+                        img {
+                            cursor: pointer;
+                            width: 100%;
+                            box-shadow: 0px 6px 12px -2px rgba(255, 255, 255, 0.5), 0px 3px 7px -3px rgba(255, 255, 255, 0.5);
+                        }
+                    }
+                    .info {
                         display: flex;
+                        flex-direction: column;
                         align-items: center;
-                        transition: none;
-                        .playersLenght{
-                            position: absolute;
-                            bottom: 0;
-                            text-wrap: nowrap;
-                            font-size: 2rem;
-                            font-family: $font;
-                        }
+                        position: absolute;
+                        bottom: -100%; /* Position it outside the bottom initially */
+                        width: 100%;
+                        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+                        transition: all 0.5s ease-in-out;
+                        padding: 0;
+                        text-align: center;
+                        z-index: 1;
+                        color: $bleu;
+                        border-top-left-radius: 2rem ;
+                        border-top-right-radius: 2rem ;
                         h6 {
-                            font-size: 7rem;
+                            font-size: 4rem;
                             font-weight: 900;
-                            font-family: $font;
-                            color: $bleu;
-                            position: absolute;
-                            bottom: 15%;
+                            
+                            margin: 0;
                         }
-        
-                        div {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            position: absolute;
-                            bottom: 5%;
-                            margin-left: -2em;
-        
-                            p:first-child {
-                                font-size: 2rem;
-                                position: absolute;
-                                bottom: 60%;
-                                left: 22%;
-                                font-weight: 500;
-                            }
-        
-                            p:nth-child(2) {
-                                font-size: 3rem;
-                                padding-left: 1em;
-                                font-weight: 900;
-                                font-family: $font;
-                            }
+                        p:first-child {
+                            font-size: 2.5rem;
+                            font-weight: 900;
+                            margin: 0;
                         }
-        
-                        figure {
-                            img {
-                                height: 60vh;
-                                object-fit: cover;
-                            }
+                        p:nth-child(2) {
+                            font-size: 2rem;
+                            font-weight: 900;
+                            margin: 0;
                         }
+                    }
+                    figure:hover .info {
+                        bottom: 0; /* Move it to the visible area */
                     }
                 }
             }
-            
-            .homeClubBtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                display: none;
-                button {
-                    background-color: $bleu;
-                    color: $beige;
-                    border: 2px solid $beige;
-                    border: none;
-                    padding: 1em;
-                }
 
-                button:first-of-type {
-                    position: absolute;
-                    bottom: 30%;
+                .slick-dots li {
+                    opacity: 0;
                 }
-
-                button:nth-of-type(2) {
+                .slick-prev.slick-arrow{
                     position: absolute;
-                    bottom: 30%;
-                    right: 0;
-                }
+                    left: 2em;
+                    bottom: 0;
+                    z-index: 99;
+                   }
+                   .slick-prev.slick-arrow{
+                       position: absolute;
+                       left: 2em;
+                       bottom: 0;
+                       z-index: 99;
+                       color: black;
+                       &::before{
+                           content: "\f359"; /* Unicode for Font Awesome right arrow */
+                           font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
+                           font-weight: 900;
+                           color: $white;
+                           font-size: 20px;
+                       }
+                   }
+                   .slick-next{
+                       color: black;
+                       position: absolute;
+                       right: 0;
+                       cursor: pointer;
+                       &::before{
+                           content: "\f35a"; /* Unicode for Font Awesome right arrow */
+                           font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
+                           font-weight: 900;
+                           color: $white;
+                           font-size: 20px;
+                       }
+                   }
             }
+
         }
-    }
+    
 
     @media screen and (min-width: 481px) and (max-width: 768px) {
         .pageHome{
+            
             .homeClub{
                 margin-bottom: 5em;
-                .diapoClub{
-                    display: none;
-                }
-                .homeClubBtn{
-                    display: none;
-                }
             }
             .container-prochainMatch{
-                margin: 0 5em;
+                margin: 0 2.5em;
             }
         }
     }
@@ -491,26 +489,25 @@
         * HOME CLUB *
     ********************************/
     .pageHome{
-        width: 99vw;
-        h1{
-            font-size: 7rem;
-            font-weight : 700;
-            text-wrap: wrap;
-            padding-top: 1em;
-            text-shadow: 0 10px 10px $black;
-            text-transform: uppercase;
-            font-style: italic;
-            text-align: center;
-            padding-top: -5em;
-            
-        }
+        
         .home{
             margin: 0;
             padding: 0;
-            width: 100%;
+            width: 98.9vw;
             padding-bottom: 2em;
             height: 100vh;
-            
+            h1{
+                font-size: 7rem;
+                font-weight : 700;
+                text-wrap: wrap;
+                padding-top: 1em;
+                text-shadow: 0 10px 10px $black;
+                text-transform: uppercase;
+                font-style: italic;
+                text-align: center;
+                padding-top: -5em;
+                
+            }
             figure{
                 width: 10%;
                 margin: 0 auto;
@@ -539,7 +536,8 @@
         ********************************/
 
         .homeActualite{ 
-            .allArticle{ 
+            .allArticle{
+                width: 98.8vw; 
                 .article{    
                     figure{
                         img{
@@ -552,48 +550,40 @@
         /*********************************
                     * HOME CLUB *
         ********************************/
+
         .homeClub{
             margin-bottom: 10em;
-            .diapoClub{
-                position:static;
-                margin-top: 5em;
-                margin-bottom: 5em;
-                margin-left: 30%;
-                margin-right: 30%;
-                .slideHomeClub{
-                    margin: 0 1em;
+            .block-homeClub{
+                .block-homeClubHistoire{
+                    width: 60%;
+                    margin: 0 auto;
                 }
             }
-        }
-        .buttonNextPrevious{
-            position: absolute;
-            left: 46.5%;           
-        }
+        } 
     }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
     .pageHome{
-        width: 99vw;
-        h1{
-            font-size: 7rem;
-            font-weight : 700;
-            text-wrap: wrap;
-            padding-top: 1em;
-            text-shadow: 0 10px 10px $black;
-            text-transform: uppercase;
-            font-style: italic;
-            text-align: center;
-            padding-top: -5em;
-            
-        }
+        
         .home{
             margin: 0;
             padding: 0;
-            width: 100%;
+            width: 98.9vw;
             padding-bottom: 2em;
             height: 100vh;
-            
+            h1{
+                font-size: 7rem;
+                font-weight : 700;
+                text-wrap: wrap;
+                padding-top: 1em;
+                text-shadow: 0 10px 10px $black;
+                text-transform: uppercase;
+                font-style: italic;
+                text-align: center;
+                padding-top: -5em;
+                
+            }
             figure{
                 width: 10%;
                 margin: 0 auto;
@@ -620,126 +610,7 @@
 
         .homeActualite{ 
             .allArticle{ 
-                .article{    
-                    figure{
-                        img{
-                            width: 100%;
-                        }
-                    }
-                }
-            }
-        }
-        .container-prochainMatch{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            article{
-                width: 50%;
-                height: 35vh;
-            }
-        }
-        /*********************************
-                    * HOME CLUB *
-        ********************************/
-        .homeClub{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 20% 20% 20%;
-            align-items: center;
-            margin-bottom: -5em;
-            h4{
-                width: 100%;
-                grid-row: 1/3;
-                grid-column: 1/2;
-                margin-bottom: 10em;
-                font-size: 2.5rem;
-            }
-            .homeClubHistoire{
-                grid-row: 2/3;
-                grid-column: 1/2;
-                margin-left: 5em;
-            } 
-            .homeClubPlayers{
-                grid-row: 3/3;
-                grid-column: 1/2;
-                margin-left: 5em;
-            }
-            .diapoClub{
-                display: block;
-                grid-row: 3/3;
-                grid-column: 2/2;
-                margin: -10em 2em 0 12em;
-            }
-            .homeClubBtn{
-                display: block;
-                button:nth-of-type(1) {
-                    position: absolute;
-                    bottom: 40%;
-                    left: 65%;
-                }
-                button:nth-of-type(2) {
-                    position: absolute;
-                    bottom: 40%;
-                    right: 5%;
-                }
-            }
-        }
-        .buttonNextPrevious{
-            position: absolute;
-            left: 46.5%;           
-        }
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    .pageHome{
-        width: 99vw;
-        h1{
-            font-size: 7rem;
-            font-weight : 700;
-            text-wrap: wrap;
-            padding-top: 1em;
-            text-shadow: 0 10px 10px $black;
-            text-transform: uppercase;
-            font-style: italic;
-            text-align: center;
-            padding-top: -5em;
-            
-        }
-        .home{
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            padding-bottom: 2em;
-            height: 100vh;
-            
-            figure{
-                width: 10%;
-                margin: 0 auto;
-                padding-top: 5em;
-
-                img{
-                    width: 100%;
-                    margin-top: 2em;
-                }
-            }
-            .btnProchainMatch{
-                display: flex;
-                justify-content: center;
-                button{
-                    font-size: 2rem;
-                    border-radius: 2rem;
-                    padding: 0.5em 1em ;
-                }
-            }
-        }
-        /*********************************
-                    * HOME ACTU *
-        ********************************/
-
-        .homeActualite{ 
-            .allArticle{ 
+                width: 98.8vw;
                 .article{    
                     figure{
                         img{
@@ -757,68 +628,169 @@
             article{
                 width: 50%;
                 height: auto;
+                
+            }
+        } 
+        .homeClub{
+            .block-homeClub{
+                .block-homeClubHistoire{
+                    width: 70%;
+                    margin: 0 auto;
+                }
+            }
+        } 
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .pageHome{
+        
+        .home{
+
+            width: 98.9vw;
+            padding-bottom: 2em;
+            height: 100vh;
+            h1{
+                font-size: 7rem;
+                font-weight : 700;
+                text-wrap: wrap;
+                padding-top: 1em;
+                text-shadow: 0 10px 10px $black;
+                text-transform: uppercase;
+                font-style: italic;
+                text-align: center;
+                padding-top: -5em;
+                
+            }
+            figure{
+                width: 10%;
+                margin: 0 auto;
+                padding-top: 5em;
+
+                img{
+                    width: 100%;
+                    margin-top: 2em;
+                }
+            }
+            .btnProchainMatch{
+                display: flex;
+                justify-content: center;
+                button{
+                    font-size: 2rem;
+                    border-radius: 2rem;
+                    padding: 0.5em 1em ;
+                }
             }
         }
         /*********************************
-                    * HOME CLUB *
+                    * HOME ACTU *
         ********************************/
-        .homeClub{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 20% 20% 20%;
-            align-items: center;
-            margin-bottom: -3em;
-            h4{
-                width: 100%;
-                grid-row: 1/3;
-                grid-column: 1/2;
-                margin-bottom: 10em;
-                font-size: 2.5rem;
-            }
-            .homeClubHistoire{
-                grid-row: 2/3;
-                grid-column: 1/2;
-                margin-left: 5em;
-            } 
-            .homeClubPlayers{
-                grid-row: 3/3;
-                grid-column: 1/2;
-                margin-left: 5em;
-            }
-            .diapoClub{
-                display: block;
-                grid-row: 3/3;
-                grid-column: 2/2;
-                margin: -10em 2em 0 12em;
-                .slideHomeClub{
-                    margin: 0 30%;
+
+        .homeActualite{ 
+            .allArticle{ 
+                width: 98.8vw;
+                .article{    
                     figure{
-                        width: 100%;
                         img{
                             width: 100%;
                         }
                     }
                 }
             }
-            .homeClubBtn{
-                display: block;
-                button:nth-of-type(1) {
-                    position: absolute;
-                    bottom: 40%;
-                    left: 65%;
-                }
-                button:nth-of-type(2) {
-                    position: absolute;
-                    bottom: 40%;
-                    right: 5%;
+        }
+        .container-prochainMatch{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 98.8vw;
+            article{
+                width: 50%;
+                height: auto;
+                &:nth-child(2){
+                    height: 50vh;
+                    padding: 4% 0;
                 }
             }
         }
-        .buttonNextPrevious{
-            position: absolute;
-            left: 46.5%;           
+    .homeClub{
+        margin-bottom: -3em;
+        width: 95.5vw;
+        //width: 100%;
+       // margin-left: auto;
+       // margin-right: auto;
+        h4{
+            width: 100%;
+            
+            font-size: 2.5rem;
+        }
+        .block-homeClub{
+            .block-homeClubHistoire{
+                width: 70%;
+                margin: 0 auto;
+                .homeClubHistoire{
+            
+                    margin-left: 5em;
+                } 
+                .homeClubPlayers{
+                    
+                    margin-left: 5em;
+                }
+            }
+            
         }
     }
+    .multiple-items {
+        width: 80%;
+        margin: 5em auto;
+        article{
+            padding: 1em;
+            figure {
+                position: relative;
+                width: 100%;
+                margin: 0 auto;
+                img {
+                    cursor: pointer;
+                    width: 100%;
+                    box-shadow: 0px 6px 12px -2px rgba(255, 255, 255, 0.5), 0px 3px 7px -3px rgba(255, 255, 255, 0.5);
+                }
+            }
+            .info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                bottom: -100%; /* Position it outside the bottom initially */
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+                transition: all 0.5s ease-in-out;
+                padding: 20px;
+                text-align: center;
+                z-index: 1;
+                color: $bleu;
+                h6 {
+                    font-size: 6rem;
+                    font-weight: 900;
+                    
+                    margin: 0;
+                }
+                p:first-child {
+                    font-size: 3rem;
+                    font-weight: 900;
+                    margin: 0;
+                }
+                p:nth-child(2) {
+                    font-size: 2.5rem;
+                    font-weight: 900;
+                    margin: 0;
+                }
+            }
+            figure:hover .info {
+                bottom: 0; /* Move it to the visible area */
+            }
+        }
+    }
+}
 }
 
 

@@ -117,7 +117,7 @@ class RivalTeamManager extends AbstractManager{
             int $match_nul
 
         ) : void {
-    //try{
+    try{
         $query = $this->db->prepare("UPDATE rivalsTeam
                                     SET ranking_points = :ranking_points,
                                         match_play = :match_play,
@@ -136,11 +136,11 @@ class RivalTeamManager extends AbstractManager{
 
         $query->execute($parameters);
 
-    //} catch (PDOException $e) {
-    // Log the error or handle it as necessary
-    //error_log("Database error : " . $e->getMessage());
-    //throw new Exception("Failed to change rival team in the database.");
-    //}
+    } catch (PDOException $e) {
+    //Log the error or handle it as necessary
+        error_log("Database error : " . $e->getMessage());
+        throw new Exception("Failed to change rival team in the database.");
+    }
     }
 
     /**********************************************************

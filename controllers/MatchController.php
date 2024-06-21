@@ -195,7 +195,7 @@ class MatchController extends AbstractController
             }
         } else {
             $_SESSION["error"] = "Une erreur est survenu.";
-            header("Location: index.php?route=page404");
+            header("Location: 404");
             exit;
         } 
     }

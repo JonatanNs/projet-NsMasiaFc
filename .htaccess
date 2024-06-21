@@ -1,21 +1,91 @@
 RewriteEngine On
 
-RewriteRule ^article&([0-9]+)$ index.php?route=article&id=$1 [L]
-
-
-RewriteRule ^check-changer-role&([a-zA-Z0-9]+)$ index.php?route=checkChangeRole&secret=$1 [L]
-RewriteRule ^check-changer-résultat&([a-zA-Z0-9]+)$ index.php?route=checkChangeResult&secret=$1 [L]
-
-
-RewriteRule ^Admin-NsMasiaFC-([a-zA-Z0-9]+)$ index.php?route=adminNsMasia&secret=$1 [L]
-
-RewriteRule ^Check-changer-nom-site-([a-zA-Z0-9]+)$ index.php?route=checkUpdateName&secret=$1 [L]
-RewriteRule ^Check-changer-logo-([a-zA-Z0-9]+)$ index.php?route=checkUpdateLogo&secret=$1 [L]
-RewriteRule ^Check-changer-email-([a-zA-Z0-9]+)$ index.php?route=checkUpdateEmail&secret=$1 [L]
-RewriteRule ^Check-ajouter-banner-([a-zA-Z0-9]+)$ index.php?route=checkUpdateBannerEmail&secret=$1 [L]
-
+# Home routes
+RewriteRule ^Accueil$ index.php?route=home [L]
+RewriteRule ^Article-([0-9]+)$ index.php?route=homeArticle&id=$1 [L]
+RewriteRule ^Classement$ index.php?route=allRanking [L]
 RewriteRule ^Mentions-légales$ index.php?route=legalNotice [L]
 RewriteRule ^Gestion-des-cookies$ index.php?route=cookies [L]
 RewriteRule ^Conditions-générales-de-ventes$ index.php?route=generalConditionsSale [L]
 
-RewriteRule ^Page404$ index.php?route=page404 [L]
+# Form routes
+RewriteRule ^Formulaire$ index.php?route=form [L]
+RewriteRule ^Vérification-de-connexion$ index.php?route=check-login [L]
+RewriteRule ^Vérification-inscription$ index.php?route=check-signup [L]
+
+# User account routes
+RewriteRule ^Compte-Utilisateur$ index.php?route=compteUser [L]
+RewriteRule ^Changer-Nom$ index.php?route=checkChangeName [L]
+RewriteRule ^Changer-Email$ index.php?route=checkChangerEmail [L]
+RewriteRule ^Changer-Mot-De-Passe$ index.php?route=checkChangerPassword [L]
+RewriteRule ^Changer-Adresse$ index.php?route=checkChangeAddress [L]
+
+# News routes
+RewriteRule ^Actualités$ index.php?route=news [L]
+
+# Club routes
+RewriteRule ^Club$ index.php?route=club [L]
+
+# Shop routes
+RewriteRule ^Boutique$ index.php?route=boutique [L]
+RewriteRule ^Produit-([0-9]+)$ index.php?route=lookProduct&id=$1 [L]
+RewriteRule ^Paiement$ index.php?route=payement [L]
+RewriteRule ^Paiement-Stripe$ index.php?route=stripePay [L]
+
+# Ticketing routes
+RewriteRule ^Billetterie$ index.php?route=billeterie [L]
+RewriteRule ^Reservation-([0-9]+)$ index.php?route=reservation&id=$1 [L]
+RewriteRule ^Paiement-Billet$ index.php?route=payementTicket [L]
+RewriteRule ^Paiement-Billet-Stripe$ index.php?route=stripePayTicket [L]
+RewriteRule ^Vérification-Adresse$ index.php?route=checkAddress [L]
+
+# Cart route
+RewriteRule ^Panier$ index.php?route=panier [L]
+
+# Payment success routes
+RewriteRule ^Retour-sur-le-site$ index.php?route=checkSucces [L]
+RewriteRule ^Payement-validé$ index.php?route=succes [L]
+
+# Admin routes with secret key
+RewriteRule ^Verifier-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAdmin&secret=$1 [L]
+RewriteRule ^Admin-Match-([a-zA-Z0-9]+)$ index.php?route=adminMatch&secret=$1 [L]
+RewriteRule ^Admin-Equipe-Rivale-([a-zA-Z0-9]+)$ index.php?route=adminRivalTeam&secret=$1 [L]
+RewriteRule ^Admin-Club-([a-zA-Z0-9]+)$ index.php?route=adminClub&secret=$1 [L]
+RewriteRule ^Admin-Actualite-([a-zA-Z0-9]+)$ index.php?route=adminActualite&secret=$1 [L]
+RewriteRule ^Admin-Billetterie-([a-zA-Z0-9]+)$ index.php?route=adminBilletterie&secret=$1 [L]
+RewriteRule ^Admin-Boutique-([a-zA-Z0-9]+)$ index.php?route=adminBoutique&secret=$1 [L]
+RewriteRule ^Gestion-Admin-([a-zA-Z0-9]+)$ index.php?route=manageAdmin&secret=$1 [L]
+RewriteRule ^Admin-NS-Masia-([a-zA-Z0-9]+)$ index.php?route=adminNsMasia&secret=$1 [L]
+
+# Admin action routes with secret key
+RewriteRule ^Changer-Role-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeRole&secret=$1 [L]
+RewriteRule ^Modifier-Nom-Admin-NS-Masia-([a-zA-Z0-9]+)$ index.php?route=checkUpdateName&secret=$1 [L]
+RewriteRule ^Modifier-Logo-Admin-NS-Masia-([a-zA-Z0-9]+)$ index.php?route=checkUpdateLogo&secret=$1 [L]
+RewriteRule ^Modifier-Email-Admin-NS-Masia-([a-zA-Z0-9]+)$ index.php?route=checkUpdateEmail&secret=$1 [L]
+RewriteRule ^Modifier-Banniere-Email-Admin-NS-Masia-([a-zA-Z0-9]+)$ index.php?route=checkUpdateBannerEmail&secret=$1 [L]
+RewriteRule ^Ajouter-Joueur-Admin-([a-zA-Z0-9]+)$ index.php?route=checkaddPlayer&secret=$1 [L]
+RewriteRule ^Supprimer-Joueur-Admin-([a-zA-Z0-9]+)$ index.php?route=checkRemovePlayer&secret=$1 [L]
+RewriteRule ^Ajouter-Article-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAddArticle&secret=$1 [L]
+RewriteRule ^Changer-Titre-Article-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeTitleArticle&secret=$1 [L]
+RewriteRule ^Changer-Contenu-Article-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeContentArticle&secret=$1 [L]
+RewriteRule ^Changer-Image-Article-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeImgArticle&secret=$1 [L]
+RewriteRule ^Supprimer-Article-Admin-([a-zA-Z0-9]+)$ index.php?route=checkRemoveArticle&secret=$1 [L]
+RewriteRule ^Ajouter-Match-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAddMatchs&secret=$1 [L]
+RewriteRule ^Modifier-Match-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeMatch&secret=$1 [L]
+RewriteRule ^Supprimer-Match-Admin-([a-zA-Z0-9]+)$ index.php?route=checkRemoveMatch&secret=$1 [L]
+RewriteRule ^Ajouter-Resultat-Match-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAddResult&secret=$1 [L]
+RewriteRule ^Modifier-Resultat-Match-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeResult&secret=$1 [L]
+RewriteRule ^Changer-Points-Equipe-Rivale-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangePointRivalTeam&secret=$1 [L]
+RewriteRule ^Ajouter-Equipe-Rivale-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAddRivalTeam&secret=$1 [L]
+RewriteRule ^Changer-Logo-Equipe-Rivale-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeLogoRivalTeam&secret=$1 [L]
+RewriteRule ^Changer-Nom-Equipe-Rivale-Admin-([a-zA-Z0-9]+)$ index.php?route=checkChangeNameRivalTeam&secret=$1 [L]
+RewriteRule ^Supprimer-Equipe-Rivale-Admin-([a-zA-Z0-9]+)$ index.php?route=checkRemoveRivalTeam&secret=$1 [L]
+RewriteRule ^Rendre-Equipe-Rivale-Passive-Admin-([a-zA-Z0-9]+)$ index.php?route=checkPassivRivalTeam&secret=$1 [L]
+RewriteRule ^Ajouter-Produit-Admin-([a-zA-Z0-9]+)$ index.php?route=checkAddproduct&secret=$1 [L]
+RewriteRule ^Supprimer-Produit-Admin-([a-zA-Z0-9]+)$ index.php?route=checkRemoveproduct&secret=$1 [L]
+
+# Logout route
+RewriteRule ^Deconnexion$ index.php?route=logout [L]
+
+# 404 page
+RewriteRule ^404$ index.php?route=page404 [L]

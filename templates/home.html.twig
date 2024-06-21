@@ -3,6 +3,13 @@
 {% block main %}
 <main class="container">
     <section class="pageHome">
+    {% if errorMessage is not empty %}
+        <p style="text-align:center;" class="alertMessage">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+    {% endif %}
+
+    {% if valideMessage is not empty %}
+        <p style="text-align:center;" class="alertMessage">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+    {% endif %}
         <div class="home" style="background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);">
             <figure>
                 <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
@@ -21,7 +28,7 @@
                 {% for article in articles|slice(0, 3) %}
                     <article class="article">
                             <h3>{{ article.title }}</h3>
-                        <a href="index.php?route=homeArticle&id={{article.id}}" class="btn">
+                        <a href="Article-{{article.id}}" class="btn">
                             Lire
                         </a>
                         <figure>
@@ -51,7 +58,7 @@
                     {% endif %}
                     <div class="teamForLastMatch">
                         <figure>
-                            <img src="assets/img/logo-ns_masia.png" alt=""/>
+                            <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
                         </figure> 
                         {% for result in resultMatchs %}
                             {% if result.match_id == match.match_id %}
@@ -141,55 +148,54 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="index.php?route=allRanking" class="btn">
+                <a href="Classement" class="btn">
                     Classement complet 
                     <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span>
                 </a>
             </article>
-        </div>
+        </div> 
 
         <section class="homeClub">
             <h4>Club</h4>
-            <article class="homeClubHistoire">
-                <a href="index.php?route=club">
-                    <h5>Histoire du club</h5>
-                    <p>NS MASIA F.C. 2024</p>
-                    <figure>
-                        <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
-                    </figure>
-                </a>
-            </article>
-            <article class="homeClubPlayers">
-                <a href="index.php?route=club">
-                    <h5>Joueur du club</h5>
-                    <p>NS MASIA F.C. 2024</p>
-                    <figure>
-                        <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
-                    </figure>
-                </a>
-            </article>
-            <div class="diapoClub">
-                <div class="slideHomeClub" data-player="{{players|length}}">
-                {% for player in players %}
-                    <article class="playersNsMasia">
-                        <h6>{{ player.number}}</h6>
-                            <div>
-                                <p>{{ player.first_name}}</p>
-                                <p>{{player.last_name}}</p>
-                            </div>
+            <div class="block-homeClub">
+                <div class="block-homeClubHistoire">
+                    <article class="homeClubHistoire">
+                        <a href="Club">
+                            <p>NS MASIA F.C. 2024</p>
+                            <h5>Histoire du club</h5>
                             <figure>
-                                <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc" />
+                                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
                             </figure>
-                            <p class="playersLenght">{{ loop.index }} / {{ players|length }}</p>
+                        </a>
                     </article>
-                {% endfor %}
-                </div>
+                    <article class="homeClubPlayers">
+                        <a href="Club">
+                            <p>NS MASIA F.C. 2024</p>
+                            <h5>Joueur du club</h5>
+                            <figure>
+                                <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
+                            </figure>
+                        </a>
+                    </article>
+                </div>           
+                <div class="multiple-items sliderPlayer" style="opacity:1;">
+                    {% for player in players %}
+                        <article>
+                            <figure>
+                                <img src="{{player.img}}" 
+                                     alt="image de {{ player.first_name ~ ' ' ~ player.last_name}}" 
+                                     data-lazy="{{player.img}}"/>
+                                <div class="info">
+                                    <h6>{{ player.number}}</h6>
+                                    <p>{{ player.first_name}}</p>
+                                    <p>{{player.last_name}}</p>
+                                </div>
+                            </figure>
+                        </article>
+                    {% endfor %}
+                </div> 
             </div>
-                <div class="homeClubBtn">
-                    <button class="homeClubBtnPrevious"><span class="fa-solid fa-angle-left"></span></button>
-                    <button class="homeClubBtnNext"> <span class="fa-solid fa-angle-left fa-flip-horizontal"></span></button>
-                </div>
-        </section>
+        </section> 
     </section>
 </main>
 {% endblock %}

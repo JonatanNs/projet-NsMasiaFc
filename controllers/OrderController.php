@@ -114,17 +114,17 @@ class OrderController extends AbstractController {
                 $_SESSION['Addresses'] = $newAddresses->getId();
 
                 $_SESSION["valide"] = "Addresse enregistrer";
-                header("Location: index.php?route=payement");
+                header("Location: Paiement");
                 exit;
 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue";
-                header("Location: index.php?route=payement");
+                header("Location: Paiement");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Une erreur est survenue";
-            header("Location: index.php?route=payement");
+            header("Location: Paiement");
             exit;
         }
     }
@@ -178,7 +178,7 @@ class OrderController extends AbstractController {
                 $this->baseEmailPurchases($users->getEmail(), $name, $order);
 
                 $_SESSION["valide"] = "Achat réalisé avec succès";
-                header("Location: index.php?route=boutique");
+                header("Location: Boutique");
                 exit;
             }        
         } else if(isset($_POST["arrayTickets"])){
@@ -212,12 +212,12 @@ class OrderController extends AbstractController {
                 $this->baseEmailTicket($users->getEmail(), $name, $order);
 
                 $_SESSION["valide"] = "Achat réalisé avec succès";
-                header("Location: index.php?route=billeterie");
+                header("Location: Billetterie");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue";
-            header("Location: index.php?route=payement");
+            header("Location: Paiement");
             exit;
         }
     }
@@ -270,8 +270,8 @@ class OrderController extends AbstractController {
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=succes',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=payement',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-validé',
+            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement',
         ]);
         
         header("HTTP/1.1 303 See Other");
@@ -311,8 +311,8 @@ class OrderController extends AbstractController {
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=succes',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/index.php?route=payementTicket',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-validé',
+            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement-Billet',
         ]);
         
         header("HTTP/1.1 303 See Other");

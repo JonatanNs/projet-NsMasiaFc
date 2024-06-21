@@ -2214,6 +2214,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   color: rgb(0, 0, 0);
   font-size: 1.5rem;
+  padding: 0.5em 1em;
 }
 .pageHome .homeActualite .allArticle .article h3 {
   margin-left: 10%;
@@ -2227,8 +2228,12 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 13%;
   width: 70%;
 }
+.pageHome .homeActualite .allArticle .article figure {
+  width: 100%;
+}
 .pageHome .homeActualite .allArticle .article figure img {
   height: 95vh;
+  width: 100%;
   object-fit: cover;
 }
 .pageHome .buttonNextPrevious {
@@ -2350,7 +2355,7 @@ h1, h2, h3, h4, h5, h6 {
 .pageHome .container-prochainMatch .ranking {
   text-align: center;
   background-color: rgb(137, 137, 137);
-  padding: 2em;
+  padding: 1em;
 }
 .pageHome .container-prochainMatch .ranking h3 {
   color: rgb(0, 0, 0);
@@ -2367,11 +2372,11 @@ h1, h2, h3, h4, h5, h6 {
 .pageHome .container-prochainMatch .ranking table .rankingTdTeam {
   width: 15%;
 }
-.pageHome .container-prochainMatch .ranking button {
+.pageHome .container-prochainMatch .ranking a {
   width: 100%;
   padding: 0.3em;
   margin-top: 1em;
-  font-size: 1.3rem;
+  font-size: 2rem;
 }
 .pageHome .homeClub {
   position: relative;
@@ -2391,7 +2396,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: auto;
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: 75%;
 }
 .pageHome .homeClub h4::after {
   left: 15%;
@@ -2427,14 +2432,14 @@ h1, h2, h3, h4, h5, h6 {
 .pageHome .homeClub .homeClubHistoire a h5 {
   position: absolute;
   z-index: 96;
-  bottom: 22%;
+  bottom: 0;
   left: 5%;
   font-size: 2.5rem;
 }
 .pageHome .homeClub .homeClubHistoire a p {
   position: absolute;
   z-index: 96;
-  bottom: 0;
+  bottom: 20px;
   left: 5%;
   font-weight: 500;
 }
@@ -2470,110 +2475,111 @@ h1, h2, h3, h4, h5, h6 {
 .pageHome .homeClub .homeClubPlayers a h5 {
   position: absolute;
   z-index: 96;
-  bottom: 22%;
+  bottom: 0;
   left: 5%;
   font-size: 2.5rem;
 }
 .pageHome .homeClub .homeClubPlayers a p {
   position: absolute;
   z-index: 96;
-  bottom: 0;
+  bottom: 20px;
   left: 5%;
   font-weight: 500;
 }
-.pageHome .homeClub .diapoClub {
-  display: none;
-  margin-top: -4em;
+.pageHome .homeClub .multiple-items {
+  width: 80%;
+  margin: 5em auto;
 }
-.pageHome .homeClub .diapoClub .slideHomeClub {
+.pageHome .homeClub .multiple-items article {
+  padding: 1em;
+}
+.pageHome .homeClub .multiple-items article figure {
   position: relative;
-  display: flex;
-  overflow: hidden;
-  margin: 5em;
+  width: 100%;
+  margin: 0 auto;
 }
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia {
-  flex: 1 0 100%;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  transition: none;
+.pageHome .homeClub .multiple-items article figure img {
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0px 6px 12px -2px rgba(255, 255, 255, 0.5), 0px 3px 7px -3px rgba(255, 255, 255, 0.5);
 }
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia .playersLenght {
-  position: absolute;
-  bottom: 0;
-  text-wrap: nowrap;
-  font-size: 2rem;
-  font-family: "Poppins", sans-serif;
-}
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia h6 {
-  font-size: 7rem;
-  font-weight: 900;
-  font-family: "Poppins", sans-serif;
-  color: rgb(25, 30, 59);
-  position: absolute;
-  bottom: 15%;
-}
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia div {
+.pageHome .homeClub .multiple-items article .info {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  bottom: 5%;
-  margin-left: -2em;
+  bottom: -100%; /* Position it outside the bottom initially */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  transition: all 0.5s ease-in-out;
+  padding: 0;
+  text-align: center;
+  z-index: 1;
+  color: rgb(25, 30, 59);
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia div p:first-child {
-  font-size: 2rem;
-  position: absolute;
-  bottom: 60%;
-  left: 22%;
-  font-weight: 500;
-}
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia div p:nth-child(2) {
-  font-size: 3rem;
-  padding-left: 1em;
+.pageHome .homeClub .multiple-items article .info h6 {
+  font-size: 4rem;
   font-weight: 900;
-  font-family: "Poppins", sans-serif;
+  margin: 0;
 }
-.pageHome .homeClub .diapoClub .slideHomeClub .playersNsMasia figure img {
-  height: 60vh;
-  object-fit: cover;
+.pageHome .homeClub .multiple-items article .info p:first-child {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
 }
-.pageHome .homeClub .homeClubBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  display: none;
+.pageHome .homeClub .multiple-items article .info p:nth-child(2) {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
 }
-.pageHome .homeClub .homeClubBtn button {
-  background-color: rgb(25, 30, 59);
-  color: rgb(255, 249, 237);
-  border: 2px solid rgb(255, 249, 237);
-  border: none;
-  padding: 1em;
+.pageHome .homeClub .multiple-items article figure:hover .info {
+  bottom: 0; /* Move it to the visible area */
 }
-.pageHome .homeClub .homeClubBtn button:first-of-type {
+.pageHome .homeClub .slick-dots li {
+  opacity: 0;
+}
+.pageHome .homeClub .slick-prev.slick-arrow {
   position: absolute;
-  bottom: 30%;
+  left: 2em;
+  bottom: 0;
+  z-index: 99;
 }
-.pageHome .homeClub .homeClubBtn button:nth-of-type(2) {
+.pageHome .homeClub .slick-prev.slick-arrow {
   position: absolute;
-  bottom: 30%;
+  left: 2em;
+  bottom: 0;
+  z-index: 99;
+  color: black;
+}
+.pageHome .homeClub .slick-prev.slick-arrow::before {
+  content: "\f359"; /* Unicode for Font Awesome right arrow */
+  font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
+  font-weight: 900;
+  color: rgb(250, 250, 250);
+  font-size: 20px;
+}
+.pageHome .homeClub .slick-next {
+  color: black;
+  position: absolute;
   right: 0;
+  cursor: pointer;
+}
+.pageHome .homeClub .slick-next::before {
+  content: "\f35a"; /* Unicode for Font Awesome right arrow */
+  font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
+  font-weight: 900;
+  color: rgb(250, 250, 250);
+  font-size: 20px;
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .pageHome .homeClub {
     margin-bottom: 5em;
   }
-  .pageHome .homeClub .diapoClub {
-    display: none;
-  }
-  .pageHome .homeClub .homeClubBtn {
-    display: none;
-  }
   .pageHome .container-prochainMatch {
-    margin: 0 5em;
+    margin: 0 2.5em;
   }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -2581,7 +2587,6 @@ h1, h2, h3, h4, h5, h6 {
       * HOME CLUB *
   ********************************/
   .pageHome {
-    width: 99vw;
     /*********************************
                 * HOME ACTU *
     ********************************/
@@ -2589,7 +2594,14 @@ h1, h2, h3, h4, h5, h6 {
                 * HOME CLUB *
     ********************************/
   }
-  .pageHome h1 {
+  .pageHome .home {
+    margin: 0;
+    padding: 0;
+    width: 98.9vw;
+    padding-bottom: 2em;
+    height: 100vh;
+  }
+  .pageHome .home h1 {
     font-size: 7rem;
     font-weight: 700;
     text-wrap: wrap;
@@ -2599,13 +2611,6 @@ h1, h2, h3, h4, h5, h6 {
     font-style: italic;
     text-align: center;
     padding-top: -5em;
-  }
-  .pageHome .home {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    padding-bottom: 2em;
-    height: 100vh;
   }
   .pageHome .home figure {
     width: 10%;
@@ -2628,38 +2633,34 @@ h1, h2, h3, h4, h5, h6 {
   .pageHome .container-prochainMatch {
     margin: 0 5em;
   }
+  .pageHome .homeActualite .allArticle {
+    width: 98.8vw;
+  }
   .pageHome .homeActualite .allArticle .article figure img {
     width: 100%;
   }
   .pageHome .homeClub {
     margin-bottom: 10em;
   }
-  .pageHome .homeClub .diapoClub {
-    position: static;
-    margin-top: 5em;
-    margin-bottom: 5em;
-    margin-left: 30%;
-    margin-right: 30%;
-  }
-  .pageHome .homeClub .diapoClub .slideHomeClub {
-    margin: 0 1em;
-  }
-  .pageHome .buttonNextPrevious {
-    position: absolute;
-    left: 46.5%;
+  .pageHome .homeClub .block-homeClub .block-homeClubHistoire {
+    width: 60%;
+    margin: 0 auto;
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
   .pageHome {
-    width: 99vw;
     /*********************************
                 * HOME ACTU *
     ********************************/
-    /*********************************
-                * HOME CLUB *
-    ********************************/
   }
-  .pageHome h1 {
+  .pageHome .home {
+    margin: 0;
+    padding: 0;
+    width: 98.9vw;
+    padding-bottom: 2em;
+    height: 100vh;
+  }
+  .pageHome .home h1 {
     font-size: 7rem;
     font-weight: 700;
     text-wrap: wrap;
@@ -2669,13 +2670,6 @@ h1, h2, h3, h4, h5, h6 {
     font-style: italic;
     text-align: center;
     padding-top: -5em;
-  }
-  .pageHome .home {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    padding-bottom: 2em;
-    height: 100vh;
   }
   .pageHome .home figure {
     width: 10%;
@@ -2695,112 +2689,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 2rem;
     padding: 0.5em 1em;
   }
-  .pageHome .homeActualite .allArticle .article figure img {
-    width: 100%;
-  }
-  .pageHome .container-prochainMatch {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  .pageHome .container-prochainMatch article {
-    width: 50%;
-    height: 35vh;
-  }
-  .pageHome .homeClub {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 20% 20% 20%;
-    align-items: center;
-    margin-bottom: -5em;
-  }
-  .pageHome .homeClub h4 {
-    width: 100%;
-    grid-row: 1/3;
-    grid-column: 1/2;
-    margin-bottom: 10em;
-    font-size: 2.5rem;
-  }
-  .pageHome .homeClub .homeClubHistoire {
-    grid-row: 2/3;
-    grid-column: 1/2;
-    margin-left: 5em;
-  }
-  .pageHome .homeClub .homeClubPlayers {
-    grid-row: 3/3;
-    grid-column: 1/2;
-    margin-left: 5em;
-  }
-  .pageHome .homeClub .diapoClub {
-    display: block;
-    grid-row: 3/3;
-    grid-column: 2/2;
-    margin: -10em 2em 0 12em;
-  }
-  .pageHome .homeClub .homeClubBtn {
-    display: block;
-  }
-  .pageHome .homeClub .homeClubBtn button:nth-of-type(1) {
-    position: absolute;
-    bottom: 40%;
-    left: 65%;
-  }
-  .pageHome .homeClub .homeClubBtn button:nth-of-type(2) {
-    position: absolute;
-    bottom: 40%;
-    right: 5%;
-  }
-  .pageHome .buttonNextPrevious {
-    position: absolute;
-    left: 46.5%;
-  }
-}
-@media screen and (min-width: 1440px) {
-  .pageHome {
-    width: 99vw;
-    /*********************************
-                * HOME ACTU *
-    ********************************/
-    /*********************************
-                * HOME CLUB *
-    ********************************/
-  }
-  .pageHome h1 {
-    font-size: 7rem;
-    font-weight: 700;
-    text-wrap: wrap;
-    padding-top: 1em;
-    text-shadow: 0 10px 10px rgb(0, 0, 0);
-    text-transform: uppercase;
-    font-style: italic;
-    text-align: center;
-    padding-top: -5em;
-  }
-  .pageHome .home {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    padding-bottom: 2em;
-    height: 100vh;
-  }
-  .pageHome .home figure {
-    width: 10%;
-    margin: 0 auto;
-    padding-top: 5em;
-  }
-  .pageHome .home figure img {
-    width: 100%;
-    margin-top: 2em;
-  }
-  .pageHome .home .btnProchainMatch {
-    display: flex;
-    justify-content: center;
-  }
-  .pageHome .home .btnProchainMatch button {
-    font-size: 2rem;
-    border-radius: 2rem;
-    padding: 0.5em 1em;
+  .pageHome .homeActualite .allArticle {
+    width: 98.8vw;
   }
   .pageHome .homeActualite .allArticle .article figure img {
     width: 100%;
@@ -2815,61 +2705,138 @@ h1, h2, h3, h4, h5, h6 {
     width: 50%;
     height: auto;
   }
-  .pageHome .homeClub {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 20% 20% 20%;
+  .pageHome .homeClub .block-homeClub .block-homeClubHistoire {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .pageHome {
+    /*********************************
+                * HOME ACTU *
+    ********************************/
+  }
+  .pageHome .home {
+    width: 98.9vw;
+    padding-bottom: 2em;
+    height: 100vh;
+  }
+  .pageHome .home h1 {
+    font-size: 7rem;
+    font-weight: 700;
+    text-wrap: wrap;
+    padding-top: 1em;
+    text-shadow: 0 10px 10px rgb(0, 0, 0);
+    text-transform: uppercase;
+    font-style: italic;
+    text-align: center;
+    padding-top: -5em;
+  }
+  .pageHome .home figure {
+    width: 10%;
+    margin: 0 auto;
+    padding-top: 5em;
+  }
+  .pageHome .home figure img {
+    width: 100%;
+    margin-top: 2em;
+  }
+  .pageHome .home .btnProchainMatch {
+    display: flex;
+    justify-content: center;
+  }
+  .pageHome .home .btnProchainMatch button {
+    font-size: 2rem;
+    border-radius: 2rem;
+    padding: 0.5em 1em;
+  }
+  .pageHome .homeActualite .allArticle {
+    width: 98.8vw;
+  }
+  .pageHome .homeActualite .allArticle .article figure img {
+    width: 100%;
+  }
+  .pageHome .container-prochainMatch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    width: 98.8vw;
+  }
+  .pageHome .container-prochainMatch article {
+    width: 50%;
+    height: auto;
+  }
+  .pageHome .container-prochainMatch article:nth-child(2) {
+    height: 50vh;
+    padding: 4% 0;
+  }
+  .pageHome .homeClub {
     margin-bottom: -3em;
+    width: 95.5vw;
   }
   .pageHome .homeClub h4 {
     width: 100%;
-    grid-row: 1/3;
-    grid-column: 1/2;
-    margin-bottom: 10em;
     font-size: 2.5rem;
   }
-  .pageHome .homeClub .homeClubHistoire {
-    grid-row: 2/3;
-    grid-column: 1/2;
+  .pageHome .homeClub .block-homeClub .block-homeClubHistoire {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .pageHome .homeClub .block-homeClub .block-homeClubHistoire .homeClubHistoire {
     margin-left: 5em;
   }
-  .pageHome .homeClub .homeClubPlayers {
-    grid-row: 3/3;
-    grid-column: 1/2;
+  .pageHome .homeClub .block-homeClub .block-homeClubHistoire .homeClubPlayers {
     margin-left: 5em;
   }
-  .pageHome .homeClub .diapoClub {
-    display: block;
-    grid-row: 3/3;
-    grid-column: 2/2;
-    margin: -10em 2em 0 12em;
+  .pageHome .multiple-items {
+    width: 80%;
+    margin: 5em auto;
   }
-  .pageHome .homeClub .diapoClub .slideHomeClub {
-    margin: 0 30%;
+  .pageHome .multiple-items article {
+    padding: 1em;
   }
-  .pageHome .homeClub .diapoClub .slideHomeClub figure {
+  .pageHome .multiple-items article figure {
+    position: relative;
     width: 100%;
+    margin: 0 auto;
   }
-  .pageHome .homeClub .diapoClub .slideHomeClub figure img {
+  .pageHome .multiple-items article figure img {
+    cursor: pointer;
     width: 100%;
+    box-shadow: 0px 6px 12px -2px rgba(255, 255, 255, 0.5), 0px 3px 7px -3px rgba(255, 255, 255, 0.5);
   }
-  .pageHome .homeClub .homeClubBtn {
-    display: block;
-  }
-  .pageHome .homeClub .homeClubBtn button:nth-of-type(1) {
+  .pageHome .multiple-items article .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
-    bottom: 40%;
-    left: 65%;
+    bottom: -100%; /* Position it outside the bottom initially */
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    transition: all 0.5s ease-in-out;
+    padding: 20px;
+    text-align: center;
+    z-index: 1;
+    color: rgb(25, 30, 59);
   }
-  .pageHome .homeClub .homeClubBtn button:nth-of-type(2) {
-    position: absolute;
-    bottom: 40%;
-    right: 5%;
+  .pageHome .multiple-items article .info h6 {
+    font-size: 6rem;
+    font-weight: 900;
+    margin: 0;
   }
-  .pageHome .buttonNextPrevious {
-    position: absolute;
-    left: 46.5%;
+  .pageHome .multiple-items article .info p:first-child {
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 0;
+  }
+  .pageHome .multiple-items article .info p:nth-child(2) {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0;
+  }
+  .pageHome .multiple-items article figure:hover .info {
+    bottom: 0; /* Move it to the visible area */
   }
 }
 /*********************************
@@ -3435,41 +3402,40 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   margin: 2em 0;
 }
-.main .pageClub .playersClub article ul {
-  position: relative;
+.main .pageClub .playersClub article div {
   display: flex;
-  flex-direction: row;
-  gap: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.main .pageClub .playersClub article div article {
+  width: 80%;
   padding: 1em;
   background-color: rgb(25, 30, 59);
   border: none;
   box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
   border-radius: 0.5rem;
   margin: 1em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.main .pageClub .playersClub article ul li:first-of-type {
+.main .pageClub .playersClub article div article h4 {
   font-size: 5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 900;
-  position: absolute;
-  bottom: -20%;
 }
-.main .pageClub .playersClub article ul li:nth-of-type(2) {
-  padding-left: 4em;
-}
-.main .pageClub .playersClub article ul li:nth-of-type(3) {
+.main .pageClub .playersClub article div article p:nth-of-type(2) {
   font-weight: 900;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
 }
-.main .pageClub .playersClub article ul .playersClubImg img {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 20%;
-  object-fit: cover;
-  object-position: top;
-  height: 57px;
+.main .pageClub .playersClub article div figure {
+  width: 50%;
+}
+.main .pageClub .playersClub article div figure img {
+  width: 100%;
 }
 
 @media screen and (min-width: 490px) and (max-width: 768px) {
@@ -3477,27 +3443,24 @@ h1, h2, h3, h4, h5, h6 {
     padding: 8em 2em;
     width: 100%;
   }
-  .main .pageClub .playersClub article ul {
-    padding: 2em;
+  .main .pageClub .playersClub article div article {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
-  .main .pageClub .playersClub article ul li:first-of-type {
-    bottom: 0;
-    top: 10px;
+  .main .pageClub .playersClub article div article h4 {
+    font-size: 6rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(2) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div article p:nth-of-type(2) {
+    font-size: 2rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(3) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div figure {
+    width: 35%;
   }
-  .main .pageClub .playersClub article ul .playersClubImg img {
-    top: -5;
-    height: 10em;
-    object-fit: cover;
-    object-position: top;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
+  .main .pageClub .playersClub article div figure img {
+    width: 100%;
   }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -3505,27 +3468,24 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     padding: 8em 3em;
   }
-  .main .pageClub .playersClub article ul {
-    padding: 2em;
+  .main .pageClub .playersClub article div article {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
-  .main .pageClub .playersClub article ul li:first-of-type {
-    bottom: 0;
-    top: 10px;
+  .main .pageClub .playersClub article div article h4 {
+    font-size: 6rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(2) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div article p:nth-of-type(2) {
+    font-size: 2rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(3) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div figure {
+    width: 35%;
   }
-  .main .pageClub .playersClub article ul .playersClubImg img {
-    top: -5;
-    height: 10em;
-    object-fit: cover;
-    object-position: top;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    box-shadow: rgb(255, 249, 237) 0px 2px 8px 0px;
+  .main .pageClub .playersClub article div figure img {
+    width: 100%;
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
@@ -3533,26 +3493,24 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     padding: 8em 10em;
   }
-  .main .pageClub .playersClub article ul {
-    padding: 2em;
+  .main .pageClub .playersClub article div article {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
-  .main .pageClub .playersClub article ul li:first-of-type {
-    bottom: 0;
-    top: 10px;
+  .main .pageClub .playersClub article div article h4 {
+    font-size: 8rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(2) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div article p:nth-of-type(2) {
+    font-size: 3rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(3) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div figure {
+    width: 30%;
   }
-  .main .pageClub .playersClub article ul .playersClubImg img {
-    top: -5;
-    height: 10em;
-    object-fit: none;
-    object-position: top;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
+  .main .pageClub .playersClub article div figure img {
+    width: 100%;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -3560,26 +3518,24 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     padding: 8em 10em;
   }
-  .main .pageClub .playersClub article ul {
-    padding: 2em;
+  .main .pageClub .playersClub article div article {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
-  .main .pageClub .playersClub article ul li:first-of-type {
-    bottom: 0;
-    top: 10px;
+  .main .pageClub .playersClub article div article h4 {
+    font-size: 8rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(2) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div article p:nth-of-type(2) {
+    font-size: 3rem;
   }
-  .main .pageClub .playersClub article ul li:nth-of-type(3) {
-    font-size: 2.5rem;
+  .main .pageClub .playersClub article div figure {
+    width: 20%;
   }
-  .main .pageClub .playersClub article ul .playersClubImg img {
-    top: -5;
-    height: 10em;
-    object-fit: none;
-    object-position: top;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
+  .main .pageClub .playersClub article div figure img {
+    width: 100%;
   }
 }
 .socialNetworks {
@@ -4025,6 +3981,8 @@ h1, h2, h3, h4, h5, h6 {
   .container {
     max-width: 480px;
     font-family: "Nunito", sans-serif !important;
+    margin: 0;
+    padding: 0;
   }
 }
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -4061,7 +4019,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Nunito", sans-serif !important;
   }
 }
-/*****************BUTTON**************/
 .btn {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 249, 237);
@@ -4079,6 +4036,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .no-scroll {
   overflow: hidden;
+}
+
+.alertMessage {
+  background-color: rgb(25, 30, 59);
+  padding: 1.5em;
+  width: 20%;
+  text-align: center;
+  position: fixed;
+  top: 1.5em;
+  right: 0;
+  z-index: 200;
+  border: 2px solid rgb(255, 249, 237);
+  border-radius: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */

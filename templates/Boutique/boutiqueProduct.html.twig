@@ -66,14 +66,14 @@
                 </section>
                 <article class="description">
                     <h3>Descriptions</h3>
-                    <p>{{ products.descriptions }}</p>
+                    <p>{{ products.descriptions|raw }}</p>
                 </article>
             </div>
         <section class="bagProductsUser invisible">
                 <h5>Panier</h5>
                 <div class="bagProducts"></div> 
                 <div class="bagProductsTotal"></div>
-                <form action="index.php?route=panier" method="POST">
+                <form action="Panier" method="POST">
                     <button type="submit" class="btn">Valider</button>
                 </form>
         </section>

@@ -23,16 +23,17 @@
             <div class="allShirt" id="articles-container">
             <span class="productLength invisible">{{products|length}}</span>
                 {% for product in products %}
+                    {% if product.status == 'ACTIF' %}
                     <article class="shirtSale">
                         <figure class="shirtOne" id="{{product.id}}">
-                            <a href="index.php?route=lookProduct&id={{product.id}}">
+                            <a href="Produit-{{product.id}}">
                                 <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
                             </a>
                         </figure> 
                         <ul>
                             <li>
                                 <h2>
-                                    <a href="index.php?route=lookProduct&id={{product.id}}">
+                                    <a href="Produit-{{product.id}}">
                                         {{ product.name }}
                                     </a>
                                 </h2>
@@ -42,6 +43,7 @@
                             </li>
                         </ul>
                     </article>
+                    {% endif %}
                 {% endfor %}
             </div>
             
@@ -49,7 +51,7 @@
                     <h5>Panier</h5>
                     <div class="bagProducts"></div> 
                     <div class="bagProductsTotal"></div>
-                    <form action="index.php?route=panier" method="POST">
+                    <form action="Panier" method="POST">
                         <button type="submit" class="btn">Valider</button>
                     </form>
             </section>

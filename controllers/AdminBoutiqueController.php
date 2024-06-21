@@ -178,40 +178,81 @@ class AdminBoutiqueController extends AbstractController{
 
     public function checkRemoveproduct() : void {
         $secret = $_ENV["SECRET"];
-        if(isset($_POST["selectProduct"]) ){
-            $tokenManager = new CSRFTokenManager(); 
-            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+        
+        // Check if the product has been selected
+        if (isset($_POST["selectProduct"])) {
+            $tokenManager = new CSRFTokenManager();
+            
+            // Validate the CSRF token
+            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
                 
                 $selectProduct = htmlspecialchars($_POST["selectProduct"]);
-
+    
                 $productManager = new MerchManager();
                 $product = $productManager->getProductsById($selectProduct);
-                // Remove file from uploads directory
+                
+                // Get file paths
                 $filePath = $product->getImgUrl();
+                $filePath2 = $product->getOtherImgUrl();
+    
+                // Check if the file paths exist
+                $filePathExists = file_exists($filePath);
+                $filePath2Exists = !empty($filePath2) && file_exists($filePath2);
+    
+                // If either file path exists, proceed with deletion
+                if ($filePathExists || $filePath2Exists) {
+                    $unlinkSuccess = true;
+    
+                    // Attempt to delete the first file if it exists
+                    if ($filePathExists) {
+                        $unlinkSuccess = unlink($filePath);
+                    }
+    
+                    // If the first file was successfully deleted and the second file exists, attempt to delete it
+                    if ($unlinkSuccess && $filePath2Exists) {
+                        $unlinkSuccess = unlink($filePath2);
+                    }
+    
+                    // If all deletions were successful, remove the product from the database
+                    if ($unlinkSuccess) {
+                        
 
-                if(file_exists($filePath)) {
-                    if(unlink($filePath)) {
-
-                        $productManager->removeProduct($product->getId());
-
-                        $_SESSION["valide"] = "Suppression réussie.";
+                        $isRemoved = $productManager->removeProduct($product->getId());
+    
+                        if ($isRemoved) {
+                            // Set a success message if the team was removed
+                            $_SESSION["valide"] = "Produit supprimée avec succès.";
+                        } else {
+                            // If the team cannot be removed, change its status to "NO ACTIF"
+                            $status = "NO ACTIF";
+                            $productManager->changeProductStatus($product->getId(), $status);
+                            $_SESSION["valide"] = " Le produit ne peut pas être retirée car il est 
+                                                    référencée dans les commandes utilisateurs, 
+                                                    mais il est maintenant marqué comme 'Non actif.";
+                        }
+                
                     } else {
-                        $_SESSION["error"] = "Une erreur est survenue lors de la suppression du fichier.";
+                        $_SESSION["error"] = "Une erreur est survenue lors de la suppression du fichier."; // Error during file deletion.
                     }
                 } else {
-                    $_SESSION["error"] = "Fichier non trouvé.";
+                    $_SESSION["error"] = "Fichier non trouvé."; // File not found.
                 }
+    
+                // Redirect to admin page with a secret key
                 header("Location: index.php?route=adminBoutique&secret=$secret");
                 exit;
-            } else{
-                $_SESSION["error"] = "Une erreur est survenue.";
+            } else {
+                // Invalid CSRF token
+                $_SESSION["error"] = "Une erreur est survenue."; // An error occurred.
                 header("Location: index.php?route=adminBoutique&secret=$secret");
                 exit;
             }
-        } else{
-            $_SESSION["error"] = "Une erreur est survenue.";
+        } else {
+            // No product selected
+            $_SESSION["error"] = "Une erreur est survenue."; // An error occurred.
             header("Location: index.php?route=adminBoutique&secret=$secret");
             exit;
         }
     }
+    
 }

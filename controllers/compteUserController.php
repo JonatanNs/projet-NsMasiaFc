@@ -101,17 +101,17 @@ class CompteUserController extends AbstractController{
                 $_SESSION['Addresses'] = $newAddresses->getId();
 
                 $_SESSION["valide"] = "Addresse enregistrer";
-                header("Location: index.php?route=compteUser");
+                header("Location: Compte-Utilisateur");
                 exit;
 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue";
-                header("Location: index.php?route=payement");
+                header("Location: Compte-Utilisateur");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Une erreur est survenue";
-            header("Location: index.php?route=payement");
+            header("Location: 404");
             exit;
         }
     }
@@ -133,22 +133,22 @@ class CompteUserController extends AbstractController{
                         $_SESSION["user"] = $newFistName . ' ' . $newLastName;
 
                         $_SESSION["valide"] = "Vos informations ont bien été changer";
-                        header("Location: index.php?route=compteUser");
+                        header("Location: Compte-Utilisateur");
                         exit;
 
                 } else {
                     $_SESSION["error"] = "Mot de passe incorrect";
-                    header("Location: index.php?route=compteUser");
+                    header("Location: Compte-Utilisateur");
                     exit;
                 }
             } else{
                 $_SESSION["error"] = "Une erreur est survenue";
-                header("Location: index.php?route=compteUser");
+                header("Location: Compte-Utilisateur");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Veuillez remplir tous les champs";
-            header("Location: index.php?route=compteUser");
+            header("Location: Compte-Utilisateur");
             exit;
         }
     }
@@ -163,7 +163,7 @@ class CompteUserController extends AbstractController{
 
                 if($user === null){
                     $_SESSION["error"] = "Identification incorrect.";
-                    header("Location: index.php?route=compteUser");
+                    header("Location: Compte-Utilisateur");
                     exit;
                 } else{
                     if($_POST["changePassword"] === $_POST["confirmChangePassword"]){
@@ -175,9 +175,51 @@ class CompteUserController extends AbstractController{
 
                                 $newPassword = password_hash($_POST["changePassword"], PASSWORD_BCRYPT); 
 
-                                new User($user->getFirstName(), $user->getLastName(), $user->getEmail(), $newPassword);
+                                $newUser = new User(
+                                                        $user->getFirstName(), 
+                                                        $user->getLastName(), 
+                                                        $user->getEmail(),
+                                                        $newPassword
+                                                    );
+                                $newUser->setId($user->getId());
 
-                                $userManager->changePassword($user->getId(), $newPassword);
+                                $userManager->changePassword($newUser->getId(), $newUser->getPassword());
+
+                                $nsMasiaManager = new NsMasiaManager();
+                                $nsMasia = $nsMasiaManager->getNsMasia();
+                                $nsMasiaName = $nsMasia->getName();
+                                $nameUser = $newUser->getFirstName() . ' ' . $newUser->getLastName();
+                                $emailUser = $newUser->getEmail();
+                                $css = $this->css();
+                                $subject =  "Vous avez modifier vos informations !";
+
+                                $emailContent = "
+                                                <!DOCTYPE html>
+                                                <html lang='fr'>
+                                                <head>
+                                                    <meta charset='UTF-8'>
+                                                    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+                                                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                                                    <title>$subject</title>
+                                                    <style>
+                                                        $css
+                                                    </style>
+                                                </head>
+                                                
+                                                <body>
+                                                    <p>Bonjour $nameUser,</p>
+                                                
+                                                    <p>Nous vous informons que votre mot de passe sur $nsMasiaName a été modifié avec succès.</p>
+                                                    <p>Si vous n'êtes pas à l'origine de cette modification, veuillez contacter notre support immédiatement pour sécuriser votre compte.</p>
+                                                
+                                                    <div>
+                                                        <p>Cordialement,</p>
+                                                        <p>L'équipe $nsMasiaName</p>
+                                                    </div>
+                                                </body>
+                                                </html>
+                                ";
+                                $this->sendEmail($emailUser, $nameUser, $subject, $emailContent);
 
                                 $_SESSION["valide"] = "Vos informations ont bien été changer.";
                                 header("Location: index.php?route=logout");
@@ -185,28 +227,28 @@ class CompteUserController extends AbstractController{
 
                             } else{
                                 $_SESSION["error"] = "Le mot de passe doit contenir minimum 8 caractères, un caractère spécial, un chiffre, une lettre majuscule et minuscule.";
-                                header("Location: index.php?route=compteUser");
+                                header("Location: Compte-Utilisateur");
                                 exit;
                             }
                         } else {
                             $_SESSION["error"] = "Mot de passe incorrect.";
-                            header("Location: index.php?route=compteUser");
+                            header("Location: Compte-Utilisateur");
                             exit;
                         }
                     } else {
                         $_SESSION["error"] = "Le mot de passe et sa confirmation ne correspondent pas.";
-                        header("Location: index.php?route=compteUser");
+                        header("Location: Compte-Utilisateur");
                         exit;
                     }   
                 }
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=compteUser");
+                header("Location: Compte-Utilisateur");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Veuillez remplir tous les champs.";
-            header("Location: index.php?route=compteUser");
+            header("Location: Compte-Utilisateur");
             exit;
         }
     }
@@ -220,7 +262,7 @@ class CompteUserController extends AbstractController{
 
                 if($user === null){
                     $_SESSION["error"] = "Email inconnu.";
-                    header("Location: index.php?route=compteUser");
+                    header("Location: Compte-Utilisateur");
                     exit;
                 } else {
                     if($_POST["newEmail"] === $_POST["confirmNewEmail"]){
@@ -228,9 +270,55 @@ class CompteUserController extends AbstractController{
 
                             $newEmail = htmlspecialchars($_POST["newEmail"]);
 
-                            new User($user->getFirstName(),  $user->getLastName(),  $newEmail, $user->getPassword());
+                            $newUser = new User($user->getFirstName(),  
+                                                $user->getLastName(),  
+                                                $newEmail, 
+                                                $user->getPassword()
+                                            );
+                            $newUser->setId($user->getId());
 
-                            $userManager->changeEmail($user->getId(), $newEmail);
+                            $userManager->changeEmail($newUser->getId(), $newUser->getEmail());
+
+                            $nsMasiaManager = new NsMasiaManager();
+                            $nsMasia = $nsMasiaManager->getNsMasia();
+                            $nsMasiaName = $nsMasia->getName();
+                            $nameUser = $user->getFirstName() . ' ' . $user->getLastName();
+                                $emailUser = $user->getEmail();
+                                $css = $this->css();
+                                
+                                $subject =  "Vous avez modifier vos informations !";
+
+                                $emailContent = "
+                                                <!DOCTYPE html>
+                                                <html lang='fr'>
+                                                <head>
+                                                    <meta charset='UTF-8'>
+                                                    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+                                                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                                                    <title>$subject</title>
+                                                    <style>
+                                                        $css
+                                                    </style>
+                                                </head>
+                                                
+                                                <body>
+                                                    <p>Bonjour $nameUser,</p>
+                                                
+                                                    <p>Nous vous informons que votre adresse email sur $nsMasiaName a été modifiée avec succès.</p>
+                                                    <p>Si vous n'êtes pas à l'origine de cette modification, veuillez contacter notre support immédiatement pour sécuriser votre compte.</p>
+                                                
+                                                    <div>
+                                                        <p>Cordialement,</p>
+                                                        <p>L'équipe $nsMasiaName</p>
+                                                    </div>
+                                                </body>
+                                                </html>
+                                
+                                ";
+                                $this->sendEmail($emailUser, $nameUser, $subject, $emailContent);
+
+                                $authC = new AuthController();
+                                $authC->logout();
                             
                             $_SESSION["valide"] = "Vos informations ont bien été changer.";
                             header("Location: index.php?route=logout");
@@ -238,23 +326,23 @@ class CompteUserController extends AbstractController{
 
                         } else {
                             $_SESSION["error"] = "Mot de passe incorrect.";
-                            header("Location: index.php?route=compteUser");
+                            header("Location: Compte-Utilisateur");
                             exit;
                         }
                     } else {
                         $_SESSION["error"] = "L'email et sa confirmation ne correspondent pas.";
-                        header("Location: index.php?route=compteUser");
+                        header("Location: Compte-Utilisateur");
                         exit;
                     }
                 } 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=compteUser");
+                header("Location: Compte-Utilisateur");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Veuillez remplir tous les champs.";
-            header("Location: index.php?route=compteUser");
+            header("Location: Compte-Utilisateur");
             exit;
         }
     }

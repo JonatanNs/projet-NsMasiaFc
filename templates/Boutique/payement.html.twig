@@ -4,7 +4,7 @@
     <main class="main">
         <article class="titleBoutiquePayement">
             <figure>
-                <a href="index.php?route=home"><img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/></a>
+                <a href="Accueil"><img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/></a>
             </figure>
             <h1>{{nsMasia.name}}</h1>
             <p>Boutique Officiel</p>
@@ -21,7 +21,7 @@
                 {% endif %}
                 {% if userIsConect is empty %}
                 <h2>Information personels </h2>
-                    <form action="index.php?route=check-login" method="POST" class="form formLogin">
+                    <form action="Vérification-de-connexion" method="POST" class="form formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="emailLogin">Email</label>
@@ -39,7 +39,7 @@
                         <p class="goSignup">Créer nouveau compte ?<p>
                     </form>
 
-                    <form action="index.php?route=check-signup" method="POST" class="form formSignup invisible" id="payment-form">
+                    <form action="Vérification-inscription" method="POST" class="form formSignup invisible" id="payment-form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="first_name">Prénom</label>
@@ -85,7 +85,7 @@
                 <article class="orderUser-address">
                     <h2>Adresse de livraison</h2>
                     {% if addresse is empty %}
-                    <form action="index.php?route=checkAddress"  method="POST" class="form formLivraison">
+                    <form action="Vérification-Adresse"  method="POST" class="form formLivraison">
                         <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                         <fieldset>
@@ -125,7 +125,7 @@
                                     <li>{{ addresse.postalcode ~ ' ' ~ addresse.city }}</li>
                                     <li>{{ addresse.pays}}</li>
                                 </ul>
-                                <a href="index.php?route=compteUser">Modifier votre adresse <span class="fa-solid fa-repeat" style="color: #ffffff;"></span></a>
+                                <a href="Compte-Utilisateur">Modifier votre adresse <span class="fa-solid fa-repeat" style="color: #ffffff;"></span></a>
                             </article>
                     {% endif %}
                 </article>

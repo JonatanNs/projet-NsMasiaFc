@@ -104,46 +104,43 @@
                     text-align: center;
                     margin: 2em 0;
                 }
-                ul {
-                    position: relative;
+                div{
                     display: flex;
-                    flex-direction: row;
-                    gap: 1em;
-                    padding: 1em;  
-                    background-color: $bleu;
-                    border: none;
-                    box-shadow: $beige 0px 2px 8px 0px;
-                    border-radius: 0.5rem;
-                    margin: 1em 0;
-    
-                    li:first-of-type{
-                        font-size: 5rem;
-                        font-family: $font;
-                        font-weight: 900;
-                        position: absolute;
-                        bottom: -20%;
-                    }
-                    li:nth-of-type(2){
-                       padding-left: 4em; 
-                    }
-                    li:nth-of-type(3){
-                        font-weight: 900;
-                        text-transform: uppercase;
-                        font-family: $font;
-                    }
-                    .playersClubImg{
-                        
-                        img{
-                            position: absolute;
-                            right: 0;
-                            bottom: 0;
-                            width: 20%;
-                            object-fit: cover;
-                            object-position: top;
-                            height: 57px;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    article {
+                        width: 80%;
+                        padding: 1em;  
+                        background-color: $bleu;
+                        border: none;
+                        box-shadow: $beige 0px 2px 8px 0px;
+                        border-radius: 0.5rem;
+                        margin: 1em 0;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        h4{
+                            font-size: 5rem;
+                            font-family: $font;
+                            font-weight: 900;
+                            
                         }
-                    }
-                }   
+                        
+                        p:nth-of-type(2){
+                            font-weight: 900;
+                            text-transform: uppercase;
+                            font-family: $font;
+                        }
+                    }  
+                    figure{
+                        width: 50%;
+                        img{
+                            width: 100%;
+                        }
+                    } 
+                }
             } 
         }  
     }
@@ -157,32 +154,29 @@
             width: 100%;
             .playersClub {
                 article{
-                    ul {
-                        padding: 2em;
-        
-                        li:first-of-type{
-                            bottom: 0;
-                            top: 10px;
-                        }
-                        li:nth-of-type(2){
-                            font-size: 2.5rem;
-                        }
-                        li:nth-of-type(3){
-                            font-size: 2.5rem;
-                        }
-                        .playersClubImg{
-                            img{
-                                top: -5;
-                                height: 10em;
-                                object-fit: cover; 
-                                object-position: top; 
-                                border-top-left-radius: 2rem;
-                                border-top-right-radius: 2rem;
-                                box-shadow: $beige 0px 2px 8px 0px;
+                    div{
+                        article {
+                            width: 80%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-around;
+                            align-items: center;
+                            h4{
+                                font-size: 6rem;
                             }
-                        }
-                    }   
-                } 
+                            
+                            p:nth-of-type(2){
+                                font-size: 2rem;
+                            }
+                        }  
+                        figure{
+                            width: 35%;
+                            img{
+                                width: 100%;
+                            }
+                        } 
+                    }
+                }  
             }
         }
     }
@@ -195,32 +189,29 @@
             padding: 8em 3em;
             .playersClub {
                 article{
-                    ul {
-                        padding: 2em;
-        
-                        li:first-of-type{
-                            bottom: 0;
-                            top: 10px;
-                        }
-                        li:nth-of-type(2){
-                            font-size: 2.5rem;
-                        }
-                        li:nth-of-type(3){
-                            font-size: 2.5rem;
-                        }
-                        .playersClubImg{
-                            img{
-                                top: -5;
-                                height: 10em;
-                                object-fit: cover; 
-                                object-position: top; 
-                                border-top-left-radius: 2rem;
-                                border-top-right-radius: 2rem;
-                                box-shadow: $beige 0px 2px 8px 0px;
+                    div{
+                        article {
+                            width: 80%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-around;
+                            align-items: center;
+                            h4{
+                                font-size: 6rem;
                             }
-                        }
-                    }   
-                } 
+                            
+                            p:nth-of-type(2){
+                                font-size: 2rem;
+                            }
+                        }  
+                        figure{
+                            width: 35%;
+                            img{
+                                width: 100%;
+                            }
+                        } 
+                    }
+                }  
             }
         }
     }
@@ -233,31 +224,29 @@
             padding: 8em 10em;
             .playersClub {
                 article{
-                    ul {
-                        padding: 2em;
-        
-                        li:first-of-type{
-                            bottom: 0;
-                            top: 10px;
-                        }
-                        li:nth-of-type(2){
-                            font-size: 2.5rem;
-                        }
-                        li:nth-of-type(3){
-                            font-size: 2.5rem;
-                        }
-                        .playersClubImg{
-                            img{
-                                top: -5;
-                                height: 10em;
-                                object-fit: none; 
-                                object-position: top; 
-                                border-top-left-radius: 2rem;
-                                border-top-right-radius: 2rem;
+                    div{
+                        article {
+                            width: 80%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-around;
+                            align-items: center;
+                            h4{
+                                font-size: 8rem;
                             }
-                        }
-                    }   
-                } 
+                            
+                            p:nth-of-type(2){
+                                font-size: 3rem;
+                            }
+                        }  
+                        figure{
+                            width: 30%;
+                            img{
+                                width: 100%;
+                            }
+                        } 
+                    }
+                }  
             }
         }
     }
@@ -270,30 +259,28 @@
             padding: 8em 10em;
             .playersClub {
                 article{
-                    ul {
-                        padding: 2em;
-        
-                        li:first-of-type{
-                            bottom: 0;
-                            top: 10px;
-                        }
-                        li:nth-of-type(2){
-                            font-size: 2.5rem;
-                        }
-                        li:nth-of-type(3){
-                            font-size: 2.5rem;
-                        }
-                        .playersClubImg{
-                            img{
-                                top: -5;
-                                height: 10em;
-                                object-fit: none; 
-                                object-position: top; 
-                                border-top-left-radius: 2rem;
-                                border-top-right-radius: 2rem;
+                    div{
+                        article {
+                            width: 80%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-around;
+                            align-items: center;
+                            h4{
+                                font-size: 8rem;
                             }
-                        }
-                    }   
+                            
+                            p:nth-of-type(2){
+                                font-size: 3rem;
+                            }
+                        }  
+                        figure{
+                            width: 20%;
+                            img{
+                                width: 100%;
+                            }
+                        } 
+                    }
                 } 
             }
         }

@@ -5,22 +5,17 @@ class NsMasiaManager extends AbstractManager{
     /**********************************************************
                              * CREATE PLAYER *
     **********************************************************/
-    public function createPlayer(
-                                    string $first_name, 
-                                    string $last_name,  
-                                    string $name_jersay, 
-                                    int $number, 
-                                    string $position
-                                ) : void {
+    public function createPlayer(PlayerNsMasia $playerNsMasia ) : void {
         try{
-            $query = $this->db->prepare("INSERT INTO playersNsMasia (id, first_name, last_name, name_jersay, number, position) 
-            VALUES (null, :first_name, :last_name, :name_jersay, :number, :position)");
+            $query = $this->db->prepare("INSERT INTO playersNsMasia (id, first_name, last_name, name_jersay, number, position, img) 
+            VALUES (null, :first_name, :last_name, :name_jersay, :number, :position, :img)");
             $parameters = [
-                'first_name' => $first_name, 
-                'last_name' => $last_name, 
-                'name_jersay' => $name_jersay, 
-                'number' => $number, 
-                'position' => $position
+                'first_name' => $playerNsMasia->getFirstName(), 
+                'last_name' => $playerNsMasia->getLastName(),  
+                'name_jersay' => $playerNsMasia->getNameJersay(), 
+                'number' => $playerNsMasia->getNumber(),  
+                'position' => $playerNsMasia->getPosition(), 
+                'img' => $playerNsMasia->getImg() 
             ];
             $query->execute($parameters); 
         } catch (PDOException $e){
@@ -308,7 +303,8 @@ class NsMasiaManager extends AbstractManager{
                                                 $item["last_name"], 
                                                 $item["name_jersay"], 
                                                 $item["number"], 
-                                                $item["position"] 
+                                                $item["position"],
+                                                $item["img"]
                                             );
                 $newPlayer->setId($item["id"]);
                 $players[] = $item;
@@ -352,7 +348,8 @@ class NsMasiaManager extends AbstractManager{
                                                 $result["last_name"], 
                                                 $result["name_jersay"], 
                                                 $result["number"], 
-                                                $result["position"] 
+                                                $result["position"],
+                                                $result["img"]  
                                             );
                 $newPlayer->setId($result["id"]);
             }

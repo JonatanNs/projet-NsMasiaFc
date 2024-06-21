@@ -40,7 +40,7 @@
                 <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
             {% endif %}
 
-    <form action="index.php?route=check-login" method="POST" class="form formLogin">
+    <form action="Vérification-de-connexion" method="POST" class="form formLogin">
       <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
         <fieldset>
           <label for="emailLogin">Email</label>
@@ -58,7 +58,7 @@
         <p class="goSignup">Créer nouveau compte <p>
       </form>
 
-    <form action="index.php?route=check-signup" method="POST" class="form formSignup invisible">
+    <form action="Vérification-inscription" method="POST" class="form formSignup invisible">
       <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
         <fieldset>
           <label for="first_name">Prénom</label>

@@ -24,7 +24,7 @@
             <article class="changeName invisible">
                 <h3>Modifier son nom <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
                 
-                <form action="index.php?route=checkChangeName" method="POST" class="form formChangeName invisible">
+                <form action="Changer-Nom" method="POST" class="form formChangeName invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="changeFirstName">Prénom</label>
@@ -49,7 +49,7 @@
 
             <article class="changePassword invisible">
                 <h3>Modifier son mot de passe <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
-                <form action="index.php?route=checkChangerPassword" method="POST" class="form formChangerPassword invisible">
+                <form action="Changer-Mot-De-Passe" method="POST" class="form formChangerPassword invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="emailForChangePassword">Email</label>
@@ -79,7 +79,7 @@
 
             <article class="changeEmail invisible">
                 <h3>Modifier Email <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
-                <form action="index.php?route=checkChangerEmail" method="POST" class="form formChangerEmail invisible">
+                <form action="Changer-Email" method="POST" class="form formChangerEmail invisible">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="emailForChange">Email actuel</label>
@@ -109,7 +109,7 @@
         <article class="addressforDelivery">
             <h2>Mon adresse de livraison <span class="fa-solid fa-map" style="color: #ffffff;"></span></h2>
             {% if address is empty %}
-                <form action="index.php?route=checkAddress"  method="POST" class="form formDelivery invisible">
+                <form action="Vérification-Adresse"  method="POST" class="form formDelivery invisible">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                     <fieldset>
@@ -149,7 +149,7 @@
                 </article>
                 <article class="changeAddress invisible">
                     <h3>Modifier son adresse <span class="fa-solid fa-circle-right" style="color: #c4bde5;"></span></h3>
-                    <form action="index.php?route=checkChangeAddress"  method="POST" class="form formForChangeAddress invisible">
+                    <form action="Changer-Adresse"  method="POST" class="form formForChangeAddress invisible">
                         <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <input type="hidden" name="user_id" id="user_id" value="{{ userId }}"/>
                         <input type="hidden" name="address_id" id="address_id" value="{{ address.id }}"/>

@@ -46,7 +46,7 @@ class AdminNsMasiaController extends AbstractController{
             } 
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: Page404-$secret");
+            header("Location: 404");
             exit;
         } 
     }
@@ -64,15 +64,12 @@ class AdminNsMasiaController extends AbstractController{
                 
                 if($_POST["updateNewEmail"] === $_POST["updateConfirmNewEmail"]){
 
-                    $nsMasiaId = htmlspecialchars($_POST["nsMasiaId"]);
                     $actualEmail = htmlspecialchars($_POST["actualEmail"]);
                     $newPasswordEmail = htmlspecialchars($_POST["updateNewPasswordEmail"]);
                     $newConfirmNewEmail = htmlspecialchars($_POST["updateConfirmNewEmail"]);
 
                     $nsMasiaManager = new NsMasiaManager();
                     $nsMasia = $nsMasiaManager->getNsMasia();
-
-                    $password = password_hash($newPasswordEmail, PASSWORD_BCRYPT); 
 
                     if($nsMasia->getEmail() === $actualEmail){
                     
@@ -81,7 +78,7 @@ class AdminNsMasiaController extends AbstractController{
                                                     $nsMasia->getLogoUrl(), 
                                                     $nsMasia->getLogoAlt(), 
                                                     $newConfirmNewEmail, 
-                                                    $password,
+                                                    $newPasswordEmail,
                                                     $nsMasia->getStadium()
                                                 );
                                     $newNsMasia->setId($nsMasia->getId());
@@ -114,7 +111,7 @@ class AdminNsMasiaController extends AbstractController{
             } 
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: Page404&$secret");
+            header("Location: 404");
             exit;
         } 
     }
@@ -218,7 +215,7 @@ class AdminNsMasiaController extends AbstractController{
             } 
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: Page404");
+            header("Location: 404");
             exit;
         } 
     }

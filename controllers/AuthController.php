@@ -102,32 +102,32 @@ class AuthController extends AbstractController
                             $this->baseEmailSignup($email, $name);
 
                             $_SESSION["valide"] = "Inscription réussi, connectez-vous ! Un email vous a été envoyé.";
-                            header("Location: index.php?route=form");
+                            header("Location: Formulaire");
                             exit;  
                             
                         } else{
                             $_SESSION["error"] = "Cette adresse e-mail est déjà utilisée par un autre utilisateur.";
-                            header("Location: index.php?route=form");
+                            header("Location: Formulaire");
                             exit;
                         }
                     } else {
                         $_SESSION["error"] = "Le mot de passe doit contenir minimum 8 caractères, un caractère spécial, un chiffre, une lettre majuscule et minuscule.";
-                        header("Location: index.php?route=form");
+                        header("Location: Formulaire");
                         exit;
                     }  
                 } else {
                     $_SESSION["error"] = "Le mot de passe et sa confirmation ne correspondent pas.";
-                    header("Location: index.php?route=form");
+                    header("Location: Formulaire");
                     exit;
                 }
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=form");
+                header("Location: Formulaire");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=page404");
+            header("Location: 404");
             exit;
         }
     }
@@ -145,7 +145,7 @@ class AuthController extends AbstractController
 
                 if($users === null){
                     $_SESSION["error"] = "Identifiant ou le mot de passe est incorrect.";
-                    header("Location: index.php?route=form");
+                    header("Location: Formulaire");
                     exit;
                 } else{
                     if(password_verify($password, $users->getPassword())){
@@ -158,17 +158,17 @@ class AuthController extends AbstractController
                         $_SESSION['userRoles'] = $users->getRoles();
 
                         $_SESSION["valide"] = "Connexion reussie.";
-                        header('Location: index.php?route=home');
+                        header('Location: Accueil');
                         exit; 
                     } else {
                         $_SESSION["error"] = "Identifiant ou mot de passe incorrect.";
-                        header("Location: index.php?route=form");
+                        header("Location: Formulaire");
                     exit;
                     }          
                 }
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=form");
+                header("Location: Formulaire");
                 exit;
             } 
         }
@@ -177,7 +177,7 @@ class AuthController extends AbstractController
     public function logout() : void
     {
         session_destroy();
-        header("Location: index.php?route=home");
+        header("Location: Accueil");
     }
 
 }

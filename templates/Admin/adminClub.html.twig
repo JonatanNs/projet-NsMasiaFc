@@ -21,7 +21,10 @@
                 {% endif %}
                 <article class="add">
                     <h3>Ajouter un joueur <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
-                    <form action="index.php?route=checkaddPlayer&secret={{secret}}" method="POST" class="form ">
+                    <form action="index.php?route=checkaddPlayer&secret={{secret}}" 
+                          enctype="multipart/form-data"
+                          method="POST" 
+                          class="form ">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="addFirst_name">Prénom</label>
@@ -48,6 +51,11 @@
                                 <option value="Milieu">Milieu</option>
                                 <option value="Attaquant">Attaquant</option>
                             </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="imgUrl">Image</label>
+                            <input type="file" id="addMediaFile" name="addMediaFile" accept="image/*" >
+                            <input type="hidden" id="addMediaFile" name="addMediaFile">
                         </fieldset>
                         <fieldset>
                             <button type="submit" class="btn">Modifier</button>

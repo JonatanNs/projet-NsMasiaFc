@@ -21,6 +21,8 @@
     .container{
         max-width: 480px;
         font-family: $font2 !important;
+        margin: 0;
+        padding: 0;
     }
 }
 
@@ -62,7 +64,7 @@
     }
 }
 
-/*****************BUTTON**************/
+// /*****************BUTTON**************/
 .btn{
     background-color: $black;
     color: $beige;
@@ -83,3 +85,15 @@
 }
 
 
+.alertMessage{
+    background-color: $bleu;
+    padding: 1.5em;
+    width: 20%;
+    text-align: center;
+    position:fixed;
+    top: 1.5em;
+    right: 0;
+    z-index: 200;
+    border: 2px solid $beige;
+    border-radius: 1rem;
+}

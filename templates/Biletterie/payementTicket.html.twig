@@ -21,7 +21,7 @@
                 <article class="orderUser-connexion">
                 {% if userIsConect is empty %}
                 <h2>Informations personels</h2>
-                    <form action="index.php?route=check-login" method="POST" class=" formLogin">
+                    <form action="Vérification-de-connexion" method="POST" class=" formLogin">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="emailLogin">Email</label>
@@ -39,7 +39,7 @@
                         <p class="goSignup">Créer nouveau compte ?<p>
                     </form>
 
-                    <form action="index.php?route=check-signup" method="POST" class="formSignup invisible" id="payment-form">
+                    <form action="Vérification-inscription" method="POST" class="formSignup invisible" id="payment-form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="first_name">Prénom</label>
@@ -94,7 +94,7 @@
                 <p class="recapTicket-total"></p>
             </section> 
             {% if userIsConect is not empty %}
-            <form action="index.php?route=stripePayTicket" method="POST" class="formTicketStripe">
+            <form action="Paiement-Billet-Stripe" method="POST" class="formTicketStripe">
                 <button type="submit" class="btn">Passez au payement</button>
             </form>  
             {% endif %}

@@ -40,42 +40,79 @@
             <h2>La NS TEAM</h2>
             <article>
                 <h3>Gardiens</h3>
-                {% for player in playersNs %}
-                    {% if player.position == 'Gardien' %}
-                    <ul>
-                        <li>{{ player.number }}</li>
-                        <li>{{ player.first_name }}</li>
-                        <li>{{ player.name_jersay }}</li> 
-                        <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
-                    </ul>
-                    {% endif %}
-                {% endfor %}
+                    <div>
+                    {% for player in playersNs %}
+                        {% if player.position == 'Gardien' %}
+                            <article>
+                                <div>
+                                    <h4>{{ player.number }}</h4>
+                                    <p>{{ player.first_name }}</p>
+                                    <p>{{ player.name_jersay }}</p>
+                                </div>
+                                <figure> 
+                                    <img src="{{player.img}}" alt="{{ player.first_name ~ ' ' ~ player.last_name}} joueur du Ns Masia FC"/>
+                                </figure>
+                            </article>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
             </article>
             <article>
                 <h3>Défenseurs</h3>
-                {% for player in playersNs %}
-                    {% if player.position == 'Défenseur' %}
-                        <ul>
-                            <li>{{ player.number }}</li>
-                            <li>{{ player.first_name }}</li>
-                            <li>{{ player.name_jersay }}</li>
-                            <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
-                        </ul>
-                    {% endif %}
-                {% endfor %}
+                    <div>
+                        {% for player in playersNs %}
+                            {% if player.position == 'Defenseur' %}
+                                <article>
+                                    <div>
+                                        <h4>{{ player.number }}</h4>
+                                        <p>{{ player.first_name }}</p>
+                                        <p>{{ player.name_jersay }}</p>
+                                    </div>
+                                    <figure> 
+                                        <img src="{{player.img}}" alt="{{ player.first_name ~ ' ' ~ player.last_name}} joueur du Ns Masia FC"/>
+                                    </figure>
+                                </article>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+            </article>
+            <article>
+                <h3>Milieu</h3>
+                    <div>
+                        {% for player in playersNs %}
+                            {% if player.position == 'Milieu' %}
+                                <article>
+                                    <div>
+                                        <h4>{{ player.number }}</h4>
+                                        <p>{{ player.first_name }}</p>
+                                        <p>{{ player.name_jersay }}</p>
+                                    </div>
+                                    <figure> 
+                                        <img src="{{player.img}}" alt="{{ player.first_name ~ ' ' ~ player.last_name}} joueur du Ns Masia FC"/>
+                                    </figure>
+                                </article>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
             </article>
             <article>
                 <h3>Attaquants</h3>
-                {% for player in playersNs %}
-                    {% if player.position == 'Attaquant' %}
-                        <ul>
-                            <li>{{ player.number }}</li>
-                            <li>{{ player.first_name }}</li>
-                            <li>{{ player.name_jersay }}</li>
-                            <li class="playersClubImg"> <img src="https://live.staticflickr.com/65535/53618576116_990506817d_n.jpg" alt="Joueur du clun Ns Masia Fc"/></li>
-                        </ul>
-                    {% endif %}
-                {% endfor %}
+                    <div>
+                        {% for player in playersNs %}
+                            {% if player.position == 'Attaquant' %}
+                                <article>
+                                    <div>
+                                        <h4>{{ player.number }}</h4>
+                                        <p>{{ player.first_name }}</p>
+                                        <p>{{ player.name_jersay }}</p>
+                                    </div>
+                                    <figure> 
+                                        <img src="{{player.img}}" alt="{{ player.first_name ~ ' ' ~ player.last_name}} joueur du Ns Masia FC"/>
+                                    </figure>
+                                </article>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
             </article>
         </article>
     </section>

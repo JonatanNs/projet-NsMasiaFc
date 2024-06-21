@@ -8,7 +8,8 @@ class PlayerNsMasia {
                                     private string $last_name, 
                                     private string $name_jersay, 
                                     private int $number, 
-                                    private string $position
+                                    private string $position,
+                                    private string $img
                                 ) {
     }
 
@@ -53,5 +54,12 @@ class PlayerNsMasia {
     }
     public function setPosition(string $position){
         $this->position = $position;
+    }
+
+    public function getImg(): string {
+        return $this->img;
+    }
+    public function setImg(string $img){
+        $this->img = $img;
     }
 }

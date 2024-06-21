@@ -78,19 +78,42 @@ class MerchManager extends AbstractManager{
         }
     }
 
+    public function changeProductStatus(
+                                            int $id, 
+                                            string $status
+                                        ) : void {
+    try{
+        $query = $this->db->prepare("UPDATE products 
+                                     SET status = :status 
+                                     WHERE id = :id");
+
+        $parameters = [
+            'id' => $id,
+            'status' => $status
+        ];
+        $query->execute($parameters); 
+    } catch (PDOException $e){
+        error_log("Database error : " . $e->getMessage());
+        throw new Exception("Failed to change product.");
+    }
+}
+
     /**********************************************************
                              * REMOVE PRODUCT *
     **********************************************************/
-    public function removeProduct(int $id) : void {
+    public function removeProduct(int $id) : bool {
         try{
             $query = $this->db->prepare("DELETE FROM products WHERE id = :id");
             $parameters = [
-                'id' =>  $id, 
+                'id' =>  $id
             ];
             $query->execute($parameters);
+
+            return $query->rowCount() > 0;
+
         } catch (PDOException $e){
             error_log("Database error : " . $e->getMessage());
-            throw new Exception("Failed to remove product.");
+            return false;
         } 
     }
 

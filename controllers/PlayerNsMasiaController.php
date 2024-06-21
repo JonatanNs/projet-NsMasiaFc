@@ -62,6 +62,53 @@ class PlayerNsMasiaController extends AbstractController{
         ) {
             $tokenManager = new CSRFTokenManager(); 
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                $media = '';
+    
+                // Checking and processing the uploaded file
+                if (isset($_FILES["addMediaFile"]["error"]) && $_FILES["addMediaFile"]["error"] === UPLOAD_ERR_OK) {
+                    $targetDir = "assets/img/uploadsPlayer/";
+                    if (!file_exists($targetDir)) {
+                        mkdir($targetDir, 0777, true);
+                    }
+    
+                    $originalFileName = basename($_FILES["addMediaFile"]["name"]);
+                    $sanitizedFileName = str_replace(' ', '_', $originalFileName);
+                    $targetFile = $targetDir . $sanitizedFileName;
+                    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    
+                    // Image file validation
+                    $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
+                    if ($check === false) {
+                        $_SESSION["error"] = "Le fichier n’est pas une image.";
+                        header("Location:  index.php?route=adminClub&secret=$secret");
+                        exit;
+                    }
+    
+                    // Validation of the file format
+                    if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
+                        $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
+                        header("Location:  index.php?route=adminClub&secret=$secret");
+                        exit;
+                    }
+    
+                    // Move the uploaded file if it does not exist
+                    if (!file_exists($targetFile)) {
+                        if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
+                            $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
+                            header("Location:  index.php?route=adminClub&secret=$secret");
+                            exit;
+                        }
+                    }
+    
+                    $media = 'assets/img/uploadsPlayer/' . htmlspecialchars($sanitizedFileName);
+                    
+                } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
+                    // Handling other download errors
+                    $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
+                    header("Location:  index.php?route=adminClub&secret=$secret");
+                    exit;
+                }
+
                 $firstName = htmlspecialchars($_POST["addFirst_name"]);
                 $lastName = htmlspecialchars($_POST["addLast_name"]);
                 $nameJersay = htmlspecialchars($_POST["addNameJersay"]);
@@ -73,7 +120,17 @@ class PlayerNsMasiaController extends AbstractController{
                 if ($nsmasiaManager->isJerseyNumberExists($number)) {
                     $_SESSION["error"] = "Un joueur a déjà ce numéro de maillot.";
                 } else {
-                    $nsmasiaManager->createPlayer($firstName, $lastName, $nameJersay, $number, $position);
+                    $newPlayer = new PlayerNsMasia( 
+                                                    $firstName, 
+                                                    $lastName, 
+                                                    $nameJersay, 
+                                                    $number, 
+                                                    $position, 
+                                                    $media
+                                                );
+
+                    $nsmasiaManager->createPlayer($newPlayer);
+
                     $_SESSION["valide"] = "Joueur ajouté.";
                 }
             } else {

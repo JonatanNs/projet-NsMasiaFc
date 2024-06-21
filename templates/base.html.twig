@@ -39,28 +39,28 @@
                     <div class="nav-links">
                         <ul class="links">
                             <li>
-                                <a href="index.php?route=home">Accueil<span class="fa-solid fa-house" style="color: #000000;"></span></a>
+                                <a href="Accueil">Accueil<span class="fa-solid fa-house" style="color: #000000;"></span></a>
                             </li>
                             <li>
-                                <a href="index.php?route=news">Actualité <span class="fa-solid fa-newspaper" style="color: #000000;"></span></a>
+                                <a href="Actualités">Actualités <span class="fa-solid fa-newspaper" style="color: #000000;"></span></a>
                             </li>
                             <li>
-                                <a href="index.php?route=club">Club <span class="fa-regular fa-futbol" style="color: #000000;"></span></a>
+                                <a href="Club">Club <span class="fa-regular fa-futbol" style="color: #000000;"></span></a>
                             </li>
                             <li>
-                                <a href="index.php?route=boutique">Boutique <span class="fa-solid fa-shop" style="color: #000000;"></span></a>
+                                <a href="Boutique">Boutique <span class="fa-solid fa-shop" style="color: #000000;"></span></a>
                             </li>
                             <li>
-                                <a href="index.php?route=billeterie">Billeterie <span class="fa-solid fa-ticket" style="color: #000000;"></span></a>
+                                <a href="Billetterie">Billeterie <span class="fa-solid fa-ticket" style="color: #000000;"></span></a>
                             </li>
                             {% if userIsConect is empty %}
                             <li>
-                                <a href="index.php?route=form" class="btn">Connexion </a>
+                                <a href="Formulaire" class="btn">Connexion </a>
                             </li>
                             {% else %}
                                 {% if userIsConect is not empty %} <!-- When the user is logged in-->
                                     <li class="header-userConnect">
-                                        <a href="index.php?route=compteUser">
+                                        <a href="Compte-Utilisateur">
                                             {{ userIsConect }} <span class="fa-solid fa-user fa-lg" id="user"></span> 
                                         </a>
                                     </li> 
