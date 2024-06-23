@@ -17,6 +17,8 @@ abstract class AbstractController {
     private Environment $twig;
     private PHPMailer $mail;
 
+    
+
     public function __construct() {
         $loader = new FilesystemLoader('templates');
         $twig = new Environment($loader, [
@@ -34,49 +36,51 @@ abstract class AbstractController {
     protected function render(string $template, array $data): void {
         echo $this->twig->render($template, $data);
     }
-    protected function sendEmail(string $addAddress, string $name, string $subject, string $body): void {
+    protected function sendEmail(string $addAddress, string $name, string $subject, string $body, ?string $qrCodeImagePath = null): void {
         try {
             $nsMasiaManager = new NsMasiaManager();
             $nsMasia = $nsMasiaManager->getNsMasia();
-
-            $this->mail->isSMTP();                                            //Send using SMTP
-            $this->mail->Host       = 'smtp.gmail.com';  //Set the SMTP server to send through
-            $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-            $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $this->mail->Username   = $nsMasia->getEmail();                     //SMTP username
-            $this->mail->Password   = $nsMasia->getPasswordEmail(); 
-            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $this->mail->CharSet       = "utf-8";                                   
-            
-            //Recipients
+    
+            $this->mail->isSMTP();                                            // Send using SMTP
+            $this->mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
+            $this->mail->Port       = 465;                                    // TCP port to connect to
+            $this->mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $this->mail->Username   = $nsMasia->getEmail();                   // SMTP username
+            $this->mail->Password   = $nsMasia->getPasswordEmail();           // SMTP password
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable implicit TLS encryption
+            $this->mail->CharSet    = "utf-8";                                // Set charset to UTF-8
+    
+            // Recipients
             $this->mail->setFrom($nsMasia->getEmail(), $nsMasia->getName());
-            $this->mail->addAddress($addAddress, $name);    
-            //$this->mail->addReplyTo('no-reply@gmail.com', 'Information');
-            //$this->mail->addCC('cc@example.com');
-            //$this->mail->addBCC('bcc@example.com');
-            
-            //Attachments
-            $this->mail->addAttachment($nsMasia->getBannerEmail());         //Add attachments
-            
-            //Content
-            $this->mail->isHTML(true);                                  //Set email format to HTML
+            $this->mail->addAddress($addAddress, $name);
+    
+            // Attachments
+            if ($nsMasia->getBannerEmail()) {
+                $this->mail->addAttachment($nsMasia->getBannerEmail());       // Add banner attachment if exists
+            }
+            if ($qrCodeImagePath !== null) {
+                $this->mail->addEmbeddedImage($qrCodeImagePath, 'qrcode', 'qrcode.png');  // Add QR code attachment if exists
+            }
+    
+            // Content
+            $this->mail->isHTML(true);                                        // Set email format to HTML
             $this->mail->Subject = $subject;
             $this->mail->Body    = $body;
-            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
+            $this->mail->AltBody = strip_tags($body);                         // Set alternate body for non-HTML mail clients
+    
             $this->mail->send();
-
         } catch (Exception $e) {
             $_SESSION["error"] = "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
         }
-    } 
+    }
+    
     
     public function css(): string{
         $css = "
         body {
-            background-color: #1e1e1e; /* Noir */
-            color: #f5f5f5; /* Blanc ou une couleur claire pour le texte */
-            font-family: Poppins, sans-serif; /* Exemple de police */
+            background-color: #1e1e1e;
+            color: #f5f5f5; 
+            font-family: Poppins, sans-serif; 
             line-height: 1.6;
             padding: 20px;
             margin: 0;
@@ -273,35 +277,64 @@ abstract class AbstractController {
     // }
 
     protected function baseEmailTicket(string $addAddress, string $nameUser, Order_ticket $order_ticket): void {
+
         // Initialisation des managers et récupération des données nécessaires
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
         $nsName = $nsMasia->getName();
-
+    
         $orderManager = new OrderManager();
         $order = $orderManager->getOrderTicketById($order_ticket);
 
-        $numberOrder = $order->getNumberOrder();
+
+
+            $numberOrder = $order_ticket->getNumberOrder();
+            
+
+            foreach($order_ticket->getTicketsId() as $ticket){
+                $tribune = $ticket["tribune"];
+            }
+
+            foreach($order_ticket->getMatchId() as $match){
+
+                $matchName = $match["name"] . "VS" . $match["team"];
+                $matchDate = $match["date"] . " à " . $match["time"];
+                $matchLocation = $match["home_outside"];
+                $matchIsAtStadium = $match["matchIsAtStadium_name"];
+
+            }
+
         $dateObj = DateTime::createFromFormat('Y-m-d', $order->getDate());
         $dateFormatee = $dateObj->format('d/m/Y');
         $css = $this->css();
         $subject = "Merci pour votre achat !";
-
+    
         // Génération du QR code basé sur le numéro de commande
         $qrCodeOptions = new QROptions([
             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel'   => QRCode::ECC_L,
-            'imageBase64' => true // Générer l'image en base64
+            'size'       => 150,
+            'imageBase64' => false // Générer l'image en tant que fichier
         ]);
-
+    
         $qrCode = new QRCode($qrCodeOptions);
-        $qrCodeData = "Numéro de commande : $numberOrder";
+
+        $qrCodeData = "
+                        Numéro de commande : $numberOrder.
+                        $matchName.
+                        Date : $matchDate.
+                        Vous etes placé : $tribune.
+                        Le match sera à $matchLocation.
+                        Le match se tiendra au stade $matchIsAtStadium.
+                        Achat effectué le $dateFormatee.
+                    ";
         $qrCodeImage = $qrCode->render($qrCodeData);
-
-        // Encodage de l'image QR code en base64 pour l'inclure dans l'email
-        $qrCodeImageData = base64_encode($qrCodeImage);
-        $qrCodeImageSrc = 'data:image/png;base64,' . $qrCodeImageData;
-
+        
+        // Enregistrer l'image QR code en tant que fichier temporaire
+        $tempDir = sys_get_temp_dir();
+        $qrCodeImagePath = $tempDir . '/qrcode.png';
+        file_put_contents($qrCodeImagePath, $qrCodeImage);
+    
         // Construction du contenu HTML de l'email avec le QR code inclus
         $emailContent = "
             <!DOCTYPE html>
@@ -322,21 +355,16 @@ abstract class AbstractController {
                     Nous sommes ravis de vous informer que votre achat de ticket pour le prochain match de $nsName a bien été enregistré. 
                     Merci pour votre soutien continu à notre équipe !
                 </p>
-
-                <p>
-                    Votre billet électronique est désormais disponible. 
-                    Vous pouvez le télécharger et l'imprimer en utilisant le lien suivant : [lien de téléchargement du billet].
-                </p>
-
-                <!-- QR code -->
+    
                 <p>Scannez le QR code ci-dessous pour accéder à votre commande :</p>
-                <img src='$qrCodeImageSrc' alt='QR Code'>
-
+    
+                <img src='cid:qrcode' alt='QR code' />
+    
                 <p>
                     Nous sommes impatients de vous accueillir au stade et de partager ensemble la passion du football. 
                     Pour toute question ou assistance supplémentaire, n'hésitez pas à nous contacter.
                 </p>
-
+    
                 <ul>
                     <li>Votre numéro de commande : $numberOrder</li>
                     <li>Achat effectué le $dateFormatee </li>
@@ -349,14 +377,13 @@ abstract class AbstractController {
             </body>
             </html>
         ";
-
+    
         // Envoi de l'email avec le contenu généré
-        $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
-    }
-
-
+        $this->sendEmail($addAddress, $nameUser, $subject, $emailContent, $qrCodeImagePath);
     
-    
+        // Supprimer le fichier temporaire après l'envoi de l'email
+        unlink($qrCodeImagePath);
+    }  
 }
 
 

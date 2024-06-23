@@ -13,11 +13,11 @@
             <h1>{{nsMasia.name}}</h1>
             <p>Boutique Officiel</p>
             {% if errorMessage is not empty %}
-                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
+                <p style="text-align:center;" class="alertMessage">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
 
             {% if valideMessage is not empty %}
-                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
+                <p style="text-align:center;" class="alertMessage">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
             {% endif %}
             <div id="search-results"></div>
             <div class="allShirt" id="articles-container">

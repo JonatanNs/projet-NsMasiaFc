@@ -66,14 +66,14 @@ class AdminNewsController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
     
@@ -81,7 +81,7 @@ class AdminNewsController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location: index.php?route=adminActualite&secret=$secret");
+                            header("Location: Admin-Actualités-$secret");
                             exit;
                         }
                     }
@@ -91,7 +91,7 @@ class AdminNewsController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location: index.php?route=adminActualite&secret=$secret");
+                    header("Location: Admin-Actualités-$secret");
                     exit;
                 }
     
@@ -117,18 +117,18 @@ class AdminNewsController extends AbstractController{
                 $articleManager->createArticle($newArticle);
     
                 $_SESSION["valide"] = "Nouvel article ajouté.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
     
             } else {
                 $_SESSION["error"] = "Une erreur de validation est survenue.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
             }
     
         } else {
             $_SESSION["error"] = "Tous les champs requis ne sont pas remplis.";
-            header("Location: index.php?route=adminActualite&secret=$secret");
+            header("Location: Admin-Actualités-$secret");
             exit;
         }
     }
@@ -167,18 +167,18 @@ class AdminNewsController extends AbstractController{
 
 
                 $_SESSION["valide"] = "Article modifier.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
             } 
             
         } else{
             $_SESSION["error"] = "Une erreur est survenue1.";
-            header("Location: index.php?route=adminActualite&secret=$secret");
+            header("Location: Admin-Actualités-$secret");
             exit;
         } 
     }
@@ -212,18 +212,18 @@ class AdminNewsController extends AbstractController{
                 $newArticle->setId($_POST["articleId"]);
 
                 $_SESSION["valide"] = "Article modifier.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
             } 
             
         } else{
             $_SESSION["error"] = "Une erreur est survenue1.";
-            header("Location: index.php?route=adminActualite&secret=$secret");
+            header("Location: Admin-Actualités-$secret");
             exit;
         } 
     }
@@ -256,21 +256,21 @@ class AdminNewsController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
     
                     // Validate file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
     
                     // Move uploaded file
                     if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                         $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
     
@@ -281,7 +281,7 @@ class AdminNewsController extends AbstractController{
                     $filePath = $article->getImgUrl();
                     if (!empty($filePath) && file_exists($filePath) && !unlink($filePath)) {
                         $_SESSION["error"] = "Une erreur est survenue lors de la suppression de l'ancien fichier.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Actualités-$secret");
                         exit;
                     }
                 }
@@ -302,18 +302,18 @@ class AdminNewsController extends AbstractController{
                 $newArticle->setId($_POST["articleId"]);
 
                 $_SESSION["valide"] = "Article modifier.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
             } 
             
         } else{
             $_SESSION["error"] = "Une erreur est survenue1.";
-            header("Location: index.php?route=adminActualite&secret=$secret");
+            header("Location: Admin-Actualités-$secret");
             exit;
         }
     }
@@ -342,18 +342,18 @@ class AdminNewsController extends AbstractController{
                 } else {
                     $_SESSION["error"] = "Fichier non trouvé.";
                 }
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminActualite&secret=$secret");
+                header("Location: Admin-Actualités-$secret");
                 exit;
             } 
             
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=adminActualite&secret=$secret");
+            header("Location: Admin-Actualités-$secret");
             exit;
         }
     }

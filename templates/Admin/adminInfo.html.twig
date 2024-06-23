@@ -13,7 +13,7 @@
         {% endif %}
         <article class="updateName">
             <h2>Mettre à jour le nom du site</h2>
-            <form action="Check-changer-nom-site-{{secret}}" method="POST" class="form">
+            <form action="Modifier-Nom-du-site-{{secret}}" method="POST" class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
                 <fieldset>
                     <label for="updateName">Nouveau nom du site</label>
@@ -33,7 +33,7 @@
                 <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}" />
             </figure>
                     
-            <form action="Check-changer-logo-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
+            <form action="Modifier-Logo-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
                 <fieldset>
                     <label for="imgUrl">Logo</label>
@@ -52,7 +52,7 @@
                     
         <article class="updateEmail">
             <h2>Mettre à jour l'email</h2>
-                <form action="Check-changer-email-{{secret}}" method="POST" class="form">
+                <form action="Modifier-Email-{{secret}}" method="POST" class="form">
                     <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="actualEmail">Actual Email *</label>
@@ -83,7 +83,7 @@
                     </figure>
                 </article>
                 
-                <form action="Check-ajouter-banner-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
+                <form action="Modifier-Banniere-Email-{{secret}}" method="POST" enctype="multipart/form-data" class="form">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="imgUrl">Banniere Email</label>

@@ -19,7 +19,7 @@ class AdminBilleterieController extends AbstractController{
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
 
-        $this->render("Admin/adminBiletterie.html.twig", [
+        $this->render("Admin/adminBilletterie.html.twig", [
             'userIsConect' => $userIsConect,
             'errorMessage' => $errorMessage, 
             'valideMessage' => $valideMessage,
@@ -67,16 +67,16 @@ class AdminBilleterieController extends AbstractController{
                 $matchManager->createMatch($newMatch);
 
                 $_SESSION["valide"] = "Nouveau match Ajouter.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=adminBiletterie&secret=$secret");
+            header("Location: Admin-Billetterie-$secret");
             exit;
         } 
     }
@@ -110,16 +110,16 @@ class AdminBilleterieController extends AbstractController{
                 $matchManager->changeMatch($matchId, $nsMasia, $team, $location, $heures_input, $formatted_date);
 
                 $_SESSION["valide"] = "Match modifier.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=adminBiletterie&secret=$secret");
+            header("Location: Admin-Billetterie-$secret");
             exit;
         } 
     }
@@ -138,16 +138,16 @@ class AdminBilleterieController extends AbstractController{
                 $matchManager->removeMatch($matchId);
 
                 $_SESSION["valide"] = "Match retirer.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminBiletterie&secret=$secret");
+                header("Location: Admin-Billetterie-$secret");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=adminBiletterie&secret=$secret");
+            header("Location: Admin-Billetterie-$secret");
             exit;
         } 
     }

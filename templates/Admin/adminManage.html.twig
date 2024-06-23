@@ -4,7 +4,7 @@
 
 <main class="main">
     <section class="admin">
-        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
         <h1>Page Admin</h1>
         {% if errorMessage is not empty %}
             <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
@@ -15,7 +15,7 @@
         {% endif %}
         <article>
             <h2>Mettre un utilisateur admin</h2>
-            <form action="check-changer-role&{{ secret }}" method="POST" class="form formChangeRole" >
+            <form action="Changer-Role-Utilisateur-{{ secret }}" method="POST" class="form formChangeRole" >
             <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
                 <fieldset>
                     <label for="emailUser">Email</label>

@@ -80,14 +80,14 @@ class PlayerNsMasiaController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location:  index.php?route=adminClub&secret=$secret");
+                        header("Location:  Admin-Club-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location:  index.php?route=adminClub&secret=$secret");
+                        header("Location:  Admin-Club-$secret");
                         exit;
                     }
     
@@ -95,7 +95,7 @@ class PlayerNsMasiaController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location:  index.php?route=adminClub&secret=$secret");
+                            header("Location:  Admin-Club-$secret");
                             exit;
                         }
                     }
@@ -105,7 +105,7 @@ class PlayerNsMasiaController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location:  index.php?route=adminClub&secret=$secret");
+                    header("Location:  Admin-Club-$secret");
                     exit;
                 }
 
@@ -140,7 +140,7 @@ class PlayerNsMasiaController extends AbstractController{
             $_SESSION["error"] = "Une erreur est survenue.";
         }
     
-        header("Location: index.php?route=adminClub&secret=$secret");
+        header("Location: Admin-Club-$secret");
         exit;
     }
 
@@ -161,7 +161,7 @@ class PlayerNsMasiaController extends AbstractController{
             $_SESSION["error"] = "Une erreur est survenue.";
         }
     
-        header("Location: index.php?route=adminClub&secret=$secret");
+        header("Location: Admin-Club-$secret");
         exit;
     }
 }

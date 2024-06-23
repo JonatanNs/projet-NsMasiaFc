@@ -270,7 +270,7 @@ class OrderController extends AbstractController {
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-validé',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-valide',
             'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement',
         ]);
         
@@ -307,11 +307,12 @@ class OrderController extends AbstractController {
             $line_items[] = $line_item;
         }
         
+        
         $checkout_session = \Stripe\Checkout\Session::create([
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-validé',
+            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-valide',
             'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement-Billet',
         ]);
         

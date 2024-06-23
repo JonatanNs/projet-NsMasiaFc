@@ -152,17 +152,17 @@ class MatchController extends AbstractController
                 }
                                             
                 $_SESSION["valide"] = "Resultat match Ajouter.";
-                header("Location: index.php?route=adminMatch&secret=$secret");
+                header("Location: Admin-Match-$secret");
                 exit;
 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminMatch&secret=$secret");
+                header("Location: Admin-Match-$secret");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Veuillez remplir tous les champs.";
-            header("Location: index.php?route=adminMatch&secret=$secret");
+            header("Location: Admin-Match-$secret");
             exit;
         }
     }
@@ -185,12 +185,12 @@ class MatchController extends AbstractController
                 $matchManager->changeResult($resultId, $score_nsMasia, $score_rivalTeam);
                 
                 $_SESSION["valide"] = "Resultat match modifier.";
-                header("Location: index.php?route=adminMatch&secret=$secret");
+                header("Location: Admin-Match-$secret");
                 exit;
 
             } else {
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminMatch&secret=$secret");
+                header("Location: Admin-Match-$secret");
                 exit;
             }
         } else {

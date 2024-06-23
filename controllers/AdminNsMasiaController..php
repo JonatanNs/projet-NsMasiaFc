@@ -31,17 +31,17 @@ class AdminNsMasiaController extends AbstractController{
                     $nsMasiaManager->updateNsMasiaName($newNsMasia->getId(), $newNsMasia->getName());
 
                     $_SESSION["valide"] = "Succès de la Mise à Jour.";
-                    header("Location: Admin-NsMasiaFC-$secret");
+                    header("Location: Admin-site-$secret");
                     exit;
 
                 } else{
                     $_SESSION["error"] = "Le nom de confirmation et le nom ne corresponde pas.";
-                    header("Location: Admin-NsMasiaFC-$secret");
+                    header("Location: Admin-site-$secret");
                     exit;
                 }  
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
             } 
         } else{
@@ -91,22 +91,22 @@ class AdminNsMasiaController extends AbstractController{
                                                             );
 
                         $_SESSION["valide"] = "Succès de la Mise à Jour.";
-                        header("Location: Admin-NsMasiaFC-$secret");
+                        header("Location: Admin-site-$secret");
                         exit;
 
                     } else{
                         $_SESSION["error"] = "L'email ne correspond pas à l'actuel.";
-                        header("Location: Admin-NsMasiaFC-$secret");
+                        header("Location: Admin-site-$secret");
                         exit;
                     } 
                 } else{
                     $_SESSION["error"] = "L’email de confirmation et l’email ne correspondent pas.";
-                    header("Location: Admin-NsMasiaFC-$secret");
+                    header("Location: Admin-site-$secret");
                     exit;
                 }  
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
             } 
         } else{
@@ -140,14 +140,14 @@ class AdminNsMasiaController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location:  Admin-NsMasiaFC-$secret");
+                        header("Location:  Admin-site-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location:  Admin-NsMasiaFC-$secret");
+                        header("Location:  Admin-site-$secret");
                         exit;
                     }
     
@@ -155,7 +155,7 @@ class AdminNsMasiaController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location:  Admin-NsMasiaFC-$secret");
+                            header("Location:  Admin-site-$secret");
                             exit;
                         }
                     }
@@ -165,7 +165,7 @@ class AdminNsMasiaController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location:  Admin-NsMasiaFC-$secret");
+                    header("Location:  Admin-site-$secret");
                     exit;
                 }
 
@@ -205,12 +205,12 @@ class AdminNsMasiaController extends AbstractController{
                 } else {
                     $_SESSION["error"] = "Fichier non trouvé.";
                 }
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
             } 
         } else{
@@ -243,14 +243,14 @@ class AdminNsMasiaController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location:  Admin-NsMasiaFC-$secret");
+                        header("Location:  Admin-site-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location:  Admin-NsMasiaFC-$secret");
+                        header("Location:  Admin-site-$secret");
                         exit;
                     }
     
@@ -258,7 +258,7 @@ class AdminNsMasiaController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location:  Admin-NsMasiaFC-$secret");
+                            header("Location:  Admin-site-$secret");
                             exit;
                         }
                     }
@@ -268,7 +268,7 @@ class AdminNsMasiaController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location:  Admin-NsMasiaFC-$secret");
+                    header("Location:  Admin-site-$secret");
                     exit;
                 }
 
@@ -304,12 +304,12 @@ class AdminNsMasiaController extends AbstractController{
                 } else {
                     $_SESSION["error"] = "Fichier non trouvé.";
                 }
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
 
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: Admin-NsMasiaFC-$secret");
+                header("Location: Admin-site-$secret");
                 exit;
             }  
     }

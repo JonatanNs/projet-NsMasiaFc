@@ -222,7 +222,7 @@ class CompteUserController extends AbstractController{
                                 $this->sendEmail($emailUser, $nameUser, $subject, $emailContent);
 
                                 $_SESSION["valide"] = "Vos informations ont bien été changer.";
-                                header("Location: index.php?route=logout");
+                                header("Location: Déconnexion");
                                 exit;
 
                             } else{
@@ -321,7 +321,7 @@ class CompteUserController extends AbstractController{
                                 $authC->logout();
                             
                             $_SESSION["valide"] = "Vos informations ont bien été changer.";
-                            header("Location: index.php?route=logout");
+                            header("Location: Déconnexion");
                             exit;
 
                         } else {

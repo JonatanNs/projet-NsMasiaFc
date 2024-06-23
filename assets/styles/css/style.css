@@ -283,7 +283,7 @@ h1, h2, h3, h4, h5, h6 {
 .pageBoutique {
   width: 100%;
   margin: 0;
-  padding: 2em 0em;
+  padding: 2em 0;
   /**********************CART********************/
 }
 .pageBoutique h1, .pageBoutique p {
@@ -1306,6 +1306,7 @@ h1, h2, h3, h4, h5, h6 {
 .payementPassed form button {
   width: 80%;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -1627,6 +1628,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1em;
   padding: 1em;
   border: 2px solid rgb(255, 249, 237);
+  cursor: pointer;
 }
 .allTickets .tickets .tribune {
   grid-column: 1/2;
@@ -1900,6 +1902,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .main .myAccount .userIsAdmin form {
   margin-left: 2em;
+  width: 100%;
 }
 .main .myAccount .userIsAdmin form button {
   width: 100%;
@@ -4014,9 +4017,11 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
     font-family: "Nunito", sans-serif !important;
+    min-width: 1440px;
   }
   .main {
     font-family: "Nunito", sans-serif !important;
+    min-width: 1440px;
   }
 }
 .btn {
@@ -4026,6 +4031,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   padding: 0.5 1em;
   box-shadow: rgb(255, 249, 237) 0px 5px 5px -5px, rgb(255, 249, 237) 0px 5px 10px -5px;
+  font-size: 1.5rem;
 }
 .btn:hover {
   background-color: rgb(255, 249, 237);

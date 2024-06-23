@@ -22,35 +22,35 @@
                     {% if not matchFound %}
                         {% set resultFound = true %}
                         <li>
-                            <a href="index.php?route=adminMatch&secret={{secret}}">Résultat des matchs <span class="fa-solid fa-bell" style="color: #e60000;"></span></a>
+                            <a href="Admin-Match-{{secret}}">Résultat des matchs <span class="fa-solid fa-bell" style="color: #e60000;"></span></a>
                         </li>
                     {% endif %}
                 {% endfor %}
                 {% if resultFound == false %}
                     <li>
-                        <a href="index.php?route=adminMatch&secret={{secret}}">Résultat des matchs</a>
+                        <a href="Admin-Match-{{secret}}">Résultat des matchs</a>
                     </li>
                 {% endif %}
             <li>
-                <a href="index.php?route=adminRivalTeam&secret={{secret}}">Equipe rival</a>
+                <a href="Admin-Equipe-Rivale-{{secret}}">Equipe rival</a>
             </li>
             <li>
-                <a href="index.php?route=manageAdmin&secret={{secret}}">Nos Admins </a>
+                <a href="Gestion-Admin-{{secret}}">Nos Admins </a>
             </li>
             <li>
-                <a href="Admin-NsMasiaFC-{{secret}}">{{nsMasia.name}}</a>
+                <a href="Admin-site-{{secret}}">{{nsMasia.name}}</a>
             </li>
             <li>
-                <a href="index.php?route=adminActualite&secret={{secret}}">Actualité <span class="fa-solid fa-newspaper" style="color: #ffffff;"></span></a>
+                <a href="Admin-Actualités-{{secret}}">Actualité <span class="fa-solid fa-newspaper" style="color: #ffffff;"></span></a>
             </li>
             <li>
-                <a href="index.php?route=adminClub&secret={{secret}}">Club <span class="fa-regular fa-futbol" style="color: #ffffff;"></span></a>
+                <a href="Admin-Club-{{secret}}">Club <span class="fa-regular fa-futbol" style="color: #ffffff;"></span></a>
             </li>
             <li>
-                <a href="index.php?route=adminBoutique&secret={{secret}}">Boutique <span class="fa-solid fa-shop" style="color: #ffffff;"></span></a>
+                <a href="Admin-Boutique-{{secret}}">Boutique <span class="fa-solid fa-shop" style="color: #ffffff;"></span></a>
             </li>
             <li>
-                <a href="index.php?route=adminBiletterie&secret={{secret}}">Billeterie<span class="fa-solid fa-ticket" style="color: #ffffff;"></span></a>
+                <a href="Admin-Billetterie-{{secret}}">Billeterie<span class="fa-solid fa-ticket" style="color: #ffffff;"></span></a>
             </li>
         </ul>
     </article>

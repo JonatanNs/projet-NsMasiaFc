@@ -65,14 +65,14 @@ class AdminBoutiqueController extends AbstractController{
                     $check1 = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check1 === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Boutique-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType1, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Boutique-$secret");
                         exit;
                     }
     
@@ -80,7 +80,7 @@ class AdminBoutiqueController extends AbstractController{
                     if (!file_exists($targetFile1)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile1)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location: index.php?route=adminActualite&secret=$secret");
+                            header("Location: Admin-Boutique-$secret");
                             exit;
                         }
                     }
@@ -89,7 +89,7 @@ class AdminBoutiqueController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location: index.php?route=adminActualite&secret=$secret");
+                    header("Location: Admin-Boutique-$secret");
                     exit;
                 }
     
@@ -109,14 +109,14 @@ class AdminBoutiqueController extends AbstractController{
                     $check2 = getimagesize($_FILES["addMediaFile2"]["tmp_name"]);
                     if ($check2 === false) {
                         $_SESSION["error"] = "Le deuxième fichier n’est pas une image.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Boutique-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType2, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés pour le deuxième fichier.";
-                        header("Location: index.php?route=adminActualite&secret=$secret");
+                        header("Location: Admin-Boutique-$secret");
                         exit;
                     }
     
@@ -124,7 +124,7 @@ class AdminBoutiqueController extends AbstractController{
                     if (!file_exists($targetFile2)) {
                         if (!move_uploaded_file($_FILES["addMediaFile2"]["tmp_name"], $targetFile2)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre deuxième fichier.";
-                            header("Location: index.php?route=adminActualite&secret=$secret");
+                            header("Location: Admin-Boutique-$secret");
                             exit;
                         }
                     }
@@ -133,7 +133,7 @@ class AdminBoutiqueController extends AbstractController{
                 } elseif ($_FILES["addMediaFile2"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du deuxième fichier.";
-                    header("Location: index.php?route=adminActualite&secret=$secret");
+                    header("Location: Admin-Boutique-$secret");
                     exit;
                 }
     
@@ -161,16 +161,16 @@ class AdminBoutiqueController extends AbstractController{
 
     
                 $_SESSION["valide"] = "Nouveau produit ajouté.";
-                header("Location: index.php?route=adminBoutique&secret=$secret");
+                header("Location: Admin-Boutique-$secret");
                 exit;
             } else{
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=adminBoutique&secret=$secret");
+                header("Location: Admin-Boutique-$secret");
                 exit;
             }
         } else{
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=adminBoutique&secret=$secret");
+            header("Location: Admin-Boutique-$secret");
             exit;
         } 
     }
@@ -239,18 +239,18 @@ class AdminBoutiqueController extends AbstractController{
                 }
     
                 // Redirect to admin page with a secret key
-                header("Location: index.php?route=adminBoutique&secret=$secret");
+                header("Location: Admin-Boutique-$secret");
                 exit;
             } else {
                 // Invalid CSRF token
                 $_SESSION["error"] = "Une erreur est survenue."; // An error occurred.
-                header("Location: index.php?route=adminBoutique&secret=$secret");
+                header("Location: Admin-Boutique-$secret");
                 exit;
             }
         } else {
             // No product selected
             $_SESSION["error"] = "Une erreur est survenue."; // An error occurred.
-            header("Location: index.php?route=adminBoutique&secret=$secret");
+            header("Location: Admin-Boutique-$secret");
             exit;
         }
     }

@@ -9,16 +9,19 @@
         .userIsAdmin{
             form{
                 margin-left: 2em;
-                
+                width: 100%;
                 button{
                     width: 100%;
                     margin: 0 auto;
                     padding: 1em;
                     font-size: 2rem;
-                
+                    &:hover{
+                        $color: $white;
+                    }
                 }
                 .btn{
                     background-color: $bleu;
+                    
                 }
             }
         }

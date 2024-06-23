@@ -13,7 +13,7 @@
 
         {% if rolesUser == "ADMIN" %} 
             <div class="userIsAdmin">
-                <form action="index.php?route=checkAdmin&secret={{secret}}" method="POST">
+                <form action="Vérifier-Admin-{{secret}}" method="POST">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <button type="submit" class="btn">ADMIN</button>
                 </form> 
@@ -263,7 +263,7 @@
         </article>
 
         <div class="logoutUser">
-            <a href="index.php?route=logout" class="btn">Déconnexion <span class="fa-solid fa-right-from-bracket fa-sm"></span> </a>   
+            <a href="Déconnexion" class="btn">Déconnexion <span class="fa-solid fa-right-from-bracket fa-sm"></span> </a>   
         </div>
     </section>
 </main>

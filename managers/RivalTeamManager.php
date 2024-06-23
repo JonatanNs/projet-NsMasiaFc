@@ -5,43 +5,70 @@ class RivalTeamManager extends AbstractManager{
     /**********************************************************
                              * CREATE *
     **********************************************************/
-    public function createRivalTeam( RivalTeam $rivalTeam) : void {
-        try{
-            $query = $this->db->prepare("INSERT INTO rivalsTeam (id, 
-                                                                team, 
+    public function createRivalTeam(RivalTeam $rivalTeam) : int {
+        try {
+            $query = $this->db->prepare("INSERT INTO rivalsTeam (team, 
                                                                 logo_url, 
                                                                 logo_alt, 
                                                                 ranking_points,
                                                                 match_play,
                                                                 match_win,
                                                                 match_lose,
-                                                                match_nul ) 
-                                        VALUES (    NULL, 
-                                                    :team, 
-                                                    :logo_url, 
-                                                    :logo_alt, 
-                                                    :ranking_points,
-                                                    :match_play,
-                                                    :match_win,
-                                                    :match_lose,
-                                                    :match_nul)");
+                                                                match_nul) 
+                                        VALUES (:team, 
+                                                :logo_url, 
+                                                :logo_alt, 
+                                                :ranking_points,
+                                                :match_play,
+                                                :match_win,
+                                                :match_lose,
+                                                :match_nul)");
             $parameters = [
-                                'team' => $rivalTeam->getTeam(), 
-                                'logo_url' => $rivalTeam->getLogoUrl(), 
-                                'logo_alt' => $rivalTeam->getLogoAlt(), 
-                                'ranking_points' => $rivalTeam->getRankingPoints(), 
-                                'match_play' => $rivalTeam->getMatchsPlay(),
-                                'match_win' => $rivalTeam->getMatchsWin(),
-                                'match_lose' => $rivalTeam->getMatchsLose(),
-                                'match_nul' => $rivalTeam->getMatchsNul()
-                            ];
-
+                'team' => $rivalTeam->getTeam(), 
+                'logo_url' => $rivalTeam->getLogoUrl(), 
+                'logo_alt' => $rivalTeam->getLogoAlt(), 
+                'ranking_points' => $rivalTeam->getRankingPoints(), 
+                'match_play' => $rivalTeam->getMatchsPlay(),
+                'match_win' => $rivalTeam->getMatchsWin(),
+                'match_lose' => $rivalTeam->getMatchsLose(),
+                'match_nul' => $rivalTeam->getMatchsNul()
+            ];
+    
             $query->execute($parameters);
+    
+            // Retourner le dernier ID inséré
+            return $this->db->lastInsertId();
         } catch (PDOException $e) {
-            error_log("Database error : " . $e->getMessage());
+            error_log("Database error: " . $e->getMessage());
             throw new Exception("Failed to create rival team.");
         }
     }
+    
+
+    public function createLocation(Location $location) : void {
+        try {
+            $query = $this->db->prepare("INSERT INTO locations (
+                                            rivalTeam_id,
+                                            stadium,
+                                            city
+                                        ) 
+                                        VALUES (
+                                            :rivalTeam_id,  
+                                            :stadium,  
+                                            :city)");
+            $parameters = [
+                'rivalTeam_id' => $location->getRivalTeamId()->getId(), 
+                'stadium' => $location->getStadium(), 
+                'city' => $location->getCity()
+            ];
+    
+            $query->execute($parameters);
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+            throw new Exception("Failed to create location.");
+        }
+    }
+    
 
     /**********************************************************
                              * UPDATE *

@@ -4,7 +4,7 @@
 
 <main class="main">
     <section class="admin">
-        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
         <h1>Page Biletterie</h1>
         <article class="handle">
             <h2>Biletterie</h2>
@@ -17,7 +17,7 @@
             {% endif %}
             <article class="add">
                 <h3>Ajouter un match <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
-                <form action="index.php?route=checkAddMatchs&secret={{secret}}" method="POST" class="form">
+                <form action="Ajouter-Match-{{secret}}" method="POST" class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}">
                     <fieldset>
                         <label for="location">NS Masia FC</label>
@@ -52,7 +52,7 @@
 
             <article class="change">
                 <h3>Modifier un match <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
-                <form action="index.php?route=checkChangeMatch&secret={{secret}}" method="POST" class="form">
+                <form action="Modifier-Match-{{secret}}" method="POST" class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}">
                     <fieldset>
                         <label for="selectMatch">Choisissez le match à modifier : </label>
@@ -96,7 +96,7 @@
 
             <article class="remove">
                 <h3>Retirer un match <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h3>
-                <form action="index.php?route=checkRemoveMatch&secret={{secret}}" method="POST" class="form">
+                <form action="Supprimer-Match-{{secret}}" method="POST" class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}">
                     <fieldset>
                         <label for="selectMatch">Choisissez le match à modifier : </label>

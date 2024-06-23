@@ -49,7 +49,11 @@ class AdminRivalTeamController extends AbstractController{
         $secret = $_ENV["SECRET"];
     
        // Verification of required fields
-        if ( isset($_POST["nameTeam"]) && isset($_POST["imgAlt"]) ) {
+        if ( isset($_POST["nameTeam"]) && 
+             isset($_POST["imgAlt"]) && 
+             isset($_POST["nameStadium"]) &&
+             isset($_POST["city"])
+            ){
             $tokenManager = new CSRFTokenManager(); 
     
             // CSRF token verification
@@ -73,14 +77,14 @@ class AdminRivalTeamController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                        header("Location: Admin-Equipe-Rivale-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                        header("Location: Admin-Equipe-Rivale-$secret");
                         exit;
                     }
     
@@ -88,24 +92,26 @@ class AdminRivalTeamController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                            header("Location: Admin-Equipe-Rivale-$secret");
                             exit;
                         }
                     }
     
                     $media = 'assets/img/uploadsRivalTeam/' . htmlspecialchars($sanitizedFileName);
-                    var_dump($media);
+                    
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                    header("Location: Admin-Equipe-Rivale-$secret");
                     exit;
                 }
     
                 // Article Data Processing
                 $nameTeam = htmlspecialchars_decode($_POST["nameTeam"]);
                 $imgAlt = htmlspecialchars_decode($_POST["imgAlt"]);
-    
+
+                $nameStadium = htmlspecialchars_decode($_POST["nameStadium"]);
+                $city = htmlspecialchars_decode($_POST["city"]);
     
                 // Creation of the article
                 $rivalTeamManager = new RivalTeamManager();
@@ -115,21 +121,30 @@ class AdminRivalTeamController extends AbstractController{
                                                 $media,
                                                 $imgAlt
                                             );
-                $rivalTeamManager->createRivalTeam($newRivalTeam);
+
+                $createRivalTeam = $rivalTeamManager->createRivalTeam($newRivalTeam);
+
+                $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($createRivalTeam);
+
+                $newLocation = new Location($rivalTeam,
+                                            $nameStadium, 
+                                            $city);
+
+                $rivalTeamManager->createLocation($newLocation);
     
                 $_SESSION["valide"] = "Nouvel équipe ajouté.";
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
     
             } else {
                 $_SESSION["error"] = "Une erreur de validation est survenue.";
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
             }
     
         } else {
             $_SESSION["error"] = "Une erreur est survenu.";
-            header("Location: index.php?route=adminRivalTeam&secret=$secret");
+            header("Location: Admin-Equipe-Rivale-$secret");
             exit;
         }
     }
@@ -164,14 +179,14 @@ class AdminRivalTeamController extends AbstractController{
                     $check = getimagesize($_FILES["addMediaFile"]["tmp_name"]);
                     if ($check === false) {
                         $_SESSION["error"] = "Le fichier n’est pas une image.";
-                        header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                        header("Location: Admin-Equipe-Rivale-$secret");
                         exit;
                     }
     
                     // Validation of the file format
                     if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
                         $_SESSION["error"] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
-                        header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                        header("Location: Admin-Equipe-Rivale-$secret");
                         exit;
                     }
     
@@ -179,7 +194,7 @@ class AdminRivalTeamController extends AbstractController{
                     if (!file_exists($targetFile)) {
                         if (!move_uploaded_file($_FILES["addMediaFile"]["tmp_name"], $targetFile)) {
                             $_SESSION["error"] = "Une erreur est survenue lors du téléchargement de votre fichier.";
-                            header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                            header("Location: Admin-Equipe-Rivale-$secret");
                             exit;
                         }
                     }
@@ -189,7 +204,7 @@ class AdminRivalTeamController extends AbstractController{
                 } elseif ($_FILES["addMediaFile"]["error"] !== UPLOAD_ERR_NO_FILE) {
                     // Handling other download errors
                     $_SESSION["error"] = "Une erreur est survenue lors du téléchargement du fichier.";
-                    header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                    header("Location: Admin-Equipe-Rivale-$secret");
                     exit;
                 }
     
@@ -227,18 +242,18 @@ class AdminRivalTeamController extends AbstractController{
                 } else {
                     $_SESSION["error"] = "Fichier non trouvé.";
                 }
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
     
             } else {
                 $_SESSION["error"] = "Une erreur de validation est survenue.";
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
             }
     
         } else {
             $_SESSION["error"] = "Une erreur est survenu.";
-            header("Location: index.php?route=adminRivalTeam&secret=$secret");
+            header("Location: Admin-Equipe-Rivale-$secret");
             exit;
         }
     }
@@ -272,18 +287,18 @@ class AdminRivalTeamController extends AbstractController{
                                                             );
                 
                 $_SESSION["valide"] = "Nom de l'équipe modifier";
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
      
             } else {
                 $_SESSION["error"] = "Une erreur de validation est survenue.";
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
             }
      
         } else {
             $_SESSION["error"] = "Une erreur est survenu.";
-            header("Location: index.php?route=adminRivalTeam&secret=$secret");
+            header("Location: Admin-Equipe-Rivale-$secret");
             exit;
         }
     }
@@ -320,7 +335,7 @@ class AdminRivalTeamController extends AbstractController{
                 }
     
                 // Redirect to the admin rival team page
-                header("Location: index.php?route=adminRivalTeam&secret=$secret");
+                header("Location: Admin-Equipe-Rivale-$secret");
                 exit;
             } else {
                 // Set an error message if CSRF validation fails
@@ -332,13 +347,7 @@ class AdminRivalTeamController extends AbstractController{
         }
         
         // Redirect to the admin rival team page if there was an error
-        header("Location: index.php?route=adminRivalTeam&secret=$secret");
+        header("Location: Admin-Equipe-Rivale-$secret");
         exit;
-    }
-    
-    
-
-    public function checkPassivRivalTeam() : void {
-        
     }
 }

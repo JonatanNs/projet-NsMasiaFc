@@ -3,7 +3,7 @@
 {% block main %}
     <main class="main">
         <section class="admin">
-            <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+            <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
                 <h1>Page Actualité</h1>
                 <article class="handle">
                     <h2>Articles</h2>
@@ -21,7 +21,7 @@
                     {% endif %}
                     <article class="add">
                         <h3>Ajouter un article <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
-                        <form action="index.php?route=checkAddArticle&secret={{secret}}" method="POST" enctype="multipart/form-data" class="form formAddArticle">
+                        <form action="Ajouter-Article-{{secret}}" method="POST" enctype="multipart/form-data" class="form formAddArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                                 <fieldset>
                                     <label for="titleArticle">Titre</label>
@@ -52,7 +52,7 @@
 
                     <article class="changeTitle">
                         <h3>Modifier le titre de l'article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
-                        <form action="index.php?route=checkChangeTitleArticle&secret={{secret}}" method="POST" class="form formChangeArticle">
+                        <form action="Changer-Titre-Article-{{secret}}" method="POST" class="form formChangeArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                                 <fieldset>
                                     <label for="article">Choisissez l'article à modifier : </label>
@@ -75,7 +75,7 @@
 
                     <article class="change">
                         <h3>Modifier le contenue de l'article <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h3>
-                        <form action="index.php?route=checkChangeContentArticle&secret={{secret}}" method="POST" class="form formChangeArticle">
+                        <form action="Changer-Contenu-Article-{{secret}}" method="POST" class="form formChangeArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                                 <fieldset>
                                     <label for="article">Choisissez l'article à modifier : </label>
@@ -106,7 +106,7 @@
                             <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span>
                         </h3>
 
-                        <form action="index.php?route=checkChangeImgArticle&secret={{secret}}" 
+                        <form action="Changer-Image-Article-{{secret}}" 
                                 method="POST" 
                                 enctype="multipart/form-data" 
                                 class="form formChangeArticle">
@@ -138,7 +138,7 @@
 
                     <article class="remove">
                         <h3>Supprimer un article <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h3>
-                        <form action="index.php?route=checkRemoveArticle&secret={{secret}}" method="POST" class="form formRemoveArticle">
+                        <form action="Supprimer-Article-{{secret}}" method="POST" class="form formRemoveArticle">
                             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                             <fieldset>
                                 <label for="article">Choisissez l'article à suprimmer : </label>

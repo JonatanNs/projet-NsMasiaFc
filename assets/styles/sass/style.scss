@@ -58,9 +58,11 @@
         margin: 0;
         padding: 0;
         font-family: $font2 !important;
+        min-width: 1440px;
     }
     .main{
         font-family: $font2 !important;
+        min-width: 1440px;
     }
 }
 
@@ -72,6 +74,7 @@
     border-radius: 1rem;
     padding: 0.5 1em;
     box-shadow: $beige 0px 5px 5px -5px, $beige 0px 5px 10px -5px;
+    font-size: 1.5rem;
     &:hover{
         background-color: $beige;
         color: $black;

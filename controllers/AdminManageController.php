@@ -102,22 +102,22 @@ class AdminManageController extends AbstractController{
                     $userManager->changeRoles($user->getId(), $choiceRole);
     
                     $_SESSION["valide"] = "Mise à jour du rôle de " .  $user->getFirstName() . " " . $user->getLastName() . ".";
-                    header("Location: index.php?route=manageAdmin&secret=$secret");
+                    header("Location: Gestion-Admin-$secret");
                     exit;
                 } else {
                     $_SESSION["error"] = "L'utilisateur avec l'email $email n'existe pas.";
-                    header("Location: index.php?route=manageAdmin&secret=$secret");
+                    header("Location: Gestion-Admin-$secret");
                     exit;
                 }
     
             } else {
                 $_SESSION["error"] = "Une erreur est survenue.";
-                header("Location: index.php?route=manageAdmin&secret=$secret");
+                header("Location: Gestion-Admin-$secret");
                 exit;
             }
         } else {
             $_SESSION["error"] = "Une erreur est survenue.";
-            header("Location: index.php?route=manageAdmin&secret=$secret");
+            header("Location: Gestion-Admin-$secret");
             exit;
         } 
     }

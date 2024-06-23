@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Function to render articles
         function renderArticles() {
             const container = document.getElementById('articles-container');
-            container.innerHTML = ''; // Clear the container
+            if(container){
+                container.innerHTML = ''; // Clear the container
+            }
+           
 
             const start = (currentPage - 1) * articlesPerPage;
             const end = start + articlesPerPage;

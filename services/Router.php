@@ -193,7 +193,7 @@ class Router
         {
             $adminNewsC->adminActualite();
         }
-        else if(isset($get["route"]) && $get["route"] === "adminBiletterie" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
+        else if(isset($get["route"]) && $get["route"] === "adminBilletterie" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminBilletterieC->adminBiletterie();
         }
@@ -321,10 +321,6 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "checkRemoveRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminRivalTeamC->checkRemoveRivalTeam();
-        }
-        else if(isset($get["route"]) && $get["route"] === "checkPassivRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
-        {
-            $adminRivalTeamC->checkPassivRivalTeam();
         }
         /*****************************
             * Check Admin Boutique *

@@ -4,7 +4,7 @@
 
     <main class="main">
         <section class="admin">
-            <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+            <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
             <h1>Page Club</h1>
             <article class="handle">
                 <h2>Club</h2>
@@ -21,7 +21,7 @@
                 {% endif %}
                 <article class="add">
                     <h3>Ajouter un joueur <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h3>
-                    <form action="index.php?route=checkaddPlayer&secret={{secret}}" 
+                    <form action="Ajouter-Joueur-{{secret}}" 
                           enctype="multipart/form-data"
                           method="POST" 
                           class="form ">
@@ -65,7 +65,7 @@
 
                 <article class="remove">
                     <h3>Retirer un joueur <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h3>
-                    <form action="index.php?route=checkRemovePlayer&secret={{secret}}" method="POST" class="form ">
+                    <form action="Supprimer-Joueur-{{secret}}" method="POST" class="form ">
                     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                         <fieldset>
                             <label for="player">Choisissez le joueur à retirer : </label>

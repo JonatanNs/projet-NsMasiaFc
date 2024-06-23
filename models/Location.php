@@ -2,7 +2,11 @@
 
 class Location{
     private ? int $id = null;
-    public function __construct(private string $stadium, private string $city) {
+    public function __construct(
+                                    private RivalTeam $rivalTeam_id, 
+                                    private string $stadium, 
+                                    private string $city
+                                ) {
     }
 
     public function getId(): ? int {
@@ -10,6 +14,13 @@ class Location{
     }
     public function setId(? int $id): void {
         $this->id = $id;
+    }
+
+    public function getRivalTeamId(): RivalTeam {
+        return $this->rivalTeam_id;
+    }
+    public function setRivalTeamId(RivalTeam $rivalTeam_id): void {
+        $this->rivalTeam_id = $rivalTeam_id;
     }
 
     public function getStadium(): string {

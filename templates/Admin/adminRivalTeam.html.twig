@@ -4,7 +4,7 @@
 
 <main class="main">
     <section class="admin">
-        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
         <h1>Page Rival Team</h1>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
@@ -15,7 +15,7 @@
             {% endif %}
             <article class="add">
                 <h2>Ajouter une équipe Rival <span class="fa-solid fa-square-plus fa-xl" style="color: #00ff62;"></span></h2>
-                <form action="index.php?route=checkAddRivalTeam&secret={{secret}}" 
+                <form action="Ajouter-Equipe-Rivale-{{secret}}" 
                       method="POST" 
                       enctype="multipart/form-data"
                       class="form">
@@ -35,6 +35,15 @@
                     </fieldset>
 
                     <fieldset>
+                        <label for="nameStadium">Nom du stade de l'équipe</label>
+                        <input type="text" id="nameStadium" name="nameStadium" required>
+                    </fieldset>
+                    <fieldset>
+                        <label for="city">Ville du club</label>
+                        <input type="text" id="city" name="city" required>
+                    </fieldset>
+
+                    <fieldset>
                         <button type="submit" class="btn">Ajouter</button>
                     </fieldset>
                 </form>
@@ -42,7 +51,7 @@
 
             <article class="change">
                 <h2>Modifier le nom d'une équipe Rival <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
-                <form action="index.php?route=checkChangeNameRivalTeam&secret={{secret}}" 
+                <form action="Changer-Nom-Equipe-Rivale-{{secret}}" 
                       method="POST" 
                       enctype="multipart/form-data"
                       class="form">
@@ -69,7 +78,7 @@
 
             <article class="change">
                 <h2>Modifier le logo d'une équipe Rival <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
-                <form action="index.php?route=checkChangeLogoRivalTeam&secret={{secret}}" 
+                <form action="Changer-Logo-Equipe-Rivale-{{secret}}" 
                       method="POST" 
                       enctype="multipart/form-data"
                       class="form">
@@ -100,7 +109,7 @@
 
             <article class="remove">
                 <h2>Retirer une équipe rival <span class="fa-solid fa-trash-can fa-xl" style="color: #ff0000;"></span></h2>
-                <form action="index.php?route=checkRemoveRivalTeam&secret={{secret}}" method="POST" class="form">
+                <form action="Supprimer-Equipe-Rivale-{{secret}}" method="POST" class="form">
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
                     <fieldset>
                         <label for="selectTeam">Choisissez le produit à modifier : </label>

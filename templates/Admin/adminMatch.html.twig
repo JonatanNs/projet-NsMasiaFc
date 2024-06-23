@@ -3,7 +3,7 @@
 {% block main %}
     <main class="main">
         <section class="admin">
-        <a href="index.php?route=checkAdmin&secret={{secret}}" class="btn">Retour</a>
+        <a href="Vérifier-Admin-{{secret}}" class="btn">Retour</a>
         <h1>Résultat des matchs</h1>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
@@ -24,7 +24,7 @@
                     {% endfor %}
                     {% if not matchFound %}
                         {% set resultFound = true %}
-                        <form action="index.php?route=checkAddResult&secret={{secret}}" method="POST" class="form">
+                        <form action="Ajouter-Resultat-Match-{{secret}}" method="POST" class="form">
                             <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
                             <input type="hidden" name="matchId" value="{{ matchPlay.match_id }}">
                             <fieldset>
@@ -63,8 +63,8 @@
                 {% endif %}
             </article>
             <article>
-                <h2>Modifier le resultat <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
-                <form action="check-changer-résultat&{{secret}}" method="POST" class="form">
+                <h2>Modifier le résultat <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span></h2>
+                <form action="Modifier-Résultat-Match-{{secret}}" method="POST" class="form">
                     <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>  
                     <fieldset>
                         <label for="resultMatchId">Choisissez le match à modifier : </label>
@@ -95,7 +95,7 @@
 
             <article class="add">
                 <h2>Modifier le nombre de point <span class="fa-solid fa-repeat fa-xl" style="color: #0534f0;"></span> </h2>
-                <form action="index.php?route=checkChangePointRivalTeam&secret={{secret}}" 
+                <form action="Changer-Points-Equipe-Rivale-{{secret}}" 
                       method="POST" 
                       class="form">
                 <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}" />
