@@ -161,6 +161,11 @@
             align-items: center;
         }
     }
+    .articleAllContent {
+        .text-content{
+            margin: 2em ;
+        }
+    }
     .pagination {
         display: flex;
         align-items: center;
@@ -200,6 +205,11 @@
             align-items: center;
         }
     }
+    .articleAllContent {
+        .text-content{
+            margin: 2em 10em;
+        }
+    }
     .pagination {
         display: flex;
         align-items: center;
@@ -237,6 +247,11 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             align-items: center;
+        }
+    }
+    .articleAllContent {
+        .text-content{
+            margin: 2em 10em;
         }
     }
     .pagination {

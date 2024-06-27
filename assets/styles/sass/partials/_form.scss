@@ -28,7 +28,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        legend{
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: left;
+            padding-top: 2em;
+        }
         input{
             background-color: $beige;
             border-radius: 0.5rem;

@@ -1,11 +1,5 @@
 RewriteEngine On
 
-# Interdire l'accès aux fichiers sensibles par leur extension
-<FilesMatch "^(?!.*\.(jpg|jpeg|png|gif)$).*$">
-    Require all granted
-</FilesMatch>
-
-
 <FilesMatch "\.env$">
     Require all denied
 </FilesMatch>
@@ -84,7 +78,7 @@ RewriteRule ^Supprimer-Article-([a-zA-Z0-9]+)$ index.php?route=checkRemoveArticl
 RewriteRule ^Ajouter-Match-([a-zA-Z0-9]+)$ index.php?route=checkAddMatchs&secret=$1 [L]
 RewriteRule ^Modifier-Match-([a-zA-Z0-9]+)$ index.php?route=checkChangeMatch&secret=$1 [L]
 RewriteRule ^Supprimer-Match-([a-zA-Z0-9]+)$ index.php?route=checkRemoveMatch&secret=$1 [L]
-RewriteRule ^Ajouter-Résultat-Match-([a-zA-Z0-9]+)$ index.php?route=checkAddResult&secret=$1 [L]
+RewriteRule ^Ajouter-résultat-match-([a-zA-Z0-9]+)$ index.php?route=checkAddResult&secret=$1 [L]
 RewriteRule ^Modifier-Résultat-Match-([a-zA-Z0-9]+)$ index.php?route=checkChangeResult&secret=$1 [L]
 RewriteRule ^Changer-Points-Equipe-Rivale-([a-zA-Z0-9]+)$ index.php?route=checkChangePointRivalTeam&secret=$1 [L]
 RewriteRule ^Ajouter-Equipe-Rivale-([a-zA-Z0-9]+)$ index.php?route=checkAddRivalTeam&secret=$1 [L]

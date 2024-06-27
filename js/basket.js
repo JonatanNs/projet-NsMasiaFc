@@ -1,3 +1,5 @@
+
+
 //sauvegarder le pannier dans le Stockage local pour y accéder console->appli->stockage local
 function saveBasket(basket){
     localStorage.setItem("basket", JSON.stringify(basket));
@@ -81,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function(){
             theBag.addEventListener("click", function() {
                 // Récupérer les données du panier depuis le LocalStorage
                 const basketData = localStorage.getItem("basket");
+                
                 if(!basketData){
                     // Le panier est vide, afficher un message approprié
                     const p = document.createElement("p");
@@ -91,8 +94,9 @@ document.addEventListener('DOMContentLoaded', function(){
                     setTimeout(() => {
                         p.remove();
                     }, 1000);  
-                }else{
+                }else {
 
+                    const basket = JSON.parse(basketData);
                     const bagProductsUser = document.querySelector(".bagProductsUser");
                     const bagProducts = document.querySelector(".bagProducts");
                     const bagProductsTotal = document.querySelector(".bagProductsTotal");
@@ -100,11 +104,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
                     bagProducts.innerHTML = '';
                     bagProductsTotal.innerHTML = '';
-                    
+                        
                     bagProductsUser.classList.toggle("invisible");
         
                     // Convertir les données récupérées en objet JavaScript
-                    const basket = JSON.parse(basketData);
+                    
             
                     // Afficher chaque produit dans le panier
                     basket.forEach(product => {
@@ -142,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         totalp.classList.add("totalp");
                         totalp.textContent = "Total = " +  getTotalPrice() + "€";
                         bagProductsTotal.appendChild(totalp);
-                }
+                    }
             });
         }  
     } 
@@ -193,29 +197,29 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    function AddLocalStorageBoutique() {
-
-        //const valueBasket = document.querySelector(".valueBasket");
-            const basketData = localStorage.getItem("basket");
-            const basket = JSON.parse(basketData);
-
-            let arrayProduct = [];
-            // Parcourir chaque produit dans le panier
-            if(basket){
-                basket.forEach(product => {
-                    // Ajouter le produit au tableau arrayProduct
-                    arrayProduct.push(product);
-                });
+    function updateProductCount() {
+        const productCount = getNumberProduct();
+        let number = document.querySelector(".numberLenghtProduct");
+        const bagProduct = document.querySelector(".bagProduct");
+    
+        if (number) {
+            number.textContent = productCount;
+        } else {
+            number = document.createElement("p");
+            number.classList.add("numberLenghtProduct");
+            number.textContent = productCount;
+            if(bagProduct){
+                bagProduct.appendChild(number);
             }
-            // if (valueBasket) {
-            //     if (basketData) {
-            //         const totalItems = basket.length;
-            //         valueBasket.textContent = totalItems;
-            //     } 
-            // }
+
+        }
+    }
+    
+    function AddLocalStorageBoutique() {
         const productIdElements = document.querySelectorAll(".shirtOne");
         const shirtSale = document.querySelectorAll('.shirtSale');
         const size = document.getElementById("size");
+        let sizeChoice = '';
     
         if (size) {
             size.addEventListener("change", function() {
@@ -231,60 +235,47 @@ document.addEventListener('DOMContentLoaded', function(){
             const productPrice = element.querySelector('.prices').textContent;
     
             const addCartButtons = element.querySelectorAll(".addCart");
-
+    
             addCartButtons.forEach((button, i) => {
-
-                const productLength = document.querySelector('.productLength');
-                button.addEventListener("click", function(){
-
+                button.addEventListener("click", function() {
                     const shirtsId = "shirts" + (i + 1);
                     const productUrl = productImgUrl;
                     const productAlt = productImgAlt;
                     const productQuantity = "";  
-
+    
                     const basketEmpty = document.querySelector(".basketEmpty");
-                    if(basketEmpty){
+                    if (basketEmpty) {
                         basketEmpty.classList.add("invisible");
                     }
-
-                    for (let j = 0; j < parseInt(productLength.textContent); j++) {
-                        if (shirtsId === "shirts" + (j + 1)) {
-                            if(sizeChoice){
-                                const logoNs = document.querySelector(".logoNs");
-                                const p = document.createElement("p");
-                                p.classList.add("productAddInBasket");
-                                p.textContent = "Produit ajouté au panier.";
-                                logoNs.parentNode.insertBefore(p, logoNs); 
-                                setTimeout(() => {
-                                    p.remove();
-                                }, 1000); 
-                            }
-                            bagBoutique();
-
-                            addBasket({
-                                id: productId,
-                                name: productName.trim(),
-                                url: productUrl,
-                                alt: productAlt,
-                                size: sizeChoice, 
-                                prices: productPrice,
-                                quantity: productQuantity
-                            });
-                            if(basket){
-                                basket.forEach(product => {
-                                    // Ajouter le produit au tableau arrayProduct
-                                    arrayProduct.push(product);
-                                    //valueBasket.textContent = arrayProduct.length;
-                                });
-                            }
-                            break; 
-                        }
-                    }  
+    
+                    if (sizeChoice) {
+                        const logoNs = document.querySelector(".logoNs");
+                        const p = document.createElement("p");
+                        p.classList.add("productAddInBasket");
+                        p.textContent = "Produit ajouté au panier.";
+                        logoNs.parentNode.insertBefore(p, logoNs); 
+                        setTimeout(() => {
+                            p.remove();
+                        }, 1000); 
+    
+                        addBasket({
+                            id: productId,
+                            name: productName.trim(),
+                            url: productUrl,
+                            alt: productAlt,
+                            size: sizeChoice,
+                            prices: parseFloat(productPrice),
+                            quantity: productQuantity
+                        });
+    
+                        // Mettre à jour le nombre de produits
+                        updateProductCount();
+                    }
                 });
             });
         });
     }
-    
+
     function lookProduct(){
         const lookProductButtons = document.querySelectorAll(".lookProduct");
         lookProductButtons.forEach(function(button) {
@@ -292,13 +283,13 @@ document.addEventListener('DOMContentLoaded', function(){
                 shirts.classList.add("invisible");
             });
             button.addEventListener("click", function() {
-                // Récupérer l'ID du produit associé à ce bouton
+                // Retrieve the product ID associated with this button
                 const productId = button.closest(".shirtSale").querySelector(".shirtOne").getAttribute("id");
                 // Masquer tous les shirtss
                 document.querySelectorAll(".shirts").forEach(function(shirts) {
                     shirts.classList.add("invisible");
                 });
-                // Afficher le shirts correspondant à l'ID du produit
+                // Show shirts matching product ID
                 document.querySelector(".shirts" + productId).classList.remove("invisible");
             });
         });
@@ -384,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             let currentValue = parseInt(textQuantity[index].textContent); 
                             currentValue++; 
                             const productId = button.dataset.id;
-                            textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
+                            textQuantity[index].textContent = currentValue; // Update text content
                             changeQuantity({id:"" + productId + ""}, +1);
                             cartQuantityValue.textContent = getTotalPrice() + " €";
                         });
@@ -394,15 +385,17 @@ document.addEventListener('DOMContentLoaded', function(){
                             let currentValue = parseInt(textQuantity[index].textContent); 
                             currentValue--; 
                             const productId = button.dataset.id;
-                            textQuantity[index].textContent = currentValue; // Mettre à jour le contenu textuel
+                            textQuantity[index].textContent = currentValue; // Update text content
                             changeQuantity({ id: productId }, -1);
                             cartQuantityValue.textContent = getTotalPrice() + " €";
                             if (currentValue === 0) {
                                 let blockProduct = document.querySelector(".cartsProducts > ul:nth-child(" + (index + 1) + ")");
-                                blockProduct.style.display = "none";  
+                                blockProduct.style.display = "none"; 
+                                document.querySelector(".goPayement").style.display = "none";
                             }
                             if(getTotalPrice() === 0) {
                                 localStorage.removeItem("basket");
+                                document.querySelector(".goPayement").style.display = "none";
                             }
                         });
                     });     
@@ -415,5 +408,7 @@ document.addEventListener('DOMContentLoaded', function(){
     switchShirts();
     lookProduct();
     cartUser();
+    AddLocalStorageBoutique();
+    updateProductCount();
 
 });

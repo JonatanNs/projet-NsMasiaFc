@@ -57,10 +57,14 @@ class MerchManager extends AbstractManager{
                                 ) : void {
         try{
             $query = $this->db->prepare("UPDATE products 
-            SET name = :name, img_url = :img_url, img_alt = :img_alt, other_img_url = :other_img_url, 
-                        other_img_alt = :other_img_alt, descriptions = :descriptions, prices = :prices 
-            WHERE id = :id");
-
+                                        SET name = :name, 
+                                            img_url = :img_url, 
+                                            img_alt = :img_alt, 
+                                            other_img_url = :other_img_url, 
+                                            other_img_alt = :other_img_alt, 
+                                            descriptions = :descriptions, 
+                                            prices = :prices 
+                                        WHERE id = :id");
             $parameters = [
                             'id' => $id,
                             'name' => $name, 

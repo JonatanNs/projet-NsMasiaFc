@@ -4,24 +4,27 @@ class HomeController extends AbstractController{
     public function home() :void
     {
         $nsMasiaManager = new NsMasiaManager();
-        $matchManager = new MatchManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
+        $players = $nsMasiaManager->getPlayerNsMasia();
+        
         $rivalTeamManager = new RivalTeamManager();
-        $articleManager = new ArticleManager();
-
-        $matchPlays = $matchManager->getMatchsPlay();
-        $resultMatchs = $matchManager->getAllResultMatch();
-
         $allTeam = $rivalTeamManager->getAllTeams();
 
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAllArticle();
+
+        $matchManager = new MatchManager();
+        $matchPlays = $matchManager->getMatchsPlay();
+        $resultMatchs = $matchManager->getAllResultMatch();
         $matchs = $matchManager->getAllMatchs();
 
         if (!empty($matchs)) {
-            // Fonction pour comparer les dates
+            // Function compare date
             usort($matchs, function($a, $b) {
                 return strtotime($a['date']) - strtotime($b['date']);
             });
         
-            // Trouver le premier match qui n'est pas passé
+            // Find the first match that didn’t pass
             $now = time();
             $next_match = null;
         
@@ -34,12 +37,6 @@ class HomeController extends AbstractController{
         } else {
             $next_match = null;
         }
-        
-        $nsMasia = $nsMasiaManager->getNsMasia();
-
-        $articles = $articleManager->getAllArticle();
-
-        $players = $nsMasiaManager->getPlayerNsMasia();
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
@@ -72,17 +69,15 @@ class HomeController extends AbstractController{
 
     public function allRanking() :void{
         $nsMasiaManager = new NsMasiaManager();
-        $matchManager = new MatchManager();
-        $rivalTeamManager = new RivalTeamManager();
+        $nsMasia = $nsMasiaManager->getNsMasia();
 
+        $matchManager = new MatchManager();
+        $matchs = $matchManager->getAllMatchs();
         $matchPlays = $matchManager->getMatchsPlay();
         $resultMatchs = $matchManager->getAllResultMatch();
 
-        $allTeam = $rivalTeamManager->getAllTeams();
-
-        $matchs = $matchManager->getAllMatchs();
-
-        $nsMasia = $nsMasiaManager->getNsMasia();
+        $rivalTeamManager = new RivalTeamManager();
+        $allTeam = $rivalTeamManager->getAllTeams();  
 
         $userId = isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;

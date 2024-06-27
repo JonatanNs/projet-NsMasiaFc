@@ -18,46 +18,46 @@
             {% endif %}
         </article>
         {% if matchs is not empty %}
-            <ul class="matchs">
+            <div class="matchs">
             {% for match in matchs %}
-                <ul class="reservation">
-                {% if match.home_outside == "domicile" %}
-                    <li>
-                        <h2>{{nsMasia.name}}</h2>
-                        <p>{{ match.team }}</p>
-                        <p>{{ match.home_outside }}</p>
-                    </li>
-                {% else %}
-                    <li>
-                        <h2>{{ match.team }}</h2>
-                        <p>VS</p>
-                        <p>{{nsMasia.name}}</p>
-                        <p>{{ match.home_outside }}</p>
-                    </li>
-                {% endif %}
-                    <li>
-                        <p>{{ match.date |format_datetime( 'short', 'none', locale='fr') }} - {{ match.time |date("H:i", "Europe/Paris") }}</p>
-                    </li>
-                    <li>
-                        <figure> 
-                            <img src="{{ match.logo_url }}" alt=" {{ match.logo_alt }} "/>
-                        </figure>
-                    </li>
+                    <ul class="reservation">
                     {% if match.home_outside == "domicile" %}
-                    <li>
-                        <a href="Réservation-{{match.match_id}}" class="btn">Je réserve</a>
-                    </li>
+                        <li>
+                            <h2>{{ nsMasia.name }}</h2>
+                            <p>{{ match.team }}</p>
+                            <p>{{ match.home_outside }}</p>
+                        </li>
                     {% else %}
-                    <li>
-                        <p>Match à l'extérieur.</p>
-                    </li>
+                        <li>
+                            <h2>{{ match.team }}</h2>
+                            <p>VS</p>
+                            <p>{{ nsMasia.name }}</p>
+                            <p>{{ match.home_outside }}</p>
+                        </li>
                     {% endif %}
-                </ul>      
+                        <li>
+                            <p>{{ match.date|date("d/m/Y", "Europe/Paris") }} - {{ match.time|date("H:i", "Europe/Paris") }}</p>
+                        </li>
+                        <li>
+                            <figure> 
+                                <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}"/>
+                            </figure>
+                        </li>
+                        {% if match.home_outside == "domicile" %}
+                        <li>
+                            <a href="Réservation-{{ match.match_id }}" class="btn">Je réserve</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <p>Match à l'extérieur.</p>
+                        </li>
+                        {% endif %}
+                    </ul>
             {% endfor %}
-            <ul> 
-        {% else %} 
-        <h3>Pas de réservation disponible...</h3> 
-        {% endif %} 
+            </div>
+        {% else %}
+            <h3>Pas de réservation disponible...</h3>
+        {% endif %}
     </article>
 </main>
 {% endblock %}

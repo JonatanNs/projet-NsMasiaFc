@@ -15,6 +15,7 @@ class AdminBilleterieController extends AbstractController{
 
         $matchNsManager = new MatchManager();
         $matchs = $matchNsManager->getAllMatchs();
+        $tickets = $matchNsManager->getAllTickets();
 
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
@@ -28,6 +29,7 @@ class AdminBilleterieController extends AbstractController{
             'teamRival' => $teamRival,
             'secret' => $secret,
             'nsMasia' => $nsMasia,
+            'tickets' => $tickets,
             'matchs' => $matchs
         ]);
     }
@@ -35,11 +37,12 @@ class AdminBilleterieController extends AbstractController{
      /***************************** Admin Billeterie ***************************/
      public function checkAddMatchs() : void {
         $secret = $_ENV["SECRET"];
+        var_dump($_POST);
         if(
             isset($_POST["location"]) && 
             isset($_POST["rivalTeam"]) && 
             isset($_POST["date"]) && 
-            isset($_POST["time"])
+            isset($_POST["time"]) 
             ){
             $tokenManager = new CSRFTokenManager(); 
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
@@ -64,7 +67,7 @@ class AdminBilleterieController extends AbstractController{
                                             $heures_input, 
                                             $formatted_date
                                         );
-                $matchManager->createMatch($newMatch);
+                $matchManager->createMatch($newMatch);       
 
                 $_SESSION["valide"] = "Nouveau match Ajouter.";
                 header("Location: Admin-Billetterie-$secret");
@@ -101,13 +104,19 @@ class AdminBilleterieController extends AbstractController{
                 $date = new DateTime($date_input);
                 $formatted_date = $date->format('Y-m-d');
                 
-                $matchManager = new MatchManager();
                 $nsManager = new NsMasiaManager();
-                $rivalTeamManager = new RivalTeamManager();
-
                 $nsMasia = $nsManager->getNsMasia();
+
+                $rivalTeamManager = new RivalTeamManager();
                 $team = $rivalTeamManager->getAllRivalTeamsByName($rivalTeam);
-                $matchManager->changeMatch($matchId, $nsMasia, $team, $location, $heures_input, $formatted_date);
+
+                $matchManager = new MatchManager();
+                $matchManager->changeMatch( $matchId, 
+                                            $nsMasia, 
+                                            $team, 
+                                            $location, 
+                                            $heures_input, 
+                                            $formatted_date);
 
                 $_SESSION["valide"] = "Match modifier.";
                 header("Location: Admin-Billetterie-$secret");

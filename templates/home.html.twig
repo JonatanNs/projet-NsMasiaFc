@@ -21,6 +21,7 @@
             </div>
         </div>
 
+         {% if articles %}
         <section class="homeActualite">
             <h2>Actualité</h2>
             <div class="diapo" data-speed="5000" data-transition="2">
@@ -43,12 +44,14 @@
                 <button class="btnNextSlide"> <span class="fa-solid fa-angle-left fa-flip-horizontal"></span></button>
             </div>
         </section>
-
+        {% endif %}
         <div class="container-prochainMatch">
+            {% if matchPlays %}
             <article class="lastResult">
                 <h3>Dernier résultat</h3>
                 {% for match in matchPlays %}
-                    <p class="lastResultDate">{{ match.date|format_datetime('full', 'none', locale='fr') }}</p>
+                    {# <p class="lastResultDate">{{ match.date|format_datetime('full', 'none', locale='fr') }}</p> #}
+                    <p class="lastResultDate">{{ match.date|date("d/m/Y", "Europe/Paris") }}</p>
                     {% if match.home_outside == 'domicile' %}
                         <p class="lastResultDom">{{ match.name }}</p>
                         <p class="lastResultEx">{{ match.team }}</p>
@@ -71,6 +74,7 @@
                     </div>
                 {% endfor %}
             </article>
+            {% endif %}
             {% if next_match is not empty %}
                 <article class="prochainMatch">
                     <h3>Prochaine rencontre</h3>
@@ -81,8 +85,7 @@
                         <p class="prochainMatchDom">{{ next_match.team }}</p>
                         <p class="prochainMatchEx">{{ next_match.name }}</p>
                     {% endif %}
-                    <p class="prochainMatchDate">{{ next_match.date|format_datetime('full', 'none', locale='fr') }}</p>
-
+                    <p class="prochainMatchDate">{{ next_match.date|date("d/m/Y", "Europe/Paris") }}</p>
                     <div class="teamForMatch">
                         <figure>
                             <img src="{{nsMasia.logourl}}" alt="{{ nsMasia.logoalt }}"/>
@@ -102,7 +105,7 @@
                     {% endif %}
                 </article>
             {% endif %}
-
+            {% if allTeam %}
             <article class="ranking">
                 <h3>Classement</h3>
                 <table>
@@ -153,6 +156,7 @@
                     <span class="fa-solid fa-circle-left fa-flip-horizontal" style="color: #ffffff;"></span>
                 </a>
             </article>
+            {% endif %}
         </div> 
 
         <section class="homeClub">
@@ -177,7 +181,8 @@
                             </figure>
                         </a>
                     </article>
-                </div>           
+                </div>  
+                {% if players %}         
                 <div class="multiple-items sliderPlayer" style="opacity:1;">
                     {% for player in players %}
                         <article>
@@ -193,7 +198,8 @@
                             </figure>
                         </article>
                     {% endfor %}
-                </div> 
+                </div>
+                {% endif %}
             </div>
         </section> 
     </section>

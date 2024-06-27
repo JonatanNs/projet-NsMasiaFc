@@ -293,6 +293,31 @@ class MatchManager extends AbstractManager{
             * TICKET MATCH *
     **************************************/
 
+    public function createTicket( Ticket $ticket ) : void {  
+        try{ 
+            $query = $this->db->prepare("INSERT INTO tickets (
+                                                                id, 
+                                                                tribune, 
+                                                                prices, 
+                                                                stock
+                                                            ) 
+                                                VALUES (null, 
+                                                        :tribune, 
+                                                        :prices, 
+                                                        :stock 
+                                                        )");
+            $parameters = [ 
+                'tribune' => $ticket->getTribune(),
+                'prices' => $ticket->getPrices(), 
+                'stock' => $ticket->getStock()
+            ];
+            $query->execute($parameters);
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to create ticket.");
+        }
+    }
+
     public function ChangeStock( int $id, int $number ) : void{
         try{
             $query = $this->db->prepare("UPDATE tickets 
@@ -372,6 +397,27 @@ class MatchManager extends AbstractManager{
         }
     }
 
+    public function getTicketsByTribune(string $tribune) : ? Ticket{  
+        try{
+            $query = $this->db->prepare("SELECT * FROM tickets WHERE tribune = :tribune");
+            $parameters = [
+                'tribune' => $tribune
+            ];
+            $query->execute($parameters);
+            $item = $query->fetch(PDO::FETCH_ASSOC); 
+
+            if($item){
+                $newTicket = new Ticket($item["tribune"], $item["prices"], $item["stock"]);
+                $newTicket->setId($item["id"]);
+                return $newTicket; 
+            }
+             return null;
+        } catch (PDOException $e){
+            error_log("Database error : " . $e->getMessage());
+            throw new Exception("Failed to fetch all tickets by id.");
+        }
+    }
+
 /***************************************
         * RESULT MATCH *
  **************************************/
@@ -421,7 +467,7 @@ class MatchManager extends AbstractManager{
                 'id' => $rivalTeam->getId(),
                 'ranking_points' => $rankingPoint + 1,
                 'match_play' => $matchPlay + 1,
-                'match_nul' => $matchNul + 1,
+                'match_nul' => $matchNul + 1
             ];
             $query->execute($parameters);
         } catch (PDOException $e){
@@ -449,7 +495,8 @@ class MatchManager extends AbstractManager{
         } else if($score_nsMasia > $score_rivalTeam){ /*************** IF NS MASIA Win the match **************/
         try{
             $query = $this->db->prepare("UPDATE rivalsTeam 
-                                        SET match_play = :match_play, match_lose = :match_lose 
+                                        SET match_play = :match_play, 
+                                            match_lose = :match_lose 
                                         WHERE id = :id");
             $parameters = [
                 'id' => $rivalTeam->getId(),

@@ -1,7 +1,13 @@
 /*********************************
             * SHOP *
 *********************************/
-
+.numberLenghtProduct{
+    color: red;
+    border-radius: 2rem;
+    margin-left: 1.5em;
+    margin-top: -1em;
+    font-weight: 900;
+}
 .pageBoutique{
     width: 100%;
     margin: 0 ;
@@ -9,6 +15,7 @@
     h1, p{
         text-align: center;
     }
+    
     .logoNs {
         width: 10%;
         margin: 1em auto;
@@ -29,11 +36,11 @@
         
     }
     .searchAndBag{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        padding: 4em 0 1em 0 ;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2em 3em;
 
         .numberBag{
             color: $beige;
@@ -349,6 +356,13 @@
     
     @media screen and (min-width: 1024px) and (max-width: 1440px) {
         .pageBoutique{
+            .searchAndBag{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 2em 25%;
+            }
             .allShirt{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
@@ -425,6 +439,13 @@
     
     @media screen and (min-width: 1440px) {
         .pageBoutique{
+            .searchAndBag{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 5em 40em;
+            }
             .allShirt{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;

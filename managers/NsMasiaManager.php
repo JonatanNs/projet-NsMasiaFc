@@ -138,7 +138,9 @@ class NsMasiaManager extends AbstractManager{
         }
     }
 
-    public function changeNamePlayer(int $id, string $first_name, string $last_name) : void {
+    public function changeNamePlayer(int $id, 
+                                     string $first_name, 
+                                     string $last_name) : void {
         try{
             $query = $this->db->prepare("UPDATE playersNsMasia 
                                         SET first_name = :first_name, last_name = :last_name 
@@ -158,7 +160,9 @@ class NsMasiaManager extends AbstractManager{
 
     public function changeNameJerseyPlayer(int $id, string $name_jersay) : void {
         try{
-            $query = $this->db->prepare("UPDATE playersNsMasia SET name_jersay = :name_jersay WHERE id = :id");
+            $query = $this->db->prepare("UPDATE playersNsMasia 
+                                         SET name_jersay = :name_jersay 
+                                         WHERE id = :id");
 
             $parameters = [
                 'id' => $id,
@@ -173,7 +177,9 @@ class NsMasiaManager extends AbstractManager{
 
     public function changeNumberPlayer(int $id, int $number) : void {
         try{
-            $query = $this->db->prepare("UPDATE playersNsMasia SET number = :number WHERE id = :id");
+            $query = $this->db->prepare("UPDATE playersNsMasia 
+                                         SET number = :number 
+                                         WHERE id = :id");
 
             $parameters = [
                 'id' => $id,
@@ -188,7 +194,9 @@ class NsMasiaManager extends AbstractManager{
 
     public function changePositionPlayer(int $id, string $position) : void {
         try{
-            $query = $this->db->prepare("UPDATE playersNsMasia SET position = :position WHERE id = :id");
+            $query = $this->db->prepare("UPDATE playersNsMasia 
+                                         SET position = :position 
+                                         WHERE id = :id");
 
             $parameters = [
                 'id' => $id, 

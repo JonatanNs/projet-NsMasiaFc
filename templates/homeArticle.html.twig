@@ -5,19 +5,12 @@
     <article class="articleAllContent">
     <a href="Actualités" class="btn">Retour</a>
         <h1>{{articles.title}}</h1>
-        {% if errorMessage is not empty %}
-                <p style="text-align:center;">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
-            {% endif %}
-
-            {% if valideMessage is not empty %}
-                <p style="text-align:center;">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
-            {% endif %}
         <figure>
             <img src="{{articles.imgurl}}" alt="{{articles.img_alt}}"/>
             <figcaption>{{articles.img_alt}}</figcaption>
         </figure>
-        <p>{{articles.content|raw}}</p>
-        <p>Date : {{articles.date|date("m/d/Y", "Europe/Paris")}}</p>
+        <p class="text-content">{{articles.content|raw}}</p>
+        <p class="text-content">Date : {{articles.date|date("m/d/Y", "Europe/Paris")}}</p>
     </article>
 </main>
 {% endblock %}

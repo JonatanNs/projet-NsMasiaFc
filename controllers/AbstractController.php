@@ -3,7 +3,7 @@
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extension\DebugExtension;
-use Twig\Extra\Intl\IntlExtension; 
+//use Twig\Extra\Intl\IntlExtension; 
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -27,7 +27,7 @@ abstract class AbstractController {
         // Configurez le fuseau horaire pour Twig
         $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
         $twig->addExtension(new DebugExtension());
-        $twig->addExtension(new IntlExtension());
+        //$twig->addExtension(new IntlExtension());
 
         $this->twig = $twig;
 
@@ -74,54 +74,10 @@ abstract class AbstractController {
         }
     }
     
-    
-    public function css(): string{
-        $css = "
-        body {
-            background-color: #1e1e1e;
-            color: #f5f5f5; 
-            font-family: Poppins, sans-serif; 
-            line-height: 1.6;
-            padding: 20px;
-            margin: 0;
-        }
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                }
-                ul{
-                    list-style: none;
-                    padding: 0;
-                }
-                a{
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-                p {
-                    line-height: 1.5;
-                }
-                .signature {
-                    margin-top: 20px;
-                }
-                .preheader {
-                    display: none;
-                    max-height: 0;
-                    max-width: 0;
-                    opacity: 0;
-                    overflow: hidden;
-                    font-size: 1px;
-                    line-height: 1px;
-                }";
-        return $css;
-    }
-    
     protected function baseEmailSignup(string $addAddress, string $nameUser) : void{
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
         $nsName = $nsMasia->getName();
-
-        $css = $this->css();
 
         $subject =  "Merci pour votre inscription !";
 
@@ -133,9 +89,6 @@ abstract class AbstractController {
                     <meta http-equiv='X-UA-Compatible'content='IE=edge'>
                     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                     <title>$subject</title>
-                    <style>
-                     $css
-                    </style>
                 </head>
                 <body>
                     <p>Bonjour $nameUser,</p>
@@ -155,6 +108,7 @@ abstract class AbstractController {
                 </html>
 
         ";
+        // Sending the email with the generated content
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
     }
 
@@ -171,7 +125,6 @@ abstract class AbstractController {
         $dateFormatee = $dateObj->format('d/m/Y');
 
         $totalPrices = $order->getTotalPrices();
-        $css = $this->css();
         $subject =  "Merci pour votre achat !";
 
         $emailContent = "
@@ -182,9 +135,6 @@ abstract class AbstractController {
                     <meta http-equiv='X-UA-Compatible'content='IE=edge'>
                     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                     <title>$subject</title>
-                    <style>
-                     $css
-                    </style>
                 </head>
                 <body>
                     <p>Bonjour $nameUser,</p>
@@ -213,68 +163,9 @@ abstract class AbstractController {
                 </html>
 
         ";
+        // Sending the email with the generated content
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
     }
-
-    // protected function baseEmailTicket(string $addAddress, string $nameUser,Order_ticket $order_ticket) : void{
-    //     $nsMasiaManager = new NsMasiaManager();
-    //     $nsMasia = $nsMasiaManager->getNsMasia();
-    //     $nsName = $nsMasia->getName();
-
-    //     $orderManager = new OrderManager();
-    //     $order = $orderManager->getOrderTicketById($order_ticket);
-
-    //     $numberOrder = $order->getNumberOrder();
-
-    //     $dateObj = DateTime::createFromFormat('Y-m-d', $order->getDate());
-    //     $dateFormatee = $dateObj->format('d/m/Y');
-    //     $css = $this->css();
-    //     $subject =  "Merci pour votre achat !";
-
-    //     $emailContent = "
-    //             <!DOCTYPE html>
-    //             <html lang='fr'>
-    //             <head>
-    //                 <meta charset='UTF-8'>
-    //                 <meta http-equiv='X-UA-Compatible'content='IE=edge'>
-    //                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    //                 <title>$subject</title>
-    //                 <style>
-    //                  $css
-    //                 </style>
-    //             </head>
-    //             <body>
-    //                 <p>Cher/Chère $nameUser,</p>
-                
-    //                 <p>
-    //                     Nous sommes ravis de vous informer que votre achat de ticket pour le prochain match de $nsName a bien été enregistré. 
-    //                     Meci pour votre soutien continu à notre équipe !
-    //                 </p>
-
-    //                 <p>
-    //                     Votre billet électronique est désormais disponible. 
-    //                     Vous pouvez le télécharger et l'imprimer en utilisant le lien suivant : [lien de téléchargement du billet].
-    //                 </p>
-
-    //                 <p>
-    //                     Nous sommes impatients de vous accueillir au stade et de partager ensemble la passion du football. 
-    //                     Pour toute question ou assistance supplémentaire, n'hésitez pas à nous contacter.
-    //                 </p>
-
-    //                 <ul>
-    //                     <li>Votre numéro de commande : $numberOrder</li>
-    //                     <li>Achat éffectuer le $dateFormatee </li>
-    //                 </ul>
-                
-    //                 <div>
-    //                     <p>Cordialement,</p>
-    //                     <p>L'équipe $nsName</p>
-    //                 </div>
-    //             </body>
-    //             </html>
-    //     ";
-    //     $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
-    // }
 
     protected function baseEmailTicket(string $addAddress, string $nameUser, Order_ticket $order_ticket): void {
 
@@ -285,28 +176,20 @@ abstract class AbstractController {
     
         $orderManager = new OrderManager();
         $order = $orderManager->getOrderTicketById($order_ticket);
-
-
-
-            $numberOrder = $order_ticket->getNumberOrder();
+        $numberOrder = $order_ticket->getNumberOrder();
             
-
-            foreach($order_ticket->getTicketsId() as $ticket){
-                $tribune = $ticket["tribune"];
-            }
-
-            foreach($order_ticket->getMatchId() as $match){
-
-                $matchName = $match["name"] . "VS" . $match["team"];
-                $matchDate = $match["date"] . " à " . $match["time"];
-                $matchLocation = $match["home_outside"];
-                $matchIsAtStadium = $match["matchIsAtStadium_name"];
-
-            }
+        foreach($order_ticket->getTicketsId() as $ticket){
+            $tribune = $ticket["tribune"];
+        }
+        foreach($order_ticket->getMatchId() as $match){
+            $matchName = $match["name"] . "VS" . $match["team"];
+            $matchDate = $match["date"] . " à " . $match["time"];
+            $matchLocation = $match["home_outside"];
+            $matchIsAtStadium = $match["matchIsAtStadium_name"];
+        }
 
         $dateObj = DateTime::createFromFormat('Y-m-d', $order->getDate());
         $dateFormatee = $dateObj->format('d/m/Y');
-        $css = $this->css();
         $subject = "Merci pour votre achat !";
     
         // Génération du QR code basé sur le numéro de commande
@@ -344,9 +227,6 @@ abstract class AbstractController {
                 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>$subject</title>
-                <style>
-                    $css
-                </style>
             </head>
             <body>
                 <p>Cher/Chère $nameUser,</p>
@@ -378,10 +258,10 @@ abstract class AbstractController {
             </html>
         ";
     
-        // Envoi de l'email avec le contenu généré
+        // Sending the email with the generated content
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent, $qrCodeImagePath);
     
-        // Supprimer le fichier temporaire après l'envoi de l'email
+        // Delete the temporary file after sending the email
         unlink($qrCodeImagePath);
     }  
 }

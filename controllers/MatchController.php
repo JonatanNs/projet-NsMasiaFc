@@ -13,7 +13,8 @@ class MatchController extends AbstractController
 
         $matchManager = new MatchManager();
         $matchs = $matchManager->getAllMatchs();
-        $this->render("biletterie/billeterie.html.twig", [
+
+        $this->render("Biletterie/billeterie.html.twig", [
             'userIsConect' => $userIsConect,
             'matchs' => $matchs,
             'rolesUser' => $rolesUser,
@@ -26,6 +27,7 @@ class MatchController extends AbstractController
         $secret = $_ENV['SECRET'];
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
+        
         $matchManager = new MatchManager();
         $matchs = $matchManager->getAllMatchsByIdNoPlay($id);
         $tickets = $matchManager->getAllTickets();
@@ -33,7 +35,7 @@ class MatchController extends AbstractController
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
 
-        $this->render("biletterie/reservation.html.twig", [
+        $this->render("Biletterie/reservation.html.twig", [
             'userIsConect' => $userIsConect,
             'matchs' => $matchs,
             'tickets' => $tickets,
@@ -55,7 +57,7 @@ class MatchController extends AbstractController
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
 
-        $this->render("biletterie/payementTicket.html.twig", [
+        $this->render("Biletterie/payementTicket.html.twig", [
             'userIsConect' => $userIsConect,
             'tickets' => $tickets,
             'tokenCSRF' => $tokenCSRF,
@@ -66,6 +68,7 @@ class MatchController extends AbstractController
     }
 
     public function checkAddResult() : void {
+        var_dump($_POST);
         $secret = $_ENV["SECRET"];
         if(isset($_POST["resultTeamNsMasia"]) && 
             isset($_POST["resultTeamRival"]) && 
@@ -97,7 +100,7 @@ class MatchController extends AbstractController
                     $results = [];
                                             
                     foreach ($_POST['resultOtherRivalTeam'] as $result) {
-                        // Sépare le type de résultat et l'ID de l'équipe
+                        // Separates outcome type and team ID
                         list($resultType, $teamId) = explode(',', $result);
                                             
                         // Stocke le résultat dans un tableau associatif
@@ -107,9 +110,9 @@ class MatchController extends AbstractController
                         ];
                         $rivalTeamManager = new RivalTeamManager();     
                         $rivalTeam = $rivalTeamManager->getAllRivalTeamsById($teamId);           
-                        // Vérifie le type de résultat
+                        // Check the result type
                         if ($resultType === "Win") {
-                            // Traitez ici le cas où le résultat est "Win"
+                            // Treat here the case where the result is "Win
                                           
                             $rivalTeamManager->checkChangePointRivalTeam(
                                 $teamId,
@@ -138,16 +141,7 @@ class MatchController extends AbstractController
                                 $rivalTeam->getMatchsLose(),
                                 $rivalTeam->getMatchsNul() +1
                             );
-                        } else {
-                            $rivalTeamManager->checkChangePointRivalTeam(
-                                $teamId,
-                                $rivalTeam->getRankingPoints(),
-                                $rivalTeam->getMatchsPlay() ,
-                                $rivalTeam->getMatchsWin(),
-                                $rivalTeam->getMatchsLose(),
-                                $rivalTeam->getMatchsNul()
-                            );
-                        }
+                        } 
                     }
                 }
                                             

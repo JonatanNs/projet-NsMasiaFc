@@ -136,14 +136,14 @@ class RivalTeamManager extends AbstractManager{
     }
 
     public function checkChangePointRivalTeam(
-            int $id, 
-            int $rankings_point, 
-            int $match_play, 
-            int $match_win,
-            int $match_lose,
-            int $match_nul
+                                                int $id, 
+                                                int $rankings_point, 
+                                                int $match_play, 
+                                                int $match_win,
+                                                int $match_lose,
+                                                int $match_nul
 
-        ) : void {
+                                            ) : void {
     try{
         $query = $this->db->prepare("UPDATE rivalsTeam
                                     SET ranking_points = :ranking_points,

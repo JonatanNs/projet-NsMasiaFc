@@ -24,11 +24,11 @@
                     {% endfor %}
                     {% if not matchFound %}
                         {% set resultFound = true %}
-                        <form action="Ajouter-Resultat-Match-{{secret}}" method="POST" class="form">
+                        <form action="Ajouter-résultat-match-{{secret}}" method="POST" class="form">
                             <input type="hidden" name="csrf-token" value="{{ tokenCSRF }}"/>
                             <input type="hidden" name="matchId" value="{{ matchPlay.match_id }}">
                             <fieldset>
-                                <legend>Match joué le {{ matchPlay.date }}</legend>
+                                <legend>Match joué le {{ matchPlay.date|date("d/m/Y", "Europe/Paris") }}</legend>
                                 <label for="resultTeamNsMasia">{{ matchPlay.name }}*</label>
                                 <input type="number" name="resultTeamNsMasia" min="0" required>
                             </fieldset>
@@ -43,10 +43,9 @@
                                     <label for="resultOtherRivalTeam">Quel a été le résultat du match de {{team.team}} ?</label>
                                     <select name="resultOtherRivalTeam[]" id="resultOtherRivalTeam" required>
                                         <option value="">Sélectionner une option</option>
-                                        <option value=" Win,{{team.id}}">Gagné</option>    
+                                        <option value="Win,{{team.id}}">Gagné</option>    
                                         <option value="Lose,{{team.id}}">Perdu</option> 
-                                        <option value="Nul,{{team.id}}">Nul</option> 
-                                        <option value="Stand-By,{{team.id}}">Pas encore joué</option>         
+                                        <option value="Nul,{{team.id}}">Nul</option>          
                                     </select>
                                 </fieldset>
                                 {% endif %}

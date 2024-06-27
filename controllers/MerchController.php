@@ -14,7 +14,7 @@ class MerchController extends AbstractController
         $nsMasiaManager = new NsMasiaManager();
         $nsMasia = $nsMasiaManager->getNsMasia();
 
-        $this->render("boutique/boutique.html.twig", [
+        $this->render("Boutique/boutique.html.twig", [
             'userIsConect' => $userIsConect,
             'products' => $products,
             'secret' => $secret,
@@ -36,7 +36,7 @@ class MerchController extends AbstractController
         $nsMasia = $nsMasiaManager->getNsMasia();
         
         // Rendre la vue en passant les détails du produit à afficher
-        $this->render("boutique/boutiqueProduct.html.twig", [
+        $this->render("Boutique/boutiqueProduct.html.twig", [
             'userIsConect' => $userIsConect,
             'products' => $products,
             'secret' => $secret,

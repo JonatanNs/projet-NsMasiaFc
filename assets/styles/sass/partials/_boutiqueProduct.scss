@@ -41,15 +41,17 @@
         .searchAndBag{
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
+            justify-content: flex-end;
             align-items: center;
-            padding: 2em 0 ;
+            padding: 2em 3em;
+            
             .numberBag{
                 color: $beige;
                 margin-left: 1.5em;
                 margin-top: -1em;  
             }
             .bagProduct{
+                cursor: pointer;
                 .valueBasket{
                     background-color: red;
                     border-radius: 1rem;
@@ -237,6 +239,13 @@
     .main{
         .pageLookProduct{
             padding-top: 5em;
+            .searchAndBag{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 2em 25%;
+            }
             .logoNs{
                 width: 8%;
                 margin: 0 auto;
@@ -335,6 +344,13 @@
     .main{
         .pageLookProduct{
             padding-top: 5em;
+            .searchAndBag{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 2em 40em;
+            }
             .logoNs{
                 width: 5%;
                 margin: 0 auto;

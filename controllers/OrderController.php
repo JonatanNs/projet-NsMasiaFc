@@ -21,7 +21,7 @@ class OrderController extends AbstractController {
         $user = isset($userId) ? $userManager->getAllUserById($userId) : "";
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
 
-        $this->render("boutique/panier.html.twig", [
+        $this->render("Boutique/panier.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
@@ -54,7 +54,7 @@ class OrderController extends AbstractController {
         $orderManager = new OrderManager();
         $addresse = isset($userId) ? $orderManager->getAllAddressesByUserId($user) : "";
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
-        $this->render("boutique/payement.html.twig", [
+        $this->render("Boutique/payement.html.twig", [
             'userIsConect' => $userIsConect,
             'tokenCSRF' => $tokenCSRF,
             'userId' => $userId,
@@ -224,10 +224,10 @@ class OrderController extends AbstractController {
     
     public function generatorNumberOrderBoutique() : string{
         // Incrémenter le numéro de commande
-        $uniqueNumber = bin2hex(random_bytes(10));
+        $uniqueNumber = bin2hex(random_bytes(5));
     
         // Retourner le nouveau numéro de commande
-        return "nsboutique" . $uniqueNumber;
+        return "nsB" . $uniqueNumber;
     }
 
     public function generatorNumberOrderTicket() {
@@ -235,7 +235,7 @@ class OrderController extends AbstractController {
         $uniqueNumber = bin2hex(random_bytes(10));
     
         // Retourner le nouveau numéro de commande
-        return "nsTicket" . $uniqueNumber;
+        return "nsT" . $uniqueNumber;
     }
         
     public function stripePayement() : void{;
@@ -246,7 +246,7 @@ class OrderController extends AbstractController {
         
         header('Content-Type: application/json');
         
-        $YOUR_DOMAIN = 'http://localhost';
+        $YOUR_DOMAIN = 'https://nsmasiafc.alwaysdata.net';
 
         $line_items = [];
         
@@ -270,8 +270,8 @@ class OrderController extends AbstractController {
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-valide',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement',
+            'success_url' => $YOUR_DOMAIN . '/Payement-valide',
+            'cancel_url' => $YOUR_DOMAIN . '/Paiement',
         ]);
         
         header("HTTP/1.1 303 See Other");
@@ -287,7 +287,7 @@ class OrderController extends AbstractController {
         
         header('Content-Type: application/json');
         
-        $YOUR_DOMAIN = 'http://localhost';
+        $YOUR_DOMAIN = 'https://nsmasiafc.alwaysdata.net';
         
         $line_items = [];
         
@@ -312,8 +312,8 @@ class OrderController extends AbstractController {
             'submit_type' => 'pay',
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Payement-valide',
-            'cancel_url' => $YOUR_DOMAIN . '/projet-NsMasiaFc/Paiement-Billet',
+            'success_url' => $YOUR_DOMAIN . '/Payement-valide',
+            'cancel_url' => $YOUR_DOMAIN . '/Paiement-Billet',
         ]);
         
         header("HTTP/1.1 303 See Other");

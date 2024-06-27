@@ -280,6 +280,14 @@ h1, h2, h3, h4, h5, h6 {
 /*********************************
             * SHOP *
 *********************************/
+.numberLenghtProduct {
+  color: red;
+  border-radius: 2rem;
+  margin-left: 1.5em;
+  margin-top: -1em;
+  font-weight: 900;
+}
+
 .pageBoutique {
   width: 100%;
   margin: 0;
@@ -310,9 +318,9 @@ h1, h2, h3, h4, h5, h6 {
 .pageBoutique .searchAndBag {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  padding: 4em 0 1em 0;
+  padding: 2em 3em;
 }
 .pageBoutique .searchAndBag .numberBag {
   color: rgb(255, 249, 237);
@@ -592,6 +600,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .pageBoutique .searchAndBag {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2em 25%;
+  }
   .pageBoutique .allShirt {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -662,6 +677,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1440px) {
+  .pageBoutique .searchAndBag {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5em 40em;
+  }
   .pageBoutique .allShirt {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -771,14 +793,17 @@ h1, h2, h3, h4, h5, h6 {
 .main .pageLookProduct .searchAndBag {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  padding: 2em 0;
+  padding: 2em 3em;
 }
 .main .pageLookProduct .searchAndBag .numberBag {
   color: rgb(255, 249, 237);
   margin-left: 1.5em;
   margin-top: -1em;
+}
+.main .pageLookProduct .searchAndBag .bagProduct {
+  cursor: pointer;
 }
 .main .pageLookProduct .searchAndBag .bagProduct .valueBasket {
   background-color: red;
@@ -931,6 +956,13 @@ h1, h2, h3, h4, h5, h6 {
   .main .pageLookProduct {
     padding-top: 5em;
   }
+  .main .pageLookProduct .searchAndBag {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2em 25%;
+  }
   .main .pageLookProduct .logoNs {
     width: 8%;
     margin: 0 auto;
@@ -1018,6 +1050,13 @@ h1, h2, h3, h4, h5, h6 {
 @media screen and (min-width: 1440px) {
   .main .pageLookProduct {
     padding-top: 5em;
+  }
+  .main .pageLookProduct .searchAndBag {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2em 40em;
   }
   .main .pageLookProduct .logoNs {
     width: 5%;
@@ -2256,6 +2295,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .pageHome .container-prochainMatch {
   padding: 1em;
+  color: rgb(250, 250, 250);
   /************ NEXT MATCH **********/
   /************ LAST MATCH **********/
   /************ RANKING **********/
@@ -2269,10 +2309,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1em;
 }
 .pageHome .container-prochainMatch .prochainMatch {
-  background-color: rgb(137, 137, 137);
+  background-color: rgb(25, 30, 59);
+  box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
 }
 .pageHome .container-prochainMatch .prochainMatch h3 {
-  color: rgb(0, 0, 0);
+  color: rgb(250, 250, 250);
 }
 .pageHome .container-prochainMatch .prochainMatch .prochainMatchDom {
   text-transform: uppercase;
@@ -2315,7 +2356,9 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: pretty;
 }
 .pageHome .container-prochainMatch .lastResult {
-  background-color: rgb(137, 137, 137);
+  background-color: rgb(255, 249, 237);
+  color: rgb(0, 0, 0);
+  box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;
 }
 .pageHome .container-prochainMatch .lastResult h3 {
   color: rgb(0, 0, 0);
@@ -2347,6 +2390,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 900;
   padding: 0.5em;
   border-radius: 1rem;
+  color: white;
 }
 .pageHome .container-prochainMatch .lastResult figure {
   width: 15%;
@@ -2357,14 +2401,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 .pageHome .container-prochainMatch .ranking {
   text-align: center;
-  background-color: rgb(137, 137, 137);
+  background-color: rgb(255, 249, 237);
   padding: 1em;
+  box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px;
 }
 .pageHome .container-prochainMatch .ranking h3 {
   color: rgb(0, 0, 0);
 }
+.pageHome .container-prochainMatch .ranking table {
+  color: rgb(0, 0, 0);
+}
 .pageHome .container-prochainMatch .ranking table td {
-  border-top: 1px solid rgb(255, 249, 237);
+  border-top: 1px solid rgb(0, 0, 0);
 }
 .pageHome .container-prochainMatch .ranking table .rankingTd {
   width: 5%;
@@ -2770,7 +2818,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 50%;
     height: auto;
   }
-  .pageHome .container-prochainMatch article:nth-child(2) {
+  .pageHome .container-prochainMatch article.prochainMatch {
     height: 50vh;
     padding: 4% 0;
   }
@@ -3014,6 +3062,12 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
 }
+.form fieldset legend {
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: left;
+  padding-top: 2em;
+}
 .form fieldset input {
   background-color: rgb(255, 249, 237);
   border-radius: 0.5rem;
@@ -3204,6 +3258,9 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 1fr;
     align-items: center;
   }
+  .articleAllContent .text-content {
+    margin: 2em;
+  }
   .pagination {
     display: flex;
     align-items: center;
@@ -3242,6 +3299,9 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
   }
+  .articleAllContent .text-content {
+    margin: 2em 10em;
+  }
   .pagination {
     display: flex;
     align-items: center;
@@ -3279,6 +3339,9 @@ h1, h2, h3, h4, h5, h6 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+  }
+  .articleAllContent .text-content {
+    margin: 2em 10em;
   }
   .pagination {
     display: flex;

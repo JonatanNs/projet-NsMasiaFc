@@ -190,7 +190,7 @@ class CompteUserController extends AbstractController{
                                 $nsMasiaName = $nsMasia->getName();
                                 $nameUser = $newUser->getFirstName() . ' ' . $newUser->getLastName();
                                 $emailUser = $newUser->getEmail();
-                                $css = $this->css();
+                                
                                 $subject =  "Vous avez modifier vos informations !";
 
                                 $emailContent = "
@@ -200,10 +200,8 @@ class CompteUserController extends AbstractController{
                                                     <meta charset='UTF-8'>
                                                     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
                                                     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                                                    
                                                     <title>$subject</title>
-                                                    <style>
-                                                        $css
-                                                    </style>
                                                 </head>
                                                 
                                                 <body>
@@ -284,7 +282,7 @@ class CompteUserController extends AbstractController{
                             $nsMasiaName = $nsMasia->getName();
                             $nameUser = $user->getFirstName() . ' ' . $user->getLastName();
                                 $emailUser = $user->getEmail();
-                                $css = $this->css();
+                                
                                 
                                 $subject =  "Vous avez modifier vos informations !";
 
@@ -295,10 +293,8 @@ class CompteUserController extends AbstractController{
                                                     <meta charset='UTF-8'>
                                                     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
                                                     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                                                    
                                                     <title>$subject</title>
-                                                    <style>
-                                                        $css
-                                                    </style>
                                                 </head>
                                                 
                                                 <body>

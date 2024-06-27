@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Function to render pagination buttons
         function renderPagination() {
             const container = document.getElementById('pagination-container');
-            container.innerHTML = '';
+            if(container){
+                container.innerHTML = '';
+            }
             const totalPages = Math.ceil(allArticles.length / articlesPerPage);
 
             const prevButton = document.createElement('button');
@@ -35,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentPage--;
                 updateUI();
             };
-            container.appendChild(prevButton);
+            if(container){
+                container.appendChild(prevButton);
+            }
 
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = document.createElement('button');
@@ -45,7 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentPage = i;
                     updateUI();
                 };
-                container.appendChild(pageButton);
+                if(container){
+                    container.appendChild(pageButton);
+                }
             }
 
             const nextButton = document.createElement('button');
@@ -56,7 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentPage++;
                 updateUI();
             };
-            container.appendChild(nextButton);
+            if(container){
+                container.appendChild(nextButton);
+            }
         }
 
         // Function to update the UI
