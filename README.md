@@ -6,6 +6,8 @@ This project will aim to increase the visibility of the club and its revenues. T
 
 The NS MASIA FC website will allow users to discover the club and its history. In addition, it will offer them the opportunity to follow the news of the club and attend sporting events.
 
+<a href="https://nsmasiafc.alwaysdata.net">Link to the hosted website</a><br>
+
 Languages used:
 * HTML/SAAS(CSS)
 * JavaScript 
