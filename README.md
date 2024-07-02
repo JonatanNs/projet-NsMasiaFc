@@ -29,7 +29,6 @@ Languages used:
 
 ## Useful links
 
-- For flags 
 - Icon library 
 - Sort by category
 - Php Mailler
