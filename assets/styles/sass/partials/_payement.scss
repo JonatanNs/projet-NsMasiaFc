@@ -356,6 +356,14 @@
     }
     
     @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .titleBoutiquePayement, .titleBiletteriePayement{
+            figure{
+                width: 10%;
+                img{
+                    width: 100%; 
+                }
+            }
+        }
         .payement{
             .orderUser{
                 .orderUser-connexion, .orderUser-address{
@@ -422,6 +430,14 @@
     }
     
     @media screen and (min-width: 1440px) {
+        .titleBoutiquePayement, .titleBiletteriePayement{
+            figure{
+                width: 10%;
+                img{
+                    width: 100%; 
+                }
+            }
+        }
         .payement{
             .orderUser{
                 .orderUser-connexion, .orderUser-address{

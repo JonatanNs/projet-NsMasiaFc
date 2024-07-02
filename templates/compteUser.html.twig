@@ -14,7 +14,7 @@
         {% if rolesUser == "ADMIN" %} 
             <div class="userIsAdmin">
                 <form action="Vérifier-Admin-{{secret}}" method="POST">
-                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}" />
+                    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ tokenCSRF }}">
                     <button type="submit" class="btn">ADMIN</button>
                 </form> 
             </div>
@@ -186,7 +186,7 @@
                 <article class="yourTickets-order invisible">
                     <article>
                         <h4>COMMANDE EFFECTUÉE LE</h4>
-                        <p>{{ orderTicket.date }}</p>
+                        <p>{{ orderTicket.date|date("d/m/Y", "Europe/Paris") }}</p>
                     </article>
                     <article>
                         <h4>N° DE COMMANDE</h4>
@@ -202,12 +202,12 @@
                         {% if orderTicket.match_id == matchOf.match_id %}
                             <article class="yourTickets-info invisible">
                                 <figure>
-                                    <img src="{{ matchOf.logo_url }}" alt="{{ matchOf.logo_alt }}"/>
+                                    <img src="{{ matchOf.logo_url }}" alt="{{ matchOf.logo_alt }}">
                                 </figure>
                                 <div>
                                     <h4>{{ matchOf.name ~ ' vs ' ~ matchOf.team }}</h4>
                                     <p>Au stade : {{ matchOf.matchIsAtStadium_name}}</p>
-                                    <p>{{ matchOf.date }} - {{ matchOf.time }}</p>
+                                    <p>{{ matchOf.date|date("d/m/Y", "Europe/Paris") }} - {{ matchOf.time|date("H:i", "Europe/Paris") }}</p>
                                 </div>
                             </article>
                         {% endif %}
@@ -219,7 +219,7 @@
             <article class="yourProducts-order invisible">
                 <article>
                     <h4>COMMANDE EFFECTUÉE LE</h4>
-                    <p>{{ allOrdersProduct.date }}</p>
+                    <p>{{ allOrdersProduct.date|date("d/m/Y", "Europe/Paris") }}</p>
                 </article>
                 <article>
                     <h4>N° DE COMMANDE</h4>
@@ -235,7 +235,7 @@
                             {% if product.id == orderProduct.product_id and allOrdersProduct.order_number == orderProduct.order_number %}
                             <article class="yourProducts-info invisible">
                                 <figure>
-                                    <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                                    <img src="{{ product.img_url }}" alt="{{ product.img_alt }}">
                                 </figure>
                                 <div>
                                     <h4>{{ product.name }}</h4>

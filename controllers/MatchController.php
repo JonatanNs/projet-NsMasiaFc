@@ -4,7 +4,6 @@ class MatchController extends AbstractController
 {
     public function billeterie() : void
     {
-
         $userIsConect = isset($_SESSION["firstAndLastName"]) ? $_SESSION["firstAndLastName"] : null;
         $rolesUser = isset($_SESSION['userRoles']) ? $_SESSION['userRoles'] : null;
         

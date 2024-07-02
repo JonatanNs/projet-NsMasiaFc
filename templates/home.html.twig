@@ -10,10 +10,10 @@
     {% if valideMessage is not empty %}
         <p style="text-align:center;" class="alertMessage">{{ valideMessage }} <span class="fa-solid fa-square-check fa-xl" style="color: #00ff55;"></span></p>
     {% endif %}
-        <div class="home" style="background-image: url(https://live.staticflickr.com/65535/53561068793_a7b0b0feac.jpg);">
+        <div class="home" style="background-image: url(assets/img/stade_accueil.png);">
             <figure>
-                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
-                <img src="assets/img/logo_adidad_nsmasia.png" alt="{{nsMasia.logoalt}}"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}">
+                <img src="assets/img/logo_adidad_nsmasia.png" alt="{{nsMasia.logoalt}}">
             </figure>
             <h1>NS<br>Masia FC</h1>
             <div class="btnProchainMatch">
@@ -33,7 +33,7 @@
                             Lire
                         </a>
                         <figure>
-                            <img src="{{ article.img_url }}" alt="{{ article.img_alt }}" />  
+                            <img src="{{ article.img_url }}" alt="{{ article.img_alt }}">  
                         </figure>
                     </article>
                 {% endfor %}
@@ -50,7 +50,6 @@
             <article class="lastResult">
                 <h3>Dernier résultat</h3>
                 {% for match in matchPlays %}
-                    {# <p class="lastResultDate">{{ match.date|format_datetime('full', 'none', locale='fr') }}</p> #}
                     <p class="lastResultDate">{{ match.date|date("d/m/Y", "Europe/Paris") }}</p>
                     {% if match.home_outside == 'domicile' %}
                         <p class="lastResultDom">{{ match.name }}</p>
@@ -61,7 +60,7 @@
                     {% endif %}
                     <div class="teamForLastMatch">
                         <figure>
-                            <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
+                            <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}">
                         </figure> 
                         {% for result in resultMatchs %}
                             {% if result.match_id == match.match_id %}
@@ -69,7 +68,7 @@
                             {% endif %}
                         {% endfor %}
                         <figure>  
-                            <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}" />
+                            <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}">
                         </figure>
                     </div>
                 {% endfor %}
@@ -88,11 +87,11 @@
                     <p class="prochainMatchDate">{{ next_match.date|date("d/m/Y", "Europe/Paris") }}</p>
                     <div class="teamForMatch">
                         <figure>
-                            <img src="{{nsMasia.logourl}}" alt="{{ nsMasia.logoalt }}"/>
+                            <img src="{{nsMasia.logourl}}" alt="{{ nsMasia.logoalt }}">
                         </figure>
                         <p>{{ next_match.time|date("H:i", "Europe/Paris") }}</p>
                         <figure>
-                            <img src="{{ next_match.logo_url }}" alt="{{ next_match.logo_alt }}" />
+                            <img src="{{ next_match.logo_url }}" alt="{{ next_match.logo_alt }}">
                         </figure>
                     </div>
                     {% if next_match.home_outside == 'domicile' %}
@@ -168,7 +167,7 @@
                             <p>NS MASIA F.C. 2024</p>
                             <h5>Histoire du club</h5>
                             <figure>
-                                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match" />
+                                <img src="https://live.staticflickr.com/65535/53630671194_1a9e5bbe73.jpg" alt="Stade NS Masia FC durant un match">
                             </figure>
                         </a>
                     </article>
@@ -177,7 +176,7 @@
                             <p>NS MASIA F.C. 2024</p>
                             <h5>Joueur du club</h5>
                             <figure>
-                                <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match" />
+                                <img src="https://live.staticflickr.com/65535/53614561184_cbdbef9f8d_z.jpg" alt="Stade NS Masia FC durant un match">
                             </figure>
                         </a>
                     </article>
@@ -189,7 +188,7 @@
                             <figure>
                                 <img src="{{player.img}}" 
                                      alt="image de {{ player.first_name ~ ' ' ~ player.last_name}}" 
-                                     data-lazy="{{player.img}}"/>
+                                     data-lazy="{{player.img}}">
                                 <div class="info">
                                     <h6>{{ player.number}}</h6>
                                     <p>{{ player.first_name}}</p>

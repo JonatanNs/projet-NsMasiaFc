@@ -157,13 +157,13 @@ class OrderController extends AbstractController {
             
                     for($i = 0; $i < count($articles); $i++){
                         foreach($articles[$i] as $product){
-                        $lastId = $orderManager->createOrderFromProduct(
-                            $nextOrderId,
-                            $product['id'],
-                            $quantities[$i],
-                            $sizes[$i],
-                            $totals[$i]
-                        ); 
+                       $orderManager->createOrderFromProduct(
+                                                                        $nextOrderId,
+                                                                        $product['id'],
+                                                                        $quantities[$i],
+                                                                        $sizes[$i],
+                                                                        $totals[$i]
+                                                                    ); 
                         }            
                     }
 
@@ -171,11 +171,56 @@ class OrderController extends AbstractController {
 
                 $userManager = new UserManager();
                 $users = $userManager->getAllUserByEmail($_SESSION["userEmail"]);
+                $userEmail = $users->getEmail();
                 $name = $users->getFirstName() . ' ' . $users->getLastName();
-                
-                $order = $orderManager->getAllOrdersProductById($lastId);
 
-                $this->baseEmailPurchases($users->getEmail(), $name, $order);
+                $nsMasiaManager = new NsMasiaManager();
+                $nsMasia = $nsMasiaManager->getNsMasia();
+                $nsName = $nsMasia->getName();
+                $totalPrices = array_sum($totals);
+                $date = new DateTime();
+                $formatted_date = $date->format('d-m-Y H:i');
+            
+                $subject =  "Merci pour votre achat !";
+
+                $emailContent = "
+                        <!DOCTYPE html>
+                        <html lang='fr'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta http-equiv='X-UA-Compatible'content='IE=edge'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>$subject</title>
+                        </head>
+                        <body>
+                            <p>Bonjour $name,</p>
+                        
+                            <p>
+                                Nous vous remercions sincèrement d'avoir choisi $nsName pour votre récente acquisition ! 
+                                C'est un honneur de vous avoir comme client(e).
+                            </p>
+        
+                            <p>
+                                Si vous avez des questions ou des préoccupations concernant votre achat, n'hésitez pas à nous contacter. 
+                                Nous sommes là pour vous assister.
+                            </p>
+        
+                            <ul>
+                                <li>Votre numéro de commande : $nextOrderId</li>
+                                <li>Achat éffectuer le $formatted_date </li>
+                                <li>Total : $totalPrices €</li>
+                            </ul>
+                        
+                            <div>
+                                <p>Cordialement,</p>
+                                <p>L'équipe $nsName</p>
+                            </div>
+                        </body>
+                        </html>
+        
+                ";
+                // Sending the email with the generated content
+                $this->sendEmail($userEmail, $name, $subject, $emailContent);
 
                 $_SESSION["valide"] = "Achat réalisé avec succès";
                 header("Location: Boutique");
@@ -223,18 +268,18 @@ class OrderController extends AbstractController {
     }
     
     public function generatorNumberOrderBoutique() : string{
-        // Incrémenter le numéro de commande
+        // Increment the order number
         $uniqueNumber = bin2hex(random_bytes(5));
     
-        // Retourner le nouveau numéro de commande
+        // Return the new order number
         return "nsB" . $uniqueNumber;
     }
 
     public function generatorNumberOrderTicket() {
-        // Incrémenter le numéro de commande
+        // Increment the order number
         $uniqueNumber = bin2hex(random_bytes(10));
     
-        // Retourner le nouveau numéro de commande
+        // Return the new order number
         return "nsT" . $uniqueNumber;
     }
         

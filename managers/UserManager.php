@@ -50,7 +50,8 @@ class UserManager extends AbstractManager{
                             ) : void {
         try{
             $query = $this->db->prepare("UPDATE users 
-                                        SET first_name = :first_name, last_name = :last_name 
+                                        SET first_name = :first_name, 
+                                            last_name = :last_name 
                                         WHERE id = :id"
                                     );
             $parameters = [

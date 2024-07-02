@@ -13,10 +13,10 @@
             {% endif %}
         <div id="articles-container">
             {% for article in articles %}
-            <article class="articleContent" >
+            <article class="articleContent">
                 <h2>{{article.title}}</h2>
                 <figure>
-                    <img src="{{article.img_url}}" alt="{{article.img_alt}}"/>
+                    <img src="{{article.img_url}}" alt="{{article.img_alt}}">
                 </figure>
                 <p>{{article.excerpt}}</p>
                 <p>Date : {{article.date|date("d/m/Y", "Europe/Paris")}}</p>

@@ -7,10 +7,9 @@
                 <span class="gg-shopping-bag bagProduct"></span>
             </div>
             <figure class="logoNs">
-                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}">
             </figure>
-            <h1>{{nsMasia.name}}</h1>
-            <p>Boutique Officiel</p>
+            <h1>Boutique {{nsMasia.name}}</h1>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;" class="alertMessage">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
@@ -25,7 +24,7 @@
                     <article class="shirtSale">
                         <figure class="shirtOne" id="{{product.id}}">
                             <a href="Produit-{{product.id}}">
-                                <img src="{{ product.img_url }}" alt="{{ product.img_alt }}"/>
+                                <img src="{{ product.img_url }}" alt="{{ product.img_alt }}">
                             </a>
                         </figure> 
                         <ul>

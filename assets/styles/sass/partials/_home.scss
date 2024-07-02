@@ -1,7 +1,6 @@
      /*********************************
                 * HOME *
     *********************************/
-    
      .pageHome{
         .home{
             background-repeat: no-repeat;
@@ -21,7 +20,6 @@
                 font-style: italic;
                 text-align: center;
                 padding-top: -5em;
-                
             }
             figure{
                 width: 20%;
@@ -191,7 +189,7 @@
             .lastResult{
                 background-color: $beige;
                 color: $black;
-                box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;
+                box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
                 h3{
                     color: $black;
                 }
@@ -240,7 +238,7 @@
                 text-align: center;
                 background-color: $beige;
                 padding: 1em;
-                box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px;
+                box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
                 h3{
                     color: $black;
                 }
@@ -443,13 +441,13 @@
                 }
                 .slick-prev.slick-arrow{
                     position: absolute;
-                    left: 2em;
+                    left: 0;
                     bottom: 0;
                     z-index: 99;
                    }
                    .slick-prev.slick-arrow{
                        position: absolute;
-                       left: 2em;
+                       left: -29px;
                        bottom: 0;
                        z-index: 99;
                        color: black;
@@ -458,20 +456,20 @@
                            font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
                            font-weight: 900;
                            color: $white;
-                           font-size: 20px;
+                           font-size: 40px;
                        }
                    }
                    .slick-next{
                        color: black;
                        position: absolute;
-                       right: 0;
+                       right: -10px;
                        cursor: pointer;
                        &::before{
                            content: "\f35a"; /* Unicode for Font Awesome right arrow */
                            font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
                            font-weight: 900;
                            color: $white;
-                           font-size: 20px;
+                           font-size: 40px;
                        }
                    }
             }
@@ -634,8 +632,16 @@
             align-items: center;
             article{
                 width: 50%;
-                height: auto;
-                
+                height: auto; 
+            }
+            .lastResult{
+                box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;  
+            }
+            .prochainMatch{
+                box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
+            }
+            .ranking{
+                box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px; 
             }
         } 
         .homeClub{
@@ -718,6 +724,15 @@
                     height: 50vh;
                     padding: 4% 0;
                 }
+            }
+            .lastResult{
+                box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;  
+            }
+            .prochainMatch{
+                box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
+            }
+            .ranking{
+                box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px; 
             }
         }
     .homeClub{

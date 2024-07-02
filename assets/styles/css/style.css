@@ -1443,6 +1443,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .titleBoutiquePayement figure, .titleBiletteriePayement figure {
+    width: 10%;
+  }
+  .titleBoutiquePayement figure img, .titleBiletteriePayement figure img {
+    width: 100%;
+  }
   .payement .orderUser .orderUser-connexion form fieldset input, .payement .orderUser .orderUser-connexion form fieldset select, .payement .orderUser .orderUser-address form fieldset input, .payement .orderUser .orderUser-address form fieldset select {
     width: 50%;
     margin: 1em auto;
@@ -1490,6 +1496,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (min-width: 1440px) {
+  .titleBoutiquePayement figure, .titleBiletteriePayement figure {
+    width: 10%;
+  }
+  .titleBoutiquePayement figure img, .titleBiletteriePayement figure img {
+    width: 100%;
+  }
   .payement .orderUser .orderUser-connexion form fieldset input, .payement .orderUser .orderUser-connexion form fieldset select, .payement .orderUser .orderUser-address form fieldset input, .payement .orderUser .orderUser-address form fieldset select {
     width: 50%;
     margin: 1em auto;
@@ -2358,7 +2370,7 @@ h1, h2, h3, h4, h5, h6 {
 .pageHome .container-prochainMatch .lastResult {
   background-color: rgb(255, 249, 237);
   color: rgb(0, 0, 0);
-  box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;
+  box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
 }
 .pageHome .container-prochainMatch .lastResult h3 {
   color: rgb(0, 0, 0);
@@ -2403,7 +2415,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   background-color: rgb(255, 249, 237);
   padding: 1em;
-  box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px;
+  box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
 }
 .pageHome .container-prochainMatch .ranking h3 {
   color: rgb(0, 0, 0);
@@ -2593,13 +2605,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .pageHome .homeClub .slick-prev.slick-arrow {
   position: absolute;
-  left: 2em;
+  left: 0;
   bottom: 0;
   z-index: 99;
 }
 .pageHome .homeClub .slick-prev.slick-arrow {
   position: absolute;
-  left: 2em;
+  left: -29px;
   bottom: 0;
   z-index: 99;
   color: black;
@@ -2609,12 +2621,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
   font-weight: 900;
   color: rgb(250, 250, 250);
-  font-size: 20px;
+  font-size: 40px;
 }
 .pageHome .homeClub .slick-next {
   color: black;
   position: absolute;
-  right: 0;
+  right: -10px;
   cursor: pointer;
 }
 .pageHome .homeClub .slick-next::before {
@@ -2622,7 +2634,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Font Awesome 6 Free"; /* Adjust for your Font Awesome version */
   font-weight: 900;
   color: rgb(250, 250, 250);
-  font-size: 20px;
+  font-size: 40px;
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -2756,6 +2768,15 @@ h1, h2, h3, h4, h5, h6 {
     width: 50%;
     height: auto;
   }
+  .pageHome .container-prochainMatch .lastResult {
+    box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;
+  }
+  .pageHome .container-prochainMatch .prochainMatch {
+    box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
+  }
+  .pageHome .container-prochainMatch .ranking {
+    box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px;
+  }
   .pageHome .homeClub .block-homeClub .block-homeClubHistoire {
     width: 70%;
     margin: 0 auto;
@@ -2821,6 +2842,15 @@ h1, h2, h3, h4, h5, h6 {
   .pageHome .container-prochainMatch article.prochainMatch {
     height: 50vh;
     padding: 4% 0;
+  }
+  .pageHome .container-prochainMatch .lastResult {
+    box-shadow: rgba(255, 255, 255, 0.4) -5px 5px, rgba(255, 255, 255, 0.3) -10px 10px, rgba(255, 255, 255, 0.2) -15px 15px, rgba(255, 255, 255, 0.1) -20px 20px;
+  }
+  .pageHome .container-prochainMatch .prochainMatch {
+    box-shadow: rgba(255, 255, 255, 0.425) 0px 5px, rgba(255, 255, 255, 0.3) 0px 10px, rgba(255, 255, 255, 0.2) 0px 15px, rgba(255, 255, 255, 0.1) 0px 20px, rgba(255, 255, 255, 0.05) 0px 25px;
+  }
+  .pageHome .container-prochainMatch .ranking {
+    box-shadow: rgba(255, 255, 255, 0.4) 5px 5px, rgba(255, 255, 255, 0.3) 10px 10px, rgba(255, 255, 255, 0.2) 15px 15px, rgba(255, 255, 255, 0.1) 20px 20px;
   }
   .pageHome .homeClub {
     margin-bottom: -3em;

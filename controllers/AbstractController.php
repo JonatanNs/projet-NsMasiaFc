@@ -106,62 +106,6 @@ abstract class AbstractController {
                     </div>
                 </body>
                 </html>
-
-        ";
-        // Sending the email with the generated content
-        $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);
-    }
-
-    protected function baseEmailPurchases(string $addAddress, string $nameUser,Order_product $order_product) : void{
-        $nsMasiaManager = new NsMasiaManager();
-        $nsMasia = $nsMasiaManager->getNsMasia();
-        $nsName = $nsMasia->getName();
-
-        $orderManager = new OrderManager();
-        $order = $orderManager->getAllOrdersProductById($order_product->getId());
-        $numberOrder = $order->getNumberOrder();
-        $dateObj = DateTime::createFromFormat('Y-m-d', $order->getDate());
-        // Format the date in French
-        $dateFormatee = $dateObj->format('d/m/Y');
-
-        $totalPrices = $order->getTotalPrices();
-        $subject =  "Merci pour votre achat !";
-
-        $emailContent = "
-                <!DOCTYPE html>
-                <html lang='fr'>
-                <head>
-                    <meta charset='UTF-8'>
-                    <meta http-equiv='X-UA-Compatible'content='IE=edge'>
-                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                    <title>$subject</title>
-                </head>
-                <body>
-                    <p>Bonjour $nameUser,</p>
-                
-                    <p>
-                        Nous vous remercions sincèrement d'avoir choisi $nsName pour votre récente acquisition ! 
-                        C'est un honneur de vous avoir comme client(e).
-                    </p>
-
-                    <p>
-                        Si vous avez des questions ou des préoccupations concernant votre achat, n'hésitez pas à nous contacter. 
-                        Nous sommes là pour vous assister.
-                    </p>
-
-                    <ul>
-                        <li>Votre numéro de commande : $numberOrder</li>
-                        <li>Achat éffectuer le $dateFormatee </li>
-                        <li>Total : $totalPrices €</li>
-                    </ul>
-                
-                    <div>
-                        <p>Cordialement,</p>
-                        <p>L'équipe $nsName</p>
-                    </div>
-                </body>
-                </html>
-
         ";
         // Sending the email with the generated content
         $this->sendEmail($addAddress, $nameUser, $subject, $emailContent);

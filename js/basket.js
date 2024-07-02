@@ -1,11 +1,11 @@
 
 
-//sauvegarder le pannier dans le Stockage local pour y accéder console->appli->stockage local
+//save the pannier in local storage to access console->app->local storage
 function saveBasket(basket){
     localStorage.setItem("basket", JSON.stringify(basket));
 }
 
-//recuperer le Stockage local du pannier
+//retrieve the local storage of the pannier
 function getBasket(){
     let basket = localStorage.getItem("basket");
     if(basket === null){
@@ -15,7 +15,7 @@ function getBasket(){
     }
 }
 
-//ajouter un produit au panier
+//add product to cart
 function addBasket(product){
     let basket = getBasket();
     let foundProduct = basket.find(p => p.id == product.id);
@@ -56,13 +56,10 @@ function getNumberProduct(){
     return number;
 }
 
-function getProductLenght(){
+
+function getProductLength() {
     let basket = getBasket();
-    let number = 0;
-    for(let product of basket){
-        number += product.length;
-    }
-    return number;
+    return basket.length;
 }
 
 
@@ -81,11 +78,11 @@ document.addEventListener('DOMContentLoaded', function(){
         const theBag = document.querySelector(".bagProduct");
         if (theBag){
             theBag.addEventListener("click", function() {
-                // Récupérer les données du panier depuis le LocalStorage
+                // Retrieve cart data from LocalStorage
                 const basketData = localStorage.getItem("basket");
                 
                 if(!basketData){
-                    // Le panier est vide, afficher un message approprié
+                    // The cart is empty, display an appropriate message
                     const p = document.createElement("p");
                     p.classList.add("basketEmpty");
                     p.textContent = "Votre panier est vide.";
@@ -100,17 +97,17 @@ document.addEventListener('DOMContentLoaded', function(){
                     const bagProductsUser = document.querySelector(".bagProductsUser");
                     const bagProducts = document.querySelector(".bagProducts");
                     const bagProductsTotal = document.querySelector(".bagProductsTotal");
-                    // Le panier n'est pas vide, afficher son contenu
+                    // The cart is not empty, display its contents
 
                     bagProducts.innerHTML = '';
                     bagProductsTotal.innerHTML = '';
                         
                     bagProductsUser.classList.toggle("invisible");
         
-                    // Convertir les données récupérées en objet JavaScript
+                    // Convert recovered data to JavaScript object
                     
             
-                    // Afficher chaque produit dans le panier
+                    // Display each product in the cart
                     basket.forEach(product => {
                         const firstLi = document.createElement("div");
                         firstLi.classList.add("firstLi");
@@ -197,84 +194,106 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    function updateProductCount() {
-        const productCount = getNumberProduct();
-        let number = document.querySelector(".numberLenghtProduct");
-        const bagProduct = document.querySelector(".bagProduct");
-    
-        if (number) {
-            number.textContent = productCount;
-        } else {
-            number = document.createElement("p");
-            number.classList.add("numberLenghtProduct");
-            number.textContent = productCount;
-            if(bagProduct){
-                bagProduct.appendChild(number);
-            }
+    // Function to update the product count in the UI
+function updateProductCount() {
+    // Get the number of distinct products in the basket
+    const productCount = getProductLength();
+    // Select the element that displays the product count
+    let number = document.querySelector(".numberLenghtProduct");
+    // Select the bag product container
+    const bagProduct = document.querySelector(".bagProduct");
 
+    // If the element exists, update its text content with the product count
+    if (number) {
+        number.textContent = productCount;
+    } else {
+        // If the element does not exist, create it
+        number = document.createElement("p");
+        number.classList.add("numberLenghtProduct");
+        number.textContent = productCount;
+        // Append the new element to the bag product container
+        if (bagProduct) {
+            bagProduct.appendChild(number);
         }
     }
-    
-    function AddLocalStorageBoutique() {
-        const productIdElements = document.querySelectorAll(".shirtOne");
-        const shirtSale = document.querySelectorAll('.shirtSale');
-        const size = document.getElementById("size");
-        let sizeChoice = '';
-    
-        if (size) {
-            size.addEventListener("change", function() {
-                sizeChoice = size.value; 
-            });
-        }
-    
-        shirtSale.forEach((element, index) => {
-            const productName = element.querySelector('h2').textContent;
-            const productId = productIdElements[index].getAttribute("id");
-            const productImgUrl = element.querySelector('img').getAttribute('src');
-            const productImgAlt = element.querySelector('img').getAttribute('alt');
-            const productPrice = element.querySelector('.prices').textContent;
-    
-            const addCartButtons = element.querySelectorAll(".addCart");
-    
-            addCartButtons.forEach((button, i) => {
-                button.addEventListener("click", function() {
-                    const shirtsId = "shirts" + (i + 1);
-                    const productUrl = productImgUrl;
-                    const productAlt = productImgAlt;
-                    const productQuantity = "";  
-    
-                    const basketEmpty = document.querySelector(".basketEmpty");
-                    if (basketEmpty) {
-                        basketEmpty.classList.add("invisible");
-                    }
-    
-                    if (sizeChoice) {
-                        const logoNs = document.querySelector(".logoNs");
-                        const p = document.createElement("p");
-                        p.classList.add("productAddInBasket");
-                        p.textContent = "Produit ajouté au panier.";
-                        logoNs.parentNode.insertBefore(p, logoNs); 
-                        setTimeout(() => {
-                            p.remove();
-                        }, 1000); 
-    
-                        addBasket({
-                            id: productId,
-                            name: productName.trim(),
-                            url: productUrl,
-                            alt: productAlt,
-                            size: sizeChoice,
-                            prices: parseFloat(productPrice),
-                            quantity: productQuantity
-                        });
-    
-                        // Mettre à jour le nombre de produits
-                        updateProductCount();
-                    }
-                });
-            });
+}
+
+// Function to add products to local storage and handle interactions
+function AddLocalStorageBoutique() {
+    // Get all product ID elements
+    const productIdElements = document.querySelectorAll(".shirtOne");
+    // Get all product sale elements
+    const shirtSale = document.querySelectorAll('.shirtSale');
+    // Get the size selection element
+    const size = document.getElementById("size");
+    let sizeChoice = '';
+
+    // Listen for changes on the size selection element
+    if (size) {
+        size.addEventListener("change", function() {
+            sizeChoice = size.value; 
         });
     }
+
+    // Iterate over each product sale element
+    shirtSale.forEach((element, index) => {
+        // Get product details from the DOM
+        const productName = element.querySelector('h2').textContent;
+        const productId = productIdElements[index].getAttribute("id");
+        const productImgUrl = element.querySelector('img').getAttribute('src');
+        const productImgAlt = element.querySelector('img').getAttribute('alt');
+        const productPrice = element.querySelector('.prices').textContent;
+
+        // Get the add to cart button
+        const addCartButton = element.querySelector(".addCart"); // Use `querySelector` instead of `querySelectorAll`
+
+        // If the add to cart button exists, add a click event listener
+        if (addCartButton) {
+            addCartButton.addEventListener("click", function() {
+                const productUrl = productImgUrl;
+                const productAlt = productImgAlt;
+                const productQuantity = 1;  // Initialize quantity to 1 or desired value
+
+                // Hide the basket empty message if it exists
+                const basketEmpty = document.querySelector(".basketEmpty");
+                if (basketEmpty) {
+                    basketEmpty.classList.add("invisible");
+                }
+
+                // If a size is chosen, add the product to the basket
+                if (sizeChoice) {
+                    // Display a message indicating the product was added to the basket
+                    const logoNs = document.querySelector(".logoNs");
+                    const p = document.createElement("p");
+                    p.classList.add("productAddInBasket");
+                    p.textContent = "Produit ajouté au panier.";
+                    logoNs.parentNode.insertBefore(p, logoNs); 
+                    setTimeout(() => {
+                        p.remove();
+                    }, 1000); 
+
+                    // Add the product to the basket
+                    addBasket({
+                        id: productId,
+                        name: productName.trim(),
+                        url: productUrl,
+                        alt: productAlt,
+                        size: sizeChoice,
+                        prices: parseFloat(productPrice),
+                        quantity: productQuantity
+                    });
+
+                    // Update the number of products in the UI
+                    updateProductCount();
+                }
+            });
+        }
+    });
+}
+
+    
+    
+
 
     function lookProduct(){
         const lookProductButtons = document.querySelectorAll(".lookProduct");
@@ -391,7 +410,6 @@ document.addEventListener('DOMContentLoaded', function(){
                             if (currentValue === 0) {
                                 let blockProduct = document.querySelector(".cartsProducts > ul:nth-child(" + (index + 1) + ")");
                                 blockProduct.style.display = "none"; 
-                                document.querySelector(".goPayement").style.display = "none";
                             }
                             if(getTotalPrice() === 0) {
                                 localStorage.removeItem("basket");
@@ -404,7 +422,6 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     
     bagBoutique();
-    AddLocalStorageBoutique();
     switchShirts();
     lookProduct();
     cartUser();

@@ -25,7 +25,6 @@ class Router
 
         if(!isset($get["route"]))
         {
-            
             $homeC->home();
         }
         /*********************************************************
@@ -126,7 +125,6 @@ class Router
         {
             $oc->stripePayement();
         }
-        
         /*********************************************************
                             * Bileterrie *
         *********************************************************/
@@ -142,7 +140,6 @@ class Router
         {
             $MatchController->payementTicket();
         }
-        
         else if(isset($get["route"]) && $get["route"] === "stripePayTicket")
         {
             $oc->stripePayTicket();
@@ -151,7 +148,6 @@ class Router
         {
             $oc->checkAddress();
         }
-
         /******** CART ********* */
         else if(isset($get["route"]) && $get["route"] === "panier")
         {
@@ -176,7 +172,6 @@ class Router
         {
             $adm->checkAdmin();
         }
-        
         else if(isset($get["route"]) && $get["route"] === "adminMatch" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adm->adminMatch();
@@ -216,7 +211,6 @@ class Router
         {
             $adminManageC->checkChangeRole();
         }
-
         /*****************************
             * Check Admin NS MASIA *
         *****************************/
@@ -236,7 +230,6 @@ class Router
         {
             $adminNsMasiaC->checkUpdateBannerEmail();
         }
-
         /*****************************
             * Check Admin Club *
         *****************************/
@@ -244,12 +237,10 @@ class Router
         {
             $pc->checkaddPlayer();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkRemovePlayer" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $pc->checkRemovePlayer();
         }
-
         /*****************************
             * Check Admin Actuality *
         *****************************/
@@ -257,22 +248,18 @@ class Router
         {
             $adminNewsC->checkAddArticle();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkChangeTitleArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminNewsC->checkChangeTitleArticle();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkChangeContentArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminNewsC->checkChangeContentArticle();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkChangeImgArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminNewsC->checkChangeImgArticle();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkRemoveArticle" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminNewsC->checkRemoveArticle();
@@ -280,7 +267,6 @@ class Router
         /*****************************
             * Check Admin Biletterie *
         *****************************/
-        
         else if(isset($get["route"]) && $get["route"] === "checkAddMatchs" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminBilletterieC->checkAddMatchs();
@@ -301,7 +287,6 @@ class Router
         {
             $MatchController->checkChangeResult();
         }
-
         else if(isset($get["route"]) && $get["route"] === "checkChangePointRivalTeam" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminRivalTeamC->checkChangePointRivalTeam();
@@ -325,7 +310,6 @@ class Router
         /*****************************
             * Check Admin Boutique *
         *****************************/
-
         else if(isset($get["route"]) && $get["route"] === "checkAddproduct" && isset($_GET['secret']) && $_GET['secret'] === $_ENV["SECRET"])
         {
             $adminBoutiqueC->checkAddproduct();
@@ -334,11 +318,9 @@ class Router
         {
             $adminBoutiqueC->checkRemoveproduct();
         }
-
         /*********************************************************
                             * LOGOUT *
         *********************************************************/
-
         else if(isset($get["route"]) && $get["route"] === "logout")
         {
             $authc->logout();

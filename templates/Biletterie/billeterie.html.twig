@@ -5,10 +5,9 @@
     <article class="nextMatch">
         <article class="titleBoutique img-background">
             <figure>
-                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}"/>
+                <img src="{{nsMasia.logourl}}" alt="{{nsMasia.logoalt}}">
             </figure>
-            <h1>{{nsMasia.name}}</h1>
-            <p>Billeterie Officiel</p>
+            <h1>Billeterie {{nsMasia.name}}</h1>
             {% if errorMessage is not empty %}
                 <p style="text-align:center;" class="alertMessage">{{ errorMessage }} <span class="fa-solid fa-square-xmark fa-xl" style="color: #ff0000;"></span></p>
             {% endif %}
@@ -40,7 +39,7 @@
                         </li>
                         <li>
                             <figure> 
-                                <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}"/>
+                                <img src="{{ match.logo_url }}" alt="{{ match.logo_alt }}">
                             </figure>
                         </li>
                         {% if match.home_outside == "domicile" %}
